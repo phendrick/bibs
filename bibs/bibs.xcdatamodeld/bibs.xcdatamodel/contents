@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Child" representedClassName=".Child" syncable="YES">
+        <attribute name="colorScheme" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="isBorn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="feedSessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FeedSession" inverseName="child" inverseEntity="FeedSession"/>
+    </entity>
+    <entity name="Expression" representedClassName=".Expression" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="side" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="feedSession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FeedSession" inverseName="expressions" inverseEntity="FeedSession"/>
+    </entity>
+    <entity name="Feed" representedClassName=".Feed" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="side" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="feedSession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FeedSession" inverseName="feeds" inverseEntity="FeedSession"/>
+    </entity>
+    <entity name="FeedSession" representedClassName=".FeedSession" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="feedSessions" inverseEntity="Child"/>
+        <relationship name="expressions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expression" inverseName="feedSession" inverseEntity="Expression"/>
+        <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Feed" inverseName="feedSession" inverseEntity="Feed"/>
+    </entity>
+    <entity name="Setting" representedClassName=".Setting" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="valueKey" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Child" positionX="-54" positionY="0" width="128" height="148"/>
+        <element name="Expression" positionX="-36" positionY="63" width="128" height="103"/>
+        <element name="Feed" positionX="-36" positionY="9" width="128" height="103"/>
+        <element name="FeedSession" positionX="-18" positionY="72" width="128" height="103"/>
+        <element name="Setting" positionX="-63" positionY="-18" width="128" height="73"/>
+    </elements>
 </model>

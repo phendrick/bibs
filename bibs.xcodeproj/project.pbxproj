@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA6A486124792D60005B8DDA /* Expression+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A485F24792D60005B8DDA /* Expression+CoreDataClass.swift */; };
+		DA6A486224792D60005B8DDA /* Expression+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A486024792D60005B8DDA /* Expression+CoreDataProperties.swift */; };
+		DAA3222324787A490063CE4F /* Child+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3221B24787A490063CE4F /* Child+CoreDataClass.swift */; };
+		DAA3222424787A490063CE4F /* Child+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3221C24787A490063CE4F /* Child+CoreDataProperties.swift */; };
+		DAA3222524787A490063CE4F /* Setting+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3221D24787A490063CE4F /* Setting+CoreDataClass.swift */; };
+		DAA3222624787A490063CE4F /* Setting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3221E24787A490063CE4F /* Setting+CoreDataProperties.swift */; };
+		DAA3222724787A490063CE4F /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3221F24787A490063CE4F /* Feed+CoreDataClass.swift */; };
+		DAA3222824787A490063CE4F /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3222024787A490063CE4F /* Feed+CoreDataProperties.swift */; };
+		DAA3222924787A490063CE4F /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3222124787A490063CE4F /* FeedSession+CoreDataClass.swift */; };
+		DAA3222A24787A490063CE4F /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3222224787A490063CE4F /* FeedSession+CoreDataProperties.swift */; };
 		DADD78F82478609600791F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F72478609600791F61 /* AppDelegate.swift */; };
 		DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F92478609600791F61 /* SceneDelegate.swift */; };
 		DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DADD78FB2478609600791F61 /* bibs.xcdatamodeld */; };
@@ -16,6 +26,10 @@
 		DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADD79052478609700791F61 /* LaunchScreen.storyboard */; };
 		DADD79122478609700791F61 /* bibsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD79112478609700791F61 /* bibsTests.swift */; };
 		DADD791D2478609700791F61 /* bibsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD791C2478609700791F61 /* bibsUITests.swift */; };
+		DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32352479D7470009B737 /* WelcomeView.swift */; };
+		DAFE32382479D7680009B737 /* AddBabyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32372479D7680009B737 /* AddBabyView.swift */; };
+		DAFE323A2479D77A0009B737 /* AddBabyConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32392479D77A0009B737 /* AddBabyConfirmationView.swift */; };
+		DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE323C2479D8890009B737 /* ViewSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +50,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA6A485F24792D60005B8DDA /* Expression+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expression+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA6A486024792D60005B8DDA /* Expression+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expression+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAA3221B24787A490063CE4F /* Child+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DAA3221C24787A490063CE4F /* Child+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAA3221D24787A490063CE4F /* Setting+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setting+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DAA3221E24787A490063CE4F /* Setting+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Setting+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAA3221F24787A490063CE4F /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DAA3222024787A490063CE4F /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAA3222124787A490063CE4F /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DAA3222224787A490063CE4F /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DADD78F42478609600791F61 /* bibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD78F72478609600791F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADD78F92478609600791F61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +75,10 @@
 		DADD79182478609700791F61 /* bibsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bibsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD791C2478609700791F61 /* bibsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bibsUITests.swift; sourceTree = "<group>"; };
 		DADD791E2478609700791F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAFE32352479D7470009B737 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		DAFE32372479D7680009B737 /* AddBabyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBabyView.swift; sourceTree = "<group>"; };
+		DAFE32392479D77A0009B737 /* AddBabyConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBabyConfirmationView.swift; sourceTree = "<group>"; };
+		DAFE323C2479D8890009B737 /* ViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +129,9 @@
 		DADD78F62478609600791F61 /* bibs */ = {
 			isa = PBXGroup;
 			children = (
+				DAFE323B2479D8780009B737 /* Models */,
+				DAFE32342479D6BD0009B737 /* Onboarding */,
+				DADD792A247864AD00791F61 /* Core Data */,
 				DADD78F72478609600791F61 /* AppDelegate.swift */,
 				DADD78F92478609600791F61 /* SceneDelegate.swift */,
 				DADD78FE2478609600791F61 /* ContentView.swift */,
@@ -137,6 +168,41 @@
 				DADD791E2478609700791F61 /* Info.plist */,
 			);
 			path = bibsUITests;
+			sourceTree = "<group>";
+		};
+		DADD792A247864AD00791F61 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				DA6A485F24792D60005B8DDA /* Expression+CoreDataClass.swift */,
+				DA6A486024792D60005B8DDA /* Expression+CoreDataProperties.swift */,
+				DAA3221B24787A490063CE4F /* Child+CoreDataClass.swift */,
+				DAA3221C24787A490063CE4F /* Child+CoreDataProperties.swift */,
+				DAA3221D24787A490063CE4F /* Setting+CoreDataClass.swift */,
+				DAA3221E24787A490063CE4F /* Setting+CoreDataProperties.swift */,
+				DAA3221F24787A490063CE4F /* Feed+CoreDataClass.swift */,
+				DAA3222024787A490063CE4F /* Feed+CoreDataProperties.swift */,
+				DAA3222124787A490063CE4F /* FeedSession+CoreDataClass.swift */,
+				DAA3222224787A490063CE4F /* FeedSession+CoreDataProperties.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		DAFE32342479D6BD0009B737 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DAFE32352479D7470009B737 /* WelcomeView.swift */,
+				DAFE32372479D7680009B737 /* AddBabyView.swift */,
+				DAFE32392479D77A0009B737 /* AddBabyConfirmationView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DAFE323B2479D8780009B737 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DAFE323C2479D8890009B737 /* ViewSettings.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,10 +336,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAA3222624787A490063CE4F /* Setting+CoreDataProperties.swift in Sources */,
+				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
+				DAA3222424787A490063CE4F /* Child+CoreDataProperties.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
+				DAA3222724787A490063CE4F /* Feed+CoreDataClass.swift in Sources */,
+				DAFE323A2479D77A0009B737 /* AddBabyConfirmationView.swift in Sources */,
+				DA6A486124792D60005B8DDA /* Expression+CoreDataClass.swift in Sources */,
+				DA6A486224792D60005B8DDA /* Expression+CoreDataProperties.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
+				DAA3222924787A490063CE4F /* FeedSession+CoreDataClass.swift in Sources */,
+				DAA3222824787A490063CE4F /* Feed+CoreDataProperties.swift in Sources */,
+				DAA3222324787A490063CE4F /* Child+CoreDataClass.swift in Sources */,
 				DADD78FF2478609600791F61 /* ContentView.swift in Sources */,
+				DAA3222524787A490063CE4F /* Setting+CoreDataClass.swift in Sources */,
+				DAA3222A24787A490063CE4F /* FeedSession+CoreDataProperties.swift in Sources */,
 				DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */,
+				DAFE32382479D7680009B737 /* AddBabyView.swift in Sources */,
+				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
