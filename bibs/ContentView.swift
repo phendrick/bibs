@@ -18,6 +18,7 @@ struct ContentView: View {
         VStack {
             if viewSettings.initialView == .dashboard {
                 Text("OK: \(children.count)")
+                ActiveFeedsView()
             }else {
                 WelcomeView()
                     .transition(.opacity)
@@ -31,7 +32,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return ContentView()
-            .environmentObject(ViewSettings(initialView: .welcome))
+            .environmentObject(ViewSettings(initialView: .dashboard))
             .environment(\.managedObjectContext, context)
     }
 }

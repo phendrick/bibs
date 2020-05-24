@@ -17,6 +17,8 @@
 		DAA3222824787A490063CE4F /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3222024787A490063CE4F /* Feed+CoreDataProperties.swift */; };
 		DAA3222924787A490063CE4F /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3222124787A490063CE4F /* FeedSession+CoreDataClass.swift */; };
 		DAA3222A24787A490063CE4F /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA3222224787A490063CE4F /* FeedSession+CoreDataProperties.swift */; };
+		DAB56B8D247A731000C80E1E /* ActiveFeedsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8C247A731000C80E1E /* ActiveFeedsView.swift */; };
+		DAB56B8F247A733300C80E1E /* ActiveFeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ActiveFeeds.swift */; };
 		DADD78F82478609600791F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F72478609600791F61 /* AppDelegate.swift */; };
 		DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F92478609600791F61 /* SceneDelegate.swift */; };
 		DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DADD78FB2478609600791F61 /* bibs.xcdatamodeld */; };
@@ -60,6 +62,8 @@
 		DAA3222024787A490063CE4F /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DAA3222124787A490063CE4F /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DAA3222224787A490063CE4F /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAB56B8C247A731000C80E1E /* ActiveFeedsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedsView.swift; sourceTree = "<group>"; };
+		DAB56B8E247A733300C80E1E /* ActiveFeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeeds.swift; sourceTree = "<group>"; };
 		DADD78F42478609600791F61 /* bibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD78F72478609600791F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DADD78F92478609600791F61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DAB56B8B247A72FC00C80E1E /* Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				DAB56B8C247A731000C80E1E /* ActiveFeedsView.swift */,
+			);
+			path = Feeds;
+			sourceTree = "<group>";
+		};
 		DADD78EB2478609600791F61 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +141,7 @@
 		DADD78F62478609600791F61 /* bibs */ = {
 			isa = PBXGroup;
 			children = (
+				DAB56B8B247A72FC00C80E1E /* Feeds */,
 				DAFE323B2479D8780009B737 /* Models */,
 				DAFE32342479D6BD0009B737 /* Onboarding */,
 				DADD792A247864AD00791F61 /* Core Data */,
@@ -201,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				DAFE323C2479D8890009B737 /* ViewSettings.swift */,
+				DAB56B8E247A733300C80E1E /* ActiveFeeds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,8 +366,10 @@
 				DAA3222524787A490063CE4F /* Setting+CoreDataClass.swift in Sources */,
 				DAA3222A24787A490063CE4F /* FeedSession+CoreDataProperties.swift in Sources */,
 				DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */,
+				DAB56B8D247A731000C80E1E /* ActiveFeedsView.swift in Sources */,
 				DAFE32382479D7680009B737 /* AddBabyView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
+				DAB56B8F247A733300C80E1E /* ActiveFeeds.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
