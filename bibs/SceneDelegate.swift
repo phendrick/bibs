@@ -28,14 +28,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         var initialView: ViewSettings.InitialView = .welcome
+        
         if let count = childCount, count > 0 {
             initialView = .dashboard
         }
+        
         let viewSettings = ViewSettings(initialView: initialView)
         
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView()
+            .environmentObject(ActiveFeedSessions.shared)
             .environmentObject(viewSettings)
             .environment(\.managedObjectContext, context)
 

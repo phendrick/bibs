@@ -10,15 +10,12 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var viewSettings: ViewSettings
-    @FetchRequest(entity: Child.entity(), sortDescriptors: []) var children: FetchedResults<Child>
     
     var body: some View {
         VStack {
             if viewSettings.initialView == .dashboard {
-                Text("OK: \(children.count)")
-                ActiveFeedsView()
+                DashboardView()
             }else {
                 WelcomeView()
                     .transition(.opacity)
@@ -30,9 +27,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         return ContentView()
             .environmentObject(ViewSettings(initialView: .dashboard))
-            .environment(\.managedObjectContext, context)
     }
 }
