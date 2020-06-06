@@ -34,7 +34,7 @@ extension Child: Identifiable {
     public var feedSessionsArray: [FeedSession] {
         let set = feedSessions as? Set<FeedSession> ?? []
         return set.sorted {
-            $0.wrappedCreatedAt < $1.wrappedCreatedAt
+            $0.wrappedCreatedAt > $1.wrappedCreatedAt
         }
     }
     
@@ -58,6 +58,25 @@ extension Child: Identifiable {
             return sessions.first
         }catch {
             return nil
+        }
+    }
+    
+    func startNewFeedSession() {
+        if let moc = self.managedObjectContext {
+            let session       = FeedSession(context: moc)
+            session.createdAt = Date()
+            session.status    = .inactive
+            
+            let feed       = Feed(context: moc)
+            feed.createdAt = Date()
+            feed.status    = .active
+            
+            session.activeFeed = feed
+            
+            session.addToFeeds(feed)
+            self.addToFeedSessions(session)
+            
+            try? moc.save()
         }
     }
 }

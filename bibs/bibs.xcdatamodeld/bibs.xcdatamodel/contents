@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Child" representedClassName=".Child" syncable="YES">
         <attribute name="colorScheme" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -22,7 +22,7 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="state" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="feedSessions" inverseEntity="Child"/>
-        <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Feed" inverseName="feedSession" inverseEntity="Feed"/>
+        <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="feedSession" inverseEntity="Feed"/>
     </entity>
     <entity name="Setting" representedClassName=".Setting" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -30,8 +30,8 @@
     </entity>
     <elements>
         <element name="Child" positionX="-54" positionY="0" width="128" height="178"/>
-        <element name="Feed" positionX="-36" positionY="9" width="128" height="118"/>
-        <element name="FeedSession" positionX="-18" positionY="72" width="128" height="103"/>
-        <element name="Setting" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Feed" positionX="417.3984375" positionY="-72.5" width="128" height="118"/>
+        <element name="FeedSession" positionX="148.2734375" positionY="-2.01171875" width="128" height="103"/>
+        <element name="Setting" positionX="-202.55078125" positionY="-117.796875" width="128" height="73"/>
     </elements>
 </model>

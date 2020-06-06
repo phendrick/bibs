@@ -38,5 +38,4 @@ extension FeedSession {
 
     @objc(removeFeeds:)
     @NSManaged public func removeFromFeeds(_ values: NSSet)
-
 }

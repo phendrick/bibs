@@ -19,5 +19,4 @@ extension Setting {
 
     @NSManaged public var name: String?
     @NSManaged public var valueKey: Int16
-
 }

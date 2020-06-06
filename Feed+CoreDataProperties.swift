@@ -22,5 +22,4 @@ extension Feed {
     @NSManaged public var side: Int16
     @NSManaged public var state: Int16
     @NSManaged public var feedSession: FeedSession?
-
 }

@@ -9,27 +9,53 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Child.entity(), sortDescriptors: []) var children: FetchedResults<Child>
     @EnvironmentObject var activeFeedSessions: ActiveFeedSessions
     
+    @State var showingChild: Bool = false
     @State var currentChild: Child?
     
     var body: some View {
-        VStack {
-            ForEach(children) {child in
-                Text("CHILD: \(child.wrappedName)")
-            }
+        NavigationView {
+            VStack {
+                HStack {
+                    HStack(alignment: .top) {
+                        VStack {
+                            Text("Hello").font(.headline)
+                            Text("World")
+                                .font(.subheadline)
+                                .padding([.top, .bottom])
+                        }
+                        
+                        Spacer()
+                        
+                        VStack {
+                            Image(systemName: "person.crop.circle.fill")
+                        }
+                    }
+                }.padding()
+                
+                Divider()
+                
+                ScrollView(.horizontal) {
+                    ForEach(children) {child in
+                        NavigationLink(destination: ChildView().environmentObject(child)) {
+                            Text(child.wrappedName)
+                        }.padding()
+                    }
+                }
+                
+                Divider()
 
-            ForEach(activeFeedSessions.feedSessions) {session in
-                FeedSessionView(feedSession: session)
+                ForEach(activeFeedSessions.feedSessions) {session in
+                    FeedSessionView(feedSession: session)
+                }
+                
+                Spacer()
             }
-
-            Spacer()
-
-            currentChild.map { child in
-                Text(child.wrappedName)
-                    .background(Color.red)
-            }
+            .navigationBarHidden(true)
+            .navigationBarTitle("")
         }
         .onAppear {
             if let currentChildUrl = UserDefaults.standard.url(forKey: "currentChild") {
