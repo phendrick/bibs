@@ -12,5 +12,4 @@ import CoreData
 import Combine
 
 public class Feed: NSManagedObject {
-    var currentTimerMode: TimerMode = .initial
 }

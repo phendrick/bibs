@@ -65,13 +65,9 @@ extension Child: Identifiable {
         if let moc = self.managedObjectContext {
             let session       = FeedSession(context: moc)
             session.createdAt = Date()
-            session.status    = .inactive
             
             let feed       = Feed(context: moc)
             feed.createdAt = Date()
-            feed.status    = .active
-            
-            session.activeFeed = feed
             
             session.addToFeeds(feed)
             self.addToFeedSessions(session)

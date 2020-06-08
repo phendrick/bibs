@@ -10,22 +10,7 @@ import SwiftUI
 
 struct ChildView: View {
     @EnvironmentObject var child: Child
-
-//    var fetchRequest: FetchRequest<FeedSession>
-//    var feedSessions: FetchedResults<FeedSession> {
-//        fetchRequest.wrappedValue
-//    }
-//
-//    init(child: Child) {
-//        self.child = child
-//
-//        fetchRequest = FetchRequest(
-//            entity: FeedSession.entity(),
-//            sortDescriptors: [NSSortDescriptor(keyPath: \FeedSession.createdAt, ascending: false)],
-//            predicate: NSPredicate(format: "child == %@", child)
-//        )
-//    }
-//
+    
     var body: some View {
         VStack {
             Text("OK")
@@ -33,7 +18,9 @@ struct ChildView: View {
                     print(self.child)
             }
             
-            Text(child.wrappedName)
+            Text(child.wrappedName).onTapGesture {
+                
+            }
 
             Divider()
 
@@ -43,7 +30,13 @@ struct ChildView: View {
                         VStack {
                             HStack {
                                 Text("Session: \(feedSession.formattedElapsedTime)").onTapGesture {
-                                    try? feedSession.toggle()
+                                    feedSession.toggle()
+                                }
+                                
+                                Button(action: {
+                                    feedSession.start()
+                                }) {
+                                    Text("Start")
                                 }
                                 
                                 Button(action: {
@@ -57,9 +50,9 @@ struct ChildView: View {
                         VStack {
                             ForEach(feedSession.feedsArray, id: \.self) {feed in
                                 HStack {
-                                    Text("Feed \(feed.currentSide.rawValue) - \(feed.formattedElapsedTime)")
+                                    Text("Feed \(feed.duration) - \(feed.formattedElapsedTime)")
                                         .onTapGesture {
-                                            _ = try? feedSession.resume()
+                                            feedSession.resume()
                                     }
                                     
                                     Button(action: {

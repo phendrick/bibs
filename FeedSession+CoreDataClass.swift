@@ -12,5 +12,5 @@ import CoreData
 
 
 public class FeedSession: NSManagedObject {
-    var activeFeed: Feed?
+    var currentTimerMode: FeedSessionStatus = .inactive
 }

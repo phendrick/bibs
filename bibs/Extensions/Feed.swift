@@ -10,61 +10,21 @@ import Foundation
 
 extension Feed: Identifiable, Timeable {
     enum FeedStatus: Int16 {
-        case inactive
         case active
-        case complete
+        case paused
     }
     
     enum BreastSide: Int16 {
         case left
         case right
     }
-
-    enum TimerMode {
-        case initial
-        case running
-        case paused
-        case switching
+    
+    var status: FeedStatus {
+        FeedStatus.init(rawValue: self.state) ?? .active
     }
 
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
-    }
-    
-    var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
-            self.feedSession?.child?.objectWillChange.send()
-            
-            if self.currentTimerMode == .paused {
-                timer.invalidate()
-            }
-            
-            self.duration += 1
-        }
-    }
-    
-    
-    var status: FeedStatus {
-        get {
-            if let feedStatus = FeedStatus(rawValue: self.state) {
-                return feedStatus
-            }
-            
-            return .inactive
-        }
-        
-        set(newValue) {
-            self.state = newValue.rawValue
-        }
-    }
-    
-    func startTimer() {
-        self.currentTimerMode = .running
-        self.timer.fire()
-    }
-
-    func stopTimer() {
-        self.currentTimerMode = .paused
     }
 
     var wrappedBreastSide: BreastSide {
@@ -84,14 +44,11 @@ extension Feed: Identifiable, Timeable {
     }
     
     func setStatus(to status: FeedStatus) {
-        self.state = Int16(status.rawValue)
-        
-        switch status {
-        case .inactive, .complete:
-            self.stopTimer()
-        default:
-            self.startTimer()
-        }
+//        switch status {
+//        case .inactive, .complete:
+//        default:
+//        }
+        state = status.rawValue
     }
     
     var calculatedElapsedTime: (hours: Int, minutes: Int, seconds: Int, hseconds: Int) {
@@ -113,7 +70,7 @@ extension Feed: Identifiable, Timeable {
     }
     
     // MARK private methods
-    private func setTimerMode(to mode: TimerMode) {
-        self.currentTimerMode = mode
-    }
+//    private func setTimerMode(to mode: TimerMode) {
+//        self.currentTimerMode = mode
+//    }
 }
