@@ -10,75 +10,34 @@ import SwiftUI
 
 struct ChildView: View {
     @EnvironmentObject var child: Child
+    @EnvironmentObject var activeFeedSessions: ActiveFeedSessions
     
     var body: some View {
         VStack {
-            Text("OK")
-                .onTapGesture {
-                    print(self.child)
-            }
+            Text(child.wrappedName)
             
-            Text(child.wrappedName).onTapGesture {
-                
-            }
-
-            Divider()
-
             VStack {
-                ForEach(child.feedSessionsArray, id: \.self) {feedSession in
-                    VStack {
-                        VStack {
-                            HStack {
-                                Text("Session: \(feedSession.formattedElapsedTime)").onTapGesture {
-                                    feedSession.toggle()
-                                }
-                                
-                                Button(action: {
-                                    feedSession.start()
-                                }) {
-                                    Text("Start")
-                                }
-                                
-                                Button(action: {
-                                    feedSession.switchSide()
-                                }) {
-                                    Text("Switch")
-                                }
-                            }
-                        }
-                        
-                        VStack {
-                            ForEach(feedSession.feedsArray, id: \.self) {feed in
-                                HStack {
-                                    Text("Feed \(feed.duration) - \(feed.formattedElapsedTime)")
-                                        .onTapGesture {
-                                            feedSession.resume()
-                                    }
-                                    
-                                    Button(action: {
-                                        try? feedSession.pause()
-                                    }) {
-                                        Text("X")
-                                    }
-                                }
-                            }
-                        }
-                        .background(Color.orange)
-                        
-                        Divider()
-                    }
+                ForEach(self.child.feedSessionsArray, id: \.self) {feedSession in
+                    FeedSessionView().environmentObject(feedSession)
+                        .background(feedSession.isActiveFeedSession ? Color.green : Color.red)
                 }
             }
             .font(.system(.body, design: .monospaced))
             .background(Color.yellow)
 
-            Divider()
-
+            Spacer()
+            
             Button(action: {
-                self.child.startNewFeedSession()
+                do {
+                    let _ = try self.child.startNewFeedSession()
+                }catch {
+                    fatalError()
+                }
             }) {
                 Text("Start new feed")
             }
+            
+            Spacer()
         }
     }
 }

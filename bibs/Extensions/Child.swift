@@ -41,11 +41,7 @@ extension Child: Identifiable {
     var activeFeedSession: FeedSession? {
         let request: NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
         
-        guard let activeState = FeedSession.FeedSessionStatus(rawValue: 1) else {
-            return nil
-        }
-        
-        request.predicate = NSPredicate(format: "state == %@", NSNumber(value: activeState.rawValue))
+        request.predicate = NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.running.rawValue))
         request.fetchLimit = 1
         
         guard let context = self.managedObjectContext else {
@@ -61,8 +57,12 @@ extension Child: Identifiable {
         }
     }
     
-    func startNewFeedSession() {
+    func startNewFeedSession() throws {
         if let moc = self.managedObjectContext {
+            for activeSession in feedSessionsArray where activeSession.status != .complete {
+                activeSession.status = .complete
+            }
+            
             let session       = FeedSession(context: moc)
             session.createdAt = Date()
             
@@ -72,7 +72,13 @@ extension Child: Identifiable {
             session.addToFeeds(feed)
             self.addToFeedSessions(session)
             
-            try? moc.save()
+            do {
+                try moc.save()
+                
+                self.objectWillChange.send()
+            }catch {
+            }
         }
     }
+    
 }

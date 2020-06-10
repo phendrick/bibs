@@ -13,5 +13,5 @@ protocol Timeable {
     var duration: Int32 {get}
     
     var calculatedElapsedTime: (hours: Int, minutes: Int, seconds: Int, hseconds: Int) {get}
-    var formattedElapsedTime: String {get}
+//    var formattedElapsedTime: String {get}
 }

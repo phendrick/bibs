@@ -11,7 +11,11 @@ import SwiftUI
 struct DashboardView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(entity: Child.entity(), sortDescriptors: []) var children: FetchedResults<Child>
-    @EnvironmentObject var activeFeedSessions: ActiveFeedSessions
+    @FetchRequest(
+        entity: FeedSession.entity(),
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.running.rawValue)),
+        animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     @State var showingChild: Bool = false
     @State var currentChild: Child?
@@ -41,16 +45,25 @@ struct DashboardView: View {
                 ScrollView(.horizontal) {
                     ForEach(children) {child in
                         NavigationLink(destination: ChildView().environmentObject(child)) {
-                            Text(child.wrappedName)
+                            VStack {
+                                Text(child.wrappedName)
+                            }
                         }.padding()
+                        Text("OK").onTapGesture {
+                            if let session = child.feedSessionsArray.first {
+                                if session.status == .running {
+                                    session.status = .paused
+                                }else {
+                                    session.status = .running
+                                }
+                                
+                                try? self.moc.save()
+                            }
+                        }
                     }
                 }
                 
-                Divider()
-
-                ForEach(activeFeedSessions.feedSessions) {session in
-                    FeedSessionView(feedSession: session)
-                }
+                ActiveFeedSessionsList()
                 
                 Spacer()
             }
@@ -83,7 +96,6 @@ struct DashboardView_Previews: PreviewProvider {
         
         return DashboardView()
             .coordinateSpace(name: "Default")
-            .environmentObject(ActiveFeedSessions.shared)
             .environment(\.managedObjectContext, context)
     }
 }

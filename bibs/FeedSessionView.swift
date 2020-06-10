@@ -10,39 +10,60 @@ import SwiftUI
 import Foundation
 
 struct FeedSessionView: View {
-    var feedSession: FeedSession
-    
-    var things: [String] = ["hello", "weee", "test", "whoops", "what"]
-    @State var label: String = "ok"
-    @State var seconds = 0
-    
-    func formatTime(seconds: Int) -> String {
-        return ""
-    }
+    @EnvironmentObject var feedSession: FeedSession
     
     var body: some View {
-        HStack {
-            Text("00:00:00 - \(label)")
-            
-            Button(action: {
-            }) {
-                Text("Pause")
+        VStack {
+            HStack {
+                Text("Session: \(feedSession.formattedElapsedTime(include_hsec: false))").onTapGesture {
+                    print("Session tapped: \(self.feedSession.status.rawValue)")
+                    
+                    if(self.feedSession.status == .running) {
+                        self.feedSession.pause()
+                    }else if(self.feedSession.status == .paused) {
+                        self.feedSession.resume()
+                    }
+                }
+                
+                Text("\(feedSession.status.rawValue)")
+                
+                if feedSession.status == .paused {
+                    Button(action: {
+                        self.feedSession.resume()
+                    }) {
+                        Image(systemName: "play")
+                    }
+                }else if(feedSession.status == .running) {
+                    Button(action: {
+                        self.feedSession.pause()
+                    }) {
+                        Image(systemName: "pause")
+                    }
+                }
+                
+                if(feedSession.status != .complete) {
+                    Button(action: {
+                        self.feedSession.switchSide()
+                    }) {
+                        Image(systemName: "arrow.right.arrow.left")
+                    }
+                }
             }
             
-            Button(action: {
-            }) {
-                Text("Switch")
+            VStack {
+                ForEach(feedSession.feedsArray, id: \.self) {feed in
+                    HStack {
+                        Text("\(feed.formattedElapsedTime)")
+                    }
+                }
             }
-        }.onAppear {
-            Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (timer) in
-                self.label = self.things.randomElement()!
-            }
+            .background(Color.orange)
         }
     }
 }
 
 struct FeedSessionView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedSessionView(feedSession: FeedSession())
+        FeedSessionView().environmentObject(FeedSession())
     }
 }

@@ -7,11 +7,21 @@
 //
 
 import Foundation
+import CoreData
 
 extension Feed: Identifiable, Timeable {
+    convenience init(status: Feed.FeedStatus, side: Feed.BreastSide, insertIntoManagedObjectContext context: NSManagedObjectContext!) {
+        let entity = NSEntityDescription.entity(forEntityName: "Feed", in: context)!
+        self.init(entity: entity, insertInto: context)
+        
+        self.createdAt = Date()
+        self.duration = 0
+        self.status = status
+    }
+    
     enum FeedStatus: Int16 {
-        case active
         case paused
+        case running
     }
     
     enum BreastSide: Int16 {
@@ -20,9 +30,15 @@ extension Feed: Identifiable, Timeable {
     }
     
     var status: FeedStatus {
-        FeedStatus.init(rawValue: self.state) ?? .active
+        get {
+            FeedStatus.init(rawValue: self.state) ?? .paused
+        }
+        
+        set(newValue) {
+            state = newValue.rawValue
+        }
     }
-
+    
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
     }
@@ -44,10 +60,6 @@ extension Feed: Identifiable, Timeable {
     }
     
     func setStatus(to status: FeedStatus) {
-//        switch status {
-//        case .inactive, .complete:
-//        default:
-//        }
         state = status.rawValue
     }
     
@@ -68,9 +80,4 @@ extension Feed: Identifiable, Timeable {
         
         return "\(hours):\(minutes):\(seconds).\(hseconds)"
     }
-    
-    // MARK private methods
-//    private func setTimerMode(to mode: TimerMode) {
-//        self.currentTimerMode = mode
-//    }
 }

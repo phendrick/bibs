@@ -9,26 +9,30 @@
 import Foundation
 import CoreData
 
-extension FeedSession: Identifiable, Timeable {
-    convenience init(withFeed feed: Feed) {
-        self.init()
-        
-        self.addToFeeds(feed)
-        
-        if let moc = self.managedObjectContext {
-            try? moc.save()
-        }
-    }
-    
+extension FeedSession: Identifiable {
     enum FeedSessionStatus: Int16 {
-        case inactive
-        case running
         case paused
+        case running
         case complete
     }
     
     enum FeedSessionError: Error {
         case noCurrentFeed
+    }
+    
+    var status: FeedSessionStatus {
+        get {
+            FeedSessionStatus.init(rawValue: self.state) ?? .paused
+        }
+        
+        set(newValue) {
+            state = newValue.rawValue
+            self.child?.objectWillChange.send()
+        }
+    }
+    
+    var isActiveFeedSession: Bool {
+        status == .running
     }
     
     var currentFeed: Feed? {
@@ -39,17 +43,20 @@ extension FeedSession: Identifiable, Timeable {
         createdAt ?? Date()
     }
     
+    /// turn our .feeds associated set into an array by sorting the members
     public var feedsArray: [Feed] {
         let set = feeds as? Set<Feed> ?? []
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
     
+    /// aggregate duration of all the associated feed instances
     var duration: Int32 {
         return feedsArray.reduce(into: 0) { (total, feed) in
             total += feed.duration
         }
     }
     
+    /// a tuple of the elaped time components
     var calculatedElapsedTime: (hours: Int, minutes: Int, seconds: Int, hseconds: Int) {
         let hours    = Int((duration / 100) / 3600)
         let minutes  = Int((duration / 100) / 60 % 60)
@@ -59,104 +66,96 @@ extension FeedSession: Identifiable, Timeable {
         return (hours: hours, minutes: minutes, seconds: seconds, hseconds: hseconds)
     }
     
-    var formattedElapsedTime: String {
+    /// formatted string to render the elapsed time
+    func formattedElapsedTime(include_hsec: Bool = true) -> String {
         let hours    = String(calculatedElapsedTime.hours).toPaddedNumber()
         let minutes  = String(calculatedElapsedTime.minutes).toPaddedNumber()
         let seconds  = String(calculatedElapsedTime.seconds).toPaddedNumber()
         let hseconds = String(calculatedElapsedTime.hseconds).toPaddedNumber()
         
-        return "\(hours):\(minutes):\(seconds).\(hseconds)"
+        var time = "\(hours):\(minutes):\(seconds)"
+        
+        if include_hsec {
+            time.append(".\(hseconds)")
+        }
+        
+        return time
     }
     
+    /// a basic timer implementation.
+    /// the timer stops incrementing and invalidate's itself when the current timer `.status` is set to `.paused`, so
+    /// we can call `feedSession.pause()` or  `feedSession.setStatus(to: .paused)` to stop a timer
     var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
             guard let feed = self.currentFeed else {
-                print("nah")
                 return
             }
             
-            if self.currentTimerMode == .paused {
+            if self.status == .paused {
                 timer.invalidate()
-                print(".paused. nah")
                 return
             }
             
-            print("Adding 0.01: \(self.currentTimerMode)")
             feed.duration += 1
-            self.child?.objectWillChange.send()
+            self.objectWillChange.send()
         }
     }
     
-    // MARK: public api for controlling sessions
-    func pause() throws {
-        self.currentTimerMode = .paused
+    /// MARK: public api for controlling sessions
+    func pause() {
+        self.status = .paused
     }
     
     func resume() {
-        guard currentTimerMode != .running else {
+        /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
+        guard status != .running else {
             return
         }
         
-        self.currentTimerMode = .running
+        self.status = .running
         timer.fire()
     }
     
+    /// calling `.finish()` on a feed session instance will set its status to FeedSessionStatus.complete
+    /// and write back to the store. .complete'd feed sessions can't be resumed
     func finish() throws {
-        print("feed.setStatus(to: .complete")
-    }
-    
-    func start() {
-        guard currentTimerMode != .running else {
-            return
-        }
-        print("Start()")
-        
-        currentTimerMode = .running
-        timer.fire()
-    }
-    
-    func toggle() {
-        guard let feed = currentFeed else {
-            return
+        guard let context = self.managedObjectContext else {
+            fatalError()
         }
         
-        print("toggle() checking feed.status (\(feed.status))")
-        if feed.status == .active {
-            try? pause()
-        }else {
-            resume()
+        defer {
+            self.child?.objectWillChange.send()
+            self.objectWillChange.send()
+        }
+        
+        self.status = .complete
+        
+        do {
+            try context.save()
+        }catch {
         }
     }
     
+    /// checks the current side the child is feeding from and appends a new Feed instance with the Feed.BreastSide alternated left<->right
     public func switchSide() {
         guard let context = self.managedObjectContext else {
             fatalError()
         }
 
-        // get either the current feed or the last known one then alternate the side value
+        /// get either the current feed or the last known one then alternate the side value
         let feed: Feed? = currentFeed
-        let side = feed?.currentSide == Feed.BreastSide.left ? Feed.BreastSide.right.rawValue : Feed.BreastSide.left.rawValue
+        let side = feed?.currentSide == Feed.BreastSide.left ? Feed.BreastSide.right : Feed.BreastSide.left
         
-        let switchedFeed = buildFeed(moc: context, status: .active)
-        switchedFeed.createdAt = Date()
-        switchedFeed.side = side
-        
-        // set the new feed as the active one, and add it to our array of feeds
+        let switchedFeed = Feed(status: .running, side: side, insertIntoManagedObjectContext: context)
+
+        /// add it to our array of feed instances
         self.addToFeeds(switchedFeed)
-        
-        // notify ancestors of changes
+
+        /// notify observers of changes
         self.objectWillChange.send()
         self.child?.objectWillChange.send()
 
-        // save changes
+        /// save changes
         try? context.save()
-    }
-    
-    private func buildFeed(moc: NSManagedObjectContext, status: Feed.FeedStatus) -> Feed {
-        let feed = Feed(context: moc)
-        feed.createdAt = Date()
-        feed.duration = 0
-        
-        return feed
     }
 }
