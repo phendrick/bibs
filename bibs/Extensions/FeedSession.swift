@@ -9,28 +9,8 @@
 import Foundation
 import CoreData
 
-/*
- func allTrackableEntities() -> [NSManagedObject] {
-     guard let context = self.managedObjectContext else {
-         return []
-     }
-
-     let feedSessionFetchRequest:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
-
-     do {
-         let feedSessions = try context.fetch(feedSessionFetchRequest)
-
-         return feedSessions
-     }catch {
-         return []
-     }
- }
- 
- 
- 
- */
-
-extension FeedSession: Identifiable, Trackable {    
+extension FeedSession: Identifiable, Trackable {
+    
     enum FeedSessionStatus: Int16 {
         case paused
         case running

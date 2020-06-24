@@ -83,27 +83,25 @@ struct DashboardView: View {
                 
                 Divider()
                 
-                VStack {
-                    ForEach(0..<5) {idx in
-                        DataRowView(index: idx)
-                    }
-                }
-                
-                Divider()
-                
-                Spacer()
-                
                 if self.activeFeedTool == .FeedTimer {
-                    DashboardDataView<FeedSession>()
+                    DashboardDataView() { (result: FeedSession, index) in
+                        Text(result.formattedElapsedTime())
+                    }
                 }
 
                 if self.activeFeedTool == .NappyChange {
-                    DashboardDataView<Child>()
+                    DashboardDataView() { (result: FeedSession, index) in
+                        Text("\(result.duration)")
+                    }
                 }
 
                 if self.activeFeedTool == .ExpressedFeed {
-                    DashboardDataView<Feed>()
+                    DashboardDataView() { (result: FeedSession, index) in
+                        Text("\(result.duration)")
+                    }
                 }
+                
+                Spacer()
             }
         }
     }

@@ -9,23 +9,30 @@
 import SwiftUI
 import CoreData
 
-struct DashboardDataView<T: NSManagedObject>: View {
+struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     var fetchRequest: FetchRequest<T>
     var results: FetchedResults<T> { fetchRequest.wrappedValue }
     
-    init(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = []) {
+    var content: (T, Int) -> Content
+    
+    init(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], @ViewBuilder content: @escaping(T, Int) -> Content) {
         fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
+        self.content = content
     }
     
     var body: some View {
         ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
-            DataRowView(index: index)
+            DashboardDataRowView(index: index) {
+                self.content(self.fetchRequest.wrappedValue[index], index)
+            }
         }
     }
 }
 
 struct DashboardDataView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardDataView<Child>()
+        DashboardDataView() { (result: Child, index) in
+            Text("OK")
+        }
     }
 }

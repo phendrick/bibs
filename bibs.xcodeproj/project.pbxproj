@@ -17,7 +17,7 @@
 		DA438686248ECE9400903A4D /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43867E248ECE9400903A4D /* FeedSession+CoreDataClass.swift */; };
 		DA438687248ECE9400903A4D /* Setting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43867F248ECE9400903A4D /* Setting+CoreDataProperties.swift */; };
 		DA43868C248EED7D00903A4D /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43868B248EED7D00903A4D /* FeedSession+CoreDataProperties.swift */; };
-		DA51154324A28AC400442543 /* DataRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154224A28AC400442543 /* DataRowView.swift */; };
+		DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154224A28AC400442543 /* DashboardDataRowView.swift */; };
 		DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154424A2A8FD00442543 /* DashboardDataView.swift */; };
 		DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1424822E13009BA4FF /* UserSettings.swift */; };
 		DA635B1B2482698D009BA4FF /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1A2482698D009BA4FF /* Child.swift */; };
@@ -80,7 +80,7 @@
 		DA43867E248ECE9400903A4D /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA43867F248ECE9400903A4D /* Setting+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Setting+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA43868B248EED7D00903A4D /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA51154224A28AC400442543 /* DataRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRowView.swift; sourceTree = "<group>"; };
+		DA51154224A28AC400442543 /* DashboardDataRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataRowView.swift; sourceTree = "<group>"; };
 		DA51154424A2A8FD00442543 /* DashboardDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataView.swift; sourceTree = "<group>"; };
 		DA635B1424822E13009BA4FF /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		DA635B1A2482698D009BA4FF /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
@@ -198,7 +198,6 @@
 		DADD78EB2478609600791F61 = {
 			isa = PBXGroup;
 			children = (
-				DA51154224A28AC400442543 /* DataRowView.swift */,
 				DADD78F62478609600791F61 /* bibs */,
 				DADD79102478609700791F61 /* bibsTests */,
 				DADD791B2478609700791F61 /* bibsUITests */,
@@ -231,6 +230,7 @@
 				DADD78FE2478609600791F61 /* ContentView.swift */,
 				DAB17398247C191500D94537 /* DashboardView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
+				DA51154224A28AC400442543 /* DashboardDataRowView.swift */,
 				DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */,
 				DA82C18C248991760009772F /* ChildView.swift */,
 				DA6A40EE24995E580076FB65 /* ChildListSheetView.swift */,
@@ -459,7 +459,7 @@
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
-				DA51154324A28AC400442543 /* DataRowView.swift in Sources */,
+				DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
 				DA438680248ECE9400903A4D /* Feed+CoreDataProperties.swift in Sources */,
 				DA635B1F24840A2C009BA4FF /* FeedSessionView.swift in Sources */,
