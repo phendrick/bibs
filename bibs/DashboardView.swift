@@ -84,19 +84,19 @@ struct DashboardView: View {
                 Divider()
                 
                 if self.activeFeedTool == .FeedTimer {
-                    DashboardDataView() { (result: FeedSession, index) in
+                    DashboardDataView(title: "Feeds") { (result: FeedSession, index) in
                         Text(result.formattedElapsedTime())
                     }
                 }
 
                 if self.activeFeedTool == .NappyChange {
-                    DashboardDataView() { (result: FeedSession, index) in
-                        Text("\(result.duration)")
+                    DashboardDataView(title: "Nappy Changes") { (result: NappyChange, index) in
+                        Text("\(result.status.rawValue)")
                     }
                 }
 
                 if self.activeFeedTool == .ExpressedFeed {
-                    DashboardDataView() { (result: FeedSession, index) in
+                    DashboardDataView(title: "Expressed Feed") { (result: FeedSession, index) in
                         Text("\(result.duration)")
                     }
                 }

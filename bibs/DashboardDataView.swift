@@ -10,20 +10,36 @@ import SwiftUI
 import CoreData
 
 struct DashboardDataView<T: NSManagedObject, Content: View>: View {
+    var title: String?
+    
     var fetchRequest: FetchRequest<T>
     var results: FetchedResults<T> { fetchRequest.wrappedValue }
     
     var content: (T, Int) -> Content
     
-    init(predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], @ViewBuilder content: @escaping(T, Int) -> Content) {
+    @State var offset: CGFloat = -5
+    
+    init(title: String = "", predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], @ViewBuilder content: @escaping(T, Int) -> Content) {
         fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
         self.content = content
+        self.title = title
     }
     
     var body: some View {
-        ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
-            DashboardDataRowView(index: index) {
-                self.content(self.fetchRequest.wrappedValue[index], index)
+        VStack(alignment: .leading) {
+            Text(title ?? "")
+                .font(.system(size: 32, weight: .medium, design: .rounded))
+                .opacity(offset == 0 ? 1 : 0)
+                .offset(x: 0, y: self.offset)
+            
+            ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
+                DashboardDataRowView(index: index) {
+                    self.content(self.fetchRequest.wrappedValue[index], index)
+                }
+            }
+        }.onAppear {
+            withAnimation {
+                self.offset = 0
             }
         }
     }
@@ -31,7 +47,7 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
 
 struct DashboardDataView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardDataView() { (result: Child, index) in
+        DashboardDataView(title: "OK") { (result: Child, index) in
             Text("OK")
         }
     }

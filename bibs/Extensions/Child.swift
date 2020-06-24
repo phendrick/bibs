@@ -38,6 +38,13 @@ extension Child: Identifiable {
         }
     }
     
+    public var nappyChangesArray: [NappyChange] {
+        let set = nappyChanges as? Set<NappyChange> ?? []
+        return set.sorted {
+            $0.wrappedCreatedAt > $1.wrappedCreatedAt
+        }
+    }
+    
     var activeFeedSession: FeedSession? {
         let request: NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
         
