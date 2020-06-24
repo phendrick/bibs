@@ -9,7 +9,28 @@
 import Foundation
 import CoreData
 
-extension FeedSession: Identifiable {
+/*
+ func allTrackableEntities() -> [NSManagedObject] {
+     guard let context = self.managedObjectContext else {
+         return []
+     }
+
+     let feedSessionFetchRequest:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
+
+     do {
+         let feedSessions = try context.fetch(feedSessionFetchRequest)
+
+         return feedSessions
+     }catch {
+         return []
+     }
+ }
+ 
+ 
+ 
+ */
+
+extension FeedSession: Identifiable, Trackable {    
     enum FeedSessionStatus: Int16 {
         case paused
         case running
@@ -40,7 +61,7 @@ extension FeedSession: Identifiable {
     }
     
     public var wrappedCreatedAt: Date {
-        createdAt ?? Date()
+        createdAt
     }
     
     /// turn our .feeds associated set into an array by sorting the members

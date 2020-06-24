@@ -17,7 +17,7 @@ extension FeedSession {
         return NSFetchRequest<FeedSession>(entityName: "FeedSession")
     }
 
-    @NSManaged public var createdAt: Date?
+    @NSManaged public var createdAt: Date
     @NSManaged public var state: Int16
     @NSManaged public var child: Child?
     @NSManaged public var feeds: NSSet?

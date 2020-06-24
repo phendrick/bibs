@@ -18,7 +18,7 @@ class ViewSettings: ObservableObject {
         case dashboard
     }
     
-    init(initialView: InitialView) {
+    init(initialView: InitialView = .welcome) {
         self.initialView = initialView
     }
     

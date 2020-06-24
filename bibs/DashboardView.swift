@@ -7,84 +7,103 @@
 //
 
 import SwiftUI
+import Introspect
+import CoreData
+
+enum FeedTool: String, CaseIterable {
+    case FeedTimer = "Feed Timer"
+    case NappyChange = "Nappy Change"
+    case ExpressedFeed = "Expressed Feed"
+}
 
 struct DashboardView: View {
+    @State private var childSheetVisible: Bool = false
+    
+    @EnvironmentObject var activeChildProfile: ActiveChildProfile
+    @ObservedObject var viewSettings = ViewSettings()
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(entity: Child.entity(), sortDescriptors: []) var children: FetchedResults<Child>
+    
     @FetchRequest(
         entity: FeedSession.entity(),
         sortDescriptors: [],
-        predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.running.rawValue)),
+        predicate: NSPredicate(
+            format: "state == %@", NSNumber(
+                value: FeedSession.FeedSessionStatus.running.rawValue
+            )
+        ),
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
-    @State var showingChild: Bool = false
-    @State var currentChild: Child?
+    @State var activeFeedTool: FeedTool = .FeedTimer
     
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    HStack(alignment: .top) {
-                        VStack {
-                            Text("Hello").font(.headline)
-                            Text("World")
-                                .font(.subheadline)
-                                .padding([.top, .bottom])
-                        }
+        GeometryReader {outerGeometry in
+            VStack(alignment: .leading) {
+                VStack(alignment: .leading) {
+                    Text("Morning")
+                        .font(.system(size: 44, weight: .bold))
+                    Text("Let's get started...")
+                        .font(.system(size: 14, weight: .regular))
+                }
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        Text("feed")
+                            .frame(
+                                width: min(max(outerGeometry.size.width*0.33, 160), 160),
+                                height: min(max(outerGeometry.size.width*0.33, 180), 180)
+                            )
+                            .background(Color.orange)
+                            .onTapGesture {
+                                self.activeFeedTool = .FeedTimer
+                            }
                         
-                        Spacer()
+                        Text("nappy")
+                            .frame(
+                                width: min(max(outerGeometry.size.width*0.33, 160), 160),
+                                height: min(max(outerGeometry.size.width*0.33, 180), 180)
+                            )
+                            .background(Color.red)
+                            .onTapGesture {
+                                self.activeFeedTool = .NappyChange
+                            }
                         
-                        VStack {
-                            Image(systemName: "person.crop.circle.fill")
-                        }
+                        Text("expressed")
+                            .frame(
+                                width: min(max(outerGeometry.size.width*0.33, 160), 160),
+                                height: min(max(outerGeometry.size.width*0.33, 180), 180)
+                            )
+                            .background(Color.orange)
+                            .onTapGesture {
+                                self.activeFeedTool = .ExpressedFeed
+                            }
                     }
-                }.padding()
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.yellow)
                 
                 Divider()
                 
-                ScrollView(.horizontal) {
-                    ForEach(children) {child in
-                        NavigationLink(destination: ChildView().environmentObject(child)) {
-                            VStack {
-                                Text(child.wrappedName)
-                            }
-                        }.padding()
-                        Text("OK").onTapGesture {
-                            if let session = child.feedSessionsArray.first {
-                                if session.status == .running {
-                                    session.status = .paused
-                                }else {
-                                    session.status = .running
-                                }
-                                
-                                try? self.moc.save()
-                            }
-                        }
+                VStack {
+                    ForEach(0..<5) {idx in
+                        DataRowView(index: idx)
                     }
                 }
                 
-                ActiveFeedSessionsList()
+                Divider()
                 
                 Spacer()
-            }
-            .navigationBarHidden(true)
-            .navigationBarTitle("")
-        }
-        .onAppear {
-            if let currentChildUrl = UserDefaults.standard.url(forKey: "currentChild") {
-                let child = self.children.first { (child) -> Bool in
-                    return child.objectID.uriRepresentation() == currentChildUrl
+                
+                if self.activeFeedTool == .FeedTimer {
+                    DashboardDataView<FeedSession>()
                 }
 
-                self.currentChild = child
-            }
-
-            guard let _ = self.currentChild else {
-                if let firstChild = self.children.first {
-                    self.currentChild = firstChild
+                if self.activeFeedTool == .NappyChange {
+                    DashboardDataView<Child>()
                 }
 
-                return
+                if self.activeFeedTool == .ExpressedFeed {
+                    DashboardDataView<Feed>()
+                }
             }
         }
     }
@@ -95,7 +114,7 @@ struct DashboardView_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         return DashboardView()
-            .coordinateSpace(name: "Default")
             .environment(\.managedObjectContext, context)
+            .environmentObject(ActiveChildProfile.shared)
     }
 }

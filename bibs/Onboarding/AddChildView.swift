@@ -67,22 +67,22 @@ struct AddChildView: View {
             
             VStack {
                 Button(action: {
-//                    let child = Child(context: self.moc)
-//                    
-//                    if let data = self.uiImage.pngData() {
-//                        child.image = data
-//                    }
-//                    
-//                    child.wrappedName = self.name
-//                    child.wrappedDueDate = self.dueDate
-//                    child.createdAt = Date()
-//                    
-//                    do {
-//                        print("Saving...")
-//                        try self.moc.save()
-//                    }catch {
-//                        print("Error: \(error)")
-//                    }
+                    let child = Child(context: self.moc)
+                    
+                    if let data = self.uiImage.pngData() {
+                        child.image = data
+                    }
+                    
+                    child.wrappedName = self.name
+                    child.wrappedDueDate = self.dueDate
+                    child.createdAt = Date()
+                    
+                    do {
+                        print("Saving...")
+                        try self.moc.save()
+                    }catch {
+                        print("Error: \(error)")
+                    }
                 }) {
                     Text("Save")
                 }

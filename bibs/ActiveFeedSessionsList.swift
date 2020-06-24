@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ActiveFeedSessionsList: View {
-    
-    
     @FetchRequest(
         entity: FeedSession.entity(),
         sortDescriptors: [],

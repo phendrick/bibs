@@ -33,12 +33,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             initialView = .dashboard
         }
         
+        // View settings to determine which view to show on start up (dashboard or onboarding process)
         let viewSettings = ViewSettings(initialView: initialView)
+        
+        // the ActiveChildProfile struct is a singleton which lets us keep track of the current
+        // child, and functionality for allowing co-feeding 
+        let childProfile = ActiveChildProfile.shared
+        
+        do {
+            let children = try context.fetch(childFetchRequest)
+            
+            if let child = children.first {
+                childProfile.setActiveChildProfile(child: child)
+            }
+        }catch {
+        }
         
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView()
-            .environmentObject(ActiveFeedSessions.shared)
+            .environmentObject(childProfile)
             .environmentObject(viewSettings)
             .environment(\.managedObjectContext, context)
 

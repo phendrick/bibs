@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ChildView: View {
     @EnvironmentObject var child: Child
-    @EnvironmentObject var activeFeedSessions: ActiveFeedSessions
     
     var body: some View {
         VStack {
@@ -36,8 +35,6 @@ struct ChildView: View {
             }) {
                 Text("Start new feed")
             }
-            
-            Spacer()
         }
     }
 }
