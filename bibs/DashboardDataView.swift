@@ -32,23 +32,32 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                 .opacity(offset == 0 ? 1 : 0)
                 .offset(x: 0, y: self.offset)
             
-            ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
-                DashboardDataRowView(index: index) {
-                    self.content(self.fetchRequest.wrappedValue[index], index)
+            List {
+                ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
+                    DashboardDataRowView(index: index) {
+                        self.content(self.fetchRequest.wrappedValue[index], index)
+                        .listRowInsets(EdgeInsets())
+                    }
                 }
             }
         }.onAppear {
+            UITableView.appearance().separatorColor = .clear
+            
             withAnimation {
                 self.offset = 0
             }
         }
+        .padding()
     }
 }
 
 struct DashboardDataView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardDataView(title: "OK") { (result: Child, index) in
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        return DashboardDataView(title: "OK") { (result: Child, index) in
             Text("OK")
         }
+        .environment(\.managedObjectContext, context)
     }
 }

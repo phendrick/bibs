@@ -37,71 +37,72 @@ struct DashboardView: View {
     
     var body: some View {
         GeometryReader {outerGeometry in
-            VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
-                    Text("Morning")
-                        .font(.system(size: 44, weight: .bold))
-                    Text("Let's get started...")
-                        .font(.system(size: 14, weight: .regular))
-                }
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        Text("feed")
-                            .frame(
-                                width: min(max(outerGeometry.size.width*0.33, 160), 160),
-                                height: min(max(outerGeometry.size.width*0.33, 180), 180)
-                            )
-                            .background(Color.orange)
-                            .onTapGesture {
-                                self.activeFeedTool = .FeedTimer
-                            }
-                        
-                        Text("nappy")
-                            .frame(
-                                width: min(max(outerGeometry.size.width*0.33, 160), 160),
-                                height: min(max(outerGeometry.size.width*0.33, 180), 180)
-                            )
-                            .background(Color.red)
-                            .onTapGesture {
-                                self.activeFeedTool = .NappyChange
-                            }
-                        
-                        Text("expressed")
-                            .frame(
-                                width: min(max(outerGeometry.size.width*0.33, 160), 160),
-                                height: min(max(outerGeometry.size.width*0.33, 180), 180)
-                            )
-                            .background(Color.orange)
-                            .onTapGesture {
-                                self.activeFeedTool = .ExpressedFeed
-                            }
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .background(Color.yellow)
-                
-                Divider()
-                
-                if self.activeFeedTool == .FeedTimer {
-                    DashboardDataView(title: "Feeds") { (result: FeedSession, index) in
-                        Text(result.formattedElapsedTime())
-                    }
-                }
+            NavigationView {
+                VStack {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 0) {
+                            Text("feed")
+                                .frame(width: outerGeometry.size.width * 0.5, height: outerGeometry.size.width*0.5)
+                                .background(Color.orange)
+                                .onTapGesture {
+                                    self.activeFeedTool = .FeedTimer
+                                }
 
-                if self.activeFeedTool == .NappyChange {
-                    DashboardDataView(title: "Nappy Changes") { (result: NappyChange, index) in
-                        Text("\(result.status.rawValue)")
-                    }
-                }
+                            Text("nappy")
+                                .frame(width: outerGeometry.size.width * 0.5, height: outerGeometry.size.width*0.5)
+                                .background(Color.red)
+                                .onTapGesture {
+                                    self.activeFeedTool = .NappyChange
+                                }
 
-                if self.activeFeedTool == .ExpressedFeed {
-                    DashboardDataView(title: "Expressed Feed") { (result: FeedSession, index) in
-                        Text("\(result.duration)")
+                            Text("expressed")
+                                .frame(width: outerGeometry.size.width * 0.5, height: outerGeometry.size.width*0.5)
+                                .background(Color.orange)
+                                .onTapGesture {
+                                    self.activeFeedTool = .ExpressedFeed
+                                }
+                        }                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.yellow)
+                    .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
+
+                    Divider()
+
+                    if self.activeFeedTool == .FeedTimer {
+                        DashboardDataView(title: "Feeds") { (result: FeedSession, index) in
+                            Text(result.formattedElapsedTime())
+                                .padding(.leading, 0)
+                        }
+                        
+                        Button(action: {
+                            print("Start new feed")
+                        }) {
+                            HStack {
+                                Text("Start Timer")
+                                Spacer()
+                            }.padding()
+                        }
                     }
+
+                    if self.activeFeedTool == .NappyChange {
+                        DashboardDataView(title: "Nappy Changes") { (result: FeedSession, index) in
+                            Text("\(result.status.rawValue)")
+                        }
+                    }
+
+                    if self.activeFeedTool == .ExpressedFeed {
+                        DashboardDataView(title: "Expressed Feed") { (result: FeedSession, index) in
+                            Text("\(result.duration)")
+                        }
+                    }
+
+                    Spacer()
                 }
-                
-                Spacer()
+                .navigationBarTitle("Morning")
+                .navigationBarItems(
+                    leading:  Image(systemName: "person.crop.circle").foregroundColor(.orange),
+                    trailing: Image("heart").resizable().frame(width: 40, height: 40)
+                )
             }
         }
     }
