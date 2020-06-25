@@ -72,31 +72,47 @@ struct DashboardView: View {
         GeometryReader {outerGeometry in
             NavigationView {
                 VStack {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 0) {
-                            Text("feed")
-                                .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
-                                .background(Color.orange)
+                    ZStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 0) {
+                                Text("feed")
+                                    .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
+                                    .background(Color.orange)
 
-                            Text("nappy")
-                                .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
-                                .background(Color.red)
+                                Text("nappy")
+                                    .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
+                                    .background(Color.red)
 
-                            Text("expressed")
-                                .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
-                                .background(Color.orange)
-                        }                    }
-                    .frame(maxWidth: .infinity)
-                    .background(Color.yellow)
-                    .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
-                    .introspectScrollView { (scrollView) in
-                        self.scrollViewDelegate.pageWidth = outerGeometry.size.width
-                        self.scrollViewDelegate.pageCount = FeedTool.allCases.count
+                                Text("expressed")
+                                    .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
+                                    .background(Color.orange)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .background(Color.yellow)
+                        .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
+                        .introspectScrollView { (scrollView) in
+                            self.scrollViewDelegate.pageWidth = outerGeometry.size.width
+                            self.scrollViewDelegate.pageCount = FeedTool.allCases.count
+                            
+                            scrollView.isPagingEnabled = true
+                            scrollView.delegate = self.scrollViewDelegate
+                            self.scrollViewDelegate.scrollViewDidEndDeceleratingCallback = self.updatePageIndex
+                        }
                         
-                        scrollView.isPagingEnabled = true
-                        scrollView.delegate = self.scrollViewDelegate
-                        self.scrollViewDelegate.scrollViewDidEndDeceleratingCallback = self.updatePageIndex
+                        Divider()
+                        
+                        HStack(alignment: .bottom) {
+                            Spacer()
+                            
+                            ForEach(FeedTool.allCases.indices) {index in
+                                Text("\(index)")
+                                    .padding()
+                                    .background(self.activeFeedTool.rawValue == index ? Color.pink : Color.clear)
+                            }
+                        }
                     }
+                    .background(Color.green)
 
                     Divider()
 
