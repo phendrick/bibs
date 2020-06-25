@@ -17,16 +17,20 @@ enum FeedTool: String, CaseIterable {
 }
 
 class CustomScrollViewDelegate: NSObject, UIScrollViewDelegate {
-    var scrollViewDidEndDeceleratingCallback: () -> Void
+    var scrollViewDidEndDeceleratingCallback: (Int) -> Void
+    var pageWidth: CGFloat = 0
+    var pageCount: Int = 0
     
-    init(scrollViewDidEndDeceleratingCallback: @escaping () -> Void) {
+    init(scrollViewDidEndDeceleratingCallback: @escaping (Int) -> Void) {
         self.scrollViewDidEndDeceleratingCallback = scrollViewDidEndDeceleratingCallback
         
         super.init()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDidEndDeceleratingCallback()
+        let offsetIndex = Int(scrollView.contentOffset.x / CGFloat(pageWidth))
+        
+        self.scrollViewDidEndDeceleratingCallback(offsetIndex)
     }
 }
 
@@ -48,15 +52,17 @@ struct DashboardView: View {
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     @State var activeFeedTool: FeedTool = .FeedTimer
+    @State var hello: String = "Whoo!"
     
     var scrollViewDelegate: CustomScrollViewDelegate!
     
     init() {
-        self.scrollViewDelegate = CustomScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updateData)
+        self.scrollViewDelegate = CustomScrollViewDelegate(scrollViewDidEndDeceleratingCallback: self.updatePageIndex)
     }
     
-    func updateData() {
-        print("Update Data")
+    func updatePageIndex(index: Int) {
+        print(self.hello)
+        self.activeFeedTool = .NappyChange
     }
     
     var body: some View {
@@ -68,28 +74,22 @@ struct DashboardView: View {
                             Text("feed")
                                 .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
                                 .background(Color.orange)
-                                .onTapGesture {
-                                    self.activeFeedTool = .FeedTimer
-                                }
 
                             Text("nappy")
                                 .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
                                 .background(Color.red)
-                                .onTapGesture {
-                                    self.activeFeedTool = .NappyChange
-                                }
 
                             Text("expressed")
                                 .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
                                 .background(Color.orange)
-                                .onTapGesture {
-                                    self.activeFeedTool = .ExpressedFeed
-                                }
                         }                    }
                     .frame(maxWidth: .infinity)
                     .background(Color.yellow)
                     .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
                     .introspectScrollView { (scrollView) in
+                        self.scrollViewDelegate.pageWidth = outerGeometry.size.width
+                        self.scrollViewDelegate.pageCount = 3
+                        
                         scrollView.isPagingEnabled = true
                         scrollView.delegate = self.scrollViewDelegate
                     }
