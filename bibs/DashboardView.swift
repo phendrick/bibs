@@ -16,6 +16,20 @@ enum FeedTool: String, CaseIterable {
     case ExpressedFeed = "Expressed Feed"
 }
 
+class CustomScrollViewDelegate: NSObject, UIScrollViewDelegate {
+    var scrollViewDidEndDeceleratingCallback: () -> Void
+    
+    init(scrollViewDidEndDeceleratingCallback: @escaping () -> Void) {
+        self.scrollViewDidEndDeceleratingCallback = scrollViewDidEndDeceleratingCallback
+        
+        super.init()
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.scrollViewDidEndDeceleratingCallback()
+    }
+}
+
 struct DashboardView: View {
     @State private var childSheetVisible: Bool = false
     
@@ -35,6 +49,16 @@ struct DashboardView: View {
     
     @State var activeFeedTool: FeedTool = .FeedTimer
     
+    var scrollViewDelegate: CustomScrollViewDelegate!
+    
+    init() {
+        self.scrollViewDelegate = CustomScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updateData)
+    }
+    
+    func updateData() {
+        print("Update Data")
+    }
+    
     var body: some View {
         GeometryReader {outerGeometry in
             NavigationView {
@@ -42,21 +66,21 @@ struct DashboardView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 0) {
                             Text("feed")
-                                .frame(width: outerGeometry.size.width * 0.5, height: outerGeometry.size.width*0.5)
+                                .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
                                 .background(Color.orange)
                                 .onTapGesture {
                                     self.activeFeedTool = .FeedTimer
                                 }
 
                             Text("nappy")
-                                .frame(width: outerGeometry.size.width * 0.5, height: outerGeometry.size.width*0.5)
+                                .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
                                 .background(Color.red)
                                 .onTapGesture {
                                     self.activeFeedTool = .NappyChange
                                 }
 
                             Text("expressed")
-                                .frame(width: outerGeometry.size.width * 0.5, height: outerGeometry.size.width*0.5)
+                                .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
                                 .background(Color.orange)
                                 .onTapGesture {
                                     self.activeFeedTool = .ExpressedFeed
@@ -65,6 +89,10 @@ struct DashboardView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.yellow)
                     .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
+                    .introspectScrollView { (scrollView) in
+                        scrollView.isPagingEnabled = true
+                        scrollView.delegate = self.scrollViewDelegate
+                    }
 
                     Divider()
 
