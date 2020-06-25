@@ -36,7 +36,6 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                 ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
                     DashboardDataRowView(index: index) {
                         self.content(self.fetchRequest.wrappedValue[index], index)
-                        .listRowInsets(EdgeInsets())
                     }
                 }
             }
@@ -47,6 +46,11 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                 self.offset = 0
             }
         }
+        .onDisappear(perform: {
+            withAnimation {
+                self.offset = 100
+            }
+        })
         .padding()
     }
 }

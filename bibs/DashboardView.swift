@@ -10,10 +10,10 @@ import SwiftUI
 import Introspect
 import CoreData
 
-enum FeedTool: String, CaseIterable {
-    case FeedTimer = "Feed Timer"
-    case NappyChange = "Nappy Change"
-    case ExpressedFeed = "Expressed Feed"
+enum FeedTool: Int, CaseIterable {
+    case FeedTimer
+    case NappyChange
+    case ExpressedFeed
 }
 
 class CustomScrollViewDelegate: NSObject, UIScrollViewDelegate {
@@ -57,12 +57,15 @@ struct DashboardView: View {
     var scrollViewDelegate: CustomScrollViewDelegate!
     
     init() {
-        self.scrollViewDelegate = CustomScrollViewDelegate(scrollViewDidEndDeceleratingCallback: self.updatePageIndex)
+        self.scrollViewDelegate = CustomScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updatePageIndex)
     }
     
     func updatePageIndex(index: Int) {
-        print(self.hello)
-        self.activeFeedTool = .NappyChange
+        guard let tool = FeedTool(rawValue: index) else {
+            return
+        }
+        
+        self.activeFeedTool = tool
     }
     
     var body: some View {
@@ -88,10 +91,11 @@ struct DashboardView: View {
                     .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
                     .introspectScrollView { (scrollView) in
                         self.scrollViewDelegate.pageWidth = outerGeometry.size.width
-                        self.scrollViewDelegate.pageCount = 3
+                        self.scrollViewDelegate.pageCount = FeedTool.allCases.count
                         
                         scrollView.isPagingEnabled = true
                         scrollView.delegate = self.scrollViewDelegate
+                        self.scrollViewDelegate.scrollViewDidEndDeceleratingCallback = self.updatePageIndex
                     }
 
                     Divider()
