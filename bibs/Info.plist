@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans.ttf</string>
+		<string>Pacifico-Regular.ttf</string>
 		<string>OpenSans-SemiBold.ttf</string>
 		<string>Merriweather.ttf</string>
 	</array>

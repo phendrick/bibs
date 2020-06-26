@@ -2,7 +2,7 @@
 //  FeedSession+CoreDataClass.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 04/06/2020.
+//  Created by Paul Hendrick on 26/06/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -12,4 +12,5 @@ import CoreData
 
 
 public class FeedSession: NSManagedObject {
+
 }

@@ -26,44 +26,55 @@ struct AddChildView: View {
     
     var body: some View {
         return VStack {
-            HStack {
-                Image(uiImage: self.uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .frame(width: 120, height: 120)
-            }
-            
             VStack {
-                TextField("Name", text: self.$name)
-                
-                Image(systemName: "photo")
-                    .onTapGesture {
-                        self.showImagePicker.toggle()
+                Form {
+                    HStack {
+                        Image(uiImage: self.uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .clipShape(Circle())
+                            .frame(width: 120, height: 120)
+                    }
+                    
+                    
+                    Group {
+                        TextField("Name", text: self.$name)
+                    }
+                    
+                    Group {
+                        HStack {
+                            Image(systemName: "photo")
+                            Text("Pick a photo")
+                        }
+                        .onTapGesture {
+                                self.showImagePicker.toggle()
+                        }
+                    }
+                    
+                    Group {
+                        VStack {
+                            Text("\(self.$dueDate.wrappedValue)")
+                                .onTapGesture {
+                                    self.showDatePicker.toggle()
+                            }
+                            
+                            Toggle("They've arrived", isOn: self.$isBorn)
+                            
+                        }.sheet(isPresented: $showDatePicker) {
+                            DatePicker(selection: self.$dueDate) {
+                                Text("Due Date")
+                            }.labelsHidden()
+                        }
+                        
+                        Text("If your little one was early...something something something")
+                    }
+                    
                 }
             }.sheet(isPresented: $showImagePicker, onDismiss: {
                 self.showImagePicker = false
             }) {
                 ImagePickerViewController(isPresented: self.$showImagePicker, selectedImage: self.$uiImage)
             }
-            
-            VStack {
-                Text("\(self.$dueDate.wrappedValue)")
-                    .onTapGesture {
-                        self.showDatePicker.toggle()
-                }
-                
-                Toggle("They've arrived", isOn: self.$isBorn)
-                
-            }.sheet(isPresented: $showDatePicker) {
-                DatePicker(selection: self.$dueDate) {
-                    Text("Due Date")
-                }.labelsHidden()
-            }
-            
-            Text("If your little one was early...something something something")
-            
-            Spacer()
             
             VStack {
                 Button(action: {

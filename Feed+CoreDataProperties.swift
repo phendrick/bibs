@@ -2,7 +2,7 @@
 //  Feed+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 04/06/2020.
+//  Created by Paul Hendrick on 26/06/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -22,4 +22,5 @@ extension Feed {
     @NSManaged public var side: Int16
     @NSManaged public var state: Int16
     @NSManaged public var feedSession: FeedSession?
+
 }

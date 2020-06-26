@@ -2,7 +2,7 @@
 //  Child+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 24/06/2020.
+//  Created by Paul Hendrick on 26/06/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -26,7 +26,8 @@ extension Child {
     @NSManaged public var name: String?
     @NSManaged public var state: Int16
     @NSManaged public var feedSessions: NSSet?
-    @NSManaged public var nappyChanges: NappyChange?
+    @NSManaged public var nappyChanges: NSSet?
+    @NSManaged public var parent: Profile?
 
 }
 
@@ -44,5 +45,22 @@ extension Child {
 
     @objc(removeFeedSessions:)
     @NSManaged public func removeFromFeedSessions(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for nappyChanges
+extension Child {
+
+    @objc(addNappyChangesObject:)
+    @NSManaged public func addToNappyChanges(_ value: NappyChange)
+
+    @objc(removeNappyChangesObject:)
+    @NSManaged public func removeFromNappyChanges(_ value: NappyChange)
+
+    @objc(addNappyChanges:)
+    @NSManaged public func addToNappyChanges(_ values: NSSet)
+
+    @objc(removeNappyChanges:)
+    @NSManaged public func removeFromNappyChanges(_ values: NSSet)
 
 }

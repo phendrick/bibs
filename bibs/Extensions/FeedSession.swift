@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 extension FeedSession: Identifiable, Trackable {
-    
     enum FeedSessionStatus: Int16 {
         case paused
         case running
@@ -41,7 +40,7 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     public var wrappedCreatedAt: Date {
-        createdAt
+        createdAt ?? Date()
     }
     
     /// turn our .feeds associated set into an array by sorting the members

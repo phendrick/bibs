@@ -2,7 +2,7 @@
 //  FeedSession+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 04/06/2020.
+//  Created by Paul Hendrick on 26/06/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -17,7 +17,7 @@ extension FeedSession {
         return NSFetchRequest<FeedSession>(entityName: "FeedSession")
     }
 
-    @NSManaged public var createdAt: Date
+    @NSManaged public var createdAt: Date?
     @NSManaged public var state: Int16
     @NSManaged public var child: Child?
     @NSManaged public var feeds: NSSet?
@@ -38,4 +38,5 @@ extension FeedSession {
 
     @objc(removeFeeds:)
     @NSManaged public func removeFromFeeds(_ values: NSSet)
+
 }

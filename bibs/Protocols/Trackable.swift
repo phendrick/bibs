@@ -9,7 +9,5 @@
 import Foundation
 
 protocol Trackable {
-    var createdAt: Date {
-        get set
-    }
+    var wrappedCreatedAt: Date {get}
 }

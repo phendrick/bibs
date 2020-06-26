@@ -2,7 +2,7 @@
 //  NappyChange+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 24/06/2020.
+//  Created by Paul Hendrick on 26/06/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -17,8 +17,8 @@ extension NappyChange {
         return NSFetchRequest<NappyChange>(entityName: "NappyChange")
     }
 
-    @NSManaged public var state: Int16
     @NSManaged public var createdAt: Date?
+    @NSManaged public var state: Int16
     @NSManaged public var child: Child?
 
 }
