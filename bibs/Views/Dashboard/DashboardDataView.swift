@@ -19,7 +19,12 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     
     @State var offset: CGFloat = -5
     
-    init(title: String = "", predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor] = [], @ViewBuilder content: @escaping(T, Int) -> Content) {
+    init(
+        title: String = "",
+        predicate: NSPredicate? = nil,
+        sortDescriptors: [NSSortDescriptor] = [],
+        @ViewBuilder content: @escaping(T, Int) -> Content
+    ) {
         fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
         self.content = content
         self.title = title
@@ -32,14 +37,22 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                 .opacity(offset == 0 ? 1 : 0)
                 .offset(x: 0, y: self.offset)
             
-            List {
-                ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
-                    DashboardDataRowView(index: index) {
-                        self.content(self.fetchRequest.wrappedValue[index], index)
+            if( fetchRequest.wrappedValue.count > 0 ) {
+                List {
+                    ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
+                        DashboardDataRowView(index: index) {
+                            self.content(self.fetchRequest.wrappedValue[index], index)
+                        }
                     }
                 }
+            }else {
+                Text("OK")
             }
-        }.onAppear {
+            
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.red)
+        .onAppear {
             UITableView.appearance().separatorColor = .clear
             
             withAnimation {

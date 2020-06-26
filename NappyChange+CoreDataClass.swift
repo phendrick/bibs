@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-
+@objc(NappyChange)
 public class NappyChange: NSManagedObject {
 
 }

@@ -36,7 +36,7 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     var currentFeed: Feed? {
-        feedsArray.last
+        return feedsArray.last
     }
     
     public var wrappedCreatedAt: Date {
@@ -86,10 +86,13 @@ extension FeedSession: Identifiable, Trackable {
     /// the timer stops incrementing and invalidate's itself when the current timer `.status` is set to `.paused`, so
     /// we can call `feedSession.pause()` or  `feedSession.setStatus(to: .paused)` to stop a timer
     var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             guard let feed = self.currentFeed else {
+                print("imouttahere")
                 return
             }
+            
+            print("feed.duration: \(feed.duration)")
             
             if self.status == .paused {
                 timer.invalidate()
@@ -109,8 +112,11 @@ extension FeedSession: Identifiable, Trackable {
     func resume() {
         /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
         guard status != .running else {
+            print("imout")
             return
         }
+        
+        print("firing...")
         
         self.status = .running
         timer.fire()
@@ -144,9 +150,9 @@ extension FeedSession: Identifiable, Trackable {
 
         /// get either the current feed or the last known one then alternate the side value
         let feed: Feed? = currentFeed
-        let side = feed?.currentSide == Feed.BreastSide.left ? Feed.BreastSide.right : Feed.BreastSide.left
+        let side = feed?.breastSide == .left ? Feed.BreastSide.right : Feed.BreastSide.left
         
-        let switchedFeed = Feed(status: .running, side: side, insertIntoManagedObjectContext: context)
+        let switchedFeed = Feed(side: side, insertIntoManagedObjectContext: context)
 
         /// add it to our array of feed instances
         self.addToFeeds(switchedFeed)

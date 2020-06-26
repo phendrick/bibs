@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-
+@objc(FeedSession)
 public class FeedSession: NSManagedObject {
 
 }

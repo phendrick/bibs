@@ -17,9 +17,9 @@ extension Profile {
         return NSFetchRequest<Profile>(entityName: "Profile")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var colorScheme: Int16
     @NSManaged public var createdAt: Date?
+    @NSManaged public var name: String?
     @NSManaged public var children: NSSet?
 
 }

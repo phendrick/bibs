@@ -15,17 +15,13 @@ struct FeedSessionView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Session: \(feedSession.formattedElapsedTime(include_hsec: false))").onTapGesture {
-                    print("Session tapped: \(self.feedSession.status.rawValue)")
-                    
+                Text("\(feedSession.formattedElapsedTime(include_hsec: true))").onTapGesture {
                     if(self.feedSession.status == .running) {
                         self.feedSession.pause()
                     }else if(self.feedSession.status == .paused) {
                         self.feedSession.resume()
                     }
                 }
-                
-                Text("\(feedSession.status.rawValue)")
                 
                 if feedSession.status == .paused {
                     Button(action: {
@@ -40,7 +36,7 @@ struct FeedSessionView: View {
                         Image(systemName: "pause")
                     }
                 }
-                
+
                 if(feedSession.status != .complete) {
                     Button(action: {
                         self.feedSession.switchSide()
@@ -49,21 +45,14 @@ struct FeedSessionView: View {
                     }
                 }
             }
-            
-            VStack {
-                ForEach(feedSession.feedsArray, id: \.self) {feed in
-                    HStack {
-                        Text("\(feed.formattedElapsedTime)")
-                    }
-                }
-            }
-            .background(Color.orange)
         }
     }
 }
 
 struct FeedSessionView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedSessionView().environmentObject(FeedSession())
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        return FeedSessionView().environmentObject(FeedSession()).environment(\.managedObjectContext, context)
     }
 }

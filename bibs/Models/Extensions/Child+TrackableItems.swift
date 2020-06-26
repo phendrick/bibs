@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 extension Child {
-    func allTrackableEntities() -> [NSManagedObject] {
+    /// fetch all trackable entities (feeds, nappy changes etc)
+    func allTrackableEntities() -> [Trackable] {
         guard let context = self.managedObjectContext else {
             return []
         }
@@ -52,9 +53,6 @@ extension Child {
             let allEntities = [feedSessions]
             
             return allEntities.flatMap {$0}
-//                .sorted { (lhs, rhs) -> Bool in
-//                lhs.createdAt < rhs.createdAt
-//            }
         }catch {
             return []
         }

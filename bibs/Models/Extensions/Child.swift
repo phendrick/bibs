@@ -52,6 +52,7 @@ extension Child: Identifiable {
         request.fetchLimit = 1
         
         guard let context = self.managedObjectContext else {
+            print("Error!!")
             fatalError()
         }
         
@@ -65,26 +66,41 @@ extension Child: Identifiable {
     }
     
     func startNewFeedSession() throws {
+        guard let context = self.managedObjectContext else {
+            fatalError()
+        }
+        
+        /// mark any old feed sessions as complete
+        for activeSession in feedSessionsArray where activeSession.status != .complete {
+            print("Marking session as .complete")
+            activeSession.status = .complete
+        }
+        
+        let session       = FeedSession(context: context)
+        session.createdAt = Date()
+        session.status = .paused
+        
+        let feed       = Feed(context: context)
+        feed.createdAt = Date()
+        feed.breastSide = .left
+        
+        session.addToFeeds(feed)
+        self.addToFeedSessions(session)
+        
+        do {
+           try context.save()
+            
+            session.resume()
+        }catch {
+            print("Error: \(error)")
+        }
+    }
+    
+    func clear() {
         if let moc = self.managedObjectContext {
-            for activeSession in feedSessionsArray where activeSession.status != .complete {
-                activeSession.status = .complete
-            }
+            _ = self.feedSessionsArray.map { moc.delete($0) }
             
-            let session       = FeedSession(context: moc)
-            session.createdAt = Date()
-            
-            let feed       = Feed(context: moc)
-            feed.createdAt = Date()
-            
-            session.addToFeeds(feed)
-            self.addToFeedSessions(session)
-            
-            do {
-                try moc.save()
-                
-                self.objectWillChange.send()
-            }catch {
-            }
+            try? moc.save()
         }
     }
     

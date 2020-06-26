@@ -16,24 +16,6 @@ enum FeedTool: Int, CaseIterable {
     case ExpressedFeed
 }
 
-class CustomScrollViewDelegate: NSObject, UIScrollViewDelegate {
-    var scrollViewDidEndDeceleratingCallback: (Int) -> Void
-    var pageWidth: CGFloat = 0
-    var pageCount: Int = 0
-    
-    init(scrollViewDidEndDeceleratingCallback: @escaping (Int) -> Void) {
-        self.scrollViewDidEndDeceleratingCallback = scrollViewDidEndDeceleratingCallback
-        
-        super.init()
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let offsetIndex = Int(scrollView.contentOffset.x / CGFloat(pageWidth))
-        
-        self.scrollViewDidEndDeceleratingCallback(offsetIndex)
-    }
-}
-
 struct DashboardView: View {
     @State private var childSheetVisible: Bool = false
     
@@ -52,12 +34,11 @@ struct DashboardView: View {
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     @State var activeFeedTool: FeedTool = .FeedTimer
-    @State var hello: String = "Whoo!"
     
-    var scrollViewDelegate: CustomScrollViewDelegate!
+    var scrollViewDelegate: CustomUIScrollViewDelegate!
     
     init() {
-        self.scrollViewDelegate = CustomScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updatePageIndex)
+        self.scrollViewDelegate = CustomUIScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updatePageIndex)
     }
     
     func updatePageIndex(index: Int) {
@@ -118,15 +99,32 @@ struct DashboardView: View {
 
                     if self.activeFeedTool == .FeedTimer {
                         DashboardDataView(title: "Feeds") { (result: FeedSession, index) in
-                            Text(result.formattedElapsedTime())
-                                .padding(.leading, 0)
+                            FeedSessionView().environmentObject(result)
                         }
                         
                         Button(action: {
                             print("Start new feed")
+                            do {
+                                try self.activeChildProfile.child?.startNewFeedSession()
+                            }catch {
+                            }
                         }) {
                             HStack {
                                 Text("Start Timer")
+                                Spacer()
+                            }.padding()
+                        }
+                        
+                        
+                        Button(action: {
+                            print("Clearing data")
+                            do {
+                                try self.activeChildProfile.child?.clear()
+                            }catch {
+                            }
+                        }) {
+                            HStack {
+                                Text("Clear out")
                                 Spacer()
                             }.padding()
                         }
