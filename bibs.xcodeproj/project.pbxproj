@@ -7,16 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA25898A24A64D75003434D7 /* NappyChange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898024A64D75003434D7 /* NappyChange+CoreDataClass.swift */; };
-		DA25898B24A64D75003434D7 /* NappyChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898124A64D75003434D7 /* NappyChange+CoreDataProperties.swift */; };
-		DA25898C24A64D75003434D7 /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898224A64D75003434D7 /* Feed+CoreDataClass.swift */; };
-		DA25898D24A64D75003434D7 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898324A64D75003434D7 /* Feed+CoreDataProperties.swift */; };
-		DA25898E24A64D75003434D7 /* Child+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898424A64D75003434D7 /* Child+CoreDataClass.swift */; };
-		DA25898F24A64D75003434D7 /* Child+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898524A64D75003434D7 /* Child+CoreDataProperties.swift */; };
-		DA25899024A64D75003434D7 /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898624A64D75003434D7 /* FeedSession+CoreDataClass.swift */; };
-		DA25899124A64D75003434D7 /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898724A64D75003434D7 /* FeedSession+CoreDataProperties.swift */; };
-		DA25899224A64D75003434D7 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898824A64D75003434D7 /* Profile+CoreDataClass.swift */; };
-		DA25899324A64D75003434D7 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA25898924A64D75003434D7 /* Profile+CoreDataProperties.swift */; };
 		DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A512498055C00E9D811 /* Trackable.swift */; };
 		DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */; };
 		DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154224A28AC400442543 /* DashboardDataRowView.swift */; };
@@ -30,11 +20,22 @@
 		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
 		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
+		DA8307B024A7417500454F14 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */; };
+		DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */; };
+		DA8307B224A7417500454F14 /* Child+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A824A7417500454F14 /* Child+CoreDataProperties.swift */; };
+		DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A924A7417500454F14 /* Feed+CoreDataClass.swift */; };
+		DA8307B424A7417500454F14 /* NappyChange+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AA24A7417500454F14 /* NappyChange+CoreDataClass.swift */; };
+		DA8307B524A7417500454F14 /* NappyChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AB24A7417500454F14 /* NappyChange+CoreDataProperties.swift */; };
+		DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */; };
+		DA8307B724A7417500454F14 /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AD24A7417500454F14 /* Profile+CoreDataProperties.swift */; };
+		DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */; };
+		DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AF24A7417500454F14 /* Child+CoreDataClass.swift */; };
+		DA8307BA24A7418800454F14 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB17398247C191500D94537 /* DashboardView.swift */; };
+		DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307BC24A742DC00454F14 /* DataviewView.swift */; };
 		DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */; };
 		DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DB92488549D00CF9028 /* OpenSans.ttf */; };
 		DAA34DBD248854AE00CF9028 /* Merriweather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DBC248854AE00CF9028 /* Merriweather.ttf */; };
 		DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DAAF5DB024A10A8500A7C499 /* Introspect */; };
-		DAB17399247C191500D94537 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB17398247C191500D94537 /* DashboardView.swift */; };
 		DAB1739C247D458600D94537 /* FeedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739B247D458600D94537 /* FeedSession.swift */; };
 		DAB1739F247D45B600D94537 /* Timeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739E247D45B600D94537 /* Timeable.swift */; };
 		DAB173A1247D513D00D94537 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB173A0247D513D00D94537 /* Feed.swift */; };
@@ -76,16 +77,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA25898024A64D75003434D7 /* NappyChange+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NappyChange+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898124A64D75003434D7 /* NappyChange+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NappyChange+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898224A64D75003434D7 /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898324A64D75003434D7 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898424A64D75003434D7 /* Child+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898524A64D75003434D7 /* Child+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898624A64D75003434D7 /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898724A64D75003434D7 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898824A64D75003434D7 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DA25898924A64D75003434D7 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DA2D2A512498055C00E9D811 /* Trackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
 		DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+TrackableItems.swift"; sourceTree = "<group>"; };
 		DA51154224A28AC400442543 /* DashboardDataRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataRowView.swift; sourceTree = "<group>"; };
@@ -99,6 +90,17 @@
 		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA8307A824A7417500454F14 /* Child+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA8307A924A7417500454F14 /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA8307AA24A7417500454F14 /* NappyChange+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NappyChange+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA8307AB24A7417500454F14 /* NappyChange+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NappyChange+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA8307AD24A7417500454F14 /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DA8307AF24A7417500454F14 /* Child+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA8307BC24A742DC00454F14 /* DataviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataviewView.swift; sourceTree = "<group>"; };
 		DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIScrollViewDelegate.swift; sourceTree = "<group>"; };
 		DAA34DB92488549D00CF9028 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenSans.ttf; sourceTree = "<group>"; };
 		DAA34DBC248854AE00CF9028 /* Merriweather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Merriweather.ttf; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		DA5DB18D24A5302E00DE2E01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA8307BB24A7426400454F14 /* Data Views */,
 				DA5DB18E24A5304700DE2E01 /* Dashboard */,
 				DA918F8924A64538006DFF99 /* Feeds */,
 				DAFE32342479D6BD0009B737 /* Onboarding */,
@@ -188,6 +191,14 @@
 				DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		DA8307BB24A7426400454F14 /* Data Views */ = {
+			isa = PBXGroup;
+			children = (
+				DA8307BC24A742DC00454F14 /* DataviewView.swift */,
+			);
+			path = "Data Views";
 			sourceTree = "<group>";
 		};
 		DA918F8424A637D3006DFF99 /* UIKit */ = {
@@ -327,16 +338,16 @@
 		DADD792A247864AD00791F61 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				DA25898024A64D75003434D7 /* NappyChange+CoreDataClass.swift */,
-				DA25898124A64D75003434D7 /* NappyChange+CoreDataProperties.swift */,
-				DA25898224A64D75003434D7 /* Feed+CoreDataClass.swift */,
-				DA25898324A64D75003434D7 /* Feed+CoreDataProperties.swift */,
-				DA25898424A64D75003434D7 /* Child+CoreDataClass.swift */,
-				DA25898524A64D75003434D7 /* Child+CoreDataProperties.swift */,
-				DA25898624A64D75003434D7 /* FeedSession+CoreDataClass.swift */,
-				DA25898724A64D75003434D7 /* FeedSession+CoreDataProperties.swift */,
-				DA25898824A64D75003434D7 /* Profile+CoreDataClass.swift */,
-				DA25898924A64D75003434D7 /* Profile+CoreDataProperties.swift */,
+				DA8307AF24A7417500454F14 /* Child+CoreDataClass.swift */,
+				DA8307A824A7417500454F14 /* Child+CoreDataProperties.swift */,
+				DA8307A924A7417500454F14 /* Feed+CoreDataClass.swift */,
+				DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */,
+				DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */,
+				DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */,
+				DA8307AA24A7417500454F14 /* NappyChange+CoreDataClass.swift */,
+				DA8307AB24A7417500454F14 /* NappyChange+CoreDataProperties.swift */,
+				DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */,
+				DA8307AD24A7417500454F14 /* Profile+CoreDataProperties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -505,45 +516,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAB17399247C191500D94537 /* DashboardView.swift in Sources */,
+				DA8307BA24A7418800454F14 /* DashboardView.swift in Sources */,
 				DAB1739C247D458600D94537 /* FeedSession.swift in Sources */,
 				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
+				DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePickerViewController.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */,
-				DA25898C24A64D75003434D7 /* Feed+CoreDataClass.swift in Sources */,
-				DA25898E24A64D75003434D7 /* Child+CoreDataClass.swift in Sources */,
+				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
+				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
-				DA25899024A64D75003434D7 /* FeedSession+CoreDataClass.swift in Sources */,
 				DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
 				DA635B1F24840A2C009BA4FF /* FeedSessionView.swift in Sources */,
+				DA8307B424A7417500454F14 /* NappyChange+CoreDataClass.swift in Sources */,
 				DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */,
+				DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */,
 				DA6A40EF24995E580076FB65 /* ChildListSheetView.swift in Sources */,
-				DA25899124A64D75003434D7 /* FeedSession+CoreDataProperties.swift in Sources */,
-				DA25898B24A64D75003434D7 /* NappyChange+CoreDataProperties.swift in Sources */,
-				DA25899324A64D75003434D7 /* Profile+CoreDataProperties.swift in Sources */,
 				DADD78FF2478609600791F61 /* ContentView.swift in Sources */,
 				DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */,
 				DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */,
-				DA25899224A64D75003434D7 /* Profile+CoreDataClass.swift in Sources */,
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
-				DA25898D24A64D75003434D7 /* Feed+CoreDataProperties.swift in Sources */,
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
-				DA25898A24A64D75003434D7 /* NappyChange+CoreDataClass.swift in Sources */,
 				DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */,
+				DA8307B224A7417500454F14 /* Child+CoreDataProperties.swift in Sources */,
+				DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */,
+				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
 				DA82C18F24899B930009772F /* Date.swift in Sources */,
 				DA635B1B2482698D009BA4FF /* Child.swift in Sources */,
+				DA8307B524A7417500454F14 /* NappyChange+CoreDataProperties.swift in Sources */,
 				DAB56B8F247A733300C80E1E /* ActiveChildProfiles.swift in Sources */,
 				DA82C18D248991760009772F /* ChildView.swift in Sources */,
-				DA25898F24A64D75003434D7 /* Child+CoreDataProperties.swift in Sources */,
+				DA8307B724A7417500454F14 /* Profile+CoreDataProperties.swift in Sources */,
+				DA8307B024A7417500454F14 /* Profile+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

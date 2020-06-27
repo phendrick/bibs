@@ -72,8 +72,7 @@ extension Child: Identifiable {
         
         /// mark any old feed sessions as complete
         for activeSession in feedSessionsArray where activeSession.status != .complete {
-            print("Marking session as .complete")
-            activeSession.status = .complete
+            try? activeSession.finish()
         }
         
         let session       = FeedSession(context: context)

@@ -10,7 +10,10 @@ import SwiftUI
 import CoreData
 
 struct DashboardDataView<T: NSManagedObject, Content: View>: View {
+    @Environment(\.managedObjectContext) var moc
+    
     var title: String?
+    var allowDelete: Bool = true
     
     var fetchRequest: FetchRequest<T>
     var results: FetchedResults<T> { fetchRequest.wrappedValue }
@@ -23,11 +26,22 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
         title: String = "",
         predicate: NSPredicate? = nil,
         sortDescriptors: [NSSortDescriptor] = [],
+        allowDelete: Bool = true,
         @ViewBuilder content: @escaping(T, Int) -> Content
     ) {
         fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
         self.content = content
         self.title = title
+        self.allowDelete = allowDelete
+    }
+    
+    func removeRows(at offsets: IndexSet) {
+        for index in offsets {
+            let row = results[index]
+            self.moc.delete(row)
+        }
+        
+        try? self.moc.save()
     }
     
     var body: some View {
@@ -43,15 +57,21 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                         DashboardDataRowView(index: index) {
                             self.content(self.fetchRequest.wrappedValue[index], index)
                         }
+                        .listRowInsets(EdgeInsets())
                     }
+                    .onDelete(perform: removeRows)
                 }
             }else {
-                Text("OK")
+                List {
+                    DashboardDataRowView(index: 1) {
+                        Text("Hello")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .listRowInsets(EdgeInsets())
+                    }
+                }
             }
-            
         }
         .frame(maxWidth: .infinity)
-        .background(Color.red)
         .onAppear {
             UITableView.appearance().separatorColor = .clear
             

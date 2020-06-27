@@ -12,37 +12,51 @@ import Foundation
 struct FeedSessionView: View {
     @EnvironmentObject var feedSession: FeedSession
     
+    func buttonIcon(state: FeedSession.FeedSessionStatus) -> String {
+        state == .running ? "pause.fill" : "play.fill"
+    }
+    
+    func breastSideIcon(state: Feed.BreastSide?) -> String {
+        guard let side = self.feedSession.currentBreastSide else {
+            return "circle.lefthalf.fill"
+        }
+        
+        return side == .left ? "circle.lefthalf.fill" : "circle.righthalf.fill"
+    }
     var body: some View {
         VStack {
             HStack {
-                Text("\(feedSession.formattedElapsedTime(include_hsec: true))").onTapGesture {
-                    if(self.feedSession.status == .running) {
-                        self.feedSession.pause()
-                    }else if(self.feedSession.status == .paused) {
+                HStack {
+                    Text("\(feedSession.formattedElapsedTime(include_hsec: true))")
+                    Spacer()
+                    Image(systemName: buttonIcon(state: self.feedSession.status))
+                }
+                .frame(maxWidth: 160)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)).cornerRadius(15))
+                .onTapGesture {
+                    if self.feedSession.status == .paused {
                         self.feedSession.resume()
+                    }else if self.feedSession.status == .running {
+                        self.feedSession.pause()
                     }
                 }
                 
-                if feedSession.status == .paused {
-                    Button(action: {
-                        self.feedSession.resume()
-                    }) {
-                        Image(systemName: "play")
-                    }
-                }else if(feedSession.status == .running) {
-                    Button(action: {
-                        self.feedSession.pause()
-                    }) {
-                        Image(systemName: "pause")
-                    }
+                HStack {
+                    Text("Done")
+                }.padding()
+                .foregroundColor(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)))
+                .onTapGesture {
+                    try? self.feedSession.finish()
                 }
-
-                if(feedSession.status != .complete) {
-                    Button(action: {
-                        self.feedSession.switchSide()
-                    }) {
-                        Image(systemName: "arrow.right.arrow.left")
-                    }
+                
+                HStack {
+                    Image(systemName: breastSideIcon(state: self.feedSession.currentBreastSide))
+                }.padding()
+                .foregroundColor(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)))
+                .onTapGesture {
+                    self.feedSession.switchSide()
                 }
             }
         }
@@ -52,7 +66,8 @@ struct FeedSessionView: View {
 struct FeedSessionView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let session = FeedSession(context: context)
         
-        return FeedSessionView().environmentObject(FeedSession()).environment(\.managedObjectContext, context)
+        return FeedSessionView().environmentObject(session).environment(\.managedObjectContext, context)
     }
 }

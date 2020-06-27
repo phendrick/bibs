@@ -39,6 +39,10 @@ extension FeedSession: Identifiable, Trackable {
         return feedsArray.last
     }
     
+    var currentBreastSide: Feed.BreastSide? {
+        return currentFeed?.breastSide
+    }
+    
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
     }
@@ -86,16 +90,17 @@ extension FeedSession: Identifiable, Trackable {
     /// the timer stops incrementing and invalidate's itself when the current timer `.status` is set to `.paused`, so
     /// we can call `feedSession.pause()` or  `feedSession.setStatus(to: .paused)` to stop a timer
     var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
             guard let feed = self.currentFeed else {
-                print("imouttahere")
+                print("no current feed")
                 return
             }
             
-            print("feed.duration: \(feed.duration)")
+            print("feed.duration: \(feed.duration), \(self.status)")
             
-            if self.status == .paused {
+            if self.status != .running {
                 timer.invalidate()
+                
                 return
             }
             
@@ -112,11 +117,8 @@ extension FeedSession: Identifiable, Trackable {
     func resume() {
         /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
         guard status != .running else {
-            print("imout")
             return
         }
-        
-        print("firing...")
         
         self.status = .running
         timer.fire()

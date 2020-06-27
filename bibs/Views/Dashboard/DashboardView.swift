@@ -7,13 +7,13 @@
 //
 
 import SwiftUI
-import Introspect
 import CoreData
 
 enum FeedTool: Int, CaseIterable {
     case FeedTimer
     case NappyChange
     case ExpressedFeed
+    case DataOverview
 }
 
 struct DashboardView: View {
@@ -27,79 +27,72 @@ struct DashboardView: View {
         entity: FeedSession.entity(),
         sortDescriptors: [],
         predicate: NSPredicate(
-            format: "state == %@", NSNumber(
-                value: FeedSession.FeedSessionStatus.running.rawValue
-            )
+            format: "state != %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)
         ),
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     @State var activeFeedTool: FeedTool = .FeedTimer
     
-    var scrollViewDelegate: CustomUIScrollViewDelegate!
-    
-    init() {
-        self.scrollViewDelegate = CustomUIScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updatePageIndex)
-    }
-    
-    func updatePageIndex(index: Int) {
-        guard let tool = FeedTool(rawValue: index) else {
-            return
-        }
-        
-        self.activeFeedTool = tool
-    }
-    
     var body: some View {
         GeometryReader {outerGeometry in
             NavigationView {
                 VStack {
-                    ZStack {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 0) {
-                                Text("feed")
-                                    .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
-                                    .background(Color.orange)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 0) {
+                            Text("feed")
+                                .frame(width: outerGeometry.size.width*0.6, height: outerGeometry.size.width*0.5)
+                                .background(Color.orange)
+                                .padding(.leading, 80)
+                                .onTapGesture {
+                                    self.activeFeedTool = .FeedTimer
+                                }
 
-                                Text("nappy")
-                                    .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
-                                    .background(Color.red)
+                            Text("nappy")
+                                .frame(width: outerGeometry.size.width*0.6, height: outerGeometry.size.width*0.5)
+                                .background(Color.red)
+                                .padding(.leading, 80)
+                                .onTapGesture {
+                                    self.activeFeedTool = .NappyChange
+                                }
 
-                                Text("expressed")
-                                    .frame(width: outerGeometry.size.width, height: outerGeometry.size.width*0.5)
-                                    .background(Color.orange)
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        .background(Color.yellow)
-                        .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
-                        .introspectScrollView { (scrollView) in
-                            self.scrollViewDelegate.pageWidth = outerGeometry.size.width
-                            self.scrollViewDelegate.pageCount = FeedTool.allCases.count
+                            Text("expressed")
+                                .frame(width: outerGeometry.size.width*0.6, height: outerGeometry.size.width*0.5)
+                                .background(Color.orange)
+                                .padding([.leading, .trailing], 80)
+                                .onTapGesture {
+                                    self.activeFeedTool = .ExpressedFeed
+                                }
                             
-                            scrollView.isPagingEnabled = true
-                            scrollView.delegate = self.scrollViewDelegate
-                            self.scrollViewDelegate.scrollViewDidEndDeceleratingCallback = self.updatePageIndex
-                        }
-                        
-                        Divider()
-                        
-                        HStack(alignment: .bottom) {
-                            Spacer()
-                            
-                            ForEach(FeedTool.allCases.indices) {index in
-                                Text("\(index)")
-                                    .padding()
-                                    .background(self.activeFeedTool.rawValue == index ? Color.pink : Color.clear)
+                            Text("data")
+                            .frame(width: outerGeometry.size.width*0.6, height: outerGeometry.size.width*0.5)
+                            .background(Color.orange)
+                            .padding([.leading, .trailing], 80)
+                            .onTapGesture {
+                                self.activeFeedTool = .DataOverview
                             }
                         }
                     }
-                    .background(Color.green)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.yellow)
+                    .animation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1))
 
-                    Divider()
-
+                    ForEach(self.activeFeedSessions) {feedSession in
+                        HStack {
+                            FeedSessionView().environmentObject(feedSession)
+                        }
+                    }
+                    
                     if self.activeFeedTool == .FeedTimer {
-                        DashboardDataView(title: "Feeds") { (result: FeedSession, index) in
-                            FeedSessionView().environmentObject(result)
+                        DashboardDataView(
+                        title: "Feeds",
+                        predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
+                        sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
+                        ) { (result: FeedSession, index) in
+                            HStack {
+                                Text(result.formattedElapsedTime(include_hsec: false))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         
                         Button(action: {
@@ -115,9 +108,8 @@ struct DashboardView: View {
                             }.padding()
                         }
                         
-                        
                         Button(action: {
-                            print("Clearing data")
+                            print("Clearing sdata")
                             do {
                                 try self.activeChildProfile.child?.clear()
                             }catch {
