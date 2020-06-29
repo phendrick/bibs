@@ -18,6 +18,8 @@
 		DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */; };
 		DA6A40EF24995E580076FB65 /* ChildListSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A40EE24995E580076FB65 /* ChildListSheetView.swift */; };
 		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
+		DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */; };
+		DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */; };
 		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
 		DA8307B024A7417500454F14 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */; };
@@ -88,6 +90,8 @@
 		DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedSessionsList.swift; sourceTree = "<group>"; };
 		DA6A40EE24995E580076FB65 /* ChildListSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildListSheetView.swift; sourceTree = "<group>"; };
 		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionModalView.swift; sourceTree = "<group>"; };
+		DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolsView.swift; sourceTree = "<group>"; };
 		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				DAB17398247C191500D94537 /* DashboardView.swift */,
+				DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */,
+				DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
 				DA51154224A28AC400442543 /* DashboardDataRowView.swift */,
 				DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */,
@@ -525,11 +531,13 @@
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePickerViewController.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
+				DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */,
 				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
+				DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
 				DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
