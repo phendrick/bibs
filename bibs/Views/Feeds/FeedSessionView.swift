@@ -54,9 +54,10 @@ struct FeedSessionView: View {
                     }
                     
                     HStack {
-                        Text("00:00:00.00")
-                            .font(.system(.body, design: .monospaced))
+                        Text("\(self.activeFeedSessions[sessionIndex].formattedElapsedTime())")
+                            .font(.custom("RobotoMono-Regular", size: 22))
                             .padding()
+                        
                         Image(systemName: "pause.fill")
                             .padding(.trailing, 15)
                     }
@@ -67,6 +68,13 @@ struct FeedSessionView: View {
                                 Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)).opacity(0.7)
                             )
                     )
+                    .onTapGesture {
+                        if self.activeFeedSessions[sessionIndex].status == .paused {
+                            self.activeFeedSessions[sessionIndex].resume()
+                        }else if self.activeFeedSessions[sessionIndex].status == .running {
+                            self.activeFeedSessions[sessionIndex].pause()
+                        }
+                    }
                 }
             }
         }.frame(maxWidth: .infinity, alignment: .leading)
@@ -119,6 +127,5 @@ struct FeedSessionView_Previews: PreviewProvider {
         let session = FeedSession(context: context)
         
         return FeedSessionView().environmentObject(session).environment(\.managedObjectContext, context)
-//            .previewLayout(.fixed(width: 400, height: 200))
     }
 }

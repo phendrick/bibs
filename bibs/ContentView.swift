@@ -15,6 +15,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if viewSettings.initialView == .dashboard {
+//                DashboardView(
+//                    viewSettings: <#T##ViewSettings#>,
+//                    activeFeedTool: <#T##FeedTool#>,
+//                    showingFeedSession: <#T##Bool#>
+//                )
+//                .environmentObject(ActiveChildProfile.shared)
+//                .environment(\.managedObjectContext, context)
+
+//                DashboardView()
                 DashboardView()
             }else {
                 WelcomeView()

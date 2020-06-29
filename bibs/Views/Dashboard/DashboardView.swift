@@ -23,17 +23,32 @@ struct DashboardView: View {
     @ObservedObject var viewSettings = ViewSettings()
     @Environment(\.managedObjectContext) var moc
     
+    @FetchRequest(
+    entity: FeedSession.entity(),
+    sortDescriptors: [],
+    predicate: NSPredicate(format: "state IN %@", [
+        FeedSession.FeedSessionStatus.running.rawValue, FeedSession.FeedSessionStatus.paused.rawValue
+    ]),
+    animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
+    
     @State var activeFeedTool: FeedTool = .FeedTimer
     @State var showingFeedSession: Bool = false
     
     var body: some View {
-        ZStack {
-            Color.red
-                .edgesIgnoringSafeArea(.all)
-            
-            GeometryReader {outerGeometry in
-                NavigationView {
+        NavigationView {
+            GeometryReader { outerGeometry in
+                ScrollView(showsIndicators: false) {
                     VStack {
+                        ForEach(self.activeFeedSessions) {s in
+                            Text("\(s.formattedElapsedTime())")
+                                .onTapGesture {
+                                    if s.status == .running {
+                                        s.pause()
+                                    }else {
+                                        s.resume()
+                                    }
+                                }
+                        }
                         DashboardToolsView(
                             geometry: outerGeometry,
                             activeFeedTool: self.$activeFeedTool
@@ -43,9 +58,9 @@ struct DashboardView: View {
                         
                         if self.activeFeedTool == .FeedTimer {
                             DashboardDataView(
-                            title: "Feeds",
-                            predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
-                            sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
+                                title: "Feeds",
+                                predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
+                                sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
                             ) { (result: FeedSession, index) in
                                 HStack {
                                     Text(result.formattedElapsedTime(include_hsec: false))
@@ -92,14 +107,16 @@ struct DashboardView: View {
 
                         Spacer()
                     }
-                    .navigationBarTitle("Morning")
-                    .navigationBarItems(
-                        leading:  Image(systemName: "person.crop.circle").foregroundColor(.orange),
-                        trailing: Image("heart").resizable().frame(width: 40, height: 40)
-                    )
                 }
             }
+            .navigationBarTitle("Morning")
+            .navigationBarItems(
+                leading:  Image(systemName: "person.crop.circle").foregroundColor(.gray),
+                trailing: Image(systemName: "heart.circle.fill").foregroundColor(.gray)
+            )
+            .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

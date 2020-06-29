@@ -47,9 +47,10 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(title ?? "")
-                .font(.system(size: 32, weight: .medium, design: .rounded))
+                .font(.custom("Merriweather-Regular", size: 26))
                 .opacity(offset == 0 ? 1 : 0)
                 .offset(x: 0, y: self.offset)
+                .overlay(Text("Results \(fetchRequest.wrappedValue.count)").offset(y: 50))
             
             if( fetchRequest.wrappedValue.count > 0 ) {
                 List {
@@ -57,33 +58,12 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                         DashboardDataRowView(index: index) {
                             self.content(self.fetchRequest.wrappedValue[index], index)
                         }
-                        .listRowInsets(EdgeInsets())
                     }
                     .onDelete(perform: removeRows)
-                }
-            }else {
-                List {
-                    DashboardDataRowView(index: 1) {
-                        Text("Hello")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .listRowInsets(EdgeInsets())
-                    }
                 }
             }
         }
         .frame(maxWidth: .infinity)
-        .onAppear {
-            UITableView.appearance().separatorColor = .clear
-            
-            withAnimation {
-                self.offset = 0
-            }
-        }
-        .onDisappear(perform: {
-            withAnimation {
-                self.offset = 100
-            }
-        })
         .padding()
     }
 }

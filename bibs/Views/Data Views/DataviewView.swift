@@ -10,12 +10,6 @@ import SwiftUI
 import Introspect
 
 struct DataviewView: View {
-    var scrollViewDelegate: CustomUIScrollViewDelegate!
-    
-    init() {
-        self.scrollViewDelegate = CustomUIScrollViewDelegate(scrollViewDidEndDeceleratingCallback: updatePageIndex)
-    }
-    
     func updatePageIndex(index: Int) {
         print("Set page \(index)")
     }
@@ -27,14 +21,6 @@ struct DataviewView: View {
                     HStack {
                         Text("OK")
                     }
-                }
-                .introspectScrollView { (scrollView) in
-                    self.scrollViewDelegate.pageWidth = outerGeometry.size.width
-                    self.scrollViewDelegate.pageCount = FeedTool.allCases.count
-                    
-                    scrollView.isPagingEnabled = true
-                    scrollView.delegate = self.scrollViewDelegate
-                    self.scrollViewDelegate.scrollViewDidEndDeceleratingCallback = self.updatePageIndex
                 }
             }
         }

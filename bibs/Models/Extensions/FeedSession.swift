@@ -27,7 +27,6 @@ extension FeedSession: Identifiable, Trackable {
         
         set(newValue) {
             state = newValue.rawValue
-            self.child?.objectWillChange.send()
         }
     }
     
@@ -129,11 +128,6 @@ extension FeedSession: Identifiable, Trackable {
     func finish() throws {
         guard let context = self.managedObjectContext else {
             fatalError()
-        }
-        
-        defer {
-            self.child?.objectWillChange.send()
-            self.objectWillChange.send()
         }
         
         self.status = .complete
