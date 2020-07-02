@@ -96,9 +96,11 @@ extension Child: Identifiable {
     }
     
     func clear() {
+        print("Clearing data for \(self.wrappedName) - \(self.feedSessionsArray.count)")
+        
         if let moc = self.managedObjectContext {
             _ = self.feedSessionsArray.map { moc.delete($0) }
-            
+
             try? moc.save()
         }
     }

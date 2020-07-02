@@ -24,37 +24,88 @@ struct DashboardView: View {
     @Environment(\.managedObjectContext) var moc
     
     @FetchRequest(
-    entity: FeedSession.entity(),
-    sortDescriptors: [],
-    predicate: NSPredicate(format: "state IN %@", [
-        FeedSession.FeedSessionStatus.running.rawValue, FeedSession.FeedSessionStatus.paused.rawValue
-    ]),
-    animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
+        entity: FeedSession.entity(),
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "state IN %@", [
+            FeedSession.FeedSessionStatus.running.rawValue, FeedSession.FeedSessionStatus.paused.rawValue
+        ]),
+        animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
+    
+    @FetchRequest(
+        entity: Child.entity(),
+        sortDescriptors: [],
+        animation: .spring()) var children: FetchedResults<Child>
     
     @State var activeFeedTool: FeedTool = .FeedTimer
-    @State var showingFeedSession: Bool = false
+    @State var showingChildListActionSheet: Bool = false
+    
+    var cofeeding: Bool {
+        self.activeFeedSessions.count > 1
+    }
+    
+    func childListActionSheetButtons(exclude: Child?) -> [ActionSheet.Button] {
+        guard let activeChild = exclude else {
+            return []
+        }
+        
+        var buttons: [ActionSheet.Button] = []
+        
+        for child in children where child != activeChild {
+            let button = ActionSheet.Button.default(Text("\(child.wrappedName)")) {
+                self.activeChildProfile.setActiveChildProfile(child: child)
+            }
+            
+            buttons.append(button)
+        }
+        
+        buttons.append(.cancel())
+        
+        return buttons
+    }
+    
+    func childListActionSheetMessage(current: String ) -> String {
+        return "Active child profile: \(current)"
+    }
+    
+    init() {
+        UINavigationBar.appearance().backgroundColor = .red
+    }
     
     var body: some View {
         NavigationView {
             GeometryReader { outerGeometry in
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        ForEach(self.activeFeedSessions) {s in
-                            Text("\(s.formattedElapsedTime())")
-                                .onTapGesture {
-                                    if s.status == .running {
-                                        s.pause()
-                                    }else {
-                                        s.resume()
-                                    }
-                                }
-                        }
                         DashboardToolsView(
                             geometry: outerGeometry,
                             activeFeedTool: self.$activeFeedTool
                         )
 
-                        FeedSessionView().padding()
+                        ForEach(self.activeChildProfile.child?.feedSessionsArray ?? []) {session in
+                            FeedSessionView(
+                                cofeeding: false,
+                                cofeedingIndex: 0,
+                                feedSession: session
+                            )
+                        }
+                        
+                        ForEach(self.activeFeedSessions.indices) {feedSessionIndex in
+                            FeedSessionView(
+                                cofeeding: self.activeFeedSessions.count>1,
+                                cofeedingIndex: feedSessionIndex,
+                                feedSession: self.activeFeedSessions[feedSessionIndex]
+                            )
+                        }
+                        
+                        if self.cofeeding && self.activeFeedSessions.filter {$0.status == .running}.count == 2 {
+                            Divider()
+                            
+                            Button(action: {
+                                let _ = self.activeFeedSessions.map {$0.pause()}
+                            }) {
+                                Text("Pause all")
+                            }
+                        }
                         
                         if self.activeFeedTool == .FeedTimer {
                             DashboardDataView(
@@ -70,20 +121,18 @@ struct DashboardView: View {
                             }
                             
                             Button(action: {
-                                print("Start new feed")
                                 do {
                                     try self.activeChildProfile.child?.startNewFeedSession()
                                 }catch {
                                 }
                             }) {
                                 HStack {
-                                    Text("Start Timer")
+                                    Text("New session")
                                     Spacer()
                                 }.padding()
                             }
                             
                             Button(action: {
-                                print("Clearing sdata")
                                 self.activeChildProfile.child?.clear()
                             }) {
                                 HStack {
@@ -109,14 +158,25 @@ struct DashboardView: View {
                     }
                 }
             }
-            .navigationBarTitle("Morning")
+            .navigationBarTitle("Morning, User", displayMode: .inline)
             .navigationBarItems(
-                leading:  Image(systemName: "person.crop.circle").foregroundColor(.gray),
-                trailing: Image(systemName: "heart.circle.fill").foregroundColor(.gray)
+                leading:  NavigationLink(destination: ProfileEditView()) {
+                    Image(systemName: "person.crop.circle").foregroundColor(.red)
+                },
+                trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {
+                    self.showingChildListActionSheet = true
+                }
             )
-            .navigationBarHidden(true)
+            .actionSheet(isPresented: self.$showingChildListActionSheet) {
+                ActionSheet(
+                    title: Text("Switch profile"),
+                    message: Text("The current active profile is: \(self.activeChildProfile.child?.wrappedName ?? "")"),
+                    buttons: self.childListActionSheetButtons(exclude: self.activeChildProfile.child)
+                )
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .scaleEffect(0.98)
     }
 }
 

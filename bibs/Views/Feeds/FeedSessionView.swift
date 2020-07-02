@@ -10,19 +10,10 @@ import SwiftUI
 import Foundation
 
 struct FeedSessionView: View {
-    @FetchRequest(
-    entity: FeedSession.entity(),
-    sortDescriptors: [],
-    predicate: NSPredicate(
-        format: "state != %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue
-        )
-    ),
-    animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
+    var cofeeding: Bool = false
+    var cofeedingIndex: Int = 0
     
-//    var cofeeding: Bool = false
-//    var cofeedingIndex: Int = 0
-    
-//    @EnvironmentObject var feedSession: FeedSession
+    @ObservedObject var feedSession: FeedSession
     
     func buttonIcon(state: FeedSession.FeedSessionStatus) -> String {
         state == .running ? "pause.fill" : "play.fill"
@@ -39,46 +30,65 @@ struct FeedSessionView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            ForEach(activeFeedSessions.indices) {sessionIndex in
-                VStack {
-                    if sessionIndex == 1 {
-                        VStack(alignment: .center) {
-                            HStack(alignment: .firstTextBaseline) {
-                                Text("Milo")
-                                Image(systemName: "link").rotationEffect(.degrees(-45)).foregroundColor(.orange)
-                                Text("Tabitha")
-                            }
-                        }
-                        .font(.custom("OpenSans-Regular", size: 14)).minimumScaleFactor(0.5)
-                        .offset(y: -5)
-                    }
-                    
-                    HStack {
-                        Text("\(self.activeFeedSessions[sessionIndex].formattedElapsedTime())")
-                            .font(.custom("RobotoMono-Regular", size: 22))
-                            .padding()
-                        
-                        Image(systemName: "pause.fill")
-                            .padding(.trailing, 15)
-                    }
-                    .foregroundColor(.white)
-                    .background(
-                        Capsule(style: .continuous)
-                            .foregroundColor(
-                                Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)).opacity(0.7)
-                            )
-                    )
+            HStack {
+                Text("\(feedSession.formattedElapsedTime())")
                     .onTapGesture {
-                        if self.activeFeedSessions[sessionIndex].status == .paused {
-                            self.activeFeedSessions[sessionIndex].resume()
-                        }else if self.activeFeedSessions[sessionIndex].status == .running {
-                            self.activeFeedSessions[sessionIndex].pause()
+                        if self.feedSession.status == .paused {
+                            self.feedSession.resume()
+                        }else if self.feedSession.status == .running {
+                            self.feedSession.pause()
                         }
                     }
+                
+                if cofeeding {
+                    Text("\(self.feedSession.child?.wrappedName ?? "")")
                 }
             }
-        }.frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .font(.custom("RobotoMono-Regular", size: 20))
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
+    
+//            ForEach(activeFeedSessions.indices) {sessionIndex in
+//                VStack {
+//                    if sessionIndex == 1 {
+//                        VStack(alignment: .center) {
+//                            HStack(alignment: .firstTextBaseline) {
+//                                Text("Milo")
+//                                Image(systemName: "link").rotationEffect(.degrees(-45)).foregroundColor(.orange)
+//                                Text("Tabitha")
+//                            }
+//                        }
+//                        .font(.custom("OpenSans-Regular", size: 14)).minimumScaleFactor(0.5)
+//                        .offset(y: -5)
+//                    }
+//
+//                    HStack {
+//                        Text("\(self.activeFeedSessions[sessionIndex].formattedElapsedTime())")
+//                            .font(.custom("RobotoMono-Regular", size: 22))
+//                            .padding()
+//
+//                        Image(systemName: "pause.fill")
+//                            .padding(.trailing, 15)
+//                    }
+//                    .foregroundColor(.white)
+//                    .background(
+//                        Capsule(style: .continuous)
+//                            .foregroundColor(
+//                                Color(#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)).opacity(0.7)
+//                            )
+//                    )
+//                    .onTapGesture {
+//                        if self.activeFeedSessions[sessionIndex].status == .paused {
+//                            self.activeFeedSessions[sessionIndex].resume()
+//                        }else if self.activeFeedSessions[sessionIndex].status == .running {
+//                            self.activeFeedSessions[sessionIndex].pause()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
 //    var body: some View {
 //        VStack {
@@ -126,6 +136,6 @@ struct FeedSessionView_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let session = FeedSession(context: context)
         
-        return FeedSessionView().environmentObject(session).environment(\.managedObjectContext, context)
+        return FeedSessionView(feedSession: session).environment(\.managedObjectContext, context)
     }
 }

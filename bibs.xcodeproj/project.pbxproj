@@ -42,6 +42,7 @@
 		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
 		DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */; };
 		DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DB92488549D00CF9028 /* OpenSans.ttf */; };
+		DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */; };
 		DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DAAF5DB024A10A8500A7C499 /* Introspect */; };
 		DAB1739C247D458600D94537 /* FeedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739B247D458600D94537 /* FeedSession.swift */; };
 		DAB1739F247D45B600D94537 /* Timeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739E247D45B600D94537 /* Timeable.swift */; };
@@ -117,6 +118,7 @@
 		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
 		DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIScrollViewDelegate.swift; sourceTree = "<group>"; };
 		DAA34DB92488549D00CF9028 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenSans.ttf; sourceTree = "<group>"; };
+		DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		DAB17398247C191500D94537 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		DAB1739B247D458600D94537 /* FeedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSession.swift; sourceTree = "<group>"; };
 		DAB1739E247D45B600D94537 /* Timeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeable.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		DA5DB18D24A5302E00DE2E01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DAAAFD5F24AC7FB70064B263 /* Profile Editing */,
 				DA8307BB24A7426400454F14 /* Data Views */,
 				DA5DB18E24A5304700DE2E01 /* Dashboard */,
 				DA918F8924A64538006DFF99 /* Feeds */,
@@ -263,6 +266,14 @@
 				DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DAAAFD5F24AC7FB70064B263 /* Profile Editing */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */,
+			);
+			path = "Profile Editing";
 			sourceTree = "<group>";
 		};
 		DAB1739A247D455600D94537 /* Extensions */ = {
@@ -555,6 +566,7 @@
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
 				DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */,
+				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePickerViewController.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,

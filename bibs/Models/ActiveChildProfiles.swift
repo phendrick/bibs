@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 final class ActiveChildProfile: ObservableObject {
-    @Published var child: Child?
+    @Published var child: Child!
     
     static let shared = ActiveChildProfile()
     

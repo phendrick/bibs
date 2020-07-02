@@ -49,7 +49,7 @@ struct DashboardToolsView: View {
                 height: min(self.geometry.size.height * 0.6, 400)
             )
             
-            HStack(spacing: 5) {
+            HStack(spacing: 15) {
                 ForEach(cardData.indices) {index in
                     Rectangle()
                         .frame(width: self.page == index ? 40 : 20, height: 20)
@@ -63,7 +63,7 @@ struct DashboardToolsView: View {
                 }.animation(
                     Animation.interactiveSpring(
                         response: 0.2,
-                        dampingFraction: 1,
+                        dampingFraction: 0.75,
                         blendDuration: 0.5).delay(0.2)
                 )
             }
@@ -94,14 +94,14 @@ struct DashboardToolCardView: View {
             }
             
             HStack {
-                VStack(alignment: .leading) {
+                VStack {
+                    Spacer()
+                    
                     Text(title)
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
                         .padding(5)
                         .padding([.top, .leading, .trailing], 10)
                         .font(.custom("Merriweather-Regular", size: 26))
-                    
-                    Spacer()
                     
                     Text(subtitle)
                         .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
@@ -111,7 +111,7 @@ struct DashboardToolCardView: View {
                         .shadow(color: .white, radius: 1, x: 0, y: 0)
                 }
 
-//                Spacer()
+                Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .foregroundColor(.white)

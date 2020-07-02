@@ -50,7 +50,7 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                 .font(.custom("Merriweather-Regular", size: 26))
                 .opacity(offset == 0 ? 1 : 0)
                 .offset(x: 0, y: self.offset)
-                .overlay(Text("Results \(fetchRequest.wrappedValue.count)").offset(y: 50))
+                .overlay(Text("Feed sessions for \(fetchRequest.wrappedValue.count)").offset(y: 50))
             
             if( fetchRequest.wrappedValue.count > 0 ) {
                 List {
