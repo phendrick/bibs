@@ -20,8 +20,6 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     
     var content: (T, Int) -> Content
     
-    @State var offset: CGFloat = -5
-    
     init(
         title: String = "",
         predicate: NSPredicate? = nil,
@@ -48,19 +46,14 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
         VStack(alignment: .leading) {
             Text(title ?? "")
                 .font(.custom("Merriweather-Regular", size: 26))
-                .opacity(offset == 0 ? 1 : 0)
-                .offset(x: 0, y: self.offset)
-                .overlay(Text("Feed sessions for \(fetchRequest.wrappedValue.count)").offset(y: 50))
             
-            if( fetchRequest.wrappedValue.count > 0 ) {
-                List {
-                    ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
-                        DashboardDataRowView(index: index) {
-                            self.content(self.fetchRequest.wrappedValue[index], index)
-                        }
+            List {
+                ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
+                    DashboardDataRowView(index: index) {
+                        self.content(self.fetchRequest.wrappedValue[index], index)
                     }
-                    .onDelete(perform: removeRows)
                 }
+                .onDelete(perform: removeRows)
             }
         }
         .frame(maxWidth: .infinity)
@@ -68,13 +61,13 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     }
 }
 
-struct DashboardDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        return DashboardDataView(title: "OK") { (result: Child, index) in
-            Text("OK")
-        }
-        .environment(\.managedObjectContext, context)
-    }
-}
+//struct DashboardDataView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//
+//        return DashboardDataView(title: "OK") { (result: Child, index) in
+//            Text("OK")
+//        }
+//        .environment(\.managedObjectContext, context)
+//    }
+//}

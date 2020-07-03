@@ -32,6 +32,12 @@ struct DashboardView: View {
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     @FetchRequest(
+        entity: FeedSession.entity(),
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "state == %d", Int16(FeedSession.FeedSessionStatus.complete.rawValue)),
+        animation: .spring()) var completedFeedSessions: FetchedResults<FeedSession>
+    
+    @FetchRequest(
         entity: Child.entity(),
         sortDescriptors: [],
         animation: .spring()) var children: FetchedResults<Child>
@@ -80,20 +86,12 @@ struct DashboardView: View {
                             geometry: outerGeometry,
                             activeFeedTool: self.$activeFeedTool
                         )
-
+                        
                         ForEach(self.activeChildProfile.child?.feedSessionsArray ?? []) {session in
                             FeedSessionView(
                                 cofeeding: false,
                                 cofeedingIndex: 0,
                                 feedSession: session
-                            )
-                        }
-                        
-                        ForEach(self.activeFeedSessions.indices) {feedSessionIndex in
-                            FeedSessionView(
-                                cofeeding: self.activeFeedSessions.count>1,
-                                cofeedingIndex: feedSessionIndex,
-                                feedSession: self.activeFeedSessions[feedSessionIndex]
                             )
                         }
                         
@@ -108,57 +106,54 @@ struct DashboardView: View {
                         }
                         
                         if self.activeFeedTool == .FeedTimer {
-                            DashboardDataView(
-                                title: "Feeds",
-                                predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
-                                sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
-                            ) { (result: FeedSession, index) in
-                                HStack {
-                                    Text(result.formattedElapsedTime(include_hsec: false))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            ForEach(self.completedFeedSessions, id: \.self) {session in
+                                Text("OK")
                             }
                             
-                            Button(action: {
-                                do {
-                                    try self.activeChildProfile.child?.startNewFeedSession()
-                                }catch {
-                                }
-                            }) {
-                                HStack {
-                                    Text("New session")
-                                    Spacer()
-                                }.padding()
-                            }
+//                            DashboardDataView(
+//                                title: "Feeds",
+//                                predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
+//                                sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
+//                            ) { (result: FeedSession, index) in
+//                                HStack {
+//                                    Text("(\(result.status.rawValue))")
+//                                    Text(result.formattedElapsedTime(include_hsec: false))
+//                                        .frame(maxWidth: .infinity, alignment: .leading)
+//                                }
+//                                .frame(maxWidth: .infinity, alignment: .leading)
+//                            }
                             
-                            Button(action: {
-                                self.activeChildProfile.child?.clear()
-                            }) {
-                                HStack {
-                                    Text("Clear out")
-                                    Spacer()
-                                }.padding()
+                            Divider()
+                            
+                            HStack {
+                                Button(action: {
+                                    do {
+                                        try self.activeChildProfile.child.startNewFeedSession()
+                                    }catch {
+                                    }
+                                }) {
+                                    HStack {
+                                        Text("New session")
+                                        Spacer()
+                                    }.padding()
+                                }
+                                
+                                Button(action: {
+                                    self.activeChildProfile.child?.clear()
+                                }) {
+                                    HStack {
+                                        Text("Clear out")
+                                        Spacer()
+                                    }.padding()
+                                }
                             }
                         }
-
-                        if self.activeFeedTool == .NappyChange {
-                            DashboardDataView(title: "Nappy Changes") { (result: FeedSession, index) in
-                                Text("\(result.status.rawValue)")
-                            }
-                        }
-
-                        if self.activeFeedTool == .ExpressedFeed {
-                            DashboardDataView(title: "Expressed Feed") { (result: FeedSession, index) in
-                                Text("\(result.duration)")
-                            }
-                        }
-
+                        
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle("Morning, User", displayMode: .inline)
+            .navigationBarTitle("Morning, mum", displayMode: .inline)
             .navigationBarItems(
                 leading:  NavigationLink(destination: ProfileEditView()) {
                     Image(systemName: "person.crop.circle").foregroundColor(.red)

@@ -31,6 +31,7 @@ struct FeedSessionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
+                Text("\(feedSession.status.rawValue) - ")
                 Text("\(feedSession.formattedElapsedTime())")
                     .onTapGesture {
                         if self.feedSession.status == .paused {
