@@ -9,16 +9,12 @@
 import SwiftUI
 import Combine
 
-final class ActiveChildProfile: ObservableObject {
-    @Published var child: Child!
+final class ProfileObserver: ObservableObject {
+    @Published var parent: ParentProfile!
     
-    static let shared = ActiveChildProfile()
+    static let shared = ProfileObserver()
     
     private init() {}
-    
-    func setActiveChildProfile(child: Child) {
-        self.child = child
-    }
     
     deinit {
         print("deinit ActiveChildren")

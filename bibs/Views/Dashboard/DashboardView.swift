@@ -19,7 +19,7 @@ enum FeedTool: Int, CaseIterable {
 struct DashboardView: View {
     @State private var childSheetVisible: Bool = false
     
-    @EnvironmentObject var activeChildProfile: ActiveChildProfile
+    @EnvironmentObject var profile: ProfileObserver
     @ObservedObject var viewSettings = ViewSettings()
     @Environment(\.managedObjectContext) var moc
     
@@ -58,7 +58,7 @@ struct DashboardView: View {
         
         for child in children where child != activeChild {
             let button = ActionSheet.Button.default(Text("\(child.wrappedName)")) {
-                self.activeChildProfile.setActiveChildProfile(child: child)
+                self.profile.parent.setActiveChild(child: child)
             }
             
             buttons.append(button)
@@ -87,7 +87,7 @@ struct DashboardView: View {
                             activeFeedTool: self.$activeFeedTool
                         )
                         
-                        ForEach(self.activeChildProfile.child?.feedSessionsArray ?? []) {session in
+                        ForEach(self.profile.parent.activeChild?.feedSessionsArray ?? []) {session in
                             FeedSessionView(
                                 cofeeding: false,
                                 cofeedingIndex: 0,
@@ -128,7 +128,7 @@ struct DashboardView: View {
                             HStack {
                                 Button(action: {
                                     do {
-                                        try self.activeChildProfile.child.startNewFeedSession()
+                                        try self.profile.parent.activeChild?.startNewFeedSession()
                                     }catch {
                                     }
                                 }) {
@@ -139,7 +139,7 @@ struct DashboardView: View {
                                 }
                                 
                                 Button(action: {
-                                    self.activeChildProfile.child?.clear()
+                                    self.profile.parent.activeChild?.clear()
                                 }) {
                                     HStack {
                                         Text("Clear out")
@@ -165,8 +165,8 @@ struct DashboardView: View {
             .actionSheet(isPresented: self.$showingChildListActionSheet) {
                 ActionSheet(
                     title: Text("Switch profile"),
-                    message: Text("The current active profile is: \(self.activeChildProfile.child?.wrappedName ?? "")"),
-                    buttons: self.childListActionSheetButtons(exclude: self.activeChildProfile.child)
+                    message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
+                    buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
                 )
             }
         }
@@ -181,6 +181,6 @@ struct DashboardView_Previews: PreviewProvider {
         
         return DashboardView()
             .environment(\.managedObjectContext, context)
-            .environmentObject(ActiveChildProfile.shared)
+            .environmentObject(ProfileObserver.shared)
     }
 }

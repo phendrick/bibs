@@ -9,12 +9,16 @@
 import SwiftUI
 
 struct AboutYouView: View {
+    @Environment(\.managedObjectContext) var context
+    
+    @EnvironmentObject var profile: ProfileObserver
+    
     @State var name: String = ""
+    @State var showAdChildView: Bool = false
     
     var body: some View {
         VStack {
             Form {
-                
                 Section(header:
                     HStack {
                         Spacer()
@@ -26,10 +30,31 @@ struct AboutYouView: View {
                 }
                 
                 Section(header: Text("Edit your details")) {
-                    TextField("Your name", text: $name)
-                    TextField("Your name", text: $name)
+                    TextField("Your name", text: self.$name)
                 }
             }
+            
+            // embed the next view in the wizard and set $showAdChildView in the button action
+            NavigationLink(destination: AddChildView(), isActive: self.$showAdChildView) {
+                EmptyView()
+            }
+            
+        }
+        .navigationBarItems(trailing: Button(action: {
+            self.profile.parent.createdAt = Date()
+            self.profile.parent.name = self.name
+            
+            do {
+                try self.context.save()
+                
+                self.showAdChildView = true
+            }catch {
+                debugPrint(error)
+            }
+        }) {
+            Text("Next")
+        }).onAppear {
+            self.name = self.profile.parent.wrappedName
         }
     }
 }

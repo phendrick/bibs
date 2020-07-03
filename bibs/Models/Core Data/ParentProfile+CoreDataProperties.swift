@@ -1,8 +1,8 @@
 //
-//  Profile+CoreDataProperties.swift
+//  ParentProfile+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 26/06/2020.
+//  Created by Paul Hendrick on 03/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -11,21 +11,22 @@ import Foundation
 import CoreData
 
 
-extension Profile {
+extension ParentProfile {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Profile> {
-        return NSFetchRequest<Profile>(entityName: "Profile")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ParentProfile> {
+        return NSFetchRequest<ParentProfile>(entityName: "ParentProfile")
     }
 
     @NSManaged public var colorScheme: Int16
     @NSManaged public var createdAt: Date?
+    @NSManaged public var image: Data?
     @NSManaged public var name: String?
     @NSManaged public var children: NSSet?
 
 }
 
 // MARK: Generated accessors for children
-extension Profile {
+extension ParentProfile {
 
     @objc(addChildrenObject:)
     @NSManaged public func addToChildren(_ value: Child)

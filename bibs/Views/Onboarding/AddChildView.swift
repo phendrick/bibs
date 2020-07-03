@@ -12,7 +12,9 @@ struct AddChildView: View {
     @State var imagePickerIsVisible = false
     @State var selectedImage = UIImage()
     
-    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var profile: ProfileObserver
+    @EnvironmentObject var viewSettings: ViewSettings
+    @Environment(\.managedObjectContext) var context
     
     @State var name: String = ""
     @State var dueDate: Date = Date()
@@ -26,35 +28,61 @@ struct AddChildView: View {
     
     var body: some View {
         return VStack {
-            ChildEditView()
+            VStack {
+                Form {
+                    
+                    Section(header:
+                        HStack {
+                            Spacer()
+                            Image("embryo")
+                            Spacer()
+                        }.padding(.top, 25)
+                    ) {
+                        EmptyView()
+                    }
+                    
+                    Section(header: Text("About your baby")) {
+                        TextField("Name", text: self.$name)
+                    }
+                    
+                    Section(header: Text("Due date")) {
+                        Toggle(isOn: self.$isBorn) {
+                            Text("They're here!")
+                        }
+                        
+                        DatePicker(selection: self.$dueDate) {
+                            Text(self.isBorn ? "Date of birth" : "Due date")
+                        }
+                    }
+                }
+            }
             
             VStack {
-                Button(action: {
-                    let child = Child(context: self.moc)
-                    
-                    if let data = self.uiImage.pngData() {
-                        child.image = data
-                    }
-                    
-                    child.wrappedName = self.name
-                    child.wrappedDueDate = self.dueDate
-                    child.createdAt = Date()
-                    
-                    do {
-                        print("Saving...")
-                        try self.moc.save()
-                    }catch {
-                        print("Error: \(error)")
-                    }
-                }) {
-                    Text("Save")
-                }
+                EmptyView()
+            }
+            .navigationBarItems(trailing: Button(action: {
+                let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
                 
-                Divider()
-                
-                NavigationLink(destination: AddChildConfirmationView()) {
-                    Text("Next")
+                child.wrappedName = self.name
+                child.wrappedDueDate = self.dueDate
+
+                if let data = self.uiImage.pngData() {
+                    child.image = data
                 }
+
+                do {
+                    try self.context.save()
+                    
+                    self.profile.parent.setActiveChild(child: child)
+                    
+                    withAnimation {
+                        self.viewSettings.initialView = .dashboard
+                    }
+                }catch {}
+            }) {
+                Text("Done")
+            }).onAppear {
+                self.name = self.profile.parent.activeChild?.wrappedName ?? ""
             }
         }
     }

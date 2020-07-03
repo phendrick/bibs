@@ -27,7 +27,7 @@ extension Child {
     @NSManaged public var state: Int16
     @NSManaged public var feedSessions: NSSet?
     @NSManaged public var nappyChanges: NSSet?
-    @NSManaged public var parent: Profile?
+    @NSManaged public var parent: ParentProfile?
 
 }
 
