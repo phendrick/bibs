@@ -9,20 +9,9 @@
 import SwiftUI
 import SwiftUIPager
 
-struct CardModel: Hashable {
-    var image: String
-    var title: String
-    var subtitle: String
-}
-
-let cardData:[CardModel] = [
-    CardModel(image: "page1", title: "Feed Timers", subtitle: "Monitor your baby's feeds"),
-    CardModel(image: "page2", title: "Nappy Change", subtitle: "Log a wet or dirty nappy"),
-    CardModel(image: "page3", title: "Expressed Feed", subtitle: "Given some expressed milk?"),
-    CardModel(image: "page4", title: "Data & Progress", subtitle: "Charts & Historical data")
-]
-
 struct DashboardToolsView: View {
+    @EnvironmentObject var toolsData: ToolsData
+    
     var geometry: GeometryProxy
     @Binding var activeFeedTool: FeedTool
     @State var page = 0
@@ -31,7 +20,7 @@ struct DashboardToolsView: View {
     
     var body: some View {
         VStack {
-            Pager(page: self.$page, data: cardData, id: \.self) { item in
+            Pager(page: .constant(0), data: toolsData.data, id: \.self) { item in
                 DashboardToolCardView(
                     image: item.image,
                     title: item.title,
@@ -129,7 +118,7 @@ struct DashboardToolsView_Previews: PreviewProvider {
                     image: "page1",
                     title: "Feed timers",
                     subtitle: "Feed timers subtitle"
-                )
+                ).environmentObject(ToolsData())
             }.previewLayout(.fixed(width: 300, height: 380))
         }
     }

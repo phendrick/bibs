@@ -39,23 +39,33 @@ struct AboutYouView: View {
                 EmptyView()
             }
             
-        }
-        .navigationBarItems(trailing: Button(action: {
-            self.profile.parent.createdAt = Date()
-            self.profile.parent.name = self.name
-            
-            do {
-                try self.context.save()
-                
+            Button(action: {
                 self.showAdChildView = true
-            }catch {
-                debugPrint(error)
+            }) {
+                Text("Next")
             }
-        }) {
-            Text("Next")
-        }).onAppear {
-            self.name = self.profile.parent.wrappedName
         }
+        .onAppear(perform: {
+            self.name = self.profile.parent.wrappedName
+        })
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+//        .navigationBarItems(trailing: Button(action: {
+//            self.profile.parent.createdAt = Date()
+//            self.profile.parent.name = self.name
+//
+//            do {
+//                try self.context.save()
+//
+//                self.showAdChildView = true
+//            }catch {
+//                debugPrint(error)
+//            }
+//        }) {
+//            Text("Next")
+//        }).onAppear {
+//            self.name = self.profile.parent.wrappedName
+//        }
     }
 }
 

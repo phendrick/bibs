@@ -85,7 +85,7 @@ struct DashboardView: View {
                         DashboardToolsView(
                             geometry: outerGeometry,
                             activeFeedTool: self.$activeFeedTool
-                        )
+                        ).environmentObject(ToolsData())
                         
                         ForEach(self.profile.parent.activeChild?.feedSessionsArray ?? []) {session in
                             FeedSessionView(

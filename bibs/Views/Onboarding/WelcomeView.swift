@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @EnvironmentObject var viewSettings: ViewSettings
+    @State var showAddAboutYouView: Bool = false
     
     var body: some View {
         NavigationView {
@@ -18,17 +19,22 @@ struct WelcomeView: View {
                         .font(.custom("Pacifico-Regular", size: 150))
                         .foregroundColor(.red)
                 }
-                
+
                 Text("Ready to get started?")
                     .padding(.bottom, 15)
-                
-                NavigationLink(destination: AboutYouView()) {
-                    Text("Set up a baby profile")
-                        .foregroundColor(.orange)
+
+                NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
+                    EmptyView()
                 }
-                
+
                 Spacer()
-                
+
+                Button(action: {
+                    self.showAddAboutYouView = true
+                }) {
+                    Text("Next")
+                }
+
                 VStack {
                     HStack(alignment: .lastTextBaseline) {
                         Image(systemName: "info.circle.fill")
@@ -36,7 +42,7 @@ struct WelcomeView: View {
                             .opacity(0.2)
                         Text("Feeding for two?").padding(.bottom, 10)
                     }
-                        
+
                     HStack {
                         Text("If you're co-feeding you can add another profile later.")
                             .font(.custom("OpenSans-Regular", size: 14))
@@ -44,8 +50,9 @@ struct WelcomeView: View {
                     }
                 }
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
-        .font(.custom("OpenSans-Regular", size: 22))
     }
 }
 

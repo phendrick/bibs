@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA10C51E24AFF1AF00EE9E2A /* ToolsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10C51D24AFF1AF00EE9E2A /* ToolsData.swift */; };
 		DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A512498055C00E9D811 /* Trackable.swift */; };
 		DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */; };
 		DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */; };
@@ -88,6 +89,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA10C51D24AFF1AF00EE9E2A /* ToolsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsData.swift; sourceTree = "<group>"; };
 		DA2D2A512498055C00E9D811 /* Trackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
 		DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+TrackableItems.swift"; sourceTree = "<group>"; };
 		DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+color.swift"; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				DAFE323C2479D8890009B737 /* ViewSettings.swift */,
 				DA635B1424822E13009BA4FF /* UserSettings.swift */,
 				DAB56B8E247A733300C80E1E /* ProfileObserver.swift */,
+				DA10C51D24AFF1AF00EE9E2A /* ToolsData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
 				DAAA33F224AFCA150015E03F /* ParentProfile+CoreDataProperties.swift in Sources */,
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
+				DA10C51E24AFF1AF00EE9E2A /* ToolsData.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
 				DAAA33F124AFCA150015E03F /* ParentProfile+CoreDataClass.swift in Sources */,
 				DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */,

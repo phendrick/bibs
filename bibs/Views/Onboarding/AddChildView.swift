@@ -28,62 +28,66 @@ struct AddChildView: View {
     
     var body: some View {
         return VStack {
-            VStack {
-                Form {
-                    
-                    Section(header:
-                        HStack {
-                            Spacer()
-                            Image("embryo")
-                            Spacer()
-                        }.padding(.top, 25)
-                    ) {
-                        EmptyView()
-                    }
-                    
-                    Section(header: Text("About your baby")) {
-                        TextField("Name", text: self.$name)
-                    }
-                    
-                    Section(header: Text("Due date")) {
-                        Toggle(isOn: self.$isBorn) {
-                            Text("They're here!")
-                        }
-                        
-                        DatePicker(selection: self.$dueDate) {
-                            Text(self.isBorn ? "Date of birth" : "Due date")
-                        }
-                    }
+            Form {
+                Section(header:
+                    HStack {
+                        Spacer()
+                        Image("embryo")
+                        Spacer()
+                    }.padding(.top, 25)
+                ) {
+                    EmptyView()
                 }
-            }
-            
-            VStack {
-                EmptyView()
-            }
-            .navigationBarItems(trailing: Button(action: {
-                let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
                 
-                child.wrappedName = self.name
-                child.wrappedDueDate = self.dueDate
-
-                if let data = self.uiImage.pngData() {
-                    child.image = data
+                Section(header: Text("About your baby")) {
+                    TextField("Name", text: self.$name)
                 }
-
-                do {
-                    try self.context.save()
-                    
-                    self.profile.parent.setActiveChild(child: child)
-                    
-                    withAnimation {
-                        self.viewSettings.initialView = .dashboard
+                
+                Section(header: Text("Due date")) {
+                    Toggle(isOn: self.$isBorn) {
+                        Text("They're here!")
                     }
-                }catch {}
-            }) {
-                Text("Done")
-            }).onAppear {
-                self.name = self.profile.parent.activeChild?.wrappedName ?? ""
+                    
+                    DatePicker(selection: self.$dueDate) {
+                        Text(self.isBorn ? "Date of birth" : "Due date")
+                    }
+                }
+                
+                Button(action: {
+                    self.viewSettings.initialView = .dashboard
+                }) {
+                    Text("OK")
+                }
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+//            VStack {
+//                EmptyView()
+//            }
+//            .navigationBarItems(trailing: Button(action: {
+//                let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
+//
+//                child.wrappedName = self.name
+//                child.wrappedDueDate = self.dueDate
+//
+//                if let data = self.uiImage.pngData() {
+//                    child.image = data
+//                }
+//
+//                do {
+//                    try self.context.save()
+//
+//                    self.profile.parent.setActiveChild(child: child)
+//
+//                    withAnimation {
+//                        self.viewSettings.initialView = .dashboard
+//                    }
+//                }catch {}
+//            }) {
+//                Text("Done")
+//            }).onAppear {
+//                self.name = self.profile.parent.activeChild?.wrappedName ?? ""
+//            }
         }
     }
 }
