@@ -23,7 +23,6 @@ extension NappyChange: Identifiable {
         
         set(newValue) {
             state = newValue.rawValue
-            self.child?.objectWillChange.send()
         }
     }
     

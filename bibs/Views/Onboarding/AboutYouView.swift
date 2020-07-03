@@ -9,14 +9,26 @@
 import SwiftUI
 
 struct AboutYouView: View {
+    @State var name: String = ""
+    
     var body: some View {
         VStack {
-            Text("Some fields about mum")
-            
-            Divider()
-            
-            NavigationLink(destination: AddChildView()) {
-                Text("Next")
+            Form {
+                
+                Section(header:
+                    HStack {
+                        Spacer()
+                        Image("embryo")
+                        Spacer()
+                    }.padding(.top, 25)
+                ) {
+                    EmptyView()
+                }
+                
+                Section(header: Text("Edit your details")) {
+                    TextField("Your name", text: $name)
+                    TextField("Your name", text: $name)
+                }
             }
         }
     }

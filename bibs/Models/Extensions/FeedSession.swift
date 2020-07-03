@@ -27,7 +27,6 @@ extension FeedSession: Identifiable, Trackable {
         
         set(newValue) {
             state = newValue.rawValue
-            self.child?.objectWillChange.send()
         }
     }
     
@@ -92,11 +91,9 @@ extension FeedSession: Identifiable, Trackable {
     var timer: Timer {
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
             guard let feed = self.currentFeed else {
-                print("no current feed")
+                timer.invalidate()
                 return
             }
-            
-            print("feed.duration: \(feed.duration), \(self.status)")
             
             if self.status != .running {
                 timer.invalidate()
@@ -129,11 +126,6 @@ extension FeedSession: Identifiable, Trackable {
     func finish() throws {
         guard let context = self.managedObjectContext else {
             fatalError()
-        }
-        
-        defer {
-            self.child?.objectWillChange.send()
-            self.objectWillChange.send()
         }
         
         self.status = .complete

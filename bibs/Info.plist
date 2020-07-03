@@ -5,9 +5,12 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans.ttf</string>
-		<string>Pacifico-Regular.ttf</string>
 		<string>OpenSans-SemiBold.ttf</string>
-		<string>Merriweather.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>Merriweather-Regular.ttf</string>
+		<string>Merriweather-Bold.ttf</string>
+		<string>Pacifico-Regular.ttf</string>
+		<string>RobotoMono.ttf</string>
 	</array>
 	<key>LSApplicationCategoryType</key>
 	<string></string>

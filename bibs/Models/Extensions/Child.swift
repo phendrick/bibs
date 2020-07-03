@@ -89,6 +89,9 @@ extension Child: Identifiable {
         do {
            try context.save()
             
+            print("Saving")
+            session.objectWillChange.send()
+            
             session.resume()
         }catch {
             print("Error: \(error)")
@@ -96,10 +99,16 @@ extension Child: Identifiable {
     }
     
     func clear() {
-        if let moc = self.managedObjectContext {
-            _ = self.feedSessionsArray.map { moc.delete($0) }
-            
-            try? moc.save()
+        guard let context = self.managedObjectContext else {
+            return
+        }
+        
+        _ = self.feedSessionsArray.map { context.delete($0) }
+
+        do {
+            try context.save()
+        }catch {
+            print("Error saving context: ", error)
         }
     }
     

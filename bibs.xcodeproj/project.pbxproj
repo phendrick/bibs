@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A512498055C00E9D811 /* Trackable.swift */; };
 		DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */; };
+		DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */; };
 		DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154224A28AC400442543 /* DashboardDataRowView.swift */; };
 		DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154424A2A8FD00442543 /* DashboardDataView.swift */; };
 		DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */; };
@@ -20,6 +21,8 @@
 		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
 		DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */; };
 		DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */; };
+		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
+		DA707B6524AE9C14006D21D2 /* DashboardDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B6424AE9C14006D21D2 /* DashboardDemoView.swift */; };
 		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
 		DA8307B024A7417500454F14 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */; };
@@ -34,9 +37,14 @@
 		DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AF24A7417500454F14 /* Child+CoreDataClass.swift */; };
 		DA8307BA24A7418800454F14 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB17398247C191500D94537 /* DashboardView.swift */; };
 		DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307BC24A742DC00454F14 /* DataviewView.swift */; };
+		DA86DEA024AA476900107ED3 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = DA86DE9F24AA476900107ED3 /* SwiftUIPager */; };
+		DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */; };
+		DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */; };
+		DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */; };
+		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
 		DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */; };
 		DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DB92488549D00CF9028 /* OpenSans.ttf */; };
-		DAA34DBD248854AE00CF9028 /* Merriweather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DBC248854AE00CF9028 /* Merriweather.ttf */; };
+		DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */; };
 		DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DAAF5DB024A10A8500A7C499 /* Introspect */; };
 		DAB1739C247D458600D94537 /* FeedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739B247D458600D94537 /* FeedSession.swift */; };
 		DAB1739F247D45B600D94537 /* Timeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739E247D45B600D94537 /* Timeable.swift */; };
@@ -81,6 +89,7 @@
 /* Begin PBXFileReference section */
 		DA2D2A512498055C00E9D811 /* Trackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
 		DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+TrackableItems.swift"; sourceTree = "<group>"; };
+		DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+color.swift"; sourceTree = "<group>"; };
 		DA51154224A28AC400442543 /* DashboardDataRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataRowView.swift; sourceTree = "<group>"; };
 		DA51154424A2A8FD00442543 /* DashboardDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataView.swift; sourceTree = "<group>"; };
 		DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
@@ -92,6 +101,8 @@
 		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionModalView.swift; sourceTree = "<group>"; };
 		DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolsView.swift; sourceTree = "<group>"; };
+		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
+		DA707B6424AE9C14006D21D2 /* DashboardDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDemoView.swift; sourceTree = "<group>"; };
 		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA8307A624A7417500454F14 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -105,9 +116,13 @@
 		DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA8307AF24A7417500454F14 /* Child+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA8307BC24A742DC00454F14 /* DataviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataviewView.swift; sourceTree = "<group>"; };
+		DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
+		DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
+		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
 		DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIScrollViewDelegate.swift; sourceTree = "<group>"; };
 		DAA34DB92488549D00CF9028 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenSans.ttf; sourceTree = "<group>"; };
-		DAA34DBC248854AE00CF9028 /* Merriweather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Merriweather.ttf; sourceTree = "<group>"; };
+		DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		DAB17398247C191500D94537 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		DAB1739B247D458600D94537 /* FeedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSession.swift; sourceTree = "<group>"; };
 		DAB1739E247D45B600D94537 /* Timeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeable.swift; sourceTree = "<group>"; };
@@ -144,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA86DEA024AA476900107ED3 /* SwiftUIPager in Frameworks */,
 				DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,9 +181,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA458F0424AA0F9D0096F411 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DA5DB18D24A5302E00DE2E01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DAAAFD5F24AC7FB70064B263 /* Profile Editing */,
 				DA8307BB24A7426400454F14 /* Data Views */,
 				DA5DB18E24A5304700DE2E01 /* Dashboard */,
 				DA918F8924A64538006DFF99 /* Feeds */,
@@ -181,8 +206,9 @@
 			children = (
 				DAB17398247C191500D94537 /* DashboardView.swift */,
 				DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */,
-				DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
+				DA707B6424AE9C14006D21D2 /* DashboardDemoView.swift */,
+				DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */,
 				DA51154224A28AC400442543 /* DashboardDataRowView.swift */,
 				DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */,
 				DA82C18C248991760009772F /* ChildView.swift */,
@@ -210,6 +236,7 @@
 		DA918F8424A637D3006DFF99 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DA458F0424AA0F9D0096F411 /* Extensions */,
 				DA918F8524A637EE006DFF99 /* Delegates */,
 				DAB56B92247AD3C800C80E1E /* ViewControllers */,
 			);
@@ -238,9 +265,21 @@
 				DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */,
 				DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */,
 				DAA34DB92488549D00CF9028 /* OpenSans.ttf */,
-				DAA34DBC248854AE00CF9028 /* Merriweather.ttf */,
+				DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */,
+				DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */,
+				DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */,
+				DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DAAAFD5F24AC7FB70064B263 /* Profile Editing */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */,
+				DA707B5E24AE7622006D21D2 /* ChildEditView.swift */,
+			);
+			path = "Profile Editing";
 			sourceTree = "<group>";
 		};
 		DAB1739A247D455600D94537 /* Extensions */ = {
@@ -399,6 +438,7 @@
 			name = bibs;
 			packageProductDependencies = (
 				DAAF5DB024A10A8500A7C499 /* Introspect */,
+				DA86DE9F24AA476900107ED3 /* SwiftUIPager */,
 			);
 			productName = bibs;
 			productReference = DADD78F42478609600791F61 /* bibs.app */;
@@ -474,6 +514,7 @@
 			mainGroup = DADD78EB2478609600791F61;
 			packageReferences = (
 				DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				DA86DE9E24AA476900107ED3 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = DADD78F52478609600791F61 /* Products */;
 			projectDirPath = "";
@@ -492,12 +533,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */,
+				DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */,
+				DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */,
 				DADD79042478609700791F61 /* Preview Assets.xcassets in Resources */,
+				DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */,
 				DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */,
 				DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */,
+				DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */,
 				DADD79012478609700791F61 /* Assets.xcassets in Resources */,
 				DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */,
-				DAA34DBD248854AE00CF9028 /* Merriweather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +572,7 @@
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
 				DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */,
+				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePickerViewController.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
@@ -538,6 +583,7 @@
 				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
 				DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */,
+				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
 				DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
@@ -552,10 +598,12 @@
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
 				DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */,
+				DA707B6524AE9C14006D21D2 /* DashboardDemoView.swift in Sources */,
 				DA8307B224A7417500454F14 /* Child+CoreDataProperties.swift in Sources */,
 				DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
+				DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
 				DA82C18F24899B930009772F /* Date.swift in Sources */,
 				DA635B1B2482698D009BA4FF /* Child.swift in Sources */,
@@ -890,6 +938,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DA86DE9E24AA476900107ED3 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
 		DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/timbersoftware/SwiftUI-Introspect.git";
@@ -901,6 +957,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DA86DE9F24AA476900107ED3 /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA86DE9E24AA476900107ED3 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
+		};
 		DAAF5DB024A10A8500A7C499 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
