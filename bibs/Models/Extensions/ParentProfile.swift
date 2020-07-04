@@ -38,7 +38,14 @@ extension ParentProfile {
     }
     
     public var wrappedImage: UIImage {
-        get {UIImage()}
+        get {
+            if let imageData = image {
+                return UIImage(data: imageData) ?? UIImage()
+            }else {
+                return UIImage()
+            }
+        }
+        
         set {image = (newValue.pngData()) }
     }
     

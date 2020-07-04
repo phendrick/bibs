@@ -28,12 +28,6 @@ struct WelcomeView: View {
                 }
                 
                 Spacer()
-
-                Button(action: {
-                    self.viewSettings.initialView = .dashboard
-                }) {
-                    Text("Done")
-                }
                 
                 Button(action: {
                     
@@ -58,8 +52,7 @@ struct WelcomeView: View {
                     }
                 }
             }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+            .navigationBarTitle("Welcome")
         }
     }
 }

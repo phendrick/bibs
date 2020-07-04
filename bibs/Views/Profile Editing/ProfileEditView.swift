@@ -9,12 +9,15 @@
 import SwiftUI
 
 struct ProfileEditView: View {
-    @State var name: String = ""
-    @State var expressingEnabled: Bool = true
-    @State var watchIntegration: Bool = false
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var context
+    @EnvironmentObject var profile: ProfileObserver
     
-    @State var babyProfileAlertVisible: Bool = false
-    @State var advancedToolsAlertVisible: Bool = false
+    @State var showingImagePicker = false
+    @State var inputImage: UIImage?
+    @State var image: Image?
+    @State var name: String = ""
+    @State var showAdChildView: Bool = false
     
     var body: some View {
         VStack {
@@ -23,16 +26,44 @@ struct ProfileEditView: View {
                 Section(header:
                     HStack {
                         Spacer()
-                        Image("embryo")
+                        if image != nil {
+                            image?
+                                .resizable()
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                                .scaledToFit()
+                                .frame(maxHeight: 100)
+                                .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                        }else {
+                            VStack {
+                                Circle()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 100, height: 100)
+                                    .overlay(VStack {
+                                        ZStack {
+                                            Circle().stroke(Color.gray, lineWidth: 2)
+                                            Image(systemName: "camera")
+                                                .font(.system(size: 40))
+                                        }
+                                    })
+                                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
+                                        ImagePicker(image: self.$inputImage)
+                                    }
+                                    .onTapGesture {
+                                        self.showingImagePicker.toggle()
+                                    }
+                            }
+                        }
                         Spacer()
                     }.padding(.top, 25)
                 ) {
                     EmptyView()
                 }
                 
-                Section(header: Text("Edit your details")) {
-                    TextField("Your name", text: $name)
-                    TextField("Your name", text: $name)
+                Section(
+                    header: Text("Edit your details")
+                ) {
+                    TextField("Your name", text: self.$name)
                 }
                 
                 Section(
@@ -42,63 +73,63 @@ struct ProfileEditView: View {
                     }
                 ) {
                     List {
-                        NavigationLink(destination: ChildEditView()) {
-                            HStack {
-                                Image(systemName: "heart.fill")
-                                Text("Milo")
-                            }
-                        }
-                        
-                        NavigationLink(destination: ChildEditView()) {
-                            HStack {
-                                Image(systemName: "heart")
-                                Text("Tabitha")
+                        ForEach(self.profile.parent.childrenArray) {child in
+                            NavigationLink(destination: ChildEditView(child: child)) {
+                                HStack {
+                                    Image(uiImage: child.wrappedImage)
+                                        .resizable().frame(width: 30, height: 30)
+                                        .clipShape(Circle())
+                                    Text("\(child.wrappedName)")
+                                }
                             }
                         }
                     }
                     
-                    HStack {
-                        NavigationLink(destination: ChildEditView()) {
-                            Text("Add another")
-                        }
-                    }
-                }
-                
-//                Section(
-//                    header: HStack {
-//                        Text("Advanced Tools")
-//                        Spacer()
-//                        Button(action: {
-//                            self.advancedToolsAlertVisible.toggle()
-//                        }) {
-//                            Image(systemName: "questionmark.circle.fill")
-//                                .resizable()
-//                                .scaledToFill()
-//                                .frame(width: 20, height: 20)
-//                        }.alert(isPresented: self.$advancedToolsAlertVisible) { () -> Alert in
-//                            Alert(
-//                                title: Text("Baby Profiles"),
-//                                message: Text("When enabled, additional tools will be made available to allow you to track how much milk you've expressed to store for later"),
-//                                dismissButton: .default(Text("OK"))
-//                            )
+//                    HStack {
+//                        NavigationLink(destination: ChildEditView()) {
+//                            Text("Add another")
 //                        }
-//                    }.padding(.top, 25)
-//                ) {
-//                    Toggle(isOn: self.$watchIntegration) {
-//                        Text("Enable hand expressing features")
 //                    }
-//
-////                    Toggle(isOn: self.$expressingEnabled) {
-////                        Text("Apple Watch integration")
-////                    }
-//                }
+                }
             }
         }
         .navigationBarTitle(Text("Update Profile"), displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-        }) {
-            Text("Edit")
+        .navigationBarItems(trailing: Button(action: save) {
+            Text("Save")
         })
+        .onAppear {
+            self.name = self.profile.parent.wrappedName
+            
+            if let _ = self.profile.parent.image {
+                self.image = Image(uiImage: self.profile.parent.wrappedImage)
+            }
+        }
+    }
+    
+    func save() {
+        self.profile.parent.createdAt = Date()
+        self.profile.parent.name = self.name
+        
+        if let inputImage = self.inputImage {
+            self.profile.parent.image = inputImage.pngData()
+        }
+        
+        do {
+            try self.context.save()
+            self.showAdChildView = true
+            
+            self.presentationMode.wrappedValue.dismiss()
+        }catch {
+            debugPrint(error)
+        }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else {
+            return
+        }
+        
+        image = Image(uiImage: inputImage)
     }
 }
 

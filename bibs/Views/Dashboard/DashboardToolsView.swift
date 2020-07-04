@@ -27,6 +27,7 @@ struct DashboardToolsView: View {
                 )
             }
             .expandPageToEdges()
+            .rotation3D()
             .onPageChanged({ (page) in
                 withAnimation {
                     self.page = page

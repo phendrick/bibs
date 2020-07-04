@@ -52,7 +52,7 @@
 		DAB173A1247D513D00D94537 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB173A0247D513D00D94537 /* Feed.swift */; };
 		DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3EF14248AEFBD00667F19 /* String+padding.swift */; };
 		DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ProfileObserver.swift */; };
-		DAB56B94247AD4B500C80E1E /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePickerViewController.swift */; };
+		DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePicker.swift */; };
 		DADD78F82478609600791F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F72478609600791F61 /* AppDelegate.swift */; };
 		DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F92478609600791F61 /* SceneDelegate.swift */; };
 		DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DADD78FB2478609600791F61 /* bibs.xcdatamodeld */; };
@@ -131,7 +131,7 @@
 		DAB173A0247D513D00D94537 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		DAB3EF14248AEFBD00667F19 /* String+padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+padding.swift"; sourceTree = "<group>"; };
 		DAB56B8E247A733300C80E1E /* ProfileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObserver.swift; sourceTree = "<group>"; };
-		DAB56B93247AD4B500C80E1E /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DADD78F42478609600791F61 /* bibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD78F72478609600791F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -310,7 +310,7 @@
 		DAB56B92247AD3C800C80E1E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DAB56B93247AD4B500C80E1E /* ImagePickerViewController.swift */,
+				DAB56B93247AD4B500C80E1E /* ImagePicker.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -580,7 +580,7 @@
 				DA8307B924A7417500454F14 /* Child+CoreDataClass.swift in Sources */,
 				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
-				DAB56B94247AD4B500C80E1E /* ImagePickerViewController.swift in Sources */,
+				DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
 				DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,

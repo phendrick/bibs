@@ -144,7 +144,7 @@ struct DashboardView: View {
                 }
                 .navigationBarTitle("Morning, mum", displayMode: .inline)
                 .navigationBarItems(
-                    leading:  NavigationLink(destination: ProfileEditView()) {
+                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
                         Image(systemName: "person.crop.circle").foregroundColor(.red)
                     },
                     trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {

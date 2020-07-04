@@ -9,20 +9,18 @@
 import SwiftUI
 
 struct AddChildView: View {
-    @State var imagePickerIsVisible = false
-    @State var selectedImage = UIImage()
-    
     @EnvironmentObject var profile: ProfileObserver
     @EnvironmentObject var viewSettings: ViewSettings
     @Environment(\.managedObjectContext) var context
     
+    @State var showingImagePicker = false
+    @State var inputImage: UIImage?
+    @State var image: Image? = Image("baby")
+    
     @State var name: String = ""
     @State var dueDate: Date = Date()
     @State var isBorn: Bool = true
-    
-    @State var showAction: Bool = false
-    @State var showImagePicker: Bool = false
-    @State var uiImage: UIImage = UIImage()
+    @State var colorScheme: Int = 0
     
     @State var showDatePicker: Bool = false
     
@@ -32,9 +30,42 @@ struct AddChildView: View {
                 Section(header:
                     HStack {
                         Spacer()
-                        Image("embryo")
+                        
+                        if image != nil {
+                            image?
+                                .resizable()
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                                .scaledToFit()
+                                .frame(maxHeight: 200)
+                                .overlay(
+                                    Circle().stroke(
+                                        Child.ColorSchemes[self.colorScheme], lineWidth: 6
+                                    )
+                                ).animation(.linear)
+                        }else {
+                            VStack {
+                                Circle()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 200, height: 200)
+                                    .overlay(VStack {
+                                        ZStack {
+                                            Circle().stroke(Color.gray, lineWidth: 2)
+                                            Image(systemName: "camera")
+                                                .font(.system(size: 40))
+                                        }
+                                    })
+                            }
+                        }
+                        
                         Spacer()
                     }.padding(.top, 25)
+                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
+                        ImagePicker(image: self.$inputImage)
+                    }
+                    .onTapGesture {
+                        self.showingImagePicker.toggle()
+                    }
                 ) {
                     EmptyView()
                 }
@@ -53,42 +84,56 @@ struct AddChildView: View {
                     }
                 }
                 
-                Button(action: {
-                    self.viewSettings.initialView = .dashboard
-                }) {
-                    Text("OK")
+                
+                Section(header: Text("Choose a colour scheme")) {
+                    HStack(spacing: 20) {
+                        Spacer()
+                        
+                        ForEach(Child.ColorSchemes.indices) {index in
+                            Rectangle()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Child.ColorSchemes[index])
+                                .clipShape(Circle())
+                                .onTapGesture {
+                                    self.colorScheme = index
+                            }
+                        }
+                        
+                        Spacer()
+                    }.offset(x: -15)
                 }
             }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
-//            VStack {
-//                EmptyView()
-//            }
-//            .navigationBarItems(trailing: Button(action: {
-//                let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
-//
-//                child.wrappedName = self.name
-//                child.wrappedDueDate = self.dueDate
-//
-//                if let data = self.uiImage.pngData() {
-//                    child.image = data
-//                }
-//
-//                do {
-//                    try self.context.save()
-//
-//                    self.profile.parent.setActiveChild(child: child)
-//
-//                    withAnimation {
-//                        self.viewSettings.initialView = .dashboard
-//                    }
-//                }catch {}
-//            }) {
-//                Text("Done")
-//            }).onAppear {
-//                self.name = self.profile.parent.activeChild?.wrappedName ?? ""
-//            }
+            .navigationBarTitle("Welcome, baby")
+            .navigationBarItems(trailing: Button(action: save) {
+                Text("Done")
+            })
         }
+    }
+    
+    func save() {
+        let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
+        
+        child.wrappedName = self.name
+        child.wrappedDueDate = self.dueDate
+        child.image = self.inputImage?.pngData()
+        child.colorScheme = Int16(self.colorScheme)
+        
+        do {
+            try self.context.save()
+            self.profile.parent.setActiveChild(child: child)
+            
+            self.viewSettings.initialView = .dashboard
+        }catch {
+            debugPrint(error)
+        }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else {
+            return
+        }
+        
+        image = Image(uiImage: inputImage)
     }
 }
 

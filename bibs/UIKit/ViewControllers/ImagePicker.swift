@@ -8,18 +8,19 @@
 
 import SwiftUI
 
-struct ImagePickerViewController: UIViewControllerRepresentable {
-    @Binding var isPresented: Bool
-    @Binding var selectedImage: UIImage
+struct ImagePicker: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var image: UIImage?
     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerViewController>) -> UIViewController {
-        let controller = UIImagePickerController()
-        controller.delegate = context.coordinator
-        return controller
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIViewController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        
+        return picker
     }
     
     func makeCoordinator() -> ImagePickerCoordinator {
-        return ImagePickerCoordinator(parent: self)
+        return ImagePickerCoordinator(self)
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
@@ -27,24 +28,24 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
     
     // coordinator
     class ImagePickerCoordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        let parent: ImagePickerViewController
+        let parent: ImagePicker
         
-        init(parent: ImagePickerViewController) {
+        init(_ parent: ImagePicker) {
             self.parent = parent
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let selectedImage = info[.originalImage] as? UIImage {
-                parent.selectedImage = selectedImage
+                parent.image = selectedImage
             }
             
-            parent.isPresented = false
+            parent.presentationMode.wrappedValue.dismiss()
         }
     }
 }
 
-struct ImagePickerViewController_Previews: PreviewProvider {
+struct ImagePicker_Previews: PreviewProvider {
     static var previews: some View {
-        ImagePickerViewController(isPresented: .constant(true), selectedImage: .constant(UIImage()))
+        ImagePicker(image: .constant(UIImage()))
     }
 }
