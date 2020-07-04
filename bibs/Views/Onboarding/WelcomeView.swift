@@ -26,14 +26,22 @@ struct WelcomeView: View {
                 NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
                     EmptyView()
                 }
-
+                
                 Spacer()
 
                 Button(action: {
+                    self.viewSettings.initialView = .dashboard
+                }) {
+                    Text("Done")
+                }
+                
+                Button(action: {
+                    
                     self.showAddAboutYouView = true
                 }) {
                     Text("Next")
                 }
+                
 
                 VStack {
                     HStack(alignment: .lastTextBaseline) {

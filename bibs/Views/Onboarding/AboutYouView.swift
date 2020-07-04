@@ -36,14 +36,14 @@ struct AboutYouView: View {
             
             // embed the next view in the wizard and set $showAdChildView in the button action
             NavigationLink(destination: AddChildView(), isActive: self.$showAdChildView) {
-                EmptyView()
+                Button(action: {
+                    self.showAdChildView = true
+                }) {
+                    Text("Next")
+                }
             }
             
-            Button(action: {
-                self.showAdChildView = true
-            }) {
-                Text("Next")
-            }
+            
         }
         .onAppear(perform: {
             self.name = self.profile.parent.wrappedName

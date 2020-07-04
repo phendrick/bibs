@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import SwiftUIPager
 
 enum FeedTool: Int, CaseIterable {
     case FeedTimer
@@ -22,6 +23,8 @@ struct DashboardView: View {
     @EnvironmentObject var profile: ProfileObserver
     @ObservedObject var viewSettings = ViewSettings()
     @Environment(\.managedObjectContext) var moc
+    
+    @State var page: Int = 0
     
     @FetchRequest(
         entity: FeedSession.entity(),
@@ -79,11 +82,11 @@ struct DashboardView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { outerGeometry in
+            GeometryReader {geometry in
                 ScrollView(showsIndicators: false) {
                     VStack {
                         DashboardToolsView(
-                            geometry: outerGeometry,
+                            outerGeometry: geometry,
                             activeFeedTool: self.$activeFeedTool
                         ).environmentObject(ToolsData())
                         
@@ -109,19 +112,6 @@ struct DashboardView: View {
                             ForEach(self.completedFeedSessions, id: \.self) {session in
                                 Text("OK")
                             }
-                            
-//                            DashboardDataView(
-//                                title: "Feeds",
-//                                predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
-//                                sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
-//                            ) { (result: FeedSession, index) in
-//                                HStack {
-//                                    Text("(\(result.status.rawValue))")
-//                                    Text(result.formattedElapsedTime(include_hsec: false))
-//                                        .frame(maxWidth: .infinity, alignment: .leading)
-//                                }
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//                            }
                             
                             Divider()
                             
@@ -152,22 +142,22 @@ struct DashboardView: View {
                         Spacer()
                     }
                 }
-            }
-            .navigationBarTitle("Morning, mum", displayMode: .inline)
-            .navigationBarItems(
-                leading:  NavigationLink(destination: ProfileEditView()) {
-                    Image(systemName: "person.crop.circle").foregroundColor(.red)
-                },
-                trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {
-                    self.showingChildListActionSheet = true
-                }
-            )
-            .actionSheet(isPresented: self.$showingChildListActionSheet) {
-                ActionSheet(
-                    title: Text("Switch profile"),
-                    message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
-                    buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
+                .navigationBarTitle("Morning, mum", displayMode: .inline)
+                .navigationBarItems(
+                    leading:  NavigationLink(destination: ProfileEditView()) {
+                        Image(systemName: "person.crop.circle").foregroundColor(.red)
+                    },
+                    trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {
+                        self.showingChildListActionSheet = true
+                    }
                 )
+                .actionSheet(isPresented: self.$showingChildListActionSheet) {
+                    ActionSheet(
+                        title: Text("Switch profile"),
+                        message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
+                        buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
+                    )
+                }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())

@@ -23,7 +23,6 @@
 		DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */; };
 		DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */; };
 		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
-		DA707B6524AE9C14006D21D2 /* DashboardDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B6424AE9C14006D21D2 /* DashboardDemoView.swift */; };
 		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
 		DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */; };
@@ -105,7 +104,6 @@
 		DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionModalView.swift; sourceTree = "<group>"; };
 		DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolsView.swift; sourceTree = "<group>"; };
 		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
-		DA707B6424AE9C14006D21D2 /* DashboardDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDemoView.swift; sourceTree = "<group>"; };
 		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				DAB17398247C191500D94537 /* DashboardView.swift */,
 				DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
-				DA707B6424AE9C14006D21D2 /* DashboardDemoView.swift */,
 				DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */,
 				DA51154224A28AC400442543 /* DashboardDataRowView.swift */,
 				DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */,
@@ -607,7 +604,6 @@
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
 				DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */,
-				DA707B6524AE9C14006D21D2 /* DashboardDemoView.swift in Sources */,
 				DA8307B224A7417500454F14 /* Child+CoreDataProperties.swift in Sources */,
 				DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
@@ -951,7 +947,7 @@
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.5.1;
+				minimumVersion = 1.4.0;
 			};
 		};
 		DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {

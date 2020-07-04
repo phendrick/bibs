@@ -12,15 +12,14 @@ import SwiftUIPager
 struct DashboardToolsView: View {
     @EnvironmentObject var toolsData: ToolsData
     
-    var geometry: GeometryProxy
+    var outerGeometry: GeometryProxy
+    
     @Binding var activeFeedTool: FeedTool
     @State var page = 0
     
-    var scrollViewDelegate: CustomUIScrollViewDelegate!
-    
     var body: some View {
         VStack {
-            Pager(page: .constant(0), data: toolsData.data, id: \.self) { item in
+            Pager(page: self.$page, data: toolsData.data, id: \.self) { item in
                 DashboardToolCardView(
                     image: item.image,
                     title: item.title,
@@ -34,8 +33,8 @@ struct DashboardToolsView: View {
                 }
             })
             .frame(
-                width: min(self.geometry.size.height, self.geometry.size.width),
-                height: min(self.geometry.size.height * 0.6, 400)
+                width: min(self.outerGeometry.size.height, self.outerGeometry.size.width),
+                height: min(self.outerGeometry.size.height * 0.6, 400)
             )
             
             HStack(spacing: 15) {
