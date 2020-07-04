@@ -30,6 +30,9 @@ struct AboutYouView: View {
                     TextField("Your name", text: $name)
                 }
             }
+            NavigationLink(destination: AddChildView()) {
+                Text("Next")
+            }
         }
     }
 }

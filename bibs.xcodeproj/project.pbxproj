@@ -942,8 +942,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.1;
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.4.1;
 			};
 		};
 		DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
