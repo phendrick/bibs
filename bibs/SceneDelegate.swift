@@ -23,36 +23,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Get the managed object context from the shared persistent container.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-        let childFetchRequest:NSFetchRequest<Child> = Child.fetchRequest()
-        let childCount = try? context.count(for: childFetchRequest)
+        // the ActiveChildProfile struct is a singleton which lets us keep track of the current
+        // child, and functionality for allowing co-feeding
+        let profileObserver = ProfileObserver.shared
         
+        let parentProfileFetchRequest:NSFetchRequest<ParentProfile> = ParentProfile.fetchRequest()
         
         var initialView: ViewSettings.InitialView = .welcome
         
-        if let count = childCount, count > 0 {
+        if let parent = try? context.fetch(parentProfileFetchRequest).first, let child = parent.childrenArray.first {
+            parent.activeChild = child
+            profileObserver.parent = parent
+            
             initialView = .dashboard
+        }else {
+            if let parent = try? context.fetch(parentProfileFetchRequest).first {
+                profileObserver.parent = parent
+            }else {
+                profileObserver.parent = ParentProfile(context: context)
+            }
         }
         
         // View settings to determine which view to show on start up (dashboard or onboarding process)
         let viewSettings = ViewSettings(initialView: initialView)
         
-        // the ActiveChildProfile struct is a singleton which lets us keep track of the current
-        // child, and functionality for allowing co-feeding 
-        let childProfile = ActiveChildProfile.shared
-        
-        do {
-            let children = try context.fetch(childFetchRequest)
-            
-            if let child = children.first {
-                childProfile.setActiveChildProfile(child: child)
-            }
-        }catch {
-        }
-        
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView()
-            .environmentObject(childProfile)
+            .environmentObject(profileObserver)
             .environmentObject(viewSettings)
             .environment(\.managedObjectContext, context)
 

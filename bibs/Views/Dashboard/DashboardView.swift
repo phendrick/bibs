@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import SwiftUIPager
 
 enum FeedTool: Int, CaseIterable {
     case FeedTimer
@@ -19,9 +20,11 @@ enum FeedTool: Int, CaseIterable {
 struct DashboardView: View {
     @State private var childSheetVisible: Bool = false
     
-    @EnvironmentObject var activeChildProfile: ActiveChildProfile
+    @EnvironmentObject var profile: ProfileObserver
     @ObservedObject var viewSettings = ViewSettings()
     @Environment(\.managedObjectContext) var moc
+    
+    @State var page: Int = 0
     
     @FetchRequest(
         entity: FeedSession.entity(),
@@ -58,7 +61,7 @@ struct DashboardView: View {
         
         for child in children where child != activeChild {
             let button = ActionSheet.Button.default(Text("\(child.wrappedName)")) {
-                self.activeChildProfile.setActiveChildProfile(child: child)
+                self.profile.parent.setActiveChild(child: child)
             }
             
             buttons.append(button)
@@ -79,15 +82,15 @@ struct DashboardView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { outerGeometry in
+            GeometryReader {geometry in
                 ScrollView(showsIndicators: false) {
                     VStack {
                         DashboardToolsView(
-                            geometry: outerGeometry,
+                            outerGeometry: geometry,
                             activeFeedTool: self.$activeFeedTool
-                        )
+                        ).environmentObject(ToolsData())
                         
-                        ForEach(self.activeChildProfile.child?.feedSessionsArray ?? []) {session in
+                        ForEach(self.profile.parent.activeChild?.feedSessionsArray ?? []) {session in
                             FeedSessionView(
                                 cofeeding: false,
                                 cofeedingIndex: 0,
@@ -110,25 +113,12 @@ struct DashboardView: View {
                                 Text("OK")
                             }
                             
-//                            DashboardDataView(
-//                                title: "Feeds",
-//                                predicate: NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.complete.rawValue)),
-//                                sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)]
-//                            ) { (result: FeedSession, index) in
-//                                HStack {
-//                                    Text("(\(result.status.rawValue))")
-//                                    Text(result.formattedElapsedTime(include_hsec: false))
-//                                        .frame(maxWidth: .infinity, alignment: .leading)
-//                                }
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//                            }
-                            
                             Divider()
                             
                             HStack {
                                 Button(action: {
                                     do {
-                                        try self.activeChildProfile.child.startNewFeedSession()
+                                        try self.profile.parent.activeChild?.startNewFeedSession()
                                     }catch {
                                     }
                                 }) {
@@ -139,7 +129,7 @@ struct DashboardView: View {
                                 }
                                 
                                 Button(action: {
-                                    self.activeChildProfile.child?.clear()
+                                    self.profile.parent.activeChild?.clear()
                                 }) {
                                     HStack {
                                         Text("Clear out")
@@ -152,22 +142,22 @@ struct DashboardView: View {
                         Spacer()
                     }
                 }
-            }
-            .navigationBarTitle("Morning, mum", displayMode: .inline)
-            .navigationBarItems(
-                leading:  NavigationLink(destination: ProfileEditView()) {
-                    Image(systemName: "person.crop.circle").foregroundColor(.red)
-                },
-                trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {
-                    self.showingChildListActionSheet = true
-                }
-            )
-            .actionSheet(isPresented: self.$showingChildListActionSheet) {
-                ActionSheet(
-                    title: Text("Switch profile"),
-                    message: Text("The current active profile is: \(self.activeChildProfile.child?.wrappedName ?? "")"),
-                    buttons: self.childListActionSheetButtons(exclude: self.activeChildProfile.child)
+                .navigationBarTitle("Morning, mum", displayMode: .inline)
+                .navigationBarItems(
+                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
+                        Image(systemName: "person.crop.circle").foregroundColor(.red)
+                    },
+                    trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {
+                        self.showingChildListActionSheet = true
+                    }
                 )
+                .actionSheet(isPresented: self.$showingChildListActionSheet) {
+                    ActionSheet(
+                        title: Text("Switch profile"),
+                        message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
+                        buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
+                    )
+                }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -181,6 +171,6 @@ struct DashboardView_Previews: PreviewProvider {
         
         return DashboardView()
             .environment(\.managedObjectContext, context)
-            .environmentObject(ActiveChildProfile.shared)
+            .environmentObject(ProfileObserver.shared)
     }
 }

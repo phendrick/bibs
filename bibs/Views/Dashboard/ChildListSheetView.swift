@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ChildListSheetView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var activeChildProfile: ActiveChildProfile
+    @EnvironmentObject var profile: ProfileObserver
     
     var children: FetchedResults<Child>
     
@@ -19,7 +19,7 @@ struct ChildListSheetView: View {
             VStack {
                 Text(child.wrappedName)
                     .onTapGesture {
-                        self.activeChildProfile.setActiveChildProfile(child: child)
+                        self.profile.parent.setActiveChild(child: child)
                         self.presentationMode.wrappedValue.dismiss()
                 }
             }.padding()

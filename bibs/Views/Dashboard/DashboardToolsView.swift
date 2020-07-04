@@ -9,44 +9,33 @@
 import SwiftUI
 import SwiftUIPager
 
-struct CardModel: Hashable {
-    var image: String
-    var title: String
-    var subtitle: String
-}
-
-let cardData:[CardModel] = [
-    CardModel(image: "page1", title: "Feed Timers", subtitle: "Monitor your baby's feeds"),
-    CardModel(image: "page2", title: "Nappy Change", subtitle: "Log a wet or dirty nappy"),
-    CardModel(image: "page3", title: "Expressed Feed", subtitle: "Given some expressed milk?"),
-    CardModel(image: "page4", title: "Data & Progress", subtitle: "Charts & Historical data")
-]
-
 struct DashboardToolsView: View {
-    var geometry: GeometryProxy
+    @EnvironmentObject var toolsData: ToolsData
+    
+    var outerGeometry: GeometryProxy
+    
     @Binding var activeFeedTool: FeedTool
     @State var page = 0
     
-    var scrollViewDelegate: CustomUIScrollViewDelegate!
-    
     var body: some View {
         VStack {
-            Pager(page: self.$page, data: cardData, id: \.self) {
+            Pager(page: self.$page, data: toolsData.data, id: \.self) { item in
                 DashboardToolCardView(
-                    image: $0.image,
-                    title: $0.title,
-                    subtitle: $0.subtitle
+                    image: item.image,
+                    title: item.title,
+                    subtitle: item.subtitle
                 )
             }
             .expandPageToEdges()
+            .rotation3D()
             .onPageChanged({ (page) in
                 withAnimation {
                     self.page = page
                 }
             })
             .frame(
-                width: min(self.geometry.size.height, self.geometry.size.width),
-                height: min(self.geometry.size.height * 0.6, 400)
+                width: min(self.outerGeometry.size.height, self.outerGeometry.size.width),
+                height: min(self.outerGeometry.size.height * 0.6, 400)
             )
             
             HStack(spacing: 15) {
@@ -128,7 +117,7 @@ struct DashboardToolsView_Previews: PreviewProvider {
                     image: "page1",
                     title: "Feed timers",
                     subtitle: "Feed timers subtitle"
-                )
+                ).environmentObject(ToolsData())
             }.previewLayout(.fixed(width: 300, height: 380))
         }
     }

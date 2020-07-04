@@ -9,54 +9,131 @@
 import SwiftUI
 
 struct AddChildView: View {
-    @State var imagePickerIsVisible = false
-    @State var selectedImage = UIImage()
+    @EnvironmentObject var profile: ProfileObserver
+    @EnvironmentObject var viewSettings: ViewSettings
+    @Environment(\.managedObjectContext) var context
     
-    @Environment(\.managedObjectContext) var moc
+    @State var showingImagePicker = false
+    @State var inputImage: UIImage?
+    @State var image: Image? = Image("baby")
     
     @State var name: String = ""
     @State var dueDate: Date = Date()
     @State var isBorn: Bool = true
-    
-    @State var showAction: Bool = false
-    @State var showImagePicker: Bool = false
-    @State var uiImage: UIImage = UIImage()
+    @State var colorScheme: Int = 0
     
     @State var showDatePicker: Bool = false
     
     var body: some View {
         return VStack {
-            ChildEditView()
-            
-            VStack {
-                Button(action: {
-                    let child = Child(context: self.moc)
-                    
-                    if let data = self.uiImage.pngData() {
-                        child.image = data
+            Form {
+                Section(header:
+                    HStack {
+                        Spacer()
+                        
+                        if image != nil {
+                            image?
+                                .resizable()
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                                .scaledToFit()
+                                .frame(maxHeight: 200)
+                                .overlay(
+                                    Circle().stroke(
+                                        Child.ColorSchemes[self.colorScheme], lineWidth: 6
+                                    )
+                                ).animation(.linear)
+                        }else {
+                            VStack {
+                                Circle()
+                                    .foregroundColor(Color.white)
+                                    .frame(width: 200, height: 200)
+                                    .overlay(VStack {
+                                        ZStack {
+                                            Circle().stroke(Color.gray, lineWidth: 2)
+                                            Image(systemName: "camera")
+                                                .font(.system(size: 40))
+                                        }
+                                    })
+                            }
+                        }
+                        
+                        Spacer()
+                    }.padding(.top, 25)
+                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
+                        ImagePicker(image: self.$inputImage)
                     }
-                    
-                    child.wrappedName = self.name
-                    child.wrappedDueDate = self.dueDate
-                    child.createdAt = Date()
-                    
-                    do {
-                        print("Saving...")
-                        try self.moc.save()
-                    }catch {
-                        print("Error: \(error)")
+                    .onTapGesture {
+                        self.showingImagePicker.toggle()
                     }
-                }) {
-                    Text("Save")
+                ) {
+                    EmptyView()
                 }
                 
-                Divider()
+                Section(header: Text("About your baby")) {
+                    TextField("Name", text: self.$name)
+                }
                 
-                NavigationLink(destination: AddChildConfirmationView()) {
-                    Text("Next")
+                Section(header: Text("Due date")) {
+                    Toggle(isOn: self.$isBorn) {
+                        Text("They're here!")
+                    }
+                    
+                    DatePicker(selection: self.$dueDate) {
+                        Text(self.isBorn ? "Date of birth" : "Due date")
+                    }
+                }
+                
+                
+                Section(header: Text("Choose a colour scheme")) {
+                    HStack(spacing: 20) {
+                        Spacer()
+                        
+                        ForEach(Child.ColorSchemes.indices) {index in
+                            Rectangle()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(Child.ColorSchemes[index])
+                                .clipShape(Circle())
+                                .onTapGesture {
+                                    self.colorScheme = index
+                            }
+                        }
+                        
+                        Spacer()
+                    }.offset(x: -15)
                 }
             }
+            .navigationBarTitle("Welcome, baby")
+            .navigationBarItems(trailing: Button(action: save) {
+                Text("Done")
+            })
         }
+    }
+    
+    func save() {
+        let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
+        
+        child.wrappedName = self.name
+        child.wrappedDueDate = self.dueDate
+        child.image = self.inputImage?.pngData()
+        child.colorScheme = Int16(self.colorScheme)
+        
+        do {
+            try self.context.save()
+            self.profile.parent.setActiveChild(child: child)
+            
+            self.viewSettings.initialView = .dashboard
+        }catch {
+            debugPrint(error)
+        }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else {
+            return
+        }
+        
+        image = Image(uiImage: inputImage)
     }
 }
 
