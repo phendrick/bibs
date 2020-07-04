@@ -70,43 +70,42 @@ struct DashboardToolCardView: View {
     @State var active  = false
     
     var body: some View {
-        return Text("K")
-//        return ZStack(alignment: .topLeading) {
-//            GeometryReader { geometry in
-//                HStack {
-//                    Spacer()
-//                    
-//                    Image(self.image)
-//                        .resizable()
-//                        .scaledToFit()
-//                    Spacer()
-//                }.frame(maxHeight: .infinity)
-//            }
-//            
-//            HStack {
-//                VStack {
-//                    Spacer()
-//                    
-//                    Text(title)
-//                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-//                        .padding(5)
-//                        .padding([.top, .leading, .trailing], 10)
-//                        .font(.custom("Merriweather-Regular", size: 26))
-//                    
-//                    Text(subtitle)
-//                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
-//                        .padding(5)
-//                        .padding([.leading, .trailing], 10)
-//                        .font(.custom("OpenSans-Regular", size: 14))
-//                        .shadow(color: .white, radius: 1, x: 0, y: 0)
-//                }
-//
-//                Spacer()
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .foregroundColor(.white)
-//        }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        return ZStack(alignment: .topLeading) {
+            GeometryReader { geometry in
+                HStack {
+                    Spacer()
+                    
+                    Image(self.image)
+                        .resizable()
+                        .scaledToFit()
+                    Spacer()
+                }.frame(maxHeight: .infinity)
+            }
+            
+            HStack {
+                VStack {
+                    Spacer()
+                    
+                    Text(title)
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                        .padding(5)
+                        .padding([.top, .leading, .trailing], 10)
+                        .font(.custom("Merriweather-Regular", size: 26))
+                    
+                    Text(subtitle)
+                        .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                        .padding(5)
+                        .padding([.leading, .trailing], 10)
+                        .font(.custom("OpenSans-Regular", size: 14))
+                        .shadow(color: .white, radius: 1, x: 0, y: 0)
+                }
+
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .foregroundColor(.white)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
