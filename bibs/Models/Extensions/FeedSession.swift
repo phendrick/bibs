@@ -71,15 +71,10 @@ extension FeedSession: Identifiable, Trackable {
     
     /// formatted string to render the elapsed time
     func formattedElapsedTime(include_hsec: Bool = true) -> String {
-        let hours    = String(calculatedElapsedTime.hours).toPaddedNumber()
-        let minutes  = String(calculatedElapsedTime.minutes).toPaddedNumber()
-        let seconds  = String(calculatedElapsedTime.seconds).toPaddedNumber()
-        let hseconds = String(calculatedElapsedTime.hseconds).toPaddedNumber()
-        
-        var time = "\(hours):\(minutes):\(seconds)"
+        var time = String(format:"%02i:%02i:%02i", calculatedElapsedTime.hours, calculatedElapsedTime.minutes, calculatedElapsedTime.seconds)
         
         if include_hsec {
-            time.append(".\(hseconds)")
+            time.append(contentsOf: String(format: ".%02i", calculatedElapsedTime.hseconds))
         }
         
         return time
@@ -89,7 +84,7 @@ extension FeedSession: Identifiable, Trackable {
     /// the timer stops incrementing and invalidate's itself when the current timer `.status` is set to `.paused`, so
     /// we can call `feedSession.pause()` or  `feedSession.setStatus(to: .paused)` to stop a timer
     var timer: Timer {
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
+        Timer(timeInterval: 0.01, repeats: true) { (timer) in
             guard let feed = self.currentFeed else {
                 timer.invalidate()
                 return
@@ -97,10 +92,9 @@ extension FeedSession: Identifiable, Trackable {
             
             if self.status != .running {
                 timer.invalidate()
-                
-                return
             }
             
+            print("Continuing...")
             feed.duration += 1
             self.objectWillChange.send()
         }
@@ -108,10 +102,13 @@ extension FeedSession: Identifiable, Trackable {
     
     /// MARK: public api for controlling sessions
     func pause() {
+        print("pause() \(self.timer)")
         self.status = .paused
     }
     
     func resume() {
+        print("resume() \(self.timer)")
+        
         /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
         guard status != .running else {
             return
@@ -156,6 +153,17 @@ extension FeedSession: Identifiable, Trackable {
         self.child?.objectWillChange.send()
 
         /// save changes
-        try? context.save()
+        do {
+            try context.save()
+            
+            print(UserDefaults.standard.bool(forKey: "pauseTimerWhenSwitching"))
+            if UserDefaults.standard.bool(forKey: "pauseTimerWhenSwitching") {
+                self.pause()
+            }else {
+                self.resume()
+            }
+        }catch {
+            fatalError()
+        }
     }
 }

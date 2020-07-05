@@ -41,6 +41,10 @@ struct FeedSessionView: View {
                         }
                     }
                 
+                Text("< - >").onTapGesture {
+                    self.feedSession.switchSide()
+                }
+                
                 if cofeeding {
                     Text("\(self.feedSession.child?.wrappedName ?? "")")
                 }

@@ -4,6 +4,7 @@
         <attribute name="colorScheme" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="imageId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isBorn" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -23,6 +24,7 @@
     <entity name="FeedSession" representedClassName="FeedSession" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="state" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="suspendedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="feedSessions" inverseEntity="Child"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="feedSession" inverseEntity="Feed"/>
     </entity>
@@ -39,9 +41,9 @@
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Child" inverseName="parent" inverseEntity="Child"/>
     </entity>
     <elements>
-        <element name="Child" positionX="-54" positionY="0" width="128" height="208"/>
+        <element name="Child" positionX="-54" positionY="0" width="128" height="223"/>
         <element name="Feed" positionX="417.3984375" positionY="-72.5" width="128" height="28"/>
-        <element name="FeedSession" positionX="148.2734375" positionY="-2.01171875" width="128" height="28"/>
+        <element name="FeedSession" positionX="148.2734375" positionY="-2.01171875" width="128" height="118"/>
         <element name="NappyChange" positionX="0" positionY="18" width="128" height="28"/>
         <element name="ParentProfile" positionX="153" positionY="45" width="128" height="118"/>
     </elements>

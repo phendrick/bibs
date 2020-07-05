@@ -115,6 +115,10 @@ struct DashboardView: View {
                             
                             Divider()
                             
+                            if self.profile.parent.activeChild != nil {
+                                Text("OK \(self.profile.parent.activeChild?.wrappedName ?? "")")
+                            }
+                            
                             HStack {
                                 Button(action: {
                                     do {
@@ -142,7 +146,7 @@ struct DashboardView: View {
                         Spacer()
                     }
                 }
-                .navigationBarTitle("Morning, mum", displayMode: .inline)
+                .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .inline)
                 .navigationBarItems(
                     leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
                         Image(systemName: "person.crop.circle").foregroundColor(.red)

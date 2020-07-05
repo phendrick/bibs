@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-extension Child: Identifiable {
+extension Child: Identifiable {    
     static let ColorSchemes: [Color] = [
         Color(#colorLiteral(red: 0.9753738046, green: 0.9755367637, blue: 0.9753522277, alpha: 1)),
         Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)),
@@ -20,6 +20,21 @@ extension Child: Identifiable {
         Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)),
         Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
     ]
+    
+    enum ChildStatuses: Int16 {
+        case current
+        case archived
+    }
+    
+    var status: ChildStatuses {
+        get {
+            ChildStatuses.init(rawValue: self.state) ?? .current
+        }
+        
+        set(newValue) {
+            self.state = newValue.rawValue
+        }
+    }
     
     public var wrappedCreatedAt: Date {
         get {createdAt ?? Date()}
@@ -106,10 +121,11 @@ extension Child: Identifiable {
         do {
            try context.save()
             
-            print("Saving")
             session.objectWillChange.send()
             
-            session.resume()
+            if UserDefaults.standard.bool(forKey: "autostartTimers") {
+                session.resume()
+            }
         }catch {
             print("Error: \(error)")
         }

@@ -31,15 +31,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         var initialView: ViewSettings.InitialView = .welcome
         
-        if let parent = try? context.fetch(parentProfileFetchRequest).first, let child = parent.childrenArray.first {
-            parent.activeChild = child
+        if let parent = try? context.fetch(parentProfileFetchRequest).first, parent.childrenArray.count > 0 {
+            let restored = parent.restoreActiveChild()
+            print("Restored: \(restored ? "yes" : "no")")
             profileObserver.parent = parent
             
             initialView = .dashboard
         }else {
+            print("checking for parent and/or child")
             if let parent = try? context.fetch(parentProfileFetchRequest).first {
+                print("got parent, no child")
                 profileObserver.parent = parent
             }else {
+                print("no parent or child")
                 profileObserver.parent = ParentProfile(context: context)
             }
         }
