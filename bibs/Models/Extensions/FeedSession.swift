@@ -11,9 +11,10 @@ import CoreData
 
 extension FeedSession: Identifiable, Trackable {
     enum FeedSessionStatus: Int16 {
-        case paused
-        case running
-        case complete
+        case paused    // manually paused by user
+        case running   // incrementing feed duration value
+        case complete  // is an old feed session
+        case suspended // suspended when user backgrounds the app
     }
     
     enum FeedSessionError: Error {
@@ -94,7 +95,6 @@ extension FeedSession: Identifiable, Trackable {
                 timer.invalidate()
             }
             
-            print("Continuing...")
             feed.duration += 1
             self.objectWillChange.send()
         }
@@ -102,20 +102,53 @@ extension FeedSession: Identifiable, Trackable {
     
     /// MARK: public api for controlling sessions
     func pause() {
-        print("pause() \(self.timer)")
-        self.status = .paused
-    }
-    
-    func resume() {
-        print("resume() \(self.timer)")
-        
-        /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
-        guard status != .running else {
+        guard status == .running || status == .suspended else {
+            print("Can't pause a non-running session")
             return
         }
         
+        self.status = .paused
+        self.timer.invalidate()
+    }
+    
+    /// save a session to be resumed later
+    /// if `hibernate` is set to true, we dont invalidate the timer as we may still only be in preview mode, not fully switched to the background
+    func suspend() {
+        guard status == .running else {
+            print("Can't suspend a non-running session")
+            return
+        }
+        
+        self.suspendedAt = Date()
+        self.status = .suspended
+        timer.invalidate()
+    }
+    
+    func resume(force fromSuspension: Bool = false) {
+        /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
+        /// unless the timer is being resumed from suspension, inwhich case its timer will be invalid and needs to be re-fired
+        guard status != .running else {
+            print("not re-firing timer")
+            return
+        }
+        
+//        let forcedResumption = fromSuspension == true && status == .running
+//
+//        if status != .running || forcedResumption {
+//            print("Timer wasn't running, or forced to resume: \(status), \(forcedResumption")
+//            return
+//        }
+//
+//        if status == .running && fromSuspension == true {
+//            print("force resumption from suspension")
+//        }
+//
+//        print(fromSuspension, status)
+//        print("Setting status to .running and firing timer")
+        
         self.status = .running
         timer.fire()
+        RunLoop.main.add(timer, forMode: .common)
     }
     
     /// calling `.finish()` on a feed session instance will set its status to FeedSessionStatus.complete
@@ -126,6 +159,7 @@ extension FeedSession: Identifiable, Trackable {
         }
         
         self.status = .complete
+        self.timer.invalidate()
         
         do {
             try context.save()

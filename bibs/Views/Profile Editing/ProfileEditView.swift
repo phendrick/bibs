@@ -21,6 +21,7 @@ struct ProfileEditView: View {
     
     @State var autostartTimer: Bool = true
     @State var pauseTimerWhenSwitching: Bool = true
+    @State var pauseRunningTimersOnShutdown: Bool = true
     
     var body: some View {
         VStack {
@@ -66,18 +67,29 @@ struct ProfileEditView: View {
                 Section(
                     header: Text("Edit your details")
                 ) {
-                    TextField("Your name", text: self.$name)
+                    TextField("Your name", text: self.$name).autocapitalization(.none)
                 }
                 
                 Section(
                     header: Text("Timer options")
                 ) {
                     Toggle(isOn: self.$autostartTimer) {
-                        Text("Automatically start timers")
+                        Text("Automatically start new feed timers")
                     }
                     
                     Toggle(isOn: self.$pauseTimerWhenSwitching) {
-                        Text("Pause the timer when switching breasts")
+                        Text("Pause the timer when switching sides")
+                    }
+                }
+                
+                Section(
+                    header: Text("Background timer behaviour"),
+                    footer: Text("This option doesn't affect behaviour when switching to another app - Bibs will always continue its active timers in the background")
+                ) {
+                    Toggle(isOn: self.$pauseRunningTimersOnShutdown) {
+                        VStack(alignment: .leading) {
+                            Text("Pause timers when closing Bibs")
+                        }
                     }
                 }
                 
@@ -119,6 +131,7 @@ struct ProfileEditView: View {
             /// restore settings from UserDefaults
             self.autostartTimer = self.profile.parent.autostartTimer
             self.pauseTimerWhenSwitching = self.profile.parent.pauseTimerWhenSwitching
+            self.pauseRunningTimersOnShutdown = self.profile.parent.pauseRunningTimersOnShutdown
             
             if let _ = self.profile.parent.image {
                 self.image = Image(uiImage: self.profile.parent.wrappedImage)
@@ -138,6 +151,7 @@ struct ProfileEditView: View {
         /// set options (UserDefaults)
         self.profile.parent.autostartTimer = self.autostartTimer
         self.profile.parent.pauseTimerWhenSwitching = self.pauseTimerWhenSwitching
+        self.profile.parent.pauseRunningTimersOnShutdown = self.pauseRunningTimersOnShutdown
         
         do {
             self.profile.objectWillChange.send()

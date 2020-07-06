@@ -109,38 +109,11 @@ struct DashboardView: View {
                         }
                         
                         if self.activeFeedTool == .FeedTimer {
-                            ForEach(self.completedFeedSessions, id: \.self) {session in
-                                Text("OK")
-                            }
-                            
-                            Divider()
-                            
-                            if self.profile.parent.activeChild != nil {
-                                Text("OK \(self.profile.parent.activeChild?.wrappedName ?? "")")
-                            }
-                            
-                            HStack {
-                                Button(action: {
-                                    do {
-                                        try self.profile.parent.activeChild?.startNewFeedSession()
-                                    }catch {
-                                    }
-                                }) {
-                                    HStack {
-                                        Text("New session")
-                                        Spacer()
-                                    }.padding()
-                                }
-                                
-                                Button(action: {
-                                    self.profile.parent.activeChild?.clear()
-                                }) {
-                                    HStack {
-                                        Text("Clear out")
-                                        Spacer()
-                                    }.padding()
-                                }
-                            }
+                            FeedSessionActionsView()
+                        }else if self.activeFeedTool == .ExpressedFeed {
+                            BottleFeedActionsView()
+                        }else if self.activeFeedTool == .NappyChange {
+                            NappyChangeActionsView()
                         }
                         
                         Spacer()
@@ -151,9 +124,13 @@ struct DashboardView: View {
                     leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
                         Image(systemName: "person.crop.circle").foregroundColor(.red)
                     },
-                    trailing: Image(systemName: "heart.circle.fill").foregroundColor(.red).onTapGesture {
-                        self.showingChildListActionSheet = true
-                    }
+                    trailing:
+                        ZStack {
+                            Image(systemName: "heart.circle.fill").foregroundColor(.red)
+                                .onTapGesture {
+                                    self.showingChildListActionSheet = true
+                            }
+                        }
                 )
                 .actionSheet(isPresented: self.$showingChildListActionSheet) {
                     ActionSheet(

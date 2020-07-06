@@ -44,6 +44,9 @@
 		DAAA33F224AFCA150015E03F /* ParentProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA33F024AFCA150015E03F /* ParentProfile+CoreDataProperties.swift */; };
 		DAAA33F424AFCD9B0015E03F /* ParentProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA33F324AFCD9B0015E03F /* ParentProfile.swift */; };
 		DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */; };
+		DAAD54CE24B36A6500F284B1 /* FeedSessionActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */; };
+		DAAD54D024B36D2A00F284B1 /* BottleFeedActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD54CF24B36D2A00F284B1 /* BottleFeedActionsView.swift */; };
+		DAAD54D224B36D3A00F284B1 /* NappyChangeActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD54D124B36D3A00F284B1 /* NappyChangeActionsView.swift */; };
 		DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DAAF5DB024A10A8500A7C499 /* Introspect */; };
 		DAB1739C247D458600D94537 /* FeedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739B247D458600D94537 /* FeedSession.swift */; };
 		DAB1739F247D45B600D94537 /* Timeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739E247D45B600D94537 /* Timeable.swift */; };
@@ -124,6 +127,9 @@
 		DAAA33F024AFCA150015E03F /* ParentProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParentProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DAAA33F324AFCD9B0015E03F /* ParentProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentProfile.swift; sourceTree = "<group>"; };
 		DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionActionsView.swift; sourceTree = "<group>"; };
+		DAAD54CF24B36D2A00F284B1 /* BottleFeedActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedActionsView.swift; sourceTree = "<group>"; };
+		DAAD54D124B36D3A00F284B1 /* NappyChangeActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeActionsView.swift; sourceTree = "<group>"; };
 		DAB17398247C191500D94537 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		DAB1739B247D458600D94537 /* FeedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSession.swift; sourceTree = "<group>"; };
 		DAB1739E247D45B600D94537 /* Timeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeable.swift; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 		DA5DB18E24A5304700DE2E01 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				DAAD54CC24B36A5400F284B1 /* FeedToolActions */,
 				DAB17398247C191500D94537 /* DashboardView.swift */,
 				DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
@@ -283,6 +290,16 @@
 				DA707B5E24AE7622006D21D2 /* ChildEditView.swift */,
 			);
 			path = "Profile Editing";
+			sourceTree = "<group>";
+		};
+		DAAD54CC24B36A5400F284B1 /* FeedToolActions */ = {
+			isa = PBXGroup;
+			children = (
+				DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */,
+				DAAD54CF24B36D2A00F284B1 /* BottleFeedActionsView.swift */,
+				DAAD54D124B36D3A00F284B1 /* NappyChangeActionsView.swift */,
+			);
+			path = FeedToolActions;
 			sourceTree = "<group>";
 		};
 		DAB1739A247D455600D94537 /* Extensions */ = {
@@ -595,9 +612,11 @@
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
 				DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
+				DAAD54D224B36D3A00F284B1 /* NappyChangeActionsView.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */,
 				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
+				DAAD54D024B36D2A00F284B1 /* BottleFeedActionsView.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
 				DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
@@ -618,6 +637,7 @@
 				DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
+				DAAD54CE24B36A6500F284B1 /* FeedSessionActionsView.swift in Sources */,
 				DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
 				DA82C18F24899B930009772F /* Date.swift in Sources */,

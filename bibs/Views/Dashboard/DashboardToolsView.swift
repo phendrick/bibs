@@ -31,6 +31,10 @@ struct DashboardToolsView: View {
             .onPageChanged({ (page) in
                 withAnimation {
                     self.page = page
+                    
+                    if let tool = FeedTool.init(rawValue: page) {
+                        self.activeFeedTool = tool
+                    }
                 }
             })
             .frame(

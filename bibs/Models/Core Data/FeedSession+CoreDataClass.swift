@@ -15,7 +15,7 @@ public class FeedSession: NSManagedObject {
     override public init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
         
-        print("Adding timer to main RunLoop: \(timer)")
-        RunLoop.current.add(timer, forMode: .common)
+//        print("Adding timer to main RunLoop: \(timer)")
+//        RunLoop.current.add(timer, forMode: .common)
     }
 }

@@ -30,6 +30,16 @@ extension ParentProfile {
         }
     }
     
+    public var pauseRunningTimersOnShutdown: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "pauseRunningTimersOnShutdown")
+        }
+        
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "pauseRunningTimersOnShutdown")
+        }
+    }
+    
     public var childrenArray: [Child] {
         let set = children as? Set<Child> ?? []
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
@@ -83,10 +93,20 @@ extension ParentProfile {
         return activeFeedSessions
     }
     
+    public var suspendedFeedSessions: [FeedSession] {
+        let activeFeedSessions = childrenArray.flatMap { (child) in
+            child.feedSessionsArray.filter { (feedSession) -> Bool in
+                feedSession.status == .suspended
+            }
+        }
+        
+        return activeFeedSessions
+    }
+    
     /// when the application is closed or sent to the background, suspend any currently running timers
     /// by setting their `suspendedAt` value to the current Date()
     public enum SuspensionType {
-        case card
+        case terminated
         case switched
     }
     
@@ -95,34 +115,76 @@ extension ParentProfile {
             fatalError()
         }
         
-        guard suspensionType == .switched else {
-            return
-        }
+        print(suspensionType, activeFeedSessions.count)
         
         for session in activeFeedSessions {
-            session.suspendedAt = Date()
-            
-            do {
-                try context.save()
-            }catch {
-                fatalError("Couldn't suspend sessions")
+            if pauseRunningTimersOnShutdown {
+                print("Pausing...")
+                session.pause()
+            }else {
+                print("Suspending...")
+                session.suspend()
             }
         }
+        
+        try? context.save()
     }
     
     /// when resuming the application, we should rehydrate a suspended session by updating the `duration` of its
     /// `currentFeed` by the number of hundredths of a second since its suspension
+//    var timerDriftWithinPermittedRange: Bool {
+//        let total = suspendedFeedSessions.reduce(into: 0.0) { (count, session) in
+//            let timeInterval = session.suspendedAt?.distance(to: Date())
+//
+//            if let difference = timeInterval {
+//                count += difference
+//            }
+//        }
+//
+//        print(total)
+//        // 30 mins max drift allowed - fixme: make this a config var
+//        return total < 1800
+//    }
+    
     public func resumeSuspendedFeedSessions() {
         let currentDate = Date()
         
-        for session in activeFeedSessions {
+        for session in suspendedFeedSessions {
             let timeDifference = session.suspendedAt?.distance(to: currentDate)
-            
+                        
             if let difference = timeDifference, let feed = session.currentFeed {
                 feed.duration += Int32(difference*100)
+                
+                // clear out the suspendedAt value so we don't increment the timer again
+                session.suspendedAt = nil
             }
             
+            session.resume(force: true)
+            session.objectWillChange.send()
             session.child?.parent?.objectWillChange.send()
+        }
+    }
+    
+    public func incrementFeedSessionTime() {
+        
+    }
+    
+    private func pauseActiveFeedSessions() {
+        guard let context = self.managedObjectContext else {
+            fatalError()
+        }
+        
+        print("Pausing active sessions")
+        
+        for session in activeFeedSessions {
+            session.suspendedAt = Date()
+            session.pause()
+            
+            do {
+                try context.save()
+            }catch {
+                fatalError()
+            }
         }
     }
     
