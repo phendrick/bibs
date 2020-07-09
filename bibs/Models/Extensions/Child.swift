@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 import SwiftUI
+import UIKit
+
+typealias ChildTheme = (Color, Color, Color)
 
 extension Child: Identifiable {    
     static let ColorSchemes: [Color] = [
@@ -20,6 +23,35 @@ extension Child: Identifiable {
         Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)),
         Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
     ]
+    
+    var themeColor: Color {
+        let defaultColor = UIColor.white
+        var color: UIColor?
+        
+        switch(self.colorScheme) {
+        case 0:
+            color = UIColor(named: "HighlightSilver")
+        case 1:
+            color = UIColor(named: "HighlightYellow")
+        case 2:
+            color = UIColor(named: "HighlightGreen")
+        case 3:
+            color = UIColor(named: "HighlightRed")
+        case 4:
+            color = UIColor(named: "HighlightPink")
+        case 5:
+            color = UIColor(named: "HighlightBlue")
+        case 6:
+            color = UIColor(named: "HighlightPurple")
+        case 7:
+            color = UIColor(named: "HighlightYellow")
+        default:
+            color = UIColor.white
+        }
+        
+        let baseColor = color ?? defaultColor
+        return Color(baseColor)
+    }
     
     enum ChildStatuses: Int16 {
         case current

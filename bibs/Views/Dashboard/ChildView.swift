@@ -17,7 +17,7 @@ struct ChildView: View {
             
             VStack {
                 ForEach(self.child.feedSessionsArray, id: \.self) {feedSession in
-                    FeedSessionView(feedSession: feedSession)
+                    FeedSessionTimerView(feedSession: feedSession)
                         .background(feedSession.isActiveFeedSession ? Color.green : Color.red)
                 }
             }

@@ -16,6 +16,10 @@ struct ContentView: View {
     @State var showingTimerAlert = false
     
     var body: some View {
+//        NavigationView {
+//            Text("OK")
+//                .navigationBarTitle("Test")
+//        }
         VStack {
             if viewSettings.initialView == .dashboard {
                 DashboardView()

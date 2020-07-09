@@ -12,19 +12,15 @@ import SwiftUIPager
 
 enum FeedTool: Int, CaseIterable {
     case FeedTimer
+    case BottleFeed
     case NappyChange
-    case ExpressedFeed
     case DataOverview
 }
 
 struct DashboardView: View {
-    @State private var childSheetVisible: Bool = false
-    
     @EnvironmentObject var profile: ProfileObserver
     @ObservedObject var viewSettings = ViewSettings()
     @Environment(\.managedObjectContext) var moc
-    
-    @State var page: Int = 0
     
     @FetchRequest(
         entity: FeedSession.entity(),
@@ -33,12 +29,6 @@ struct DashboardView: View {
             FeedSession.FeedSessionStatus.running.rawValue, FeedSession.FeedSessionStatus.paused.rawValue
         ]),
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
-    
-    @FetchRequest(
-        entity: FeedSession.entity(),
-        sortDescriptors: [],
-        predicate: NSPredicate(format: "state == %d", Int16(FeedSession.FeedSessionStatus.complete.rawValue)),
-        animation: .spring()) var completedFeedSessions: FetchedResults<FeedSession>
     
     @FetchRequest(
         entity: Child.entity(),
@@ -50,6 +40,79 @@ struct DashboardView: View {
     
     var cofeeding: Bool {
         self.activeFeedSessions.count > 1
+    }
+    
+    var body: some View {
+        NavigationView {
+            GeometryReader {geometry in
+                ZStack(alignment: .top) {
+                    ActiveFeedsPreview(profile: self.profile)
+                        .frame(maxWidth: geometry.size.width * 0.8)
+                        .offset(
+                            y: (self.activeFeedTool.rawValue != 0 && self.profile.parent.activeFeedSessions.count > 0)
+                                ? 0
+                                : -geometry.frame(in: .global).minY*2
+                        )
+                        .zIndex(2)
+                    
+                    ScrollView(showsIndicators: false) {
+                        VStack {
+                            DashboardToolsView(
+                                outerGeometry: geometry,
+                                activeFeedTool: self.$activeFeedTool
+                            ).environmentObject(ToolsData())
+                            
+                            if self.activeFeedTool.rawValue == 0 {
+                                ForEach(self.profile.parent.activeChild?.feedSessionsArray ?? []) {session in
+                                    FeedSessionTimerView(feedSession: session)
+                                }
+                            }
+
+                            if self.cofeeding && self.activeFeedSessions.filter {$0.status == .running}.count == 2 {
+                                Button(action: {
+                                    let _ = self.activeFeedSessions.map {$0.pause()}
+                                }) {
+                                    Text("Pause all")
+                                }
+                            }
+
+                            if self.activeFeedTool == .FeedTimer {
+                                FeedSessionActionsView()
+                            }else if self.activeFeedTool == .BottleFeed {
+                                BottleFeedActionsView()
+                            }else if self.activeFeedTool == .NappyChange {
+                                NappyChangeActionsView()
+                            }else if self.activeFeedTool == .DataOverview {
+                                DataToolsView()
+                            }
+                            
+                            Spacer()
+                        }
+                    }
+                }
+            }
+            .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .inline)
+            .navigationBarItems(
+                leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
+                    Image(systemName: "person.crop.circle").foregroundColor(.red)
+                },
+                trailing:
+                    ZStack {
+                        Image(systemName: "heart.circle.fill").foregroundColor(.red)
+                            .onTapGesture {
+                                self.showingChildListActionSheet = true
+                        }
+                    }
+            )
+//            .actionSheet(isPresented: self.$showingChildListActionSheet) {
+//                ActionSheet(
+//                    title: Text("Switch profile"),
+//                    message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
+//                    buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
+//                )
+//            }
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     func childListActionSheetButtons(exclude: Child?) -> [ActionSheet.Button] {
@@ -71,78 +134,9 @@ struct DashboardView: View {
         
         return buttons
     }
-    
+
     func childListActionSheetMessage(current: String ) -> String {
         return "Active child profile: \(current)"
-    }
-    
-    init() {
-        UINavigationBar.appearance().backgroundColor = .red
-    }
-    
-    var body: some View {
-        NavigationView {
-            GeometryReader {geometry in
-                ScrollView(showsIndicators: false) {
-                    VStack {
-                        DashboardToolsView(
-                            outerGeometry: geometry,
-                            activeFeedTool: self.$activeFeedTool
-                        ).environmentObject(ToolsData())
-                        
-                        ForEach(self.profile.parent.activeChild?.feedSessionsArray ?? []) {session in
-                            FeedSessionView(
-                                cofeeding: false,
-                                cofeedingIndex: 0,
-                                feedSession: session
-                            )
-                        }
-                        
-                        if self.cofeeding && self.activeFeedSessions.filter {$0.status == .running}.count == 2 {
-                            Divider()
-                            
-                            Button(action: {
-                                let _ = self.activeFeedSessions.map {$0.pause()}
-                            }) {
-                                Text("Pause all")
-                            }
-                        }
-                        
-                        if self.activeFeedTool == .FeedTimer {
-                            FeedSessionActionsView()
-                        }else if self.activeFeedTool == .ExpressedFeed {
-                            BottleFeedActionsView()
-                        }else if self.activeFeedTool == .NappyChange {
-                            NappyChangeActionsView()
-                        }
-                        
-                        Spacer()
-                    }
-                }
-                .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .inline)
-                .navigationBarItems(
-                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
-                        Image(systemName: "person.crop.circle").foregroundColor(.red)
-                    },
-                    trailing:
-                        ZStack {
-                            Image(systemName: "heart.circle.fill").foregroundColor(.red)
-                                .onTapGesture {
-                                    self.showingChildListActionSheet = true
-                            }
-                        }
-                )
-                .actionSheet(isPresented: self.$showingChildListActionSheet) {
-                    ActionSheet(
-                        title: Text("Switch profile"),
-                        message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
-                        buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
-                    )
-                }
-            }
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .scaleEffect(0.98)
     }
 }
 

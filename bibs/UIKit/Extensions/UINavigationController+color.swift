@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UINavigationController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
         let standard = UINavigationBarAppearance()
-        standard.backgroundColor = .white //When you scroll or you have title (small one)
-
+        standard.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0) //When you scroll or you have title (small one)
+        standard.shadowColor = nil
+        standard.shadowImage = nil
+        
         let compact = UINavigationBarAppearance()
-        compact.backgroundColor = .white //compact-height
-
+        compact.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0) //compact-height
+        compact.shadowColor = nil
+        compact.shadowImage = nil
+        
         let scrollEdge = UINavigationBarAppearance()
-        scrollEdge.backgroundColor = .white //When you have large title
+        scrollEdge.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0) //When you have large title
+        scrollEdge.shadowColor = nil
+        scrollEdge.shadowImage = nil
 
         navigationBar.standardAppearance = standard
         navigationBar.compactAppearance = compact

@@ -27,42 +27,42 @@ struct ProfileEditView: View {
         VStack {
             Form {
                 
-                Section(header:
-                    HStack {
-                        Spacer()
-                        if image != nil {
-                            image?
-                                .resizable()
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                                .scaledToFit()
-                                .frame(maxHeight: 100)
-                                .overlay(Circle().stroke(Color.white, lineWidth: 3))
-                        }else {
-                            VStack {
-                                Circle()
-                                    .foregroundColor(Color.white)
-                                    .frame(width: 100, height: 100)
-                                    .overlay(VStack {
-                                        ZStack {
-                                            Circle().stroke(Color.gray, lineWidth: 2)
-                                            Image(systemName: "camera")
-                                                .font(.system(size: 40))
-                                        }
-                                    })
-                                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
-                                        ImagePicker(image: self.$inputImage)
-                                    }
-                                    .onTapGesture {
-                                        self.showingImagePicker.toggle()
-                                    }
-                            }
-                        }
-                        Spacer()
-                    }.padding(.top, 25)
-                ) {
-                    EmptyView()
-                }
+//                Section(header:
+//                    HStack {
+//                        Spacer()
+//                        if image != nil {
+//                            image?
+//                                .resizable()
+//                                .clipShape(Circle())
+//                                .shadow(radius: 5)
+//                                .scaledToFit()
+//                                .frame(maxHeight: 100)
+//                                .overlay(Circle().stroke(Color.white, lineWidth: 3))
+//                        }else {
+//                            VStack {
+//                                Circle()
+//                                    .foregroundColor(Color.white)
+//                                    .frame(width: 100, height: 100)
+//                                    .overlay(VStack {
+//                                        ZStack {
+//                                            Circle().stroke(Color.gray, lineWidth: 2)
+//                                            Image(systemName: "camera")
+//                                                .font(.system(size: 40))
+//                                        }
+//                                    })
+//                                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
+//                                        ImagePicker(image: self.$inputImage)
+//                                    }
+//                                    .onTapGesture {
+//                                        self.showingImagePicker.toggle()
+//                                    }
+//                            }
+//                        }
+//                        Spacer()
+//                    }.padding(.top, 25)
+//                ) {
+//                    EmptyView()
+//                }
                 
                 Section(
                     header: Text("Edit your details")

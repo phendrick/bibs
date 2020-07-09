@@ -2,7 +2,7 @@
 //  Child+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 05/07/2020.
+//  Created by Paul Hendrick on 06/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -20,15 +20,16 @@ extension Child {
     @NSManaged public var colorScheme: Int16
     @NSManaged public var createdAt: Date?
     @NSManaged public var dueDate: Date?
+    @NSManaged public var id: UUID?
     @NSManaged public var image: Data?
     @NSManaged public var imageId: Int16
     @NSManaged public var isBorn: Bool
     @NSManaged public var name: String?
     @NSManaged public var state: Int16
-    @NSManaged public var id: UUID?
     @NSManaged public var feedSessions: NSSet?
     @NSManaged public var nappyChanges: NSSet?
     @NSManaged public var parent: ParentProfile?
+    @NSManaged public var bottleFeeds: BottleFeed?
 
 }
 

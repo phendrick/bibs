@@ -13,18 +13,8 @@ struct FeedSessionTimerView: View {
     @ObservedObject var feedSession: FeedSession
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Text("\(feedSession.child?.wrappedName ?? "")")
-                Text("\(feedSession.formattedElapsedTime())")
-                    .onTapGesture {
-                        if self.feedSession.status == .paused {
-                            self.feedSession.resume()
-                        }else if self.feedSession.status == .running {
-                            self.feedSession.pause()
-                        }
-                    }
-            }
+        HStack {
+            Text("\(feedSession.formattedElapsedTime())")
         }
         .font(.custom("RobotoMono-Regular", size: 20))
         .frame(maxWidth: .infinity, alignment: .leading)

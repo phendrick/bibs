@@ -16,13 +16,15 @@
 		DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */; };
 		DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1424822E13009BA4FF /* UserSettings.swift */; };
 		DA635B1B2482698D009BA4FF /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1A2482698D009BA4FF /* Child.swift */; };
-		DA635B1F24840A2C009BA4FF /* FeedSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1E24840A2C009BA4FF /* FeedSessionView.swift */; };
+		DA635B1F24840A2C009BA4FF /* FeedSessionTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1E24840A2C009BA4FF /* FeedSessionTimerView.swift */; };
 		DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */; };
-		DA6A40EF24995E580076FB65 /* ChildListSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6A40EE24995E580076FB65 /* ChildListSheetView.swift */; };
 		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
-		DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */; };
 		DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */; };
 		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
+		DA7AA5E924B7A95800036352 /* ParentProfile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AA5E524B7A95800036352 /* ParentProfile+CoreDataClass.swift */; };
+		DA7AA5EA24B7A95800036352 /* ParentProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AA5E624B7A95800036352 /* ParentProfile+CoreDataProperties.swift */; };
+		DA7AA5EB24B7A95800036352 /* ExpressedBottle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AA5E724B7A95800036352 /* ExpressedBottle+CoreDataClass.swift */; };
+		DA7AA5EC24B7A95800036352 /* ExpressedBottle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AA5E824B7A95800036352 /* ExpressedBottle+CoreDataProperties.swift */; };
 		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
 		DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */; };
@@ -38,10 +40,15 @@
 		DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */; };
 		DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */; };
 		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
+		DA8EC69424B684640014BB97 /* FeedSessionTimerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8EC69324B684640014BB97 /* FeedSessionTimerActions.swift */; };
 		DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */; };
+		DAA0490424B53449007D290D /* ActiveFeedsPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA0490324B53449007D290D /* ActiveFeedsPreview.swift */; };
 		DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DB92488549D00CF9028 /* OpenSans.ttf */; };
-		DAAA33F124AFCA150015E03F /* ParentProfile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA33EF24AFCA150015E03F /* ParentProfile+CoreDataClass.swift */; };
-		DAAA33F224AFCA150015E03F /* ParentProfile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA33F024AFCA150015E03F /* ParentProfile+CoreDataProperties.swift */; };
+		DAA923FA24B3B897001935B4 /* Child+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA923F624B3B897001935B4 /* Child+CoreDataClass.swift */; };
+		DAA923FB24B3B897001935B4 /* Child+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA923F724B3B897001935B4 /* Child+CoreDataProperties.swift */; };
+		DAA923FC24B3B897001935B4 /* BottleFeed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA923F824B3B897001935B4 /* BottleFeed+CoreDataClass.swift */; };
+		DAA923FD24B3B897001935B4 /* BottleFeed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA923F924B3B897001935B4 /* BottleFeed+CoreDataProperties.swift */; };
+		DAA923FF24B3B9A0001935B4 /* DataToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA923FE24B3B9A0001935B4 /* DataToolsView.swift */; };
 		DAAA33F424AFCD9B0015E03F /* ParentProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA33F324AFCD9B0015E03F /* ParentProfile.swift */; };
 		DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */; };
 		DAAD54CE24B36A6500F284B1 /* FeedSessionActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */; };
@@ -54,8 +61,6 @@
 		DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3EF14248AEFBD00667F19 /* String+padding.swift */; };
 		DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ProfileObserver.swift */; };
 		DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePicker.swift */; };
-		DADBE69524B1C36900B1E3B1 /* Child+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBE69324B1C36900B1E3B1 /* Child+CoreDataClass.swift */; };
-		DADBE69624B1C36900B1E3B1 /* Child+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBE69424B1C36900B1E3B1 /* Child+CoreDataProperties.swift */; };
 		DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBE69A24B1CFEF00B1E3B1 /* dateHelpers.swift */; };
 		DADD78F82478609600791F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F72478609600791F61 /* AppDelegate.swift */; };
 		DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F92478609600791F61 /* SceneDelegate.swift */; };
@@ -67,6 +72,7 @@
 		DADD79122478609700791F61 /* bibsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD79112478609700791F61 /* bibsTests.swift */; };
 		DADD791D2478609700791F61 /* bibsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD791C2478609700791F61 /* bibsUITests.swift */; };
 		DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE245B424A5DE3D00018C3F /* AboutYouView.swift */; };
+		DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAEF517124B640A3006CD447 /* Colors.xcassets */; };
 		DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1FA2724A40DE10051CA6B /* NappyChange.swift */; };
 		DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32352479D7470009B737 /* WelcomeView.swift */; };
 		DAFE32382479D7680009B737 /* AddChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32372479D7680009B737 /* AddChildView.swift */; };
@@ -101,13 +107,15 @@
 		DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		DA635B1424822E13009BA4FF /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		DA635B1A2482698D009BA4FF /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
-		DA635B1E24840A2C009BA4FF /* FeedSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionView.swift; sourceTree = "<group>"; };
+		DA635B1E24840A2C009BA4FF /* FeedSessionTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionTimerView.swift; sourceTree = "<group>"; };
 		DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedSessionsList.swift; sourceTree = "<group>"; };
-		DA6A40EE24995E580076FB65 /* ChildListSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildListSheetView.swift; sourceTree = "<group>"; };
 		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionModalView.swift; sourceTree = "<group>"; };
 		DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolsView.swift; sourceTree = "<group>"; };
 		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
+		DA7AA5E524B7A95800036352 /* ParentProfile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParentProfile+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DA7AA5E624B7A95800036352 /* ParentProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParentProfile+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DA7AA5E724B7A95800036352 /* ExpressedBottle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpressedBottle+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DA7AA5E824B7A95800036352 /* ExpressedBottle+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpressedBottle+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -121,10 +129,15 @@
 		DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
+		DA8EC69324B684640014BB97 /* FeedSessionTimerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionTimerActions.swift; sourceTree = "<group>"; };
 		DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIScrollViewDelegate.swift; sourceTree = "<group>"; };
+		DAA0490324B53449007D290D /* ActiveFeedsPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedsPreview.swift; sourceTree = "<group>"; };
 		DAA34DB92488549D00CF9028 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenSans.ttf; sourceTree = "<group>"; };
-		DAAA33EF24AFCA150015E03F /* ParentProfile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParentProfile+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DAAA33F024AFCA150015E03F /* ParentProfile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParentProfile+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAA923F624B3B897001935B4 /* Child+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DAA923F724B3B897001935B4 /* Child+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DAA923F824B3B897001935B4 /* BottleFeed+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottleFeed+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DAA923F924B3B897001935B4 /* BottleFeed+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BottleFeed+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DAA923FE24B3B9A0001935B4 /* DataToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataToolsView.swift; sourceTree = "<group>"; };
 		DAAA33F324AFCD9B0015E03F /* ParentProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentProfile.swift; sourceTree = "<group>"; };
 		DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionActionsView.swift; sourceTree = "<group>"; };
@@ -138,8 +151,6 @@
 		DAB56B8E247A733300C80E1E /* ProfileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObserver.swift; sourceTree = "<group>"; };
 		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DADBE69324B1C36900B1E3B1 /* Child+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		DADBE69424B1C36900B1E3B1 /* Child+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DADBE69A24B1CFEF00B1E3B1 /* dateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateHelpers.swift; sourceTree = "<group>"; };
 		DADD78F42478609600791F61 /* bibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD78F72478609600791F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +168,7 @@
 		DADD791C2478609700791F61 /* bibsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bibsUITests.swift; sourceTree = "<group>"; };
 		DADD791E2478609700791F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAE245B424A5DE3D00018C3F /* AboutYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutYouView.swift; sourceTree = "<group>"; };
+		DAEF517124B640A3006CD447 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		DAF1FA2724A40DE10051CA6B /* NappyChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChange.swift; sourceTree = "<group>"; };
 		DAFE32352479D7470009B737 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		DAFE32372479D7680009B737 /* AddChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildView.swift; sourceTree = "<group>"; };
@@ -214,15 +226,13 @@
 		DA5DB18E24A5304700DE2E01 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				DAA0490024B533FD007D290D /* Global */,
 				DAAD54CC24B36A5400F284B1 /* FeedToolActions */,
 				DAB17398247C191500D94537 /* DashboardView.swift */,
-				DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
-				DA6DBFBF24A8ED430061A9A0 /* FeedSessionModalView.swift */,
 				DA51154224A28AC400442543 /* DashboardDataRowView.swift */,
 				DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */,
 				DA82C18C248991760009772F /* ChildView.swift */,
-				DA6A40EE24995E580076FB65 /* ChildListSheetView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -264,7 +274,8 @@
 		DA918F8924A64538006DFF99 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
-				DA635B1E24840A2C009BA4FF /* FeedSessionView.swift */,
+				DA635B1E24840A2C009BA4FF /* FeedSessionTimerView.swift */,
+				DA8EC69324B684640014BB97 /* FeedSessionTimerActions.swift */,
 			);
 			path = Feeds;
 			sourceTree = "<group>";
@@ -283,6 +294,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		DAA0490024B533FD007D290D /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				DAA0490324B53449007D290D /* ActiveFeedsPreview.swift */,
+				DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		DAAAFD5F24AC7FB70064B263 /* Profile Editing */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +318,7 @@
 				DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */,
 				DAAD54CF24B36D2A00F284B1 /* BottleFeedActionsView.swift */,
 				DAAD54D124B36D3A00F284B1 /* NappyChangeActionsView.swift */,
+				DAA923FE24B3B9A0001935B4 /* DataToolsView.swift */,
 			);
 			path = FeedToolActions;
 			sourceTree = "<group>";
@@ -375,6 +396,7 @@
 				DADD78F92478609600791F61 /* SceneDelegate.swift */,
 				DADD78FE2478609600791F61 /* ContentView.swift */,
 				DADD79002478609700791F61 /* Assets.xcassets */,
+				DAEF517124B640A3006CD447 /* Colors.xcassets */,
 				DADD79052478609700791F61 /* LaunchScreen.storyboard */,
 				DADD79082478609700791F61 /* Info.plist */,
 				DADD78FB2478609600791F61 /* bibs.xcdatamodeld */,
@@ -413,16 +435,20 @@
 		DADD792A247864AD00791F61 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				DADBE69324B1C36900B1E3B1 /* Child+CoreDataClass.swift */,
-				DADBE69424B1C36900B1E3B1 /* Child+CoreDataProperties.swift */,
+				DA7AA5E724B7A95800036352 /* ExpressedBottle+CoreDataClass.swift */,
+				DA7AA5E824B7A95800036352 /* ExpressedBottle+CoreDataProperties.swift */,
+				DAA923F624B3B897001935B4 /* Child+CoreDataClass.swift */,
+				DAA923F724B3B897001935B4 /* Child+CoreDataProperties.swift */,
+				DAA923F824B3B897001935B4 /* BottleFeed+CoreDataClass.swift */,
+				DAA923F924B3B897001935B4 /* BottleFeed+CoreDataProperties.swift */,
 				DA8307A924A7417500454F14 /* Feed+CoreDataClass.swift */,
 				DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */,
 				DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */,
 				DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */,
 				DA8307AA24A7417500454F14 /* NappyChange+CoreDataClass.swift */,
 				DA8307AB24A7417500454F14 /* NappyChange+CoreDataProperties.swift */,
-				DAAA33EF24AFCA150015E03F /* ParentProfile+CoreDataClass.swift */,
-				DAAA33F024AFCA150015E03F /* ParentProfile+CoreDataProperties.swift */,
+				DA7AA5E524B7A95800036352 /* ParentProfile+CoreDataClass.swift */,
+				DA7AA5E624B7A95800036352 /* ParentProfile+CoreDataProperties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -565,6 +591,7 @@
 			files = (
 				DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */,
 				DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */,
+				DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */,
 				DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */,
 				DADD79042478609700791F61 /* Preview Assets.xcassets in Resources */,
 				DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */,
@@ -599,18 +626,16 @@
 			files = (
 				DA8307BA24A7418800454F14 /* DashboardView.swift in Sources */,
 				DAB1739C247D458600D94537 /* FeedSession.swift in Sources */,
+				DAA923FD24B3B897001935B4 /* BottleFeed+CoreDataProperties.swift in Sources */,
 				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
-				DAAA33F224AFCA150015E03F /* ParentProfile+CoreDataProperties.swift in Sources */,
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
 				DA10C51E24AFF1AF00EE9E2A /* ToolsData.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
-				DAAA33F124AFCA150015E03F /* ParentProfile+CoreDataClass.swift in Sources */,
 				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */,
-				DADBE69524B1C36900B1E3B1 /* Child+CoreDataClass.swift in Sources */,
+				DAA923FC24B3B897001935B4 /* BottleFeed+CoreDataClass.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
-				DA6DBFC024A8ED430061A9A0 /* FeedSessionModalView.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DAAD54D224B36D3A00F284B1 /* NappyChangeActionsView.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
@@ -618,23 +643,31 @@
 				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
 				DAAD54D024B36D2A00F284B1 /* BottleFeedActionsView.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
+				DAA923FA24B3B897001935B4 /* Child+CoreDataClass.swift in Sources */,
 				DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */,
+				DA7AA5EA24B7A95800036352 /* ParentProfile+CoreDataProperties.swift in Sources */,
+				DAA0490424B53449007D290D /* ActiveFeedsPreview.swift in Sources */,
+				DA7AA5EC24B7A95800036352 /* ExpressedBottle+CoreDataProperties.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
 				DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
-				DA635B1F24840A2C009BA4FF /* FeedSessionView.swift in Sources */,
+				DAA923FF24B3B9A0001935B4 /* DataToolsView.swift in Sources */,
+				DAA923FB24B3B897001935B4 /* Child+CoreDataProperties.swift in Sources */,
+				DA635B1F24840A2C009BA4FF /* FeedSessionTimerView.swift in Sources */,
 				DA8307B424A7417500454F14 /* NappyChange+CoreDataClass.swift in Sources */,
 				DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */,
 				DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */,
-				DA6A40EF24995E580076FB65 /* ChildListSheetView.swift in Sources */,
 				DADD78FF2478609600791F61 /* ContentView.swift in Sources */,
 				DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */,
 				DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */,
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
 				DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */,
+				DA7AA5E924B7A95800036352 /* ParentProfile+CoreDataClass.swift in Sources */,
+				DA8EC69424B684640014BB97 /* FeedSessionTimerActions.swift in Sources */,
 				DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */,
+				DA7AA5EB24B7A95800036352 /* ExpressedBottle+CoreDataClass.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
 				DAAD54CE24B36A6500F284B1 /* FeedSessionActionsView.swift in Sources */,
@@ -647,7 +680,6 @@
 				DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,
 				DA82C18D248991760009772F /* ChildView.swift in Sources */,
-				DADBE69624B1C36900B1E3B1 /* Child+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

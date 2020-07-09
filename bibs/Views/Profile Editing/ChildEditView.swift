@@ -47,15 +47,18 @@ struct ChildEditView: View {
                         }else {
                             VStack {
                                 Circle()
-                                    .foregroundColor(Color.white)
+                                    .opacity(0.2)
+                                    .foregroundColor(Child.ColorSchemes[self.colorScheme])
                                     .frame(width: 100, height: 100)
                                     .overlay(VStack {
                                         ZStack {
-                                            Circle().stroke(Color.gray, lineWidth: 2)
+                                            Circle()
+                                                .stroke(Child.ColorSchemes[self.colorScheme], lineWidth: 6)
+                                                .foregroundColor(.black)
                                             Image(systemName: "camera")
                                                 .font(.system(size: 40))
                                         }
-                                    })
+                                    }).animation(.linear)
                                     .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
                                         ImagePicker(image: self.$inputImage)
                                     }

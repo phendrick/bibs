@@ -17,9 +17,9 @@ struct CardModel: Hashable {
 
 let cardData:[CardModel] = [
     CardModel(image: "page1", title: "Feed Timers", subtitle: "Monitor your baby's feeds"),
-    CardModel(image: "page2", title: "Nappy Change", subtitle: "Log a wet or dirty nappy"),
-    CardModel(image: "page3", title: "Expressed Feed", subtitle: "Given some expressed milk?"),
-    CardModel(image: "page4", title: "Data & Progress", subtitle: "Charts & Historical data")
+    CardModel(image: "page2", title: "Bottle Feed", subtitle: "Mixed feeding? Add a bottle feed"),
+    CardModel(image: "page3", title: "Nappy Change", subtitle: "Log a wet or dirty nappy"),
+    CardModel(image: "page5", title: "Data & Progress", subtitle: "Charts & Historical data")
 ]
 
 class ToolsData: ObservableObject {

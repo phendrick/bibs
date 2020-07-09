@@ -1,5 +1,5 @@
 //
-//  Child+CoreDataClass.swift
+//  BottleFeed+CoreDataClass.swift
 //  bibs
 //
 //  Created by Paul Hendrick on 06/07/2020.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Child)
-public class Child: NSManagedObject {
+@objc(BottleFeed)
+public class BottleFeed: NSManagedObject {
 
 }

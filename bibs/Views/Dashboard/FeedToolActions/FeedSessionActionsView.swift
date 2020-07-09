@@ -11,6 +11,12 @@ import SwiftUI
 struct FeedSessionActionsView: View {
     @EnvironmentObject var profile: ProfileObserver
     
+    @FetchRequest(
+        entity: FeedSession.entity(),
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "state == %d", Int16(FeedSession.FeedSessionStatus.complete.rawValue)),
+        animation: .spring()) var completedFeedSessions: FetchedResults<FeedSession>
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -33,7 +39,7 @@ struct FeedSessionActionsView: View {
                     Spacer()
                 }.padding()
             }
-        }.background(Color.red)
+        }.background(Color.orange)
     }
 }
 
