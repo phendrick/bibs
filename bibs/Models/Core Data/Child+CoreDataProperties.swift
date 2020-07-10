@@ -2,7 +2,7 @@
 //  Child+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 06/07/2020.
+//  Created by Paul Hendrick on 09/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -26,10 +26,27 @@ extension Child {
     @NSManaged public var isBorn: Bool
     @NSManaged public var name: String?
     @NSManaged public var state: Int16
+    @NSManaged public var bottleFeeds: NSSet?
     @NSManaged public var feedSessions: NSSet?
     @NSManaged public var nappyChanges: NSSet?
     @NSManaged public var parent: ParentProfile?
-    @NSManaged public var bottleFeeds: BottleFeed?
+
+}
+
+// MARK: Generated accessors for bottleFeeds
+extension Child {
+
+    @objc(addBottleFeedsObject:)
+    @NSManaged public func addToBottleFeeds(_ value: BottleFeed)
+
+    @objc(removeBottleFeedsObject:)
+    @NSManaged public func removeFromBottleFeeds(_ value: BottleFeed)
+
+    @objc(addBottleFeeds:)
+    @NSManaged public func addToBottleFeeds(_ values: NSSet)
+
+    @objc(removeBottleFeeds:)
+    @NSManaged public func removeFromBottleFeeds(_ values: NSSet)
 
 }
 

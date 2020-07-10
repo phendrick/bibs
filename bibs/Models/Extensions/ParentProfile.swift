@@ -40,8 +40,17 @@ extension ParentProfile {
         }
     }
     
+    public var expressedMilkAvailable: Int {
+        10
+    }
+    
     public var childrenArray: [Child] {
         let set = children as? Set<Child> ?? []
+        return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
+    }
+    
+    public var expressedBottlesArray: [ExpressedBottle] {
+        let set = expressedBottles as? Set<ExpressedBottle> ?? []
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
     

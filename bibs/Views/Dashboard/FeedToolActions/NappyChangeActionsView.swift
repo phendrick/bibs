@@ -9,31 +9,36 @@
 import SwiftUI
 
 struct NappyChangeActionsView: View {
+    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
+    
+    @FetchRequest(
+        entity: NappyChange.entity(),
+        sortDescriptors: []) var nappyChanges: FetchedResults<NappyChange>
+        
     @State var nappyChangeFormVisible: Bool = false
     @State var nappyType: Int = 0
     
     var body: some View {
-        HStack {
-            Button(action: {
-                self.nappyChangeFormVisible.toggle()
-            }) {
-                HStack {
-                    Text("Nappy Change")
-                    Spacer()
-                }.padding()
+        VStack {
+            HStack {
+                Button(action: {
+                    self.nappyChangeFormVisible.toggle()
+                }) {
+                    HStack {
+                        Text("Nappy Change")
+                        Spacer()
+                    }.padding()
+                }
             }
+            .background(Color.yellow)
             
-            Button(action: {
-                self.profile.parent.activeChild?.clear()
-            }) {
-                HStack {
-                    Text("Clear out")
-                    Spacer()
-                }.padding()
+            Divider()
+            
+            ForEach(self.profile.parent.activeChild?.nappyChangesArray ?? [], id: \.self) {nappy in
+                Text("Nappy \(nappy.state)")
             }
         }
-        .background(Color.yellow)
         .sheet(isPresented: self.$nappyChangeFormVisible) {
             VStack {
                 HStack {
@@ -68,9 +73,19 @@ struct NappyChangeActionsView: View {
                 
                 VStack {
                     Button(action: {
+                        let nappyChange = NappyChange(context: self.moc)
+                        nappyChange.state = Int16(self.nappyType)
+                        nappyChange.createdAt = Date()
+                        self.profile.parent.activeChild?.addToNappyChanges(nappyChange)
+                        
+                        do {
+                            try self.moc.save()
+                        }catch {
+                        }
+                        
                         self.nappyChangeFormVisible = false
                     }) {
-                        Text("OK")
+                        Text("Done")
                     }
                 }
                 .frame(maxWidth: .infinity)

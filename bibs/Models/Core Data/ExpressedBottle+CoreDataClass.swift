@@ -1,5 +1,5 @@
 //
-//  ParentProfile+CoreDataClass.swift
+//  ExpressedBottle+CoreDataClass.swift
 //  bibs
 //
 //  Created by Paul Hendrick on 09/07/2020.
@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 
-public class ParentProfile: NSManagedObject {
-    var activeChild: Child? 
+public class ExpressedBottle: NSManagedObject {
+
 }

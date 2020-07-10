@@ -19,10 +19,11 @@ extension ParentProfile {
 
     @NSManaged public var colorScheme: Int16
     @NSManaged public var createdAt: Date?
+    @NSManaged public var expressedMilkAmount: Int16
     @NSManaged public var image: Data?
     @NSManaged public var name: String?
     @NSManaged public var children: NSSet?
-    @NSManaged public var expressedBottles: Child?
+    @NSManaged public var expressedBottles: NSSet?
 
 }
 
@@ -40,5 +41,22 @@ extension ParentProfile {
 
     @objc(removeChildren:)
     @NSManaged public func removeFromChildren(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for expressedBottles
+extension ParentProfile {
+
+    @objc(addExpressedBottlesObject:)
+    @NSManaged public func addToExpressedBottles(_ value: ExpressedBottle)
+
+    @objc(removeExpressedBottlesObject:)
+    @NSManaged public func removeFromExpressedBottles(_ value: ExpressedBottle)
+
+    @objc(addExpressedBottles:)
+    @NSManaged public func addToExpressedBottles(_ values: NSSet)
+
+    @objc(removeExpressedBottles:)
+    @NSManaged public func removeFromExpressedBottles(_ values: NSSet)
 
 }

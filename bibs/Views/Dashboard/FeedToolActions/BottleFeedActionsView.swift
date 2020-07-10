@@ -13,28 +13,43 @@ struct BottleFeedActionsView: View {
     @EnvironmentObject var profile: ProfileObserver
 
     @FetchRequest(
-        entity: FeedSession.entity(),
-        sortDescriptors: [],
-        animation: .spring()) var bottleFeeds: FetchedResults<BottleFeed>
+        entity: BottleFeed.entity(),
+        sortDescriptors: []) var bottleFeeds: FetchedResults<BottleFeed>
+    
+    @FetchRequest(
+        entity: ExpressedBottle.entity(),
+        sortDescriptors: []) var expressedBottles: FetchedResults<ExpressedBottle>
     
     @State var bottleFeedFormVisible: Bool = false
     
-    @State var picker: Int = 0
+    @State var pickerFeedType: Int = 0
+    @State var pickerFeedSource: Int = 0
+    
     @State var feedAmount: Int = 5
     @State var expressedAmount: Int = 0
     
     var body: some View {
-        HStack {
-            Button(action: {
-                self.bottleFeedFormVisible = true
-            }) {
-                HStack {
-                    Text("Bottle Feed")
-                    Spacer()
-                }.padding()
+        VStack {
+            HStack {
+                Button(action: {
+                    self.bottleFeedFormVisible = true
+                }) {
+                    HStack {
+                        Text("Bottle Feed")
+                        Spacer()
+                    }.padding()
+                }
+            }
+            .background(Color.green)
+            
+            Divider()
+            
+            VStack {
+                ForEach(bottleFeeds, id: \.self) {feed in
+                    Text("Feed: \(feed.amount)")
+                }
             }
         }
-        .background(Color.green)
         .sheet(isPresented: self.$bottleFeedFormVisible) {
             VStack {
                 HStack {
@@ -56,18 +71,33 @@ struct BottleFeedActionsView: View {
                     .font(.system(size: 30))
                     .padding(.top, 20)
                     
-                Picker(selection: self.$picker, label: Text("")) {
+                Picker(selection: self.$pickerFeedType, label: Text("")) {
                     Text("I've given a bottle feed").tag(0)
                     Text("I've expressed some milk").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
-                if self.picker == 0 {
+                if self.pickerFeedType == 0 {
                     VStack {
                         Stepper("Milo had \(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                             .padding()
                             .font(.custom("RobotoMono-Regular", size: 20))
+                        Text("of")
+                        Picker(selection: self.$pickerFeedSource, label: Text("")) {
+                            ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {feedType in
+                                Text("\(feedType.description)").tag(feedType.rawValue)
+                            }
+                        }.pickerStyle(SegmentedPickerStyle())
+                        .animation(nil)
+                        
+                        if self.pickerFeedSource == 0 {
+                            List {
+                                ForEach(0..<5, id: \.self) {id in
+                                    Text("Bottle \(id)")
+                                }
+                            }
+                        }
                     }
                     .background(Color(UIColor.systemBackground))
                 }else {
@@ -83,10 +113,22 @@ struct BottleFeedActionsView: View {
                 
                 VStack {
                     Button(action: {
-                        if self.picker == 0 {
-                            print(self.feedAmount)
+                        if self.pickerFeedType == 0 {
+                            let bottleFeed = BottleFeed(context: self.moc)
+                            bottleFeed.amount = Int16(self.feedAmount)
+                            bottleFeed.createdAt = Date()
+                            self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
                         }else {
-                            print(self.expressedAmount)
+                            let expressedBottle = ExpressedBottle(context: self.moc)
+                            expressedBottle.status = .fresh
+                            expressedBottle.amount = Int16(self.expressedAmount)
+                            expressedBottle.createdAt = Date()
+                            self.profile.parent.addToExpressedBottles(expressedBottle)
+                        }
+                        
+                        do {
+                            try self.moc.save()
+                        }catch {
                         }
                     }) {
                         Text("OK")

@@ -1,5 +1,5 @@
 //
-//  ExpressedBottle+CoreDataClass.swift
+//  BottleFeed+CoreDataClass.swift
 //  bibs
 //
 //  Created by Paul Hendrick on 09/07/2020.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(ExpressedBottle)
-public class ExpressedBottle: NSManagedObject {
+
+public class BottleFeed: NSManagedObject {
 
 }

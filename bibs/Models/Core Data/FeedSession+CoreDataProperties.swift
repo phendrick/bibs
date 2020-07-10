@@ -2,7 +2,7 @@
 //  FeedSession+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 26/06/2020.
+//  Created by Paul Hendrick on 09/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -18,8 +18,8 @@ extension FeedSession {
     }
 
     @NSManaged public var createdAt: Date?
-    @NSManaged public var suspendedAt: Date?
     @NSManaged public var state: Int16
+    @NSManaged public var suspendedAt: Date?
     @NSManaged public var child: Child?
     @NSManaged public var feeds: NSSet?
 
