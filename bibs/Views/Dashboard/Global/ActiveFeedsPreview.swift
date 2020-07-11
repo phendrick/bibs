@@ -11,13 +11,25 @@ import SwiftUI
 struct ActiveFeedsPreview: View {
     var profile: ProfileObserver
     
+//    @FetchRequest(
+//        entity: FeedSession.entity(),
+//        sortDescriptors: [],
+//        predicate: NSPredicate(format: "state == %@", FeedSession.FeedSessionStatus.running.rawValue)
+//    ) var activeFeedSessions: FetchedResults<FeedSession>
+    
     var body: some View {
         VStack {
+            Text("Showing  active feeds \(profile.parent.activeFeedSessions.count)")
+                .padding(.top, 200)
+                .onTapGesture {
+                    print("\(self.profile.parent.activeFeedSessions.count)")
+            }
+            
             ForEach(profile.parent.activeFeedSessions.indices) { sessionIndex in
                 HStack {
                     Spacer()
                     
-                    Text("\(self.profile.parent.activeFeedSessions[sessionIndex].child?.wrappedName ?? "")")
+                    Text("Timer for \(self.profile.parent.activeFeedSessions[sessionIndex].child?.wrappedName ?? "")")
                     
                     FeedSessionTimerView(
                         feedSession: self.profile.parent.activeFeedSessions[sessionIndex]
@@ -28,12 +40,12 @@ struct ActiveFeedsPreview: View {
                     FeedSessionTimerActions(feedSession: self.profile.parent.activeFeedSessions[sessionIndex])
                 }
                 .font(.custom("RobotoMono-Regular", size: 20))
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .foregroundColor(self.profile.parent.activeFeedSessions[sessionIndex].child?.themeColor ?? .clear)
-                        .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 0, y: 6)
-                ).foregroundColor(.white)
+//                .padding()
+//                .background(
+//                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+//                        .foregroundColor(self.profile.parent.activeFeedSessions[sessionIndex].child?.themeColor ?? .clear)
+//                        .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 0, y: 6)
+//                ).foregroundColor(.white)
             }
             .padding(.top, 10)
         }

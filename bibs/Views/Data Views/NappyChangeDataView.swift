@@ -20,10 +20,14 @@ struct NappyChangeDataView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
-            DynamicListView(filterKey: "state", filterValue: Int16(self.nappyChangeType.rawValue)) { (result: NappyChange) in
+            DashboardDataView(
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.nappyChangeType.rawValue])
+            ) {(result: NappyChange, count: Int) in
                 HStack {
-                    Text("\(result.status.description) ")
-                    Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                    HStack {
+                        Text("\(result.status.description) ")
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                    }
                 }
             }
             

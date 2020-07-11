@@ -42,7 +42,8 @@ struct AddChildView: View {
                                     Circle().stroke(
                                         Child.ColorSchemes[self.colorScheme], lineWidth: 6
                                     )
-                                ).animation(.linear)
+                                )
+//                                .animation(.linear)
                         }else {
                             VStack {
                                 Circle()

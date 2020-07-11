@@ -12,7 +12,7 @@ struct DashboardDataRowView<Content: View>: View {
     let index: Int
     let content: Content
     
-    @State var offset:CGFloat = 50
+//    @State var offset:CGFloat = 50
 
     init(index: Int, @ViewBuilder content: () -> Content) {
         self.index = index
@@ -21,7 +21,7 @@ struct DashboardDataRowView<Content: View>: View {
     
     var body: some View {
         self.content
-        .offset(x: 0, y: self.offset)
+//        .offset(x: 0, y: self.offset)
 //        .opacity(offset == 0 ? 1 : 0)
 //        .onAppear {
 //            withAnimation(Animation.spring(response: 0.5, dampingFraction: 0.85, blendDuration: 0.91).delay(0.05 * Double(self.index))) {

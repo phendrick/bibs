@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BottleFeedsDataView: View {
-    @State var bottleFeedType: BottleFeed.BottleFeedType = .donorMilk
+    @State var bottleFeedType: BottleFeed.BottleFeedType = .expressedMilk
     
     var body: some View {
         VStack {
@@ -20,7 +20,9 @@ struct BottleFeedsDataView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
-            DynamicListView(filterKey: "state", filterValue: Int16(self.bottleFeedType.rawValue)) { (result: BottleFeed) in
+            DashboardDataView(
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.bottleFeedType.rawValue])
+            ) {(result: BottleFeed, count: Int) in
                 HStack {
                     Text("\(result.wrappedCreatedAt.getFormattedDate())")
                 }

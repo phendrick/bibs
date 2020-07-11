@@ -18,9 +18,11 @@ struct ExpressedMilkDataView: View {
                     Text("\(storage.description)").tag(storage.rawValue)
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
+            .pickerStyle(WheelPickerStyle())
             
-            DynamicListView(filterKey: "state", filterValue: self.expressedBottleStorageType.rawValue) { (result: ExpressedBottle) in
+            DashboardDataView(
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue])
+            ) {(result: ExpressedBottle, count: Int) in
                 HStack {
                     Text("\(result.convertedAmount) ")
                     Text("\(result.wrappedCreatedAt.getFormattedDate())")

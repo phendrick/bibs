@@ -14,22 +14,19 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     
     var title: String?
     var allowDelete: Bool = true
-    
     var fetchRequest: FetchRequest<T>
     var results: FetchedResults<T> { fetchRequest.wrappedValue }
     
     var content: (T, Int) -> Content
     
     init(
-        title: String = "",
         predicate: NSPredicate? = nil,
         sortDescriptors: [NSSortDescriptor] = [],
         allowDelete: Bool = true,
         @ViewBuilder content: @escaping(T, Int) -> Content
     ) {
-        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
+        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .linear)
         self.content = content
-        self.title = title
         self.allowDelete = allowDelete
     }
     
@@ -44,9 +41,6 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title ?? "")
-                .font(.custom("Merriweather-Regular", size: 26))
-            
             List {
                 ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
                     DashboardDataRowView(index: index) {
@@ -56,8 +50,6 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
                 .onDelete(perform: removeRows)
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding()
     }
 }
 
@@ -71,3 +63,4 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
 //        .environment(\.managedObjectContext, context)
 //    }
 //}
+

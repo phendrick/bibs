@@ -19,9 +19,13 @@ struct FeedTimersDataView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
-            DynamicListView(filterKey: "state", filterValue: self.feedSessionType.rawValue) { (result: FeedSession) in
-                HStack {
-                    Text("\(result.wrappedCreatedAt.getFormattedDate())")
+            DashboardDataView(
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.feedSessionType.rawValue])
+            ) {(result: FeedSession, count: Int) in
+                NavigationLink(destination: EditFeedTimeView(feedSession: result)) {
+                    HStack {
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                    }
                 }
             }
             

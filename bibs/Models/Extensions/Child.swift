@@ -136,6 +136,7 @@ extension Child: Identifiable {
         
         /// mark any old feed sessions as complete
         for activeSession in feedSessionsArray where activeSession.status != .complete {
+            print("Finishing session.")
             try? activeSession.finish()
         }
         
@@ -153,8 +154,7 @@ extension Child: Identifiable {
         do {
            try context.save()
             
-            session.objectWillChange.send()
-            
+            // if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
                 session.resume()
             }

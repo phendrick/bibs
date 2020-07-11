@@ -22,6 +22,13 @@ extension Feed: Identifiable, Timeable {
     enum BreastSide: Int16 {
         case left
         case right
+        
+        var description: String {
+            switch(self) {
+                case .left: return "Left"
+                case .right: return "Right"
+            }
+        }
     }
     
     public var wrappedCreatedAt: Date {

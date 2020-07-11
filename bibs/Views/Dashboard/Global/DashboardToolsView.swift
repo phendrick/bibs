@@ -29,12 +29,10 @@ struct DashboardToolsView: View {
             .expandPageToEdges()
             .rotation3D()
             .onPageChanged({ (page) in
-                withAnimation {
-                    self.page = page
-                    
-                    if let tool = FeedTool.init(rawValue: page) {
-                        self.activeFeedTool = tool
-                    }
+                self.page = page
+
+                if let tool = FeedTool.init(rawValue: page) {
+                    self.activeFeedTool = tool
                 }
             })
             .frame(
@@ -49,16 +47,15 @@ struct DashboardToolsView: View {
                         .cornerRadius(.infinity)
                         .foregroundColor(Color.gray.opacity(self.page == index ? 0.8 : 0.2))
                         .onTapGesture {
-                            withAnimation {
-                                self.page = index
-                            }
+                            self.page = index
                         }
-                }.animation(
-                    Animation.interactiveSpring(
-                        response: 0.2,
-                        dampingFraction: 0.75,
-                        blendDuration: 0.5).delay(0.2)
-                )
+                }
+//                .animation(
+//                    Animation.interactiveSpring(
+//                        response: 0.2,
+//                        dampingFraction: 0.75,
+//                        blendDuration: 0.5).delay(0.2)
+//                )
             }
             .frame(width: CGFloat(20 * cardData.count), height: 10)
         }
