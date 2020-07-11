@@ -30,7 +30,6 @@
 		DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */; };
 		DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */; };
 		DA8307BA24A7418800454F14 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB17398247C191500D94537 /* DashboardView.swift */; };
-		DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307BC24A742DC00454F14 /* DataviewView.swift */; };
 		DA86DEA024AA476900107ED3 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = DA86DE9F24AA476900107ED3 /* SwiftUIPager */; };
 		DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */; };
 		DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */; };
@@ -63,6 +62,11 @@
 		DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADD79052478609700791F61 /* LaunchScreen.storyboard */; };
 		DADD79122478609700791F61 /* bibsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD79112478609700791F61 /* bibsTests.swift */; };
 		DADD791D2478609700791F61 /* bibsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD791C2478609700791F61 /* bibsUITests.swift */; };
+		DAE1A7CA24B91FCB00FFA96E /* DynamicListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1A7C924B91FCB00FFA96E /* DynamicListView.swift */; };
+		DAE1A7CC24B9200C00FFA96E /* ExpressedMilkDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */; };
+		DAE1A7CE24B92E5800FFA96E /* NappyChangeDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1A7CD24B92E5800FFA96E /* NappyChangeDataView.swift */; };
+		DAE1A7D024B92E7B00FFA96E /* FeedTimersDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1A7CF24B92E7B00FFA96E /* FeedTimersDataView.swift */; };
+		DAE1A7D224B92FFB00FFA96E /* BottleFeedsDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1A7D124B92FFB00FFA96E /* BottleFeedsDataView.swift */; };
 		DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE245B424A5DE3D00018C3F /* AboutYouView.swift */; };
 		DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAEF517124B640A3006CD447 /* Colors.xcassets */; };
 		DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1FA2724A40DE10051CA6B /* NappyChange.swift */; };
@@ -122,7 +126,6 @@
 		DA8307AB24A7417500454F14 /* NappyChange+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NappyChange+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA8307BC24A742DC00454F14 /* DataviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataviewView.swift; sourceTree = "<group>"; };
 		DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
@@ -161,6 +164,11 @@
 		DADD79182478609700791F61 /* bibsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bibsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD791C2478609700791F61 /* bibsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bibsUITests.swift; sourceTree = "<group>"; };
 		DADD791E2478609700791F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAE1A7C924B91FCB00FFA96E /* DynamicListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicListView.swift; sourceTree = "<group>"; };
+		DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressedMilkDataView.swift; sourceTree = "<group>"; };
+		DAE1A7CD24B92E5800FFA96E /* NappyChangeDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeDataView.swift; sourceTree = "<group>"; };
+		DAE1A7CF24B92E7B00FFA96E /* FeedTimersDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTimersDataView.swift; sourceTree = "<group>"; };
+		DAE1A7D124B92FFB00FFA96E /* BottleFeedsDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedsDataView.swift; sourceTree = "<group>"; };
 		DAE245B424A5DE3D00018C3F /* AboutYouView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutYouView.swift; sourceTree = "<group>"; };
 		DAEF517124B640A3006CD447 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		DAF1FA2724A40DE10051CA6B /* NappyChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChange.swift; sourceTree = "<group>"; };
@@ -252,7 +260,11 @@
 		DA8307BB24A7426400454F14 /* Data Views */ = {
 			isa = PBXGroup;
 			children = (
-				DA8307BC24A742DC00454F14 /* DataviewView.swift */,
+				DAE1A7C924B91FCB00FFA96E /* DynamicListView.swift */,
+				DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */,
+				DAE1A7D124B92FFB00FFA96E /* BottleFeedsDataView.swift */,
+				DAE1A7CD24B92E5800FFA96E /* NappyChangeDataView.swift */,
+				DAE1A7CF24B92E7B00FFA96E /* FeedTimersDataView.swift */,
 			);
 			path = "Data Views";
 			sourceTree = "<group>";
@@ -644,13 +656,16 @@
 				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DAAD54D224B36D3A00F284B1 /* NappyChangeActionsView.swift in Sources */,
+				DAE1A7CA24B91FCB00FFA96E /* DynamicListView.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */,
 				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
 				DAAD54D024B36D2A00F284B1 /* BottleFeedActionsView.swift in Sources */,
+				DAE1A7CC24B9200C00FFA96E /* ExpressedMilkDataView.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
 				DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */,
 				DAA0490424B53449007D290D /* ActiveFeedsPreview.swift in Sources */,
+				DAE1A7D024B92E7B00FFA96E /* FeedTimersDataView.swift in Sources */,
 				DAF7518024B7D2AA00C83F33 /* BottleFeed+CoreDataClass.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
 				DAF7518224B7D2AA00C83F33 /* Child+CoreDataClass.swift in Sources */,
@@ -671,8 +686,8 @@
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
 				DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */,
 				DAF7517724B7C92C00C83F33 /* ParentProfile+CoreDataProperties.swift in Sources */,
+				DAE1A7D224B92FFB00FFA96E /* BottleFeedsDataView.swift in Sources */,
 				DA8EC69424B684640014BB97 /* FeedSessionTimerActions.swift in Sources */,
-				DA8307BD24A742DC00454F14 /* DataviewView.swift in Sources */,
 				DAF7517E24B7D2AA00C83F33 /* ExpressedBottle+CoreDataClass.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
@@ -688,6 +703,7 @@
 				DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,
 				DA82C18D248991760009772F /* ChildView.swift in Sources */,
+				DAE1A7CE24B92E5800FFA96E /* NappyChangeDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

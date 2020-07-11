@@ -30,6 +30,10 @@ struct NappyChangeActionsView: View {
                         Spacer()
                     }.padding()
                 }
+                
+                NavigationLink(destination: NappyChangeDataView().environment(\.managedObjectContext, self.moc)) {
+                    Text("Manage Nappy Changes")
+                }
             }
             .background(Color.yellow)
             

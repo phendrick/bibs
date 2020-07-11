@@ -18,15 +18,20 @@ struct BottleFeedActionsView: View {
     
     @FetchRequest(
         entity: ExpressedBottle.entity(),
-        sortDescriptors: []) var expressedBottles: FetchedResults<ExpressedBottle>
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "state IN %@ AND amount > 0", ExpressedBottle.permittedUsableStates.map{$0.rawValue}),
+        animation: Animation.linear.delay(0.5)
+    ) var expressedBottles: FetchedResults<ExpressedBottle>
     
     @State var bottleFeedFormVisible: Bool = false
     
     @State var pickerFeedType: Int = 0
-    @State var pickerFeedSource: Int = 0
+    @State var pickerFeedSource: BottleFeed.BottleFeedType = .expressedMilk
     
     @State var feedAmount: Int = 5
     @State var expressedAmount: Int = 0
+    @State var selectedExpressedBottles: [ExpressedBottle] = []
+    @State var expressedMilkStorage: ExpressedBottle.ExpressedBottleStorageStatus = .refridgerated
     
     var body: some View {
         VStack {
@@ -39,16 +44,18 @@ struct BottleFeedActionsView: View {
                         Spacer()
                     }.padding()
                 }
-            }
-            .background(Color.green)
-            
-            Divider()
-            
-            VStack {
-                ForEach(bottleFeeds, id: \.self) {feed in
-                    Text("Feed: \(feed.amount)")
+                
+                Spacer()
+                
+                NavigationLink(destination: BottleFeedsDataView().environment(\.managedObjectContext, self.moc)) {
+                    Text("Manage Bottle Feeds")
+                }
+                
+                NavigationLink(destination: ExpressedMilkDataView().environment(\.managedObjectContext, self.moc)) {
+                    Text("Manage Expressed Milk")
                 }
             }
+            .background(Color.green)
         }
         .sheet(isPresented: self.$bottleFeedFormVisible) {
             VStack {
@@ -64,8 +71,8 @@ struct BottleFeedActionsView: View {
                 Image(systemName: "ear")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 180)
-                    .padding(.top, 80)
+                    .frame(maxHeight: 100)
+                    .padding(.top, 20)
                     
                 Text("Bottle feeds")
                     .font(.system(size: 30))
@@ -83,7 +90,9 @@ struct BottleFeedActionsView: View {
                         Stepper("Milo had \(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                             .padding()
                             .font(.custom("RobotoMono-Regular", size: 20))
+                        
                         Text("of")
+                        
                         Picker(selection: self.$pickerFeedSource, label: Text("")) {
                             ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {feedType in
                                 Text("\(feedType.description)").tag(feedType.rawValue)
@@ -91,10 +100,27 @@ struct BottleFeedActionsView: View {
                         }.pickerStyle(SegmentedPickerStyle())
                         .animation(nil)
                         
-                        if self.pickerFeedSource == 0 {
+                        if self.pickerFeedSource == .expressedMilk {
                             List {
-                                ForEach(0..<5, id: \.self) {id in
-                                    Text("Bottle \(id)")
+                                ForEach(self.expressedBottles, id: \.self) {bottle in
+                                    HStack {
+                                        Text("\(bottle.convertedAmount) ")
+                                        Text("\(bottle.wrappedCreatedAt.getFormattedDate())")
+                                        
+                                        if self.selectedExpressedBottles.contains(bottle) {
+                                            Spacer()
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .foregroundColor(Color( UIColor.tertiaryLabel) )
+                                        }
+                                    }.onTapGesture {
+                                        if self.selectedExpressedBottles.contains(bottle) {
+                                            self.selectedExpressedBottles.removeAll { (currentBottle) -> Bool in
+                                                currentBottle == bottle
+                                            }
+                                        }else {
+                                            self.selectedExpressedBottles.append(bottle)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -105,8 +131,22 @@ struct BottleFeedActionsView: View {
                         Stepper("I've expressed \(self.expressedAmount)ml", value: self.$expressedAmount, in: 0...2000)
                             .padding()
                             .font(.custom("RobotoMono-Regular", size: 20))
+                        
+                        Text("Which I'll")
+                        
+                        Picker(selection: self.$expressedMilkStorage, label: Text("")) {
+                            Text("Refridgerate").tag(ExpressedBottle.ExpressedBottleStorageStatus.refridgerated)
+                            Text("Freeze").tag(ExpressedBottle.ExpressedBottleStorageStatus.frozen)
+                            Text("Use soon").tag(ExpressedBottle.ExpressedBottleStorageStatus.fresh)
+                        }.pickerStyle(SegmentedPickerStyle())
+                        
+                        Picker(selection: self.$expressedMilkStorage, label: Text("")) {
+                            Text("Donate").tag(ExpressedBottle.ExpressedBottleStorageStatus.donated)
+                            Text("Discard").tag(ExpressedBottle.ExpressedBottleStorageStatus.disposed)
+                        }.pickerStyle(SegmentedPickerStyle())
                     }
                     .background(Color(UIColor.systemBackground))
+                    Spacer()
                 }
                 
                 Spacer()
@@ -117,7 +157,10 @@ struct BottleFeedActionsView: View {
                             let bottleFeed = BottleFeed(context: self.moc)
                             bottleFeed.amount = Int16(self.feedAmount)
                             bottleFeed.createdAt = Date()
+                            bottleFeed.status = self.pickerFeedSource
                             self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
+                            
+                            self.profile.parent.reduceExpressedBottles(self.selectedExpressedBottles, by: Int16(self.feedAmount))
                         }else {
                             let expressedBottle = ExpressedBottle(context: self.moc)
                             expressedBottle.status = .fresh
@@ -128,6 +171,9 @@ struct BottleFeedActionsView: View {
                         
                         do {
                             try self.moc.save()
+                            
+                            self.selectedExpressedBottles = []
+//                            self.bottleFeedFormVisible = false
                         }catch {
                         }
                     }) {

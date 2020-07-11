@@ -174,10 +174,6 @@ extension ParentProfile {
         }
     }
     
-    public func incrementFeedSessionTime() {
-        
-    }
-    
     private func pauseActiveFeedSessions() {
         guard let context = self.managedObjectContext else {
             fatalError()
@@ -217,5 +213,44 @@ extension ParentProfile {
     public var wrappedName: String {
         get {name ?? ""}
         set {name = newValue}
+    }
+    
+    public var expressedMilkAmount: Int {
+        self.expressedBottlesArray.reduce(into: 0) { (total, bottle) in
+            total += Int(bottle.amount)
+        }
+    }
+    
+    public var expressedMilkGiven: Int {
+        self.childrenArray.compactMap { child in
+            child.bottleFeedsArray.filter { (bottleFeed) -> Bool in
+                bottleFeed.status == .expressedMilk
+            }.reduce(into: 0) { (total, bottleFeed) in
+                total += Int(bottleFeed.amount)
+            }
+        }.reduce(into: 0) { (total, amount) in
+            total += amount
+        }
+    }
+    
+    public func reduceExpressedBottles(_ bottles: [ExpressedBottle], by reduceByAmount: Int16) {
+        let sortedBottles = bottles.sorted { (b1, b2) -> Bool in
+            b1.amount < b2.amount
+        }
+        
+        var reducedCounter: Int16 = 0
+        
+        for bottle in sortedBottles {
+            if reducedCounter + bottle.amount > reduceByAmount {
+                print("Reducing bottle amount from \(bottle.amount) by \(reduceByAmount - reducedCounter) ")
+                bottle.amount -= (reduceByAmount - reducedCounter)
+                
+                break
+            }
+            
+            print("Setting bottle amount to 0")
+            reducedCounter += bottle.amount
+            bottle.amount = 0
+        }
     }
 }

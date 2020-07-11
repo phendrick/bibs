@@ -16,7 +16,7 @@ extension Date {
         case lateNight
     }
     
-   func getFormattedDate(format: String) -> String {
+   func getFormattedDate(format: String = "EEEE, MMMM d, h:mm a") -> String {
         let dateformat = DateFormatter()
         dateformat.dateFormat = format
         

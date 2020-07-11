@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct FeedSessionActionsView: View {
+    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
     
     @FetchRequest(
@@ -38,6 +39,10 @@ struct FeedSessionActionsView: View {
                     Text("Clear out")
                     Spacer()
                 }.padding()
+            }
+            
+            NavigationLink(destination: FeedTimersDataView().environment(\.managedObjectContext, self.moc)) {
+                Text("Manage Feeds")
             }
         }.background(Color.orange)
     }

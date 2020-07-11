@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension FeedSession: Identifiable, Trackable {
-    enum FeedSessionStatus: Int16 {
+    enum FeedSessionStatus: Int16, CaseIterable {
         case paused    // manually paused by user
         case running   // incrementing feed duration value
         case complete  // is an old feed session

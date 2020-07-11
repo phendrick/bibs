@@ -113,6 +113,10 @@ struct DashboardView: View {
 //            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            print("Amount: ", self.profile.parent.expressedMilkAmount)
+            print("Amount: ", self.profile.parent.expressedMilkGiven)
+        }
     }
     
     func childListActionSheetButtons(exclude: Child?) -> [ActionSheet.Button] {

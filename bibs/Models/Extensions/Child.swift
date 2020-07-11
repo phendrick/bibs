@@ -163,6 +163,11 @@ extension Child: Identifiable {
         }
     }
     
+    public var bottleFeedsArray: [BottleFeed] {
+        let set = bottleFeeds as? Set<BottleFeed> ?? []
+        return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
+    }
+    
     func clear() {
         guard let context = self.managedObjectContext else {
             return
@@ -176,5 +181,4 @@ extension Child: Identifiable {
             print("Error saving context: ", error)
         }
     }
-    
 }

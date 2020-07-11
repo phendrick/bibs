@@ -13,8 +13,7 @@ extension ExpressedBottle: Identifiable {
         case fresh
         case refridgerated
         case frozen
-        case inUse
-        case partiallyUsed
+        case donated
         case disposed
         
         var description: String {
@@ -22,9 +21,8 @@ extension ExpressedBottle: Identifiable {
                 case .fresh: return "Fresh"
                 case .refridgerated: return "Refridgerated"
                 case .frozen: return "Frozen"
-                case .inUse: return "In use"
-                case .partiallyUsed: return "Partially used"
                 case .disposed: return "Disposed"
+                case .donated: return "Donated"
             }
         }
     }
@@ -39,8 +37,16 @@ extension ExpressedBottle: Identifiable {
         }
     }
     
+    static var permittedUsableStates: [ExpressedBottleStorageStatus] {
+        [.fresh, .refridgerated, .frozen]
+    }
+    
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
+    }
+    
+    public var convertedAmount: String {
+        return "\(amount)ml"
     }
     
     public func save() {
