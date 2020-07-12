@@ -15,6 +15,15 @@ enum FeedTool: Int, CaseIterable {
     case BottleFeed
     case NappyChange
     case DataOverview
+    
+    var navigationBarTitle: String {
+        switch(self) {
+        case .FeedTimer: return "Timers"
+        case .BottleFeed: return "Bottle Feeds"
+        case .NappyChange: return "Nappy Changes"
+        case .DataOverview: return "Data & Tracking"
+        }
+    }
 }
 
 struct DashboardView: View {
@@ -49,7 +58,7 @@ struct DashboardView: View {
                     ActiveFeedsPreview(profile: self.profile)
                         .frame(maxWidth: geometry.size.width * 0.8)
                         .offset(
-                            y: (self.activeFeedTool != .FeedTimer && self.profile.parent.activeFeedSessions.count > 0)
+                            y: (self.activeFeedTool != .FeedTimer && self.profile.parent.currentFeedSessions.count > 0)
                                 ? 0
                                 : -geometry.frame(in: .global).minY*2
                         )
@@ -91,7 +100,8 @@ struct DashboardView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)))
+            //.navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)))
+            .navigationBarTitle(self.activeFeedTool.navigationBarTitle)
             .navigationBarItems(
                 leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
                     Image(systemName: "person.crop.circle").foregroundColor(.red)

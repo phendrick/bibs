@@ -37,7 +37,7 @@ struct DashboardToolsView: View {
             })
             .frame(
                 width: min(self.outerGeometry.size.height, self.outerGeometry.size.width),
-                height: min(self.outerGeometry.size.height * 0.6, 400)
+                height: min(self.outerGeometry.size.height * 0.4, 300)
             )
             
             HStack(spacing: 15) {

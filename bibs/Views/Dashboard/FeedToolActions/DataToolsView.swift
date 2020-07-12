@@ -12,9 +12,23 @@ struct DataToolsView: View {
     @EnvironmentObject var profile: ProfileObserver
     
     var body: some View {
-        HStack {
-            Text("Data Tools View")
-        }.background(Color.pink)
+        VStack {
+            NavigationLink(destination: Text("Data")) {
+                Text("Feed timer data")
+            }
+            
+            NavigationLink(destination: Text("Data")) {
+                Text("Bottle Feeds")
+            }
+            
+            NavigationLink(destination: Text("Data")) {
+                Text("Expressed Milk")
+            }
+            
+            NavigationLink(destination: Text("Data")) {
+                Text("Nappy Changes")
+            }
+        }
     }
 }
 

@@ -107,6 +107,16 @@ extension ParentProfile {
         return activeFeedSessions
     }
     
+    public var currentFeedSessions: [FeedSession] {
+        let activeFeedSessions = childrenArray.flatMap { (child) in
+            child.feedSessionsArray.filter { (feedSession) -> Bool in
+                feedSession.status == .running || feedSession.status == .paused
+            }
+        }
+        
+        return activeFeedSessions
+    }
+    
     public var suspendedFeedSessions: [FeedSession] {
         let activeFeedSessions = childrenArray.flatMap { (child) in
             child.feedSessionsArray.filter { (feedSession) -> Bool in

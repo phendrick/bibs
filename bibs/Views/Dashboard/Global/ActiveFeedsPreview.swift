@@ -13,7 +13,7 @@ struct ActiveFeedsPreview: View {
     
     var body: some View {
         VStack {
-            ForEach(profile.parent.activeFeedSessions, id: \.self) { session in
+            ForEach(profile.parent.currentFeedSessions, id: \.self) { session in
                 HStack {
                     Spacer()
 
