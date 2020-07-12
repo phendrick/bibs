@@ -1,0 +1,6 @@
+module CalendarHeatmap {
+  umbrella header "CalendarHeatmap-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+module Pods_bibs {
+  umbrella header "Pods-bibs-umbrella.h"
+
+  export *
+  module * { export * }
+}

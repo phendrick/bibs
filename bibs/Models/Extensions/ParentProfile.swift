@@ -8,6 +8,16 @@
 
 import Foundation
 import UIKit
+import CalendarHeatmap
+
+extension ParentProfile: CalendarHeatmapDelegate {
+    public func colorFor(dateComponents: DateComponents) -> UIColor {
+        let opacity = Double.random(in: 0.1...1.0)
+            
+        print(dateComponents)
+        return UIColor.red.withAlphaComponent(CGFloat(opacity))
+    }
+}
 
 extension ParentProfile {
     public var autostartTimer: Bool {
