@@ -182,9 +182,9 @@ extension FeedSession: Identifiable, Trackable {
         /// add it to our array of feed instances
         self.addToFeeds(switchedFeed)
 
-        /// notify observers of changes
-        self.objectWillChange.send()
-        self.child?.objectWillChange.send()
+//        /// notify observers of changes
+//        self.objectWillChange.send()
+//        self.child?.objectWillChange.send()
 
         /// save changes
         do {

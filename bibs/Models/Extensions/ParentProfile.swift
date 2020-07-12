@@ -89,6 +89,11 @@ extension ParentProfile {
             return true
         }
         
+        if let lastChild = childrenArray.last {
+            self.activeChild = lastChild
+            return true
+        }
+        
         return false
     }
     

@@ -23,6 +23,9 @@ struct FeedSessionActionsView: View {
             Button(action: {
                 do {
                     try self.profile.parent.activeChild?.startNewFeedSession()
+                    
+                    // ensure any views observing ProfileObserver are re-rendered
+                    self.profile.objectWillChange.send()
                 }catch {
                 }
             }) {

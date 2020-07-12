@@ -136,7 +136,6 @@ extension Child: Identifiable {
         
         /// mark any old feed sessions as complete
         for activeSession in feedSessionsArray where activeSession.status != .complete {
-            print("Finishing session.")
             try? activeSession.finish()
         }
         
@@ -149,12 +148,13 @@ extension Child: Identifiable {
         feed.breastSide = .left
         
         session.addToFeeds(feed)
+        
         self.addToFeedSessions(session)
         
         do {
-           try context.save()
+            try context.save()
             
-            // if the user has set their autostartTimers setting to true, `resume` it immediately
+            /// if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
                 session.resume()
             }

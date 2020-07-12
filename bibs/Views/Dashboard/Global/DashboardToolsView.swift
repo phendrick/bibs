@@ -47,15 +47,17 @@ struct DashboardToolsView: View {
                         .cornerRadius(.infinity)
                         .foregroundColor(Color.gray.opacity(self.page == index ? 0.8 : 0.2))
                         .onTapGesture {
-                            self.page = index
+                            withAnimation {
+                                self.page = index
+                            }
                         }
                 }
-//                .animation(
-//                    Animation.interactiveSpring(
-//                        response: 0.2,
-//                        dampingFraction: 0.75,
-//                        blendDuration: 0.5).delay(0.2)
-//                )
+                .animation(
+                    Animation.interactiveSpring(
+                        response: 0.2,
+                        dampingFraction: 0.75,
+                        blendDuration: 0.5).delay(0.2)
+                )
             }
             .frame(width: CGFloat(20 * cardData.count), height: 10)
         }

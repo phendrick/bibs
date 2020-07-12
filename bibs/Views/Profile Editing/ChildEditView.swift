@@ -44,7 +44,7 @@ struct ChildEditView: View {
                                         Child.ColorSchemes[self.colorScheme], lineWidth: 6
                                     )
                                 )
-//                                .animation(.linear)
+                                .animation(.linear)
                         }else {
                             VStack {
                                 Circle()
@@ -60,7 +60,7 @@ struct ChildEditView: View {
                                                 .font(.system(size: 40))
                                         }
                                     })
-//                                    .animation(.linear)
+                                    .animation(.linear)
                                     .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
                                         ImagePicker(image: self.$inputImage)
                                     }

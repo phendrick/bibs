@@ -18,13 +18,16 @@ struct ActiveFeedSessionsList: View {
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     var body: some View {
-        ForEach(activeFeedSessions) {session in
-            HStack {
-                Text("\(session.status.rawValue) \(session.child?.wrappedName ?? "")")
-                Button(action: {
-                    try? session.finish()
-                }) {
-                    Text("Finish")
+        VStack {
+            
+            ForEach(activeFeedSessions) {session in
+                HStack {
+                    Text("\(session.status.rawValue) \(session.child?.wrappedName ?? "")")
+                    Button(action: {
+                        try? session.finish()
+                    }) {
+                        Text("Finish")
+                    }
                 }
             }
         }
