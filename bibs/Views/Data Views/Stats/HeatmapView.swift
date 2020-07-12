@@ -30,13 +30,13 @@ struct HeatmapView: UIViewRepresentable {
             calendarFont = config.monthFont
         }
         
-        config.weekDayWidth = 0
-        config.monthHeight  = 0
-        config.monthFont = calendarFont
-        config.itemSide = 50
-        config.itemCornerRadius = 10
-        config.allowItemSelection = true
-        config.interitemSpacing = 10
+//        config.weekDayWidth = 0
+//        config.monthHeight  = 0
+//        config.monthFont = calendarFont
+//        config.itemSide = 50
+//        config.itemCornerRadius = 10
+//        config.allowItemSelection = true
+//        config.interitemSpacing = 10
         
         let heatmap = CalendarHeatmap(config: config, startDate: startDate, endDate: endDate)
         heatmap.delegate = self.delgate
