@@ -25,10 +25,14 @@ struct CalendarView: View {
     @State var calendarPage = 0
     
     var body: some View {
-        Pager(page: self.$calendarPage, data: calendarDates, id: \.self) {date in
-            HeatmapView(delegate: self.profile.parent)
-                .frame(width: 350)
+        GeometryReader {geometry in
+            Pager(page: self.$calendarPage, data: calendarDates, id: \.self) {date in
+                HeatmapView(
+                    delegate: self.profile.parent,
+                    itemSize: CGSize(width: ((geometry.frame(in: .local).size.width-30)/7), height: 30)
+                )
                 .background(Color.green)
+            }.navigationBarTitle("Data")
         }
     }
 }

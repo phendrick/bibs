@@ -15,6 +15,10 @@ extension ParentProfile: CalendarHeatmapDelegate {
         let opacity = Double.random(in: 0.1...1.0)
         return UIColor.red.withAlphaComponent(CGFloat(opacity))
     }
+    
+    public func didSelectedAt(dateComponents: DateComponents) {
+        print(dateComponents)
+    }
 }
 
 extension ParentProfile {

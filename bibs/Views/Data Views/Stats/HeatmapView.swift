@@ -11,14 +11,18 @@ import CalendarHeatmap
 
 struct HeatmapView: UIViewRepresentable {
     var delgate: CalendarHeatmapDelegate
+    var itemSize: CGSize
     
-    init(delegate: CalendarHeatmapDelegate) {
+    init(delegate: CalendarHeatmapDelegate, itemSize: CGSize) {
         self.delgate = delegate
+        self.itemSize = itemSize
     }
     
     func makeUIView(context: UIViewRepresentableContext<HeatmapView>) -> CalendarHeatmap {
-        let startDate = Date().startOfMonth
-        let endDate   = Date().endOfMonth
+        let date = Calendar.current.date(byAdding: .month, value: -5, to: Date())!
+        
+        let startDate = date.startOfMonth
+        let endDate   = date.endOfMonth
         
         var calendarFont: UIFont
         
@@ -30,13 +34,13 @@ struct HeatmapView: UIViewRepresentable {
             calendarFont = config.monthFont
         }
         
-//        config.weekDayWidth = 0
-//        config.monthHeight  = 0
-//        config.monthFont = calendarFont
-//        config.itemSide = 50
-//        config.itemCornerRadius = 10
-//        config.allowItemSelection = true
-//        config.interitemSpacing = 10
+        config.weekDayWidth = 0
+        config.monthHeight  = 0
+        config.monthFont = calendarFont
+        config.itemCornerRadius = 0
+        config.allowItemSelection = true
+        config.interitemSpacing = 5
+        config.itemSize = self.itemSize
         
         let heatmap = CalendarHeatmap(config: config, startDate: startDate, endDate: endDate)
         heatmap.delegate = self.delgate

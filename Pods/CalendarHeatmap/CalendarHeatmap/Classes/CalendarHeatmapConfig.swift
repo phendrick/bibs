@@ -39,5 +39,7 @@ public struct CalendarHeatmapConfig {
     public var monthFont: UIFont = UIFont.systemFont(ofSize: 12, weight: .medium)
     public var monthHeight: CGFloat = 20
     
+    public var itemSize: CGSize = CGSize(width: 10, height: 10)
+    
     public init(){}
 }

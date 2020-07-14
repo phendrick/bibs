@@ -22,7 +22,7 @@ open class CalendarHeatmap: UIView {
         cv.delegate = self
         cv.dataSource = self
         cv.register(CalendarHeatmapCell.self, forCellWithReuseIdentifier: cellId)
-        cv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: config.contentRightInset)
+        cv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) //config.contentRightInset)
         cv.showsHorizontalScrollIndicator = false
         cv.showsVerticalScrollIndicator = false
         cv.layer.masksToBounds = false
@@ -32,11 +32,12 @@ open class CalendarHeatmap: UIView {
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         let flow = UICollectionViewFlowLayout()
-        flow.scrollDirection = .horizontal
-        flow.itemSize = CGSize(width: config.itemSide, height: config.itemSide)
-        flow.sectionInset = UIEdgeInsets(top: config.monthHeight, left: 0, bottom: 0, right: config.lineSpacing)
+        flow.scrollDirection = .vertical
+        flow.itemSize = config.itemSize // CGSize(width: config.itemSide*1.6, height: config.itemSide)
+        flow.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) //config.lineSpacing)
         flow.minimumLineSpacing = config.lineSpacing
         flow.minimumInteritemSpacing = config.interitemSpacing
+        
         return flow
     }()
     

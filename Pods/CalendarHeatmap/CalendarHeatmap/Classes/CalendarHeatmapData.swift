@@ -59,7 +59,8 @@ struct CalendarHeatmapData {
     private mutating func setupCalendar() {
         // cache for date of current month.
         let leadingEmptyDays = buildLeadingEmptyDays(date: startDate)
-        days.append(contentsOf: leadingEmptyDays)
+//        days.append(contentsOf: leadingEmptyDays)
+//        days.insert(contentsOf: leadingEmptyDays, at: 0)
         var currentMonthCount = leadingEmptyDays.count
         // loop all days.
         for _ in 0...totalDays {
