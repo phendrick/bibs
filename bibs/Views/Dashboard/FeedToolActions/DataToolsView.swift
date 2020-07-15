@@ -13,7 +13,7 @@ struct DataToolsView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(destination: Text("Data")) {
+            NavigationLink(destination: CalendarView()) {
                 Text("Feed timer data")
             }
             

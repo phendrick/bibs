@@ -9,8 +9,31 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @State var date: Date = Date()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Form {
+                Section(footer:
+                    Button(action: {
+                    }) {
+                        HStack {
+                            Text("Today")
+                            Text("This Week")
+                            Text("This Month")
+                        }
+                    }
+                ) {
+                    DatePicker(selection: self.$date) {
+                        Text("Today")
+                    }
+                    
+                    DatePicker(selection: self.$date) {
+                        Text("")
+                    }
+                }
+            }
+        }
     }
 }
 
