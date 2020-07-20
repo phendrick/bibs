@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension ExpressedBottle: Identifiable {
-    enum ExpressedBottleStorageStatus: Int16, CaseIterable {
+extension ExpressedBottle: Identifiable, Trackable {
+    public enum ExpressedBottleStorageStatus: Int16, CaseIterable {
         case fresh
         case refridgerated
         case frozen
@@ -19,7 +19,7 @@ extension ExpressedBottle: Identifiable {
         var description: String {
             switch(self) {
                 case .fresh: return "Fresh"
-                case .refridgerated: return "Refridgerated"
+                case .refridgerated: return "Cold"
                 case .frozen: return "Frozen"
                 case .disposed: return "Disposed"
                 case .donated: return "Donated"
@@ -27,7 +27,7 @@ extension ExpressedBottle: Identifiable {
         }
     }
     
-    var status: ExpressedBottleStorageStatus {
+    public var status: ExpressedBottleStorageStatus {
         get {
             ExpressedBottleStorageStatus.init(rawValue: self.state) ?? .refridgerated
         }
@@ -54,5 +54,13 @@ extension ExpressedBottle: Identifiable {
             try self.managedObjectContext?.save()
         }catch {
         }
+    }
+    
+    public var title: String {
+        "Expressed Bottle"
+    }
+    
+    public var details: String {
+        "bottle feed details"
     }
 }

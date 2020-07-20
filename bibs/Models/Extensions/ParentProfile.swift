@@ -40,6 +40,27 @@ extension ParentProfile {
         }
     }
     
+    public var startOfWeekDay: Int {
+        get {
+            UserDefaults.standard.integer(forKey: "startOfWeekDay")
+        }
+        
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "startOfWeekDay")
+        }
+    }
+    
+    public var weeklyDataSevenDays: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "weeklyDataSevenDays")
+        }
+        
+        set(newValue) {
+            print("Setting weeklyDataSevenDays to \(newValue)2")
+            UserDefaults.standard.set(newValue, forKey: "weeklyDataSevenDays")
+        }
+    }
+    
     public var expressedMilkAvailable: Int {
         10
     }
@@ -267,5 +288,81 @@ extension ParentProfile {
             reducedCounter += bottle.amount
             bottle.amount = 0
         }
+    }
+    
+    public enum TrackableItemScope {
+        case activeChild
+        case parent
+        case allChildren
+    }
+    
+    public enum TrackableItemDateRange {
+        case today
+        case week
+        case weekFromMonday
+        case weekFrom(Date)
+        case month
+        case year
+        case all
+        
+        var range: ClosedRange<Date>? {
+            switch(self) {
+            case .today: return Date().beginningOfDay...Date()
+            case .week: return Date().beginningOfWeek...Date()
+            case .weekFromMonday: return Date().beginningOfWeekMonday...Date()
+            case .weekFrom(let startDate): return startDate...Date()
+            case .month: return Date().beginningOfMonth...Date()
+            case .year: return Date().beginningOfYear...Date()
+            case .all: return nil
+            }
+        }
+        
+        var description: String {
+            switch(self) {
+            case .today: return "Today"
+            case .week: return "This week"
+            case .weekFromMonday: return "This week"
+            case .weekFrom(_): return "Last 7 days"
+            case .month: return "This month"
+            case .year: return "This year"
+            case .all: return "Everything"
+            }
+        }
+        
+        var detail: String {
+            switch(self) {
+                case .today: return "\(Date().beginningOfDay.getFormattedDate(format: "MMMM d YYYY"))"
+                case .week: return "\(Date().beginningOfWeek.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
+                case .weekFromMonday: return "\(Date().beginningOfWeek.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
+                case .weekFrom(let startDate): return "\(startDate.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
+                case .month: return "\(Date().beginningOfMonth.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
+                case .year: return "\(Date().beginningOfYear.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
+                case .all: return ""
+            }
+        }
+    }
+    
+    public func trackedItems(type: TrackableItemScope = .activeChild, within dateRange: TrackableItemDateRange) -> [Trackable] {
+        let expressedBottles = self.expressedBottlesArray
+        let nappies = self.activeChild?.nappyChangesArray ?? []
+        let bottles = self.activeChild?.bottleFeedsArray ?? []
+        
+        var items: [Trackable] = []
+        
+        if let range = dateRange.range {
+            items.append(contentsOf: expressedBottles.filter { range.contains($0.wrappedCreatedAt)} )
+            items.append(contentsOf: nappies.filter { range.contains($0.wrappedCreatedAt)} )
+            items.append(contentsOf: bottles.filter { range.contains($0.wrappedCreatedAt)} )
+        }else {
+            items.append(contentsOf: expressedBottles)
+            items.append(contentsOf: nappies)
+            items.append(contentsOf: bottles)
+        }
+        
+        items.sort { (lhs, rhs) -> Bool in
+            lhs.wrappedCreatedAt < rhs.wrappedCreatedAt
+        }
+        
+        return items
     }
 }

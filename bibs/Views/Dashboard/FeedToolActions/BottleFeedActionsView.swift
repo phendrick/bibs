@@ -87,7 +87,7 @@ struct BottleFeedActionsView: View {
                 
                 if self.pickerFeedType == 0 {
                     VStack {
-                        Stepper("Milo had \(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
+                        Stepper("\(self.profile.parent.activeChild?.wrappedName ?? "") had \(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                             .padding()
                             .font(.custom("RobotoMono-Regular", size: 20))
                         
@@ -107,11 +107,11 @@ struct BottleFeedActionsView: View {
                                         Text("\(bottle.convertedAmount) ")
                                         Text("\(bottle.wrappedCreatedAt.getFormattedDate())")
                                         
-                                        if self.selectedExpressedBottles.contains(bottle) {
-                                            Spacer()
-                                            Image(systemName: "checkmark.circle.fill")
-                                                .foregroundColor(Color( UIColor.tertiaryLabel) )
-                                        }
+                                        Spacer()
+                                        
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(Color( UIColor.tertiaryLabel) )
+                                            .opacity(self.selectedExpressedBottles.contains(bottle) ? 1 : 0.2)
                                     }.onTapGesture {
                                         if self.selectedExpressedBottles.contains(bottle) {
                                             self.selectedExpressedBottles.removeAll { (currentBottle) -> Bool in

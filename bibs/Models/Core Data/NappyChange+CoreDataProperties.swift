@@ -19,6 +19,9 @@ extension NappyChange {
 
     @NSManaged public var createdAt: Date?
     @NSManaged public var state: Int16
+    @NSManaged public var amount: Int16
+    @NSManaged public var color: Int16
+    @NSManaged public var note: String?
     @NSManaged public var child: Child?
 
 }

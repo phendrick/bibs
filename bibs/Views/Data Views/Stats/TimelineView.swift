@@ -40,7 +40,11 @@ struct TimelineView: View {
                             if self.profile.parent.weeklyDataSevenDays {
                                 self.selectedDateRange = .weekFrom(Date().lastSevenDays)
                             }else {
-                                self.selectedDateRange = .week
+                                if self.profile.parent.startOfWeekDay == 1 {
+                                    self.selectedDateRange = .week
+                                }else {
+                                    self.selectedDateRange = .weekFromMonday
+                                }
                             }
                         }) {
                             HStack {

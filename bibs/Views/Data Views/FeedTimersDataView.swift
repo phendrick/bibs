@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct FeedTimersDataView: View {
+    @Environment(\.managedObjectContext) var moc
     @State var feedSessionType: FeedSession.FeedSessionStatus = .complete
     
     var body: some View {
@@ -22,9 +23,11 @@ struct FeedTimersDataView: View {
             DashboardDataView(
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.feedSessionType.rawValue])
             ) {(result: FeedSession, count: Int) in
-                NavigationLink(destination: EditFeedTimeView(feedSession: result)) {
+                NavigationLink(destination: EditFeedSessionView(feedSession: result, context: self.moc)) {
                     HStack {
-                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                        Text("\(result.formattedElapsedTime(include_hsec: false))")
+                        Spacer()
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
                     }
                 }
             }

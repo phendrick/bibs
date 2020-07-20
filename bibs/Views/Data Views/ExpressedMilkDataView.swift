@@ -18,7 +18,8 @@ struct ExpressedMilkDataView: View {
                     Text("\(storage.description)").tag(storage.rawValue)
                 }
             }
-            .pickerStyle(WheelPickerStyle())
+            .pickerStyle(SegmentedPickerStyle())
+            .labelsHidden()
             
             DashboardDataView(
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue])
@@ -31,7 +32,7 @@ struct ExpressedMilkDataView: View {
             
             Spacer()
         }
-        .navigationBarTitle(Text("Expressed Milk Storage"), displayMode: .large)
+        .navigationBarTitle(Text("Expressed Milk"), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }
 }

@@ -8,12 +8,12 @@
 
 import Foundation
 
-extension BottleFeed: Identifiable {
+extension BottleFeed: Identifiable, Trackable {
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
     }
     
-    enum BottleFeedType: Int, CaseIterable {
+    public enum BottleFeedType: Int, CaseIterable {
         case expressedMilk
         case donorMilk
         case formula
@@ -27,7 +27,7 @@ extension BottleFeed: Identifiable {
         }
     }
     
-    var status: BottleFeedType {
+    public var status: BottleFeedType {
         get {
             BottleFeedType.init(rawValue: Int(self.state)) ?? .expressedMilk
         }
@@ -35,5 +35,13 @@ extension BottleFeed: Identifiable {
         set(newValue) {
             state = Int16(newValue.rawValue)
         }
+    }
+    
+    public var title: String {
+        "Bottle Feed"
+    }
+    
+    public var details: String {
+        "bottle feed details"
     }
 }

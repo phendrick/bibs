@@ -22,7 +22,7 @@ extension FeedSession {
     @NSManaged public var suspendedAt: Date?
     @NSManaged public var child: Child?
     @NSManaged public var feeds: NSSet?
-
+    @NSManaged public var note: String?
 }
 
 // MARK: Generated accessors for feeds

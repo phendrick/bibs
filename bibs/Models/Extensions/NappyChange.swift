@@ -8,23 +8,71 @@
 
 import Foundation
 import CoreData
+import UIKit
 
-extension NappyChange: Identifiable {
-    enum NappyChangeType: Int, CaseIterable {
+extension NappyChange: Identifiable, Trackable {
+    public enum NappyChangeType: Int, CaseIterable {
         case wet
         case dirty
         case both
+        case dry
         
         var description: String {
             switch self {
                 case .wet: return "Wet"
                 case .dirty: return "Dirty"
                 case .both: return "Wet & Dirty"
+                case .dry: return "Dry"
             }
         }
     }
     
-    var status: NappyChangeType {
+    public enum NappyChangeAmountType: Int, CaseIterable {
+        case light
+        case normal
+        case heavy
+        
+        var description: String {
+            switch self {
+                case .light: return "Light"
+                case .normal: return "Regular"
+                case .heavy: return "Heavy"
+            }
+        }
+    }
+    
+    public enum NappyChangePoopColor: Int, CaseIterable {
+        case black
+        case green
+        case brown
+        case yellow
+        case white
+        case red
+        
+        var color: UIColor {
+            switch self {
+            case .black:  return UIColor.black
+            case .green:  return UIColor.systemGreen
+            case .brown:  return UIColor.brown
+            case .yellow: return UIColor.systemYellow
+            case .white:  return UIColor.quaternarySystemFill
+            case .red:    return UIColor.systemRed
+            }
+        }
+        
+        var details: (String, String, Int?) {
+            switch self {
+            case .black:  return (name: "Black", description: "Normal in newborns", daysWarning: 14)
+            case .green:  return (name: "Green", description: "Can be caused medication or allergies", daysWarning: nil)
+            case .brown:  return (name: "Brown", description: "Normal", daysWarning: nil)
+            case .yellow: return (name: "Yellow", description: "Normal in breastfed babies", daysWarning: nil)
+            case .white:  return (name: "White", description: "Seek medical advice", daysWarning: 0)
+            case .red:    return (name: "Red", description: "Seek medical advice", daysWarning: 0)
+            }
+        }
+    }
+    
+    public var status: NappyChangeType {
         get {
             NappyChangeType.init(rawValue: Int(self.state)) ?? .wet
         }
@@ -34,7 +82,25 @@ extension NappyChange: Identifiable {
         }
     }
     
+    public var detail: NappyChangeAmountType {
+        get {
+            NappyChangeAmountType.init(rawValue: Int(self.amount)) ?? .light
+        }
+        
+        set(newValue) {
+            amount = Int16(newValue.rawValue)
+        }
+    }
+    
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
+    }
+    
+    public var title: String {
+        "Nappy Change"
+    }
+    
+    public var details: String {
+        "nappy change description"
     }
 }

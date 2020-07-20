@@ -13,7 +13,15 @@ import UIKit
 
 typealias ChildTheme = (Color, Color, Color)
 
-extension Child: Identifiable {    
+extension Child: Identifiable, Trackable {
+    public var title: String {
+        "Baby name"
+    }
+    
+    public var details: String {
+        "baby details"
+    }
+    
     static let ColorSchemes: [Color] = [
         Color(#colorLiteral(red: 0.9753738046, green: 0.9755367637, blue: 0.9753522277, alpha: 1)),
         Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)),
@@ -53,12 +61,12 @@ extension Child: Identifiable {
         return Color(baseColor)
     }
     
-    enum ChildStatuses: Int16 {
+    public enum ChildStatuses: Int16 {
         case current
         case archived
     }
     
-    var status: ChildStatuses {
+    public var status: ChildStatuses {
         get {
             ChildStatuses.init(rawValue: self.state) ?? .current
         }

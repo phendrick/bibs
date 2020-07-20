@@ -40,4 +40,37 @@ extension Date {
         
         return timeOfDayType
     }
+    
+    var lastSevenDays: Date {
+        let delta:Double = 3600*24*7
+        let date = Date().advanced(by: -delta)
+        
+        return date.beginningOfDay
+    }
+    
+    var beginningOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var beginningOfWeek: Date {
+        let components: DateComponents = Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        
+        return Calendar.current.date(from: components)!
+    }
+    
+    var beginningOfWeekMonday: Date {
+        return beginningOfWeek.advanced(by: 3600*24)
+    }
+    
+    var beginningOfMonth: Date {
+        let components: DateComponents = Calendar.current.dateComponents([.year, .month], from: self)
+        
+        return Calendar.current.date(from: components)!
+    }
+    
+    var beginningOfYear: Date {
+        let components: DateComponents = Calendar.current.dateComponents([.year], from: self)
+        
+        return Calendar.current.date(from: components)!
+    }
 }

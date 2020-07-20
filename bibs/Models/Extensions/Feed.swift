@@ -19,14 +19,14 @@ extension Feed: Identifiable, Timeable {
         self.duration = 0
     }
     
-    enum BreastSide: Int16 {
+    enum BreastSide: Int16, CaseIterable {
         case left
         case right
         
         var description: String {
             switch(self) {
-                case .left: return "Left"
-                case .right: return "Right"
+                case .left: return "Left side"
+                case .right: return "Right side"
             }
         }
     }
@@ -54,12 +54,24 @@ extension Feed: Identifiable, Timeable {
         return (hours: hours, minutes: minutes, seconds: seconds, hseconds: hseconds)
     }
     
-    var formattedElapsedTime: String {
-        let hours    = String(calculatedElapsedTime.hours).toPaddedNumber()
-        let minutes  = String(calculatedElapsedTime.minutes).toPaddedNumber()
-        let seconds  = String(calculatedElapsedTime.seconds).toPaddedNumber()
-        let hseconds = String(calculatedElapsedTime.hseconds).toPaddedNumber()
+    /// formatted string to render the elapsed time
+    func formattedElapsedTime(include_hsec: Bool = true) -> String {
+        var time = String(format:"%02i:%02i:%02i", calculatedElapsedTime.hours, calculatedElapsedTime.minutes, calculatedElapsedTime.seconds)
         
-        return "\(hours):\(minutes):\(seconds).\(hseconds)"
+        if include_hsec {
+            time.append(contentsOf: String(format: ".%02i", calculatedElapsedTime.hseconds))
+        }
+        
+        return time
+    }
+    
+    func setDurationFromStrings(hours: String, minutes: String, seconds: String) -> (hours: Int, minutes: Int, seconds: Int, hseconds: Int)? {
+        guard let h = Int(hours), let m = Int(minutes), let s = Int(seconds) else {
+            return nil
+        }
+        
+        self.duration = Int32(h*3600 + m*60 + s) * 100
+        
+        return calculatedElapsedTime
     }
 }

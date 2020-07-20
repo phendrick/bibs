@@ -13,7 +13,7 @@ struct DataToolsView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(destination: CalendarView()) {
+            NavigationLink(destination: TimelineView().environmentObject(self.profile)) {
                 Text("Feed timer data")
             }
             

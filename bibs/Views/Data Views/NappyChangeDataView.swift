@@ -11,6 +11,7 @@ import SwiftUI
 struct NappyChangeDataView: View {
     @State var nappyChangeType: NappyChange.NappyChangeType = .wet
     
+    
     var body: some View {
         VStack {
             Picker(selection: self.$nappyChangeType, label: Text("")) {

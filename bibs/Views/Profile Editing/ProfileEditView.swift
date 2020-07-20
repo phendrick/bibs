@@ -23,47 +23,12 @@ struct ProfileEditView: View {
     @State var pauseTimerWhenSwitching: Bool = true
     @State var pauseRunningTimersOnShutdown: Bool = true
     
+    @State var startOfWeekDay = true
+    @State var weeklyDataSevenDays = false
+    
     var body: some View {
         VStack {
             Form {
-                
-//                Section(header:
-//                    HStack {
-//                        Spacer()
-//                        if image != nil {
-//                            image?
-//                                .resizable()
-//                                .clipShape(Circle())
-//                                .shadow(radius: 5)
-//                                .scaledToFit()
-//                                .frame(maxHeight: 100)
-//                                .overlay(Circle().stroke(Color.white, lineWidth: 3))
-//                        }else {
-//                            VStack {
-//                                Circle()
-//                                    .foregroundColor(Color.white)
-//                                    .frame(width: 100, height: 100)
-//                                    .overlay(VStack {
-//                                        ZStack {
-//                                            Circle().stroke(Color.gray, lineWidth: 2)
-//                                            Image(systemName: "camera")
-//                                                .font(.system(size: 40))
-//                                        }
-//                                    })
-//                                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
-//                                        ImagePicker(image: self.$inputImage)
-//                                    }
-//                                    .onTapGesture {
-//                                        self.showingImagePicker.toggle()
-//                                    }
-//                            }
-//                        }
-//                        Spacer()
-//                    }.padding(.top, 25)
-//                ) {
-//                    EmptyView()
-//                }
-                
                 Section(
                     header: Text("Edit your details")
                 ) {
@@ -79,6 +44,22 @@ struct ProfileEditView: View {
                     
                     Toggle(isOn: self.$pauseTimerWhenSwitching) {
                         Text("Pause the timer when switching sides")
+                    }
+                }
+                
+                Section(
+                    header: Text("Data")
+                ) {
+                    Toggle(isOn: self.$startOfWeekDay) {
+                        VStack(alignment: .leading) {
+                            Text("Weekly data starts on Monday")
+                        }
+                    }
+                    
+                    Toggle(isOn: self.$weeklyDataSevenDays) {
+                        VStack(alignment: .leading) {
+                            Text("Week view shows last 7 days")
+                        }
                     }
                 }
                 
@@ -113,11 +94,11 @@ struct ProfileEditView: View {
                         }
                     }
                     
-//                    HStack {
-//                        NavigationLink(destination: ChildEditView()) {
-//                            Text("Add another")
-//                        }
-//                    }
+                    HStack {
+                        NavigationLink(destination: ChildEditView()) {
+                            Text("Add another")
+                        }
+                    }
                 }
             }
         }
@@ -132,6 +113,8 @@ struct ProfileEditView: View {
             self.autostartTimer = self.profile.parent.autostartTimer
             self.pauseTimerWhenSwitching = self.profile.parent.pauseTimerWhenSwitching
             self.pauseRunningTimersOnShutdown = self.profile.parent.pauseRunningTimersOnShutdown
+            self.startOfWeekDay = self.profile.parent.startOfWeekDay == 2
+            self.weeklyDataSevenDays = self.profile.parent.weeklyDataSevenDays
             
             if let _ = self.profile.parent.image {
                 self.image = Image(uiImage: self.profile.parent.wrappedImage)
@@ -152,6 +135,9 @@ struct ProfileEditView: View {
         self.profile.parent.autostartTimer = self.autostartTimer
         self.profile.parent.pauseTimerWhenSwitching = self.pauseTimerWhenSwitching
         self.profile.parent.pauseRunningTimersOnShutdown = self.pauseRunningTimersOnShutdown
+        
+        self.profile.parent.startOfWeekDay = self.startOfWeekDay ? 2 : 1 // starts on monday if checked
+        self.profile.parent.weeklyDataSevenDays = self.weeklyDataSevenDays
         
         do {
             self.profile.objectWillChange.send()

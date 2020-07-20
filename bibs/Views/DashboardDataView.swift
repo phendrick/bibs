@@ -36,6 +36,7 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
             self.moc.delete(row)
         }
         
+        self.moc.refreshAllObjects()
         try? self.moc.save()
     }
     

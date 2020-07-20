@@ -22,6 +22,7 @@
 		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
 		DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */; };
 		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
+		DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */; };
 		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
 		DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */; };
@@ -53,7 +54,7 @@
 		DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3EF14248AEFBD00667F19 /* String+padding.swift */; };
 		DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ProfileObserver.swift */; };
 		DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePicker.swift */; };
-		DABB736B24BBA3660005C2E1 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABB736A24BBA3660005C2E1 /* CalendarView.swift */; };
+		DABB736B24BBA3660005C2E1 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABB736A24BBA3660005C2E1 /* TimelineView.swift */; };
 		DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBE69A24B1CFEF00B1E3B1 /* dateHelpers.swift */; };
 		DADD78F82478609600791F61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F72478609600791F61 /* AppDelegate.swift */; };
 		DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78F92478609600791F61 /* SceneDelegate.swift */; };
@@ -120,6 +121,7 @@
 		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolsView.swift; sourceTree = "<group>"; };
 		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
+		DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedSessionView.swift; sourceTree = "<group>"; };
 		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -150,7 +152,7 @@
 		DAB56B8E247A733300C80E1E /* ProfileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObserver.swift; sourceTree = "<group>"; };
 		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DABB736A24BBA3660005C2E1 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		DABB736A24BBA3660005C2E1 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		DADBE69A24B1CFEF00B1E3B1 /* dateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateHelpers.swift; sourceTree = "<group>"; };
 		DADD78F42478609600791F61 /* bibs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bibs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD78F72478609600791F61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */,
+				DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -387,7 +390,7 @@
 		DABB736924BBA34F0005C2E1 /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				DABB736A24BBA3660005C2E1 /* CalendarView.swift */,
+				DABB736A24BBA3660005C2E1 /* TimelineView.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				DAA0490424B53449007D290D /* ActiveFeedsPreview.swift in Sources */,
 				DAE1A7D024B92E7B00FFA96E /* FeedTimersDataView.swift in Sources */,
 				DAF7518024B7D2AA00C83F33 /* BottleFeed+CoreDataClass.swift in Sources */,
+				DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
 				DAF7518224B7D2AA00C83F33 /* Child+CoreDataClass.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
@@ -711,7 +715,7 @@
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
 				DAAD54CE24B36A6500F284B1 /* FeedSessionActionsView.swift in Sources */,
-				DABB736B24BBA3660005C2E1 /* CalendarView.swift in Sources */,
+				DABB736B24BBA3660005C2E1 /* TimelineView.swift in Sources */,
 				DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
 				DAF7518324B7D2AA00C83F33 /* Child+CoreDataProperties.swift in Sources */,
