@@ -110,6 +110,12 @@ extension Child: Identifiable, Trackable {
         }
     }
     
+    public var latestFeedSessionsArray: [FeedSession] {
+        let feedSessions = feedSessionsArray
+        
+        return Array(feedSessions.prefix(5))
+    }
+    
     public var nappyChangesArray: [NappyChange] {
         let set = nappyChanges as? Set<NappyChange> ?? []
         return set.sorted {

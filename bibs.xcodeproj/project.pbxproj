@@ -18,12 +18,11 @@
 		DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1424822E13009BA4FF /* UserSettings.swift */; };
 		DA635B1B2482698D009BA4FF /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1A2482698D009BA4FF /* Child.swift */; };
 		DA635B1F24840A2C009BA4FF /* FeedSessionTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1E24840A2C009BA4FF /* FeedSessionTimerView.swift */; };
-		DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */; };
 		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
 		DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */; };
 		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
 		DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */; };
-		DA82C18D248991760009772F /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18C248991760009772F /* ChildView.swift */; };
+		DA8283CF24C65B2000E82E45 /* BreastSideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8283CE24C65B2000E82E45 /* BreastSideView.swift */; };
 		DA82C18F24899B930009772F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA82C18E24899B930009772F /* Date.swift */; };
 		DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */; };
 		DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307A924A7417500454F14 /* Feed+CoreDataClass.swift */; };
@@ -117,12 +116,11 @@
 		DA635B1424822E13009BA4FF /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		DA635B1A2482698D009BA4FF /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		DA635B1E24840A2C009BA4FF /* FeedSessionTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionTimerView.swift; sourceTree = "<group>"; };
-		DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedSessionsList.swift; sourceTree = "<group>"; };
 		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		DA6DBFC124A945F10061A9A0 /* DashboardToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolsView.swift; sourceTree = "<group>"; };
 		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
 		DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedSessionView.swift; sourceTree = "<group>"; };
-		DA82C18C248991760009772F /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
+		DA8283CE24C65B2000E82E45 /* BreastSideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastSideView.swift; sourceTree = "<group>"; };
 		DA82C18E24899B930009772F /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		DA8307A724A7417500454F14 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA8307A924A7417500454F14 /* Feed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -219,13 +217,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DA43F41424BA553C002FE487 /* Editing */ = {
+		DA43F41424BA553C002FE487 /* Editing Feeds */ = {
 			isa = PBXGroup;
 			children = (
 				DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */,
 				DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */,
 			);
-			path = Editing;
+			path = "Editing Feeds";
 			sourceTree = "<group>";
 		};
 		DA458F0424AA0F9D0096F411 /* Extensions */ = {
@@ -256,8 +254,6 @@
 				DAA0490024B533FD007D290D /* Global */,
 				DAAD54CC24B36A5400F284B1 /* FeedToolActions */,
 				DAB17398247C191500D94537 /* DashboardView.swift */,
-				DA66F57524902C6A00F84E13 /* ActiveFeedSessionsList.swift */,
-				DA82C18C248991760009772F /* ChildView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -274,7 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				DABB736924BBA34F0005C2E1 /* Stats */,
-				DA43F41424BA553C002FE487 /* Editing */,
+				DA43F41424BA553C002FE487 /* Editing Feeds */,
 				DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */,
 				DAE1A7D124B92FFB00FFA96E /* BottleFeedsDataView.swift */,
 				DAE1A7CD24B92E5800FFA96E /* NappyChangeDataView.swift */,
@@ -306,6 +302,7 @@
 			children = (
 				DA635B1E24840A2C009BA4FF /* FeedSessionTimerView.swift */,
 				DA8EC69324B684640014BB97 /* FeedSessionTimerActions.swift */,
+				DA8283CE24C65B2000E82E45 /* BreastSideView.swift */,
 			);
 			path = Feeds;
 			sourceTree = "<group>";
@@ -691,6 +688,7 @@
 				DAF7518024B7D2AA00C83F33 /* BottleFeed+CoreDataClass.swift in Sources */,
 				DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
+				DA8283CF24C65B2000E82E45 /* BreastSideView.swift in Sources */,
 				DAF7518224B7D2AA00C83F33 /* Child+CoreDataClass.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
 				DAF7517F24B7D2AA00C83F33 /* ExpressedBottle+CoreDataProperties.swift in Sources */,
@@ -707,7 +705,6 @@
 				DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */,
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
-				DA66F57624902C6A00F84E13 /* ActiveFeedSessionsList.swift in Sources */,
 				DAF7517724B7C92C00C83F33 /* ParentProfile+CoreDataProperties.swift in Sources */,
 				DAE1A7D224B92FFB00FFA96E /* BottleFeedsDataView.swift in Sources */,
 				DA8EC69424B684640014BB97 /* FeedSessionTimerActions.swift in Sources */,
@@ -726,7 +723,6 @@
 				DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */,
 				DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,
-				DA82C18D248991760009772F /* ChildView.swift in Sources */,
 				DAE1A7CE24B92E5800FFA96E /* NappyChangeDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

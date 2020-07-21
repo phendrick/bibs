@@ -56,7 +56,6 @@ struct DashboardView: View {
             GeometryReader {geometry in
                 ZStack(alignment: .top) {
                     ActiveFeedsPreview(profile: self.profile)
-                        .frame(maxWidth: geometry.size.width * 0.8)
                         .offset(
                             y: (self.activeFeedTool != .FeedTimer && self.profile.parent.currentFeedSessions.count > 0)
                                 ? 0
@@ -71,10 +70,48 @@ struct DashboardView: View {
                                 activeFeedTool: self.$activeFeedTool
                             ).environmentObject(ToolsData())
                             
+                            /*
+                             VStack {
+                                 ForEach(profile.parent.currentFeedSessions, id: \.self) { session in
+                                     HStack {
+                                         Spacer()
+
+                                         FeedSessionTimerView(
+                                             feedSession: session
+                                         )
+
+                                         Spacer()
+
+                                         FeedSessionTimerActions(feedSession: session)
+                                     }
+                                     .font(.custom("RobotoMono-Regular", size: 20))
+                                     .padding()
+                                     .background(
+                                         RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                             .foregroundColor(session.child?.themeColor ?? .clear)
+                                             .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 0, y: 6)
+                                     ).foregroundColor(.white)
+                                 }
+                             }
+                             */
+                            
                             if self.activeFeedTool.rawValue == 0 {
-                                ForEach(self.profile.parent.activeChild?.feedSessionsArray ?? []) {session in
-                                    FeedSessionTimerView(feedSession: session)
-                                }
+                                VStack(spacing: 5) {
+                                    ForEach(self.profile.parent.currentFeedSessions) {session in
+                                        HStack {
+                                            FeedSessionTimerView(feedSession: session)
+                                            FeedSessionTimerActions(feedSession: session)
+                                        }
+                                        .padding()
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10, style: .circular)
+                                                .foregroundColor(session.child?.themeColor ?? .green)
+                                                .opacity(session.isActiveFeedSession ? 1 : 0.25)
+                                        )
+                                        .foregroundColor(.white)
+                                        
+                                    }
+                                }.frame(maxWidth: geometry.size.width * 0.8)
                             }
 
                             if self.cofeeding && self.activeFeedSessions.filter {$0.status == .running}.count == 2 {
@@ -100,7 +137,6 @@ struct DashboardView: View {
                     }
                 }
             }
-            //.navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)))
             .navigationBarTitle(self.activeFeedTool.navigationBarTitle)
             .navigationBarItems(
                 leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
@@ -114,13 +150,6 @@ struct DashboardView: View {
                         }
                     }
             )
-//            .actionSheet(isPresented: self.$showingChildListActionSheet) {
-//                ActionSheet(
-//                    title: Text("Switch profile"),
-//                    message: Text("The current active profile is: \(self.profile.parent.activeChild?.wrappedName ?? "")"),
-//                    buttons: self.childListActionSheetButtons(exclude: self.profile.parent.activeChild)
-//                )
-//            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {

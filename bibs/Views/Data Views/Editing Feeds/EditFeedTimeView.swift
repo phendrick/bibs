@@ -58,19 +58,17 @@ struct EditFeedTimeView: View {
             ) {
                 Picker(selection: self.$breastSide, label: Text("Side")) {
                     ForEach(Feed.BreastSide.allCases, id: \.self) {side in
-                        Text("\(side.description)").tag(side.rawValue)
+                        Text("\(side.description.0)").tag(side.rawValue)
                     }
                 }.pickerStyle(SegmentedPickerStyle())
             }
         }.onAppear {
-            let durationString = self.feed.formattedElapsedTime(include_hsec: false)
-            let split = durationString.split(separator: ":", maxSplits: 3, omittingEmptySubsequences: false)
+            let elapstedTime = self.feed.calculatedElapsedTime
             
-            print(Int(self.feed.side))
+            self.adjustedHours   = String(elapstedTime.hours)
+            self.adjustedMinutes = String(elapstedTime.minutes)
+            self.adjustedSeconds = String(elapstedTime.seconds)
             
-            self.adjustedHours   = String(split[0])
-            self.adjustedMinutes = String(split[1])
-            self.adjustedSeconds = String(split[2])
             self.breastSide      = self.feed.breastSide
         }
         .navigationBarTitle("\(self.feed.feedSession?.child?.wrappedName ?? "")'s feed")

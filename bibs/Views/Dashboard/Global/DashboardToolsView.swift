@@ -1,4 +1,6 @@
 //
+//  The dashboard tools pager
+//
 //  DashboardToolsView.swift
 //  bibs
 //

@@ -1,4 +1,6 @@
 //
+//  The actions to affect a timer
+//
 //  FeedSessionTimerActions.swift
 //  bibs
 //
@@ -10,17 +12,33 @@ import SwiftUI
 
 struct FeedSessionTimerActions: View {
     @ObservedObject var feedSession: FeedSession
+    var expandedView = true
+    
+    var frameSize: CGFloat {
+        expandedView ? 60 : 40
+    }
     
     var body: some View {
         HStack {
-            Image(systemName: self.feedSession.status == .paused ? "play" : "pause")
+            Spacer()
+            
+            BreastSideView(feedSession: self.feedSession, color: .white, expandedView: expandedView)
+                .frame(width: frameSize, height: frameSize/2)
                 .onTapGesture {
-                    if self.feedSession.status == .paused {
-                        self.feedSession.resume()
-                    }else if self.feedSession.status == .running {
-                        self.feedSession.pause()
-                    }
+                    self.feedSession.switchSide()
                 }
+            
+            Spacer()
+            
+            Image(systemName: self.feedSession.status == .paused ? "play" : "pause")
+            .frame(width: 30, height: 30)
+            .onTapGesture {
+                if self.feedSession.status == .paused {
+                    self.feedSession.resume()
+                }else if self.feedSession.status == .running {
+                    self.feedSession.pause()
+                }
+            }
         }
     }
 }

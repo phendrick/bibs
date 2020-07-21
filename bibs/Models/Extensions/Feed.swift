@@ -23,10 +23,10 @@ extension Feed: Identifiable, Timeable {
         case left
         case right
         
-        var description: String {
+        var description: (String, String, String) {
             switch(self) {
-                case .left: return "Left side"
-                case .right: return "Right side"
+                case .left: return (full: "Left side", label: "L", short: "Left")
+                case .right: return (full: "Right side", label: "R", short: "Right")
             }
         }
     }

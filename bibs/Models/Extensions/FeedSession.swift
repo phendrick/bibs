@@ -15,6 +15,15 @@ extension FeedSession: Identifiable, Trackable {
         case running   // incrementing feed duration value
         case complete  // is an old feed session
         case suspended // suspended when user backgrounds the app
+        
+        var description: String {
+            switch(self) {
+            case .paused: return "Paused"
+            case .running: return "Running"
+            case .complete: return "Complete"
+            case .suspended: return "Suspended"
+            }
+        }
     }
     
     enum FeedSessionError: Error {
@@ -32,15 +41,15 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     var isActiveFeedSession: Bool {
-        status == .running
+        status == .running || status == .paused
     }
     
     var currentFeed: Feed? {
         return feedsArray.last
     }
     
-    var currentBreastSide: Feed.BreastSide? {
-        return currentFeed?.breastSide
+    var currentBreastSide: Feed.BreastSide {
+        return currentFeed?.breastSide ?? .left
     }
     
     public var wrappedCreatedAt: Date {
@@ -103,7 +112,6 @@ extension FeedSession: Identifiable, Trackable {
     /// MARK: public api for controlling sessions
     func pause() {
         guard status == .running || status == .suspended else {
-            print("Can't pause a non-running session")
             return
         }
         
@@ -115,7 +123,6 @@ extension FeedSession: Identifiable, Trackable {
     /// if `hibernate` is set to true, we dont invalidate the timer as we may still only be in preview mode, not fully switched to the background
     func suspend() {
         guard status == .running else {
-            print("Can't suspend a non-running session")
             return
         }
         
@@ -149,6 +156,18 @@ extension FeedSession: Identifiable, Trackable {
         self.status = .running
         timer.fire()
         RunLoop.main.add(timer, forMode: .common)
+    }
+    
+    func toggle() {
+        guard status == .paused || status == .running else {
+            return
+        }
+        
+        if status == .running {
+            pause()
+        }else {
+            resume()
+        }
     }
     
     /// calling `.finish()` on a feed session instance will set its status to FeedSessionStatus.complete

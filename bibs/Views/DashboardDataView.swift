@@ -1,4 +1,6 @@
 //
+//  Call a content block for each Core Data result for a given entity and predicate
+//
 //  DashboardDataView.swift
 //  bibs
 //

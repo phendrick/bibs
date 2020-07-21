@@ -24,7 +24,7 @@ struct EditFeedSessionView: View {
                             NavigationLink(destination: EditFeedTimeView(feed: feed, context: self.context)) {
                                 Text("\(feed.formattedElapsedTime())")
                                 Spacer()
-                                Text("\(feed.breastSide.description)").foregroundColor(.gray)
+                                Text("\(feed.breastSide.description.0)").foregroundColor(.gray)
                             }
                         }
                     }.onDelete { (index) in

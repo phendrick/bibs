@@ -1,4 +1,7 @@
 //
+//  Used on the dashboard when the currently active tool is not the feeds tool 
+//
+//
 //  SwiftUIView.swift
 //  bibs
 //
@@ -18,12 +21,16 @@ struct ActiveFeedsPreview: View {
                     Spacer()
 
                     FeedSessionTimerView(
-                        feedSession: session
+                        feedSession: session,
+                        expandedView: false
                     )
 
                     Spacer()
 
-                    FeedSessionTimerActions(feedSession: session)
+                    FeedSessionTimerActions(
+                        feedSession: session,
+                        expandedView: false
+                    )
                 }
                 .font(.custom("RobotoMono-Regular", size: 20))
                 .padding()

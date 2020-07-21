@@ -160,10 +160,8 @@ extension ParentProfile {
             fatalError()
         }
         
-        print(suspensionType, activeFeedSessions.count)
-        
         for session in activeFeedSessions {
-            if pauseRunningTimersOnShutdown {
+            if suspensionType == .terminated && pauseRunningTimersOnShutdown {
                 print("Pausing...")
                 session.pause()
             }else {
@@ -210,7 +208,7 @@ extension ParentProfile {
         }
     }
     
-    private func pauseActiveFeedSessions() {
+    public func pauseActiveFeedSessions() {
         guard let context = self.managedObjectContext else {
             fatalError()
         }
@@ -220,12 +218,12 @@ extension ParentProfile {
         for session in activeFeedSessions {
             session.suspendedAt = Date()
             session.pause()
-            
-            do {
-                try context.save()
-            }catch {
-                fatalError()
-            }
+        }
+        
+        do {
+            try context.save()
+        }catch {
+            fatalError()
         }
     }
     
