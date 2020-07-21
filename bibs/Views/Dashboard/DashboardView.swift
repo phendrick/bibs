@@ -61,6 +61,7 @@ struct DashboardView: View {
                                 ? 0
                                 : -geometry.frame(in: .global).minY*2
                         )
+                        .frame(width: geometry.frame(in: .global).width * 0.9)
                         .zIndex(2)
                     
                     ScrollView(showsIndicators: false) {
@@ -69,31 +70,6 @@ struct DashboardView: View {
                                 outerGeometry: geometry,
                                 activeFeedTool: self.$activeFeedTool
                             ).environmentObject(ToolsData())
-                            
-                            /*
-                             VStack {
-                                 ForEach(profile.parent.currentFeedSessions, id: \.self) { session in
-                                     HStack {
-                                         Spacer()
-
-                                         FeedSessionTimerView(
-                                             feedSession: session
-                                         )
-
-                                         Spacer()
-
-                                         FeedSessionTimerActions(feedSession: session)
-                                     }
-                                     .font(.custom("RobotoMono-Regular", size: 20))
-                                     .padding()
-                                     .background(
-                                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                             .foregroundColor(session.child?.themeColor ?? .clear)
-                                             .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 0, y: 6)
-                                     ).foregroundColor(.white)
-                                 }
-                             }
-                             */
                             
                             if self.activeFeedTool.rawValue == 0 {
                                 VStack(spacing: 5) {
@@ -113,15 +89,7 @@ struct DashboardView: View {
                                     }
                                 }.frame(maxWidth: geometry.size.width * 0.8)
                             }
-
-                            if self.cofeeding && self.activeFeedSessions.filter {$0.status == .running}.count == 2 {
-                                Button(action: {
-                                    let _ = self.activeFeedSessions.map {$0.pause()}
-                                }) {
-                                    Text("Pause all")
-                                }
-                            }
-
+                            
                             if self.activeFeedTool == .FeedTimer {
                                 FeedSessionActionsView()
                             }else if self.activeFeedTool == .BottleFeed {

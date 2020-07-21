@@ -111,12 +111,21 @@ extension FeedSession: Identifiable, Trackable {
     
     /// MARK: public api for controlling sessions
     func pause() {
+        guard let context = self.managedObjectContext else {
+            fatalError()
+        }
+        
         guard status == .running || status == .suspended else {
             return
         }
         
         self.status = .paused
         self.timer.invalidate()
+        
+        do {
+            try context.save()
+        }catch {
+        }
     }
     
     /// save a session to be resumed later
@@ -132,30 +141,23 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     func resume(force fromSuspension: Bool = false) {
+        guard let context = self.managedObjectContext else {
+            fatalError()
+        }
+        
         /// guard against calling .fire() on an already .running timer since we'll be incrememnting the duration for each fired timer
         /// unless the timer is being resumed from suspension, inwhich case its timer will be invalid and needs to be re-fired
         guard status != .running else {
-            print("not re-firing timer")
             return
         }
-        
-//        let forcedResumption = fromSuspension == true && status == .running
-//
-//        if status != .running || forcedResumption {
-//            print("Timer wasn't running, or forced to resume: \(status), \(forcedResumption")
-//            return
-//        }
-//
-//        if status == .running && fromSuspension == true {
-//            print("force resumption from suspension")
-//        }
-//
-//        print(fromSuspension, status)
-//        print("Setting status to .running and firing timer")
-        
         self.status = .running
         timer.fire()
         RunLoop.main.add(timer, forMode: .common)
+        
+        do {
+            try context.save()
+        }catch {
+        }
     }
     
     func toggle() {
@@ -200,10 +202,6 @@ extension FeedSession: Identifiable, Trackable {
 
         /// add it to our array of feed instances
         self.addToFeeds(switchedFeed)
-
-//        /// notify observers of changes
-//        self.objectWillChange.send()
-//        self.child?.objectWillChange.send()
 
         /// save changes
         do {

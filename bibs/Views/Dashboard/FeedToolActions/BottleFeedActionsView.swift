@@ -68,12 +68,6 @@ struct BottleFeedActionsView: View {
                     }.padding([.top, .trailing], 15)
                 }
                 
-                Image(systemName: "ear")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxHeight: 100)
-                    .padding(.top, 20)
-                    
                 Text("Bottle feeds")
                     .font(.system(size: 30))
                     .padding(.top, 20)

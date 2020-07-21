@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0892DF24C720CC00CFA8D1 /* FeedingOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0892DE24C720CC00CFA8D1 /* FeedingOverviewView.swift */; };
 		DA10C51E24AFF1AF00EE9E2A /* ToolsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA10C51D24AFF1AF00EE9E2A /* ToolsData.swift */; };
 		DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A512498055C00E9D811 /* Trackable.swift */; };
 		DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */; };
@@ -105,6 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA0892DE24C720CC00CFA8D1 /* FeedingOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedingOverviewView.swift; sourceTree = "<group>"; };
 		DA10C51D24AFF1AF00EE9E2A /* ToolsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsData.swift; sourceTree = "<group>"; };
 		DA2D2A512498055C00E9D811 /* Trackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
 		DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+TrackableItems.swift"; sourceTree = "<group>"; };
@@ -217,6 +219,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA0892DD24C720BD00CFA8D1 /* Overviews */ = {
+			isa = PBXGroup;
+			children = (
+				DA0892DE24C720CC00CFA8D1 /* FeedingOverviewView.swift */,
+			);
+			path = Overviews;
+			sourceTree = "<group>";
+		};
 		DA43F41424BA553C002FE487 /* Editing Feeds */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +261,7 @@
 		DA5DB18E24A5304700DE2E01 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				DA0892DD24C720BD00CFA8D1 /* Overviews */,
 				DAA0490024B533FD007D290D /* Global */,
 				DAAD54CC24B36A5400F284B1 /* FeedToolActions */,
 				DAB17398247C191500D94537 /* DashboardView.swift */,
@@ -685,6 +696,7 @@
 				DA6DBFC224A945F10061A9A0 /* DashboardToolsView.swift in Sources */,
 				DAA0490424B53449007D290D /* ActiveFeedsPreview.swift in Sources */,
 				DAE1A7D024B92E7B00FFA96E /* FeedTimersDataView.swift in Sources */,
+				DA0892DF24C720CC00CFA8D1 /* FeedingOverviewView.swift in Sources */,
 				DAF7518024B7D2AA00C83F33 /* BottleFeed+CoreDataClass.swift in Sources */,
 				DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
