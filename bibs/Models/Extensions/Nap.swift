@@ -9,40 +9,9 @@
 import Foundation
 import CoreData
 
-extension Feed: Identifiable, Timeable {
-    convenience init(side: Feed.BreastSide, insertIntoManagedObjectContext context: NSManagedObjectContext!) {
-        let entity = NSEntityDescription.entity(forEntityName: "Feed", in: context)!
-        self.init(entity: entity, insertInto: context)
-        
-        self.breastSide = side
-        self.createdAt = Date()
-        self.duration = 0
-    }
-    
-    enum BreastSide: Int16, CaseIterable {
-        case left
-        case right
-        
-        var description: (String, String, String) {
-            switch(self) {
-                case .left: return (full: "Left side", label: "L", short: "Left")
-                case .right: return (full: "Right side", label: "R", short: "Right")
-            }
-        }
-    }
-    
+extension Nap: Identifiable, Timeable {
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
-    }
-
-    var breastSide: BreastSide {
-        get {
-            BreastSide.init(rawValue: self.side) ?? .left
-        }
-        
-        set(newValue) {
-            side = newValue.rawValue
-        }
     }
     
     var calculatedElapsedTime: (hours: Int, minutes: Int, seconds: Int, hseconds: Int) {

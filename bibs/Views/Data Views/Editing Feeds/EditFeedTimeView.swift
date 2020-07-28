@@ -76,27 +76,27 @@ struct EditFeedTimeView: View {
             trailing: Button(action: {
                 print("Save")
                 
-                if let _ = self.feed.setDurationFromStrings(hours: self.adjustedHours, minutes: self.adjustedMinutes, seconds: self.adjustedSeconds) {
-                    self.feed.breastSide = self.breastSide
-                }else {
-                    print("Error saving time")
-                }
-                
-                do {
-                    self.feed.objectWillChange.send()
-                    self.feed.feedSession?.objectWillChange.send()
-                    
-                    try self.context.save()
-                    
-                    // force the data in the "Manage" view to be reloaded since it's rendering a plain
-                    // set of CoreData objects, not observed objects on a publisher
-                    
-                    self.context.refreshAllObjects()
-                }catch {
-                    print("Error saving context")
-                }
-                
-                self.presentationMode.wrappedValue.dismiss()
+//                if let _ = self.feed.setDurationFromStrings(hours: self.adjustedHours, minutes: self.adjustedMinutes, seconds: self.adjustedSeconds) {
+//                    self.feed.breastSide = self.breastSide
+//                }else {
+//                    print("Error saving time")
+//                }
+//                
+//                do {
+//                    self.feed.objectWillChange.send()
+//                    self.feed.feedSession?.objectWillChange.send()
+//                    
+//                    try self.context.save()
+//                    
+//                    // force the data in the "Manage" view to be reloaded since it's rendering a plain
+//                    // set of CoreData objects, not observed objects on a publisher
+//                    
+//                    self.context.refreshAllObjects()
+//                }catch {
+//                    print("Error saving context")
+//                }
+//                
+//                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Save")
             }

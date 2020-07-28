@@ -22,23 +22,36 @@ struct FeedSessionTimerActions: View {
         HStack {
             Spacer()
             
-            BreastSideView(feedSession: self.feedSession, color: .white, expandedView: expandedView)
-                .frame(width: frameSize, height: frameSize/2)
-                .onTapGesture {
-                    self.feedSession.switchSide()
-                }
+            if self.feedSession.status == .paused || self.feedSession.status == .running {
+                BreastSideView(feedSession: self.feedSession, color: .white, expandedView: expandedView)
+                    .frame(width: frameSize, height: frameSize/2)
+                    .onTapGesture {
+                        self.feedSession.switchSide()
+                    }
+            }
+            
+            if self.feedSession.status == .paused {
+                Text("Complete").animation(.spring())
+            }
             
             Spacer()
             
-            Image(systemName: self.feedSession.status == .paused ? "play" : "pause")
-            .frame(width: 30, height: 30)
-            .onTapGesture {
-                if self.feedSession.status == .paused {
-                    self.feedSession.resume()
-                }else if self.feedSession.status == .running {
-                    self.feedSession.pause()
+            if self.feedSession.status == .paused || self.feedSession.status == .running {
+                Image(systemName: self.feedSession.status == .paused ? "play" : "pause")
+                .frame(width: 30, height: 30)
+                .onTapGesture {
+                    if self.feedSession.status == .paused {
+                        withAnimation {
+                            self.feedSession.resume()
+                        }
+                    }else if self.feedSession.status == .running {
+                        withAnimation {
+                            self.feedSession.pause()
+                        }
+                    }
                 }
             }
+            
         }
     }
 }

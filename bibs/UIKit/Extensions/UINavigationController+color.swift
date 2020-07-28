@@ -14,18 +14,19 @@ extension UINavigationController {
         super.viewDidLoad()
 
         let standard = UINavigationBarAppearance()
-        standard.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0) //When you scroll or you have title (small one)
-        standard.shadowColor = .white
+        
+        standard.backgroundColor = UIColor.systemBackground //When you scroll or you have title (small one)
+        standard.shadowColor = .clear
         standard.shadowImage = nil
         
         let compact = UINavigationBarAppearance()
-        compact.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0) //compact-height
-        compact.shadowColor = .white
+        compact.backgroundColor = UIColor.systemBackground //compact-height
+        compact.shadowColor = .clear
         compact.shadowImage = nil
         
         let scrollEdge = UINavigationBarAppearance()
-        scrollEdge.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0) //When you have large title
-        scrollEdge.shadowColor = .white
+        scrollEdge.backgroundColor = UIColor.systemBackground //When you have large title
+        scrollEdge.shadowColor = .clear
         scrollEdge.shadowImage = nil
 
         navigationBar.standardAppearance = standard

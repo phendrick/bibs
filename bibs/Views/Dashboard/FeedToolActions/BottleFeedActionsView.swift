@@ -167,7 +167,6 @@ struct BottleFeedActionsView: View {
                             try self.moc.save()
                             
                             self.selectedExpressedBottles = []
-//                            self.bottleFeedFormVisible = false
                         }catch {
                         }
                     }) {

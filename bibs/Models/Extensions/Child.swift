@@ -116,6 +116,12 @@ extension Child: Identifiable, Trackable {
         return Array(feedSessions.prefix(5))
     }
     
+    public var completedFeedSessionsArray: [FeedSession] {
+        let feedSessions = feedSessionsArray.filter {$0.status == .complete}
+        
+        return Array(feedSessions.prefix(5))
+    }
+    
     public var nappyChangesArray: [NappyChange] {
         let set = nappyChanges as? Set<NappyChange> ?? []
         return set.sorted {
@@ -123,10 +129,22 @@ extension Child: Identifiable, Trackable {
         }
     }
     
-    var activeFeedSession: FeedSession? {
+    public var napsArray: [Nap] {
+        let set = naps as? Set<Nap> ?? []
+        return set.sorted {
+            $0.wrappedCreatedAt > $1.wrappedCreatedAt
+        }
+    }
+    
+    var activeFeedSession: FeedSession {
         let request: NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
         
-        request.predicate = NSPredicate(format: "state == %@", NSNumber(value: FeedSession.FeedSessionStatus.running.rawValue))
+        let activeSessionValues = [
+            NSNumber(value: FeedSession.FeedSessionStatus.running.rawValue),
+            NSNumber(value: FeedSession.FeedSessionStatus.paused.rawValue),
+        ]
+        
+        request.predicate = NSPredicate(format: "state IN %@", activeSessionValues)
         request.fetchLimit = 1
         
         guard let context = self.managedObjectContext else {
@@ -134,23 +152,18 @@ extension Child: Identifiable, Trackable {
             fatalError()
         }
         
-        do {
-            let sessions = try context.fetch(request) as [FeedSession]
-            
-            return sessions.first
-        }catch {
-            return nil
+        let sessions = try? context.fetch(request) as [FeedSession]
+        
+        if let session = sessions?.first {
+            return session
+        }else {
+            return self.buildNewFeedSession()
         }
     }
     
-    func startNewFeedSession() throws {
+    func buildNewFeedSession() -> FeedSession {
         guard let context = self.managedObjectContext else {
             fatalError()
-        }
-        
-        /// mark any old feed sessions as complete
-        for activeSession in feedSessionsArray where activeSession.status != .complete {
-            try? activeSession.finish()
         }
         
         let session       = FeedSession(context: context)
@@ -165,13 +178,34 @@ extension Child: Identifiable, Trackable {
         
         self.addToFeedSessions(session)
         
+        return session
+    }
+    
+    func startNewFeedSession() throws {
+        guard let context = self.managedObjectContext else {
+            fatalError()
+        }
+        
+        /// mark any old feed sessions as complete
+        for activeSession in feedSessionsArray where activeSession.status != .complete {
+            try? activeSession.finish()
+        }
+        
+        print("Starting new feed session")
+        
+        let session = self.buildNewFeedSession()
+        
         do {
             try context.save()
             
             /// if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
+                print("GO")
                 session.resume()
             }
+            
+            print("done")
+            self.objectWillChange.send()
         }catch {
             print("Error: \(error)")
         }

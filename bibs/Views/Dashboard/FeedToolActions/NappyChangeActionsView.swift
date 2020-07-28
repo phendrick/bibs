@@ -115,22 +115,6 @@ struct NappyChangeActionsView: View {
                         .disabled(![NappyChange.NappyChangeType.dirty.rawValue, NappyChange.NappyChangeType.both.rawValue].contains(self.nappyType))
                     }.animation(.spring())
                     
-//                    Section(
-//                        header: Text("What colour was the stool?")
-//                    ) {
-//
-//                    }
-//                    .opacity(
-//                        [NappyChange.NappyChangeType.dirty.rawValue, NappyChange.NappyChangeType.both.rawValue].contains(self.nappyType)
-//                            ? 1
-//                            : 0
-//                    )
-//                    .frame(
-//                        maxHeight: [NappyChange.NappyChangeType.dirty.rawValue, NappyChange.NappyChangeType.both.rawValue].contains(self.nappyType)
-//                            ? .infinity
-//                            : 0
-//                    )
-                    
                     Section(
                         header: Text("Amount")
                     ) {

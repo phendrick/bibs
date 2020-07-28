@@ -10,19 +10,29 @@ import Foundation
 
 extension ExpressedBottle: Identifiable, Trackable {
     public enum ExpressedBottleStorageStatus: Int16, CaseIterable {
-        case fresh
         case refridgerated
+        case fresh
         case frozen
         case donated
         case disposed
         
         var description: String {
             switch(self) {
-                case .fresh: return "Fresh"
-                case .refridgerated: return "Cold"
-                case .frozen: return "Frozen"
-                case .disposed: return "Disposed"
-                case .donated: return "Donated"
+                case .refridgerated: return "Refridgerate"
+                case .fresh: return "Keep at room temperature"
+                case .frozen: return "Freeze"
+                case .disposed: return "Dispose of"
+                case .donated: return "Donate"
+            }
+        }
+        
+        var details: String {
+            switch(self) {
+                case .refridgerated: return "Refridgerated milk will last for"
+                case .fresh: return "Make sure to dispose if..."
+                case .frozen: return "You can keep milk in the freezer for"
+                case .disposed: return "Safely dispose of. Or consider donating"
+                case .donated: return "❤️"
             }
         }
     }

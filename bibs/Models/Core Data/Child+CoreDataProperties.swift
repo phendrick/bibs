@@ -2,7 +2,7 @@
 //  Child+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 09/07/2020.
+//  Created by Paul Hendrick on 26/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -29,8 +29,9 @@ extension Child {
     @NSManaged public var bottleFeeds: NSSet?
     @NSManaged public var feedSessions: NSSet?
     @NSManaged public var nappyChanges: NSSet?
+    @NSManaged public var naps: NSSet?
     @NSManaged public var parent: ParentProfile?
-
+    @NSManaged public var snacks: NSSet?
 }
 
 // MARK: Generated accessors for bottleFeeds
@@ -81,5 +82,39 @@ extension Child {
 
     @objc(removeNappyChanges:)
     @NSManaged public func removeFromNappyChanges(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for naps
+extension Child {
+
+    @objc(addNapsObject:)
+    @NSManaged public func addToNaps(_ value: Nap)
+
+    @objc(removeNapsObject:)
+    @NSManaged public func removeFromNaps(_ value: Nap)
+
+    @objc(addNaps:)
+    @NSManaged public func addToNaps(_ values: NSSet)
+
+    @objc(removeNaps:)
+    @NSManaged public func removeFromNaps(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for snacks
+extension Child {
+
+    @objc(addSnacksObject:)
+    @NSManaged public func addToSnacks(_ value: Snack)
+
+    @objc(removeSnacksObject:)
+    @NSManaged public func removeFromSnacks(_ value: Snack)
+
+    @objc(addSnacks:)
+    @NSManaged public func addToSnacks(_ values: NSSet)
+
+    @objc(removeSnacks:)
+    @NSManaged public func removeFromSnacks(_ values: NSSet)
 
 }

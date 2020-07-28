@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="BottleFeed" representedClassName=".BottleFeed" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -20,7 +20,9 @@
         <relationship name="bottleFeeds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BottleFeed" inverseName="child" inverseEntity="BottleFeed"/>
         <relationship name="feedSessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FeedSession" inverseName="child" inverseEntity="FeedSession"/>
         <relationship name="nappyChanges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NappyChange" inverseName="child" inverseEntity="NappyChange"/>
+        <relationship name="naps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Nap" inverseName="child" inverseEntity="Nap"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ParentProfile" inverseName="children" inverseEntity="ParentProfile"/>
+        <relationship name="snacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Snack" inverseName="child" inverseEntity="Snack"/>
     </entity>
     <entity name="ExpressedBottle" representedClassName=".ExpressedBottle" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -34,16 +36,24 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="side" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="state" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="feedSession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FeedSession" inverseName="feeds" inverseEntity="FeedSession"/>
     </entity>
     <entity name="FeedSession" representedClassName=".FeedSession" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="feedState" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="state" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="suspendedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="feedSessions" inverseEntity="Child"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="feedSession" inverseEntity="Feed"/>
+    </entity>
+    <entity name="Nap" representedClassName=".Nap" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nappedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="naps" inverseEntity="Child"/>
     </entity>
     <entity name="NappyChange" representedClassName=".NappyChange" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -61,13 +71,21 @@
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Child" inverseName="parent" inverseEntity="Child"/>
         <relationship name="expressedBottles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpressedBottle" inverseName="parent" inverseEntity="ExpressedBottle"/>
     </entity>
+    <entity name="Snack" representedClassName=".Snack" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="snacks" inverseEntity="Child"/>
+    </entity>
     <elements>
         <element name="BottleFeed" positionX="115.80078125" positionY="373.6640625" width="128" height="118"/>
-        <element name="Child" positionX="-228.05859375" positionY="97.65234375" width="128" height="238"/>
+        <element name="Child" positionX="-171.8203125" positionY="47.98828125" width="128" height="268"/>
         <element name="ExpressedBottle" positionX="-277.50390625" positionY="374.3203125" width="128" height="133"/>
-        <element name="Feed" positionX="180.9296875" positionY="-55.8984375" width="128" height="118"/>
-        <element name="FeedSession" positionX="1.91015625" positionY="2.08984375" width="128" height="133"/>
-        <element name="NappyChange" positionX="27.765625" positionY="156.40234375" width="128" height="133"/>
+        <element name="Feed" positionX="188.2109375" positionY="-63.21875" width="128" height="118"/>
+        <element name="FeedSession" positionX="1.078125" positionY="-93.109375" width="128" height="148"/>
+        <element name="Nap" positionX="-388.9609375" positionY="-110.5703125" width="128" height="118"/>
+        <element name="NappyChange" positionX="178.859375" positionY="87.29296875" width="128" height="133"/>
         <element name="ParentProfile" positionX="-505.92578125" positionY="202.74609375" width="128" height="133"/>
+        <element name="Snack" positionX="-476.4921875" positionY="-1.359375" width="128" height="103"/>
     </elements>
 </model>

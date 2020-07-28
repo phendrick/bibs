@@ -40,6 +40,12 @@ struct DashboardView: View {
         animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
     
     @FetchRequest(
+        entity: FeedSession.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)],
+        predicate: NSPredicate(format: "state IN %@", [FeedSession.FeedSessionStatus.complete.rawValue])
+        ) var completedFeedSessions: FetchedResults<FeedSession>
+        
+    @FetchRequest(
         entity: Child.entity(),
         sortDescriptors: [],
         animation: .spring()) var children: FetchedResults<Child>
@@ -71,6 +77,18 @@ struct DashboardView: View {
                                 activeFeedTool: self.$activeFeedTool
                             ).environmentObject(ToolsData())
                             
+                            if self.activeFeedTool == .FeedTimer {
+                                FeedSessionActionsView()
+                            }else if self.activeFeedTool == .BottleFeed {
+                                BottleFeedActionsView()
+                            }else if self.activeFeedTool == .NappyChange {
+                                NappyChangeActionsView()
+                            }else if self.activeFeedTool == .DataOverview {
+                                DataToolsView()
+                            }
+                            
+                            Spacer()
+                            
                             if self.activeFeedTool.rawValue == 0 {
                                 VStack(spacing: 5) {
                                     ForEach(self.profile.parent.currentFeedSessions) {session in
@@ -88,16 +106,22 @@ struct DashboardView: View {
                                         
                                     }
                                 }.frame(maxWidth: geometry.size.width * 0.8)
-                            }
-                            
-                            if self.activeFeedTool == .FeedTimer {
-                                FeedSessionActionsView()
-                            }else if self.activeFeedTool == .BottleFeed {
-                                BottleFeedActionsView()
-                            }else if self.activeFeedTool == .NappyChange {
-                                NappyChangeActionsView()
-                            }else if self.activeFeedTool == .DataOverview {
-                                DataToolsView()
+                                
+                                VStack(spacing: 5) {
+                                    ForEach(self.completedFeedSessions) {session in
+                                        HStack {
+//                                            Image(uiImage: session.child!.wrappedImage)
+//                                                .resizable().frame(width: 50, height: 50)
+//                                                .clipShape(
+//                                                    Circle()
+//                                                ).overlay(
+//                                                    Circle().stroke(lineWidth: 2).foregroundColor(.red)
+//                                                )
+                                            FeedSessionTimerView(feedSession: session)
+                                        }
+                                        .padding()
+                                    }
+                                }
                             }
                             
                             Spacer()

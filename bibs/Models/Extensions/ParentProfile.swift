@@ -174,6 +174,7 @@ extension ParentProfile {
             }
         }
         
+        print("Saving")
         try? context.save()
     }
     
@@ -196,6 +197,7 @@ extension ParentProfile {
     public func resumeSuspendedFeedSessions() {
         let currentDate = Date()
         
+        print(suspendedFeedSessions.count)
         for session in suspendedFeedSessions {
             let timeDifference = session.suspendedAt?.distance(to: currentDate)
                         
@@ -206,7 +208,10 @@ extension ParentProfile {
                 session.suspendedAt = nil
             }
             
-            session.resume(force: true)
+            session.unsuspend()
+            
+            try? self.managedObjectContext?.save()
+            
             session.objectWillChange.send()
             session.child?.parent?.objectWillChange.send()
         }

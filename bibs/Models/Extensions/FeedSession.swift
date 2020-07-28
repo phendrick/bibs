@@ -140,7 +140,18 @@ extension FeedSession: Identifiable, Trackable {
         timer.invalidate()
     }
     
-    func resume(force fromSuspension: Bool = false) {
+    func unsuspend() {
+        print("unsuspending")
+        let pauseRunningTimersOnShutdown = UserDefaults.standard.bool(forKey: "pauseRunningTimersOnShutdown")
+        
+        if pauseRunningTimersOnShutdown {
+            self.status = .paused
+        }else {
+            self.resume()
+        }
+    }
+    
+    func resume() {
         guard let context = self.managedObjectContext else {
             fatalError()
         }
@@ -150,6 +161,7 @@ extension FeedSession: Identifiable, Trackable {
         guard status != .running else {
             return
         }
+        
         self.status = .running
         timer.fire()
         RunLoop.main.add(timer, forMode: .common)
