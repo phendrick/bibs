@@ -18,8 +18,8 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if viewSettings.initialView == .dashboard {
-                DataView()
 //                DashboardView()
+                DataView(profile: profile)
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
                         self.profile.parent.suspendActiveFeedSessions(as: .terminated)
                     })
@@ -27,7 +27,6 @@ struct ContentView: View {
                         self.profile.parent.suspendActiveFeedSessions(as: .switched)
                     }
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                        print("Unsuspending...")
                         self.profile.parent.resumeSuspendedFeedSessions()
 //                        if self.profile.parent.timerDriftWithinPermittedRange {
 //                            self.profile.parent.resumeSuspendedFeedSessions()
@@ -35,6 +34,8 @@ struct ContentView: View {
 //                            self.showingTimerAlert = true
 //                        }
                     }
+                
+                
 //                    .alert(isPresented: self.$showingTimerAlert) {
 //                        Alert(
 //                            title: Text("Timer"),

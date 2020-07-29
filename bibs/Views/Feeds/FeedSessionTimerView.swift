@@ -12,6 +12,7 @@ import SwiftUI
 import Foundation
 
 struct FeedSessionTimerView: View {
+    @ObservedObject var profile: ProfileObserver
     @ObservedObject var feedSession: FeedSession
     var expandedView = true
     
@@ -48,6 +49,6 @@ struct FeedSessionView_Previews: PreviewProvider {
         feed.duration = 23423
         session.addToFeeds(feed)
         
-        return FeedSessionTimerView(feedSession: session).environment(\.managedObjectContext, context)
+        return FeedSessionTimerView(profile: ProfileObserver.shared, feedSession: session).environment(\.managedObjectContext, context)
     }
 }

@@ -136,7 +136,7 @@ extension Child: Identifiable, Trackable {
         }
     }
     
-    var activeFeedSession: FeedSession {
+    var activeFeedSession: FeedSession? {
         let request: NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
         
         let activeSessionValues = [
@@ -152,12 +152,14 @@ extension Child: Identifiable, Trackable {
             fatalError()
         }
         
+        self.parent?.objectWillChange.send()
+        
         let sessions = try? context.fetch(request) as [FeedSession]
         
         if let session = sessions?.first {
             return session
         }else {
-            return self.buildNewFeedSession()
+            return nil
         }
     }
     

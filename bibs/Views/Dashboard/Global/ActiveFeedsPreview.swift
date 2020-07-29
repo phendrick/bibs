@@ -21,6 +21,7 @@ struct ActiveFeedsPreview: View {
                     Spacer()
 
                     FeedSessionTimerView(
+                        profile: self.profile,
                         feedSession: session,
                         expandedView: false
                     )
@@ -28,6 +29,7 @@ struct ActiveFeedsPreview: View {
                     Spacer()
 
                     FeedSessionTimerActions(
+                        profile: self.profile,
                         feedSession: session,
                         expandedView: false
                     )

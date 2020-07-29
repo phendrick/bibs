@@ -93,8 +93,8 @@ struct DashboardView: View {
                                 VStack(spacing: 5) {
                                     ForEach(self.profile.parent.currentFeedSessions) {session in
                                         HStack {
-                                            FeedSessionTimerView(feedSession: session)
-                                            FeedSessionTimerActions(feedSession: session)
+                                            FeedSessionTimerView(profile: self.profile, feedSession: session)
+                                            FeedSessionTimerActions(profile: self.profile, feedSession: session)
                                         }
                                         .padding()
                                         .background(
@@ -117,7 +117,7 @@ struct DashboardView: View {
 //                                                ).overlay(
 //                                                    Circle().stroke(lineWidth: 2).foregroundColor(.red)
 //                                                )
-                                            FeedSessionTimerView(feedSession: session)
+                                            FeedSessionTimerView(profile: self.profile, feedSession: session)
                                         }
                                         .padding()
                                     }

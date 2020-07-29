@@ -11,6 +11,7 @@
 import SwiftUI
 
 struct FeedSessionTimerActions: View {
+    @ObservedObject var profile: ProfileObserver
     @ObservedObject var feedSession: FeedSession
     var expandedView = true
     
@@ -31,7 +32,12 @@ struct FeedSessionTimerActions: View {
             }
             
             if self.feedSession.status == .paused {
-                Text("Complete").animation(.spring())
+                Text("Complete").animation(.spring()).onTapGesture {
+                    withAnimation {
+                        self.profile.objectWillChange.send()
+                        self.feedSession.complete()
+                    }
+                }
             }
             
             Spacer()
@@ -51,7 +57,6 @@ struct FeedSessionTimerActions: View {
                     }
                 }
             }
-            
         }
     }
 }
@@ -61,6 +66,6 @@ struct FeedSessionTimerActions_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let session = FeedSession(context: context)
         
-        return FeedSessionTimerActions(feedSession: session).environment(\.managedObjectContext, context)
+        return FeedSessionTimerActions(profile: ProfileObserver.shared, feedSession: session).environment(\.managedObjectContext, context)
     }
 }

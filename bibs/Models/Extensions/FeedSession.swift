@@ -131,6 +131,7 @@ extension FeedSession: Identifiable, Trackable {
     /// save a session to be resumed later
     /// if `hibernate` is set to true, we dont invalidate the timer as we may still only be in preview mode, not fully switched to the background
     func suspend() {
+        print("suspending timer")
         guard status == .running else {
             return
         }
@@ -141,7 +142,7 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     func unsuspend() {
-        print("unsuspending")
+        print("unsuspending timer \(self.duration)")
         let pauseRunningTimersOnShutdown = UserDefaults.standard.bool(forKey: "pauseRunningTimersOnShutdown")
         
         if pauseRunningTimersOnShutdown {
@@ -165,6 +166,19 @@ extension FeedSession: Identifiable, Trackable {
         self.status = .running
         timer.fire()
         RunLoop.main.add(timer, forMode: .common)
+        
+        do {
+            try context.save()
+        }catch {
+        }
+    }
+    
+    func complete() {
+        guard let context = self.managedObjectContext else {
+            fatalError()
+        }
+        
+        self.status = .complete
         
         do {
             try context.save()

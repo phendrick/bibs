@@ -44,6 +44,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
         
+        profileObserver.parent.resumeSuspendedFeedSessions()
+        
         // View settings to determine which view to show on start up (dashboard or onboarding process)
         let viewSettings = ViewSettings(initialView: initialView)
         

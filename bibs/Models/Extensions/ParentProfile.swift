@@ -195,6 +195,7 @@ extension ParentProfile {
 //    }
     
     public func resumeSuspendedFeedSessions() {
+        print("Unsuspending...")
         let currentDate = Date()
         
         print(suspendedFeedSessions.count)
