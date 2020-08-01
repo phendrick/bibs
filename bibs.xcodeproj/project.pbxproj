@@ -27,6 +27,11 @@
 		DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */; };
 		DA43F41624BA5547002FE487 /* EditFeedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */; };
 		DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */; };
+		DA4DEA2A24D4B0B600ADC1EA /* Int32+timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */; };
+		DA4DEA2C24D4C4CF00ADC1EA /* ChildrenFormList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */; };
+		DA4DEA2E24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2D24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift */; };
+		DA4DEA3024D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2F24D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift */; };
+		DA4DEA3224D4E30700ADC1EA /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA3124D4E30700ADC1EA /* Emotion.swift */; };
 		DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154224A28AC400442543 /* DashboardDataRowView.swift */; };
 		DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154424A2A8FD00442543 /* DashboardDataView.swift */; };
 		DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */; };
@@ -63,10 +68,15 @@
 		DAAD54D024B36D2A00F284B1 /* BottleFeedActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD54CF24B36D2A00F284B1 /* BottleFeedActionsView.swift */; };
 		DAAD54D224B36D3A00F284B1 /* NappyChangeActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAD54D124B36D3A00F284B1 /* NappyChangeActionsView.swift */; };
 		DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DAAF5DB024A10A8500A7C499 /* Introspect */; };
+		DAAF7B3424D2107F0019C4C4 /* Emotion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3224D2107F0019C4C4 /* Emotion+CoreDataClass.swift */; };
+		DAAF7B3524D2107F0019C4C4 /* Emotion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3324D2107F0019C4C4 /* Emotion+CoreDataProperties.swift */; };
+		DAAF7B3724D210900019C4C4 /* FoodDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3624D210900019C4C4 /* FoodDiaryEntry.swift */; };
+		DAAF7B3A24D210C70019C4C4 /* FoodDiaryEntry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3824D210C70019C4C4 /* FoodDiaryEntry+CoreDataClass.swift */; };
+		DAAF7B3B24D210C70019C4C4 /* FoodDiaryEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3924D210C70019C4C4 /* FoodDiaryEntry+CoreDataProperties.swift */; };
 		DAB1739C247D458600D94537 /* FeedSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739B247D458600D94537 /* FeedSession.swift */; };
 		DAB1739F247D45B600D94537 /* Timeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1739E247D45B600D94537 /* Timeable.swift */; };
 		DAB173A1247D513D00D94537 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB173A0247D513D00D94537 /* Feed.swift */; };
-		DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3EF14248AEFBD00667F19 /* String+padding.swift */; };
+		DAB3EF15248AEFBD00667F19 /* String+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3EF14248AEFBD00667F19 /* String+helpers.swift */; };
 		DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ProfileObserver.swift */; };
 		DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePicker.swift */; };
 		DABB736B24BBA3660005C2E1 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABB736A24BBA3660005C2E1 /* TimelineView.swift */; };
@@ -149,6 +159,11 @@
 		DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+TrackableItems.swift"; sourceTree = "<group>"; };
 		DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedTimeView.swift; sourceTree = "<group>"; };
 		DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+color.swift"; sourceTree = "<group>"; };
+		DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int32+timers.swift"; sourceTree = "<group>"; };
+		DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenFormList.swift; sourceTree = "<group>"; };
+		DA4DEA2D24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryFormSheet.swift; sourceTree = "<group>"; };
+		DA4DEA2F24D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionDiaryFormSheet.swift; sourceTree = "<group>"; };
+		DA4DEA3124D4E30700ADC1EA /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		DA51154224A28AC400442543 /* DashboardDataRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataRowView.swift; sourceTree = "<group>"; };
 		DA51154424A2A8FD00442543 /* DashboardDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataView.swift; sourceTree = "<group>"; };
 		DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
@@ -182,11 +197,16 @@
 		DAAD54CD24B36A6500F284B1 /* FeedSessionActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionActionsView.swift; sourceTree = "<group>"; };
 		DAAD54CF24B36D2A00F284B1 /* BottleFeedActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedActionsView.swift; sourceTree = "<group>"; };
 		DAAD54D124B36D3A00F284B1 /* NappyChangeActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeActionsView.swift; sourceTree = "<group>"; };
+		DAAF7B3224D2107F0019C4C4 /* Emotion+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emotion+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DAAF7B3324D2107F0019C4C4 /* Emotion+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emotion+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DAAF7B3624D210900019C4C4 /* FoodDiaryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryEntry.swift; sourceTree = "<group>"; };
+		DAAF7B3824D210C70019C4C4 /* FoodDiaryEntry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodDiaryEntry+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DAAF7B3924D210C70019C4C4 /* FoodDiaryEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodDiaryEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DAB17398247C191500D94537 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		DAB1739B247D458600D94537 /* FeedSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSession.swift; sourceTree = "<group>"; };
 		DAB1739E247D45B600D94537 /* Timeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeable.swift; sourceTree = "<group>"; };
 		DAB173A0247D513D00D94537 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		DAB3EF14248AEFBD00667F19 /* String+padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+padding.swift"; sourceTree = "<group>"; };
+		DAB3EF14248AEFBD00667F19 /* String+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+helpers.swift"; sourceTree = "<group>"; };
 		DAB56B8E247A733300C80E1E /* ProfileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObserver.swift; sourceTree = "<group>"; };
 		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -274,6 +294,8 @@
 				DA08834B24CE45EA003B7020 /* ExpressedMilkFormSheet.swift */,
 				DA08834F24CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift */,
 				DA08835124CE50C8003B7020 /* NaptimeFormSheet.swift */,
+				DA4DEA2D24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift */,
+				DA4DEA2F24D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -282,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				DA08835624CF88BE003B7020 /* ChildrenListSheet.swift */,
+				DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -437,7 +460,9 @@
 				DA7F8A7324CB05E800840AF1 /* UIDevice+screen.swift */,
 				DA2B0FD524C8E64D00209638 /* DispatchQueue+background.swift */,
 				DA2B0FD724C8FAC100209638 /* Image+async.swift */,
+				DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */,
 				DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */,
+				DA4DEA3124D4E30700ADC1EA /* Emotion.swift */,
 				DA82C18E24899B930009772F /* Date.swift */,
 				DAB173A0247D513D00D94537 /* Feed.swift */,
 				DAB1739B247D458600D94537 /* FeedSession.swift */,
@@ -446,8 +471,9 @@
 				DA08835324CEC4E9003B7020 /* Snack+snackList.swift */,
 				DAF7518824B7D6BC00C83F33 /* ExpressedBottle.swift */,
 				DAF7518A24B7D78A00C83F33 /* BottleFeed.swift */,
-				DAB3EF14248AEFBD00667F19 /* String+padding.swift */,
+				DAB3EF14248AEFBD00667F19 /* String+helpers.swift */,
 				DAAA33F324AFCD9B0015E03F /* ParentProfile.swift */,
+				DAAF7B3624D210900019C4C4 /* FoodDiaryEntry.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -523,6 +549,7 @@
 				DADD79082478609700791F61 /* Info.plist */,
 				DADD78FB2478609600791F61 /* bibs.xcdatamodeld */,
 				DADD79022478609700791F61 /* Preview Content */,
+				DA08834624CE1524003B7020 /* Forms */,
 				DA9BD44B2486F47B00025C3F /* Fonts */,
 			);
 			path = bibs;
@@ -557,6 +584,10 @@
 		DADD792A247864AD00791F61 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				DAAF7B3824D210C70019C4C4 /* FoodDiaryEntry+CoreDataClass.swift */,
+				DAAF7B3924D210C70019C4C4 /* FoodDiaryEntry+CoreDataProperties.swift */,
+				DAAF7B3224D2107F0019C4C4 /* Emotion+CoreDataClass.swift */,
+				DAAF7B3324D2107F0019C4C4 /* Emotion+CoreDataProperties.swift */,
 				DA08833E24CCF550003B7020 /* Snack+CoreDataClass.swift */,
 				DA08833F24CCF550003B7020 /* Snack+CoreDataProperties.swift */,
 				DAEE23D224C9813600E368DC /* Nap+CoreDataClass.swift */,
@@ -583,7 +614,6 @@
 			isa = PBXGroup;
 			children = (
 				DA08835524CF88B2003B7020 /* Children */,
-				DA08834624CE1524003B7020 /* Forms */,
 				DAEE23D024C979D100E368DC /* DataView.swift */,
 				DAEBBF4E24CB7CA30065B232 /* DashboardToolsListView.swift */,
 				DA08834224CD7608003B7020 /* DashboardPopupTimersListView.swift */,
@@ -772,6 +802,7 @@
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
 				DA10C51E24AFF1AF00EE9E2A /* ToolsData.swift in Sources */,
 				DAF7518924B7D6BC00C83F33 /* ExpressedBottle.swift in Sources */,
+				DA4DEA3224D4E30700ADC1EA /* Emotion.swift in Sources */,
 				DAEE23D724C981AA00E368DC /* Nap.swift in Sources */,
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
 				DA08834524CD794F003B7020 /* View+roundedCorners.swift in Sources */,
@@ -779,7 +810,7 @@
 				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */,
-				DAB3EF15248AEFBD00667F19 /* String+padding.swift in Sources */,
+				DAB3EF15248AEFBD00667F19 /* String+helpers.swift in Sources */,
 				DA08834E24CE4917003B7020 /* SnackFormSheet.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DA08834824CE15A0003B7020 /* NappyChangeFormSheet.swift in Sources */,
@@ -805,17 +836,22 @@
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
 				DA08835724CF88BE003B7020 /* ChildrenListSheet.swift in Sources */,
 				DA8283CF24C65B2000E82E45 /* BreastSideView.swift in Sources */,
+				DAAF7B3A24D210C70019C4C4 /* FoodDiaryEntry+CoreDataClass.swift in Sources */,
 				DAF7518224B7D2AA00C83F33 /* Child+CoreDataClass.swift in Sources */,
+				DA4DEA2C24D4C4CF00ADC1EA /* ChildrenFormList.swift in Sources */,
 				DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */,
 				DAF7517F24B7D2AA00C83F33 /* ExpressedBottle+CoreDataProperties.swift in Sources */,
 				DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */,
 				DA08835224CE50C8003B7020 /* NaptimeFormSheet.swift in Sources */,
+				DA4DEA2E24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift in Sources */,
+				DAAF7B3424D2107F0019C4C4 /* Emotion+CoreDataClass.swift in Sources */,
 				DADD78FA2478609600791F61 /* SceneDelegate.swift in Sources */,
 				DAA923FF24B3B9A0001935B4 /* DataToolsView.swift in Sources */,
 				DA08834A24CE423E003B7020 /* BottleFeedsFormSheet.swift in Sources */,
 				DAEBBF4D24CB7C900065B232 /* DashboardFeedTimerView.swift in Sources */,
 				DAEE23D424C9813600E368DC /* Nap+CoreDataClass.swift in Sources */,
 				DA635B1F24840A2C009BA4FF /* FeedSessionTimerView.swift in Sources */,
+				DA4DEA3024D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift in Sources */,
 				DA08834324CD7608003B7020 /* DashboardPopupTimersListView.swift in Sources */,
 				DA08834C24CE45EA003B7020 /* ExpressedMilkFormSheet.swift in Sources */,
 				DA8307B424A7417500454F14 /* NappyChange+CoreDataClass.swift in Sources */,
@@ -824,6 +860,7 @@
 				DADD78FF2478609600791F61 /* ContentView.swift in Sources */,
 				DAF7517624B7C92C00C83F33 /* ParentProfile+CoreDataClass.swift in Sources */,
 				DADD78FD2478609600791F61 /* bibs.xcdatamodeld in Sources */,
+				DA4DEA2A24D4B0B600ADC1EA /* Int32+timers.swift in Sources */,
 				DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */,
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
 				DA635B1524822E13009BA4FF /* UserSettings.swift in Sources */,
@@ -831,6 +868,7 @@
 				DAE1A7D224B92FFB00FFA96E /* BottleFeedsDataView.swift in Sources */,
 				DA8EC69424B684640014BB97 /* FeedSessionTimerActions.swift in Sources */,
 				DAF7517E24B7D2AA00C83F33 /* ExpressedBottle+CoreDataClass.swift in Sources */,
+				DAAF7B3B24D210C70019C4C4 /* FoodDiaryEntry+CoreDataProperties.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
 				DA2B0FD824C8FAC100209638 /* Image+async.swift in Sources */,
@@ -846,12 +884,14 @@
 				DAEBBF4924CB7C6C0065B232 /* DashboardHeaderView.swift in Sources */,
 				DA7F8A7424CB05E800840AF1 /* UIDevice+screen.swift in Sources */,
 				DA8307B524A7417500454F14 /* NappyChange+CoreDataProperties.swift in Sources */,
+				DAAF7B3724D210900019C4C4 /* FoodDiaryEntry.swift in Sources */,
 				DAAA33F424AFCD9B0015E03F /* ParentProfile.swift in Sources */,
 				DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */,
 				DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */,
 				DAEBBF4B24CB7C790065B232 /* DashboardHeaderOverviewView.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,
 				DAE1A7CE24B92E5800FFA96E /* NappyChangeDataView.swift in Sources */,
+				DAAF7B3524D2107F0019C4C4 /* Emotion+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

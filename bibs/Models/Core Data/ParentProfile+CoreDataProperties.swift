@@ -2,7 +2,7 @@
 //  ParentProfile+CoreDataProperties.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 09/07/2020.
+//  Created by Paul Hendrick on 29/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 //
@@ -23,6 +23,8 @@ extension ParentProfile {
     @NSManaged public var name: String?
     @NSManaged public var children: NSSet?
     @NSManaged public var expressedBottles: NSSet?
+    @NSManaged public var emotions: NSSet?
+    @NSManaged public var foodDiaryEntries: NSSet?
 
 }
 
@@ -57,5 +59,39 @@ extension ParentProfile {
 
     @objc(removeExpressedBottles:)
     @NSManaged public func removeFromExpressedBottles(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for emotions
+extension ParentProfile {
+
+    @objc(addEmotionsObject:)
+    @NSManaged public func addToEmotions(_ value: Emotion)
+
+    @objc(removeEmotionsObject:)
+    @NSManaged public func removeFromEmotions(_ value: Emotion)
+
+    @objc(addEmotions:)
+    @NSManaged public func addToEmotions(_ values: NSSet)
+
+    @objc(removeEmotions:)
+    @NSManaged public func removeFromEmotions(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for foodDiaryEntries
+extension ParentProfile {
+
+    @objc(addFoodDiaryEntriesObject:)
+    @NSManaged public func addToFoodDiaryEntries(_ value: FoodDiaryEntry)
+
+    @objc(removeFoodDiaryEntriesObject:)
+    @NSManaged public func removeFromFoodDiaryEntries(_ value: FoodDiaryEntry)
+
+    @objc(addFoodDiaryEntries:)
+    @NSManaged public func addToFoodDiaryEntries(_ values: NSSet)
+
+    @objc(removeFoodDiaryEntries:)
+    @NSManaged public func removeFromFoodDiaryEntries(_ values: NSSet)
 
 }

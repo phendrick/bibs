@@ -40,6 +40,13 @@ struct BottleFeedsFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
+            Text("Bottle Feed").font(.title)
+            
+            if profile.parent.activeChildrenArray.count > 1 {
+                ChildrenFormList()
+                    .padding()
+            }
+            
             Form {
                 Section(
                     header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Child") had")
@@ -63,37 +70,37 @@ struct BottleFeedsFormSheet: View {
                 }
             }
             
-            if self.pickerFeedSource == .expressedMilk {
-                Section {
-                    Text("Choose from stored milk supply").font(.subheadline)
-                    List {
-                        ForEach(self.expressedBottles, id: \.self) {bottle in
-                            HStack {
-                                Text("\(bottle.convertedAmount) ")
-                                Text("\(bottle.wrappedCreatedAt.getFormattedDate())")
-
-                                Spacer()
-
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(Color(UIColor.systemGreen) )
-                                    .opacity(self.selectedExpressedBottles.contains(bottle) ? 1 : 0.2)
-                            }.onTapGesture {
-                                if self.selectedExpressedBottles.contains(bottle) {
-                                    self.selectedExpressedBottles.removeAll { (currentBottle) -> Bool in
-                                        currentBottle == bottle
-                                    }
-                                }else {
-                                    self.selectedExpressedBottles.append(bottle)
-                                }
-                            }
-                        }
-                    }
-                    .cornerRadius(10).padding()
-                    .frame(maxHeight: 380)
-                }
-            }
-            
-            Spacer()
+//            if self.pickerFeedSource == .expressedMilk {
+//                Section {
+//                    Text("Choose from stored milk supply").font(.subheadline)
+//                    List {
+//                        ForEach(self.expressedBottles, id: \.self) {bottle in
+//                            HStack {
+//                                Text("\(bottle.convertedAmount) ")
+//                                Text("\(bottle.wrappedCreatedAt.getFormattedDate())")
+//
+//                                Spacer()
+//
+//                                Image(systemName: "checkmark.circle.fill")
+//                                    .foregroundColor(Color(UIColor.systemGreen) )
+//                                    .opacity(self.selectedExpressedBottles.contains(bottle) ? 1 : 0.2)
+//                            }.onTapGesture {
+//                                if self.selectedExpressedBottles.contains(bottle) {
+//                                    self.selectedExpressedBottles.removeAll { (currentBottle) -> Bool in
+//                                        currentBottle == bottle
+//                                    }
+//                                }else {
+//                                    self.selectedExpressedBottles.append(bottle)
+//                                }
+//                            }
+//                        }
+//                    }
+//                    .cornerRadius(10).padding()
+//                    .frame(maxHeight: 200)
+//                }
+//            }
+//
+//            Spacer()
             
             VStack {
                 Button(action: {

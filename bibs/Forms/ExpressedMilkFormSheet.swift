@@ -32,6 +32,8 @@ struct ExpressedMilkFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
+            Text("Expressing").font(.title)
+            
             Form {
                 Section(
                     header: Text("I've expressed ")

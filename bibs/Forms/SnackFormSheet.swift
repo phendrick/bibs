@@ -28,10 +28,13 @@ struct SnackFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Snacks & Solid foods")
-                .font(.system(size: 30))
-                .padding(.top, 20)
-                .padding(.bottom, 80)
+            Text("Snacks & Solid foods").font(.title)
+            
+            if profile.parent.activeChildrenArray.count > 1 {
+                ChildrenFormList()
+                    .padding()
+                    .animation(nil)
+            }
             
             Form {
                 Section(

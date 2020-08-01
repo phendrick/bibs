@@ -48,8 +48,17 @@ extension Child {
         let feedSessionFetchRequest:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
         feedSessionFetchRequest.predicate = datePredicate
         
+        let nappyChangeFetchRequest:NSFetchRequest<NappyChange> = NappyChange.fetchRequest()
+        nappyChangeFetchRequest.predicate = datePredicate
+        
+        let napFetchRequest:NSFetchRequest<Nap> = Nap.fetchRequest()
+        napFetchRequest.predicate = datePredicate
+        
         do {
             let feedSessions = try context.fetch(feedSessionFetchRequest)
+            let nappyChangeFetchRequest = try context.fetch(nappyChangeFetchRequest)
+            let napFetchRequest = try context.fetch(napFetchRequest)
+            
             let allEntities = [feedSessions]
             
             return allEntities.flatMap {$0}
@@ -59,14 +68,21 @@ extension Child {
     }
     
     /// get 'todays' overview of activity
-    func todaysTrackableEntities() -> [Trackable] {
-        let date = Date()
-        var calendar = Calendar.current
-        calendar.timeZone = NSTimeZone.local
-        
-        let dateFrom = calendar.startOfDay(for: date)
-        let dateTo   = calendar.date(byAdding: .day, value: 1, to: dateFrom) ?? dateFrom
-        
-        return trackableEntitiesBetween(start: dateFrom, end: dateTo)
+    func completedFeedsWithinRange(dateDange: Range<Date>) -> [FeedSession] {
+        return self.feedSessionsArray.filter {
+            $0.status == .complete && dateDange.contains($0.wrappedCreatedAt)
+        }
+    }
+    
+    func nappyChangesWithinRange(dateDange: Range<Date>) -> [NappyChange] {
+        return self.nappyChangesArray.filter {
+            dateDange.contains($0.wrappedCreatedAt)
+        }
+    }
+    
+    func napsWithinRange(dateDange: Range<Date>) -> [Nap] {
+        return self.napsArray.filter {
+            dateDange.contains($0.wrappedCreatedAt)
+        }
     }
 }

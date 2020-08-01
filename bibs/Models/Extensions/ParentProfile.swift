@@ -61,12 +61,90 @@ extension ParentProfile {
         }
     }
     
-    public var overview: String {
-        "hello\n\n1234"
+    public var showFoodDiaryPrompt: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "showFoodDiaryPrompt")
+        }
+        
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: "showFoodDiaryPrompt")
+        }
     }
     
-    public var expressedMilkAvailable: Int {
-        10
+    public var todaysFeedsOverview: (Int, String) {
+        let date = Date()
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateFrom = calendar.startOfDay(for: date)
+        let dateTo   = calendar.date(byAdding: .day, value: 1, to: dateFrom) ?? dateFrom
+        
+        let dateRange = dateFrom..<dateTo
+        
+        let feeds = activeChild?.completedFeedsWithinRange(dateDange: dateRange) ?? []
+        
+        let duration: Duration = feeds.reduce(into: 0, { (result, session) in
+            result += session.duration
+        })
+        
+        var overview = ""
+        
+        if duration > 0 {
+            overview = duration.formattedHoursAndMinutes
+        }else {
+            overview = "None today"
+        }
+        
+        return (feeds.count, overview)
+    }
+    
+    public var todaysNappysOverview: (String, Int, Int) {
+        let date = Date()
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateFrom = calendar.startOfDay(for: date)
+        let dateTo   = calendar.date(byAdding: .day, value: 1, to: dateFrom) ?? dateFrom
+        
+        let dateRange = dateFrom..<dateTo
+        
+        let nappies = activeChild?.nappyChangesWithinRange(dateDange: dateRange) ?? []
+        
+        if nappies.count > 0 {
+            let wet = nappies.filter {$0.status == .wet}
+            let dirty = nappies.filter {$0.status == .dirty}
+            
+            return ("\(nappies.count)", wet.count, dirty.count)
+        }else {
+            return ("None today", 0, 0)
+        }
+    }
+    
+    public var todaysNapsOverview: (Int, String) {
+        let date = Date()
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateFrom = calendar.startOfDay(for: date)
+        let dateTo   = calendar.date(byAdding: .day, value: 1, to: dateFrom) ?? dateFrom
+        
+        let dateRange = dateFrom..<dateTo
+        
+        let naps = activeChild?.napsWithinRange(dateDange: dateRange) ?? []
+        
+        let duration: Duration = naps.reduce(into: 0, { (result, session) in
+            result += session.duration
+        })
+        
+        var overview = ""
+        
+        if duration > 0 {
+            overview = duration.formattedHoursAndMinutes
+        }else {
+            overview = "None today"
+        }
+        
+        return (naps.count, overview)
     }
     
     public var childrenArray: [Child] {
@@ -74,8 +152,17 @@ extension ParentProfile {
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
     
+    public var activeChildrenArray: [Child] {
+        childrenArray.filter {$0.status == .current}
+    }
+    
     public var expressedBottlesArray: [ExpressedBottle] {
         let set = expressedBottles as? Set<ExpressedBottle> ?? []
+        return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
+    }
+    
+    public var foodDiaryEntriesArray: [FoodDiaryEntry] {
+        let set = foodDiaryEntries as? Set<FoodDiaryEntry> ?? []
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
     

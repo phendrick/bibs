@@ -24,6 +24,12 @@
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ParentProfile" inverseName="children" inverseEntity="ParentProfile"/>
         <relationship name="snacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Snack" inverseName="child" inverseEntity="Snack"/>
     </entity>
+    <entity name="Emotion" representedClassName=".Emotion" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ParentProfile" inverseName="emotions" inverseEntity="ParentProfile"/>
+    </entity>
     <entity name="ExpressedBottle" representedClassName=".ExpressedBottle" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="amountUsed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -48,6 +54,12 @@
         <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="feedSessions" inverseEntity="Child"/>
         <relationship name="feeds" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Feed" inverseName="feedSession" inverseEntity="Feed"/>
     </entity>
+    <entity name="FoodDiaryEntry" representedClassName=".FoodDiaryEntry" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ParentProfile" inverseName="foodDiaryEntries" inverseEntity="ParentProfile"/>
+    </entity>
     <entity name="Nap" representedClassName=".Nap" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -69,7 +81,9 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Child" inverseName="parent" inverseEntity="Child"/>
+        <relationship name="emotions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Emotion" inverseName="parent" inverseEntity="Emotion"/>
         <relationship name="expressedBottles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpressedBottle" inverseName="parent" inverseEntity="ExpressedBottle"/>
+        <relationship name="foodDiaryEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodDiaryEntry" inverseName="parent" inverseEntity="FoodDiaryEntry"/>
     </entity>
     <entity name="Snack" representedClassName=".Snack" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -80,12 +94,14 @@
     <elements>
         <element name="BottleFeed" positionX="115.80078125" positionY="373.6640625" width="128" height="118"/>
         <element name="Child" positionX="-171.8203125" positionY="47.98828125" width="128" height="268"/>
+        <element name="Emotion" positionX="-288" positionY="54" width="128" height="103"/>
         <element name="ExpressedBottle" positionX="-277.50390625" positionY="374.3203125" width="128" height="133"/>
         <element name="Feed" positionX="188.2109375" positionY="-63.21875" width="128" height="118"/>
         <element name="FeedSession" positionX="1.078125" positionY="-93.109375" width="128" height="148"/>
+        <element name="FoodDiaryEntry" positionX="-297" positionY="45" width="128" height="28"/>
         <element name="Nap" positionX="-388.9609375" positionY="-110.5703125" width="128" height="118"/>
         <element name="NappyChange" positionX="178.859375" positionY="87.29296875" width="128" height="133"/>
-        <element name="ParentProfile" positionX="-505.92578125" positionY="202.74609375" width="128" height="133"/>
+        <element name="ParentProfile" positionX="-505.92578125" positionY="202.74609375" width="128" height="28"/>
         <element name="Snack" positionX="-476.4921875" positionY="-1.359375" width="128" height="103"/>
     </elements>
 </model>

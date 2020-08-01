@@ -31,11 +31,6 @@ struct FeedSessionTimerView: View {
                         .font(.custom("RobotoMono-Regular", size: fontSize))
                 }
             }
-            
-            if expandedView {
-                Text(self.feedSession.currentBreastSide.description.0)
-                    .font(.custom("RobotoMono-Regular", size: fontSize*0.75))
-            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

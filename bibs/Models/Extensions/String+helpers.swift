@@ -7,4 +7,8 @@ extension String {
         
         return String(padded)
     }
+    
+    func pluralize(count: Int) -> String {
+        return count < 2 ? self : "\(self)s"
+    }
 }

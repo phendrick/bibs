@@ -21,6 +21,9 @@ struct DashboardToolsListView: View {
     @State var expressedMilkFormVisible = false
     @State var manualFeedTimerFormVisible = false
     
+    @State var foodDiaryFormVisible = false
+    @State var emotionFormVisible = false
+    
     var iconSize: CGFloat {
         UIDevice.current.hasLargeScreen ? 100 : 80
     }
@@ -36,10 +39,10 @@ struct DashboardToolsListView: View {
                 }
                     .font(.headline)
             }
-            .padding()
+            .padding([.leading])
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
+                HStack(alignment: .top, spacing: 15) {
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Feed").font(.subheadline)
@@ -107,13 +110,41 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Expressed Milk").font(.subheadline).lineLimit(2)
+                        Text("Expressed Milk").font(.subheadline)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         self.expressedMilkFormVisible = true
                     }.sheet(isPresented: self.$expressedMilkFormVisible) {
                         ExpressedMilkFormSheet(expressedMilkFormVisible: self.$expressedMilkFormVisible)
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(self.profile)
+                    }
+                    
+                    Divider().frame(maxHeight: 100).foregroundColor(.red)
+                    
+                    VStack(alignment: .center) {
+                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
+                        Text("Food Diary").font(.subheadline)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        self.foodDiaryFormVisible = true
+                    }.sheet(isPresented: self.$foodDiaryFormVisible) {
+                        FoodDiaryFormSheet(foodDiaryFormVisible: self.$foodDiaryFormVisible)
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(self.profile)
+                    }
+                    
+                    VStack(alignment: .center) {
+                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
+                        Text("Emotion").font(.subheadline)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        self.emotionFormVisible = true
+                    }.sheet(isPresented: self.$emotionFormVisible) {
+                        EmotionDiaryFormSheet(emotionDiaryFormVisible: self.$emotionFormVisible)
                             .environment(\.managedObjectContext, self.moc)
                             .environmentObject(self.profile)
                     }

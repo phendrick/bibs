@@ -16,7 +16,7 @@ struct DashboardHeaderView: View {
         ZStack {
             HStack(alignment: .center) {
                 Text("How are you today?")
-                    .font(.title).padding(.top, 5)
+                    .font(.headline)
                 
                 Spacer()
                 
@@ -24,11 +24,11 @@ struct DashboardHeaderView: View {
                     .resizable()
                     .scaledToFit()
                     .clipped()
-                    .frame(maxHeight: 100)
+                    .frame(width: 50, height: 50)
                     .onTapGesture {
-//                        if self.profile.parent.childrenArray.count < 2 {
-//                            return
-//                        }
+                        if self.profile.parent.childrenArray.count < 2 {
+                            return
+                        }
                         
                         self.childListSheetVisible.toggle()
                     }

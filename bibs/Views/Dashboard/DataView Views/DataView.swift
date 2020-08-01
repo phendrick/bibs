@@ -28,51 +28,43 @@ struct DataView: View {
     
     var body: some View {
         ZStack {
-            VStack {
-                NavigationView {
-                    VStack(spacing: 0) {
-                        DashboardHeaderView().padding()
-                        
-                        NavigationLink(destination: Text("OK")) {
-                            DashboardHeaderOverviewView().padding([.leading, .trailing])
-                        }.foregroundColor(Color(UIColor.label))
-                        
-                        DashboardToolsListView()
-                            .padding(.top, 15)
-                        
-                        Spacer()
+            NavigationView {
+                VStack(spacing: 0) {
+                    DashboardHeaderView().padding([.leading, .trailing])
+                    
+                    NavigationLink(destination: Text("OK")) {
+                        DashboardHeaderOverviewView(profile: profile).padding([.leading, .trailing, .bottom])
+                    }.foregroundColor(Color(UIColor.label))
+                    
+                    DashboardToolsListView()
+                    
+                    Spacer()
 
-                        if self.profile.parent.activeChild != nil && self.profile.parent.activeChild!.activeFeedSession != nil{
-                            DashboardFeedTimerView(
-                                profile: self.profile,
-                                feedSession: self.profile.parent.activeChild!.activeFeedSession!,
-                                color: Color.red,
-                                expandedLayout: self.$expanded
-                            ).padding([.leading, .trailing])
-                            
-                            Button(action: {
-                                print(self.profile.parent.activeChild?.activeFeedSession)
-                                self.timersListVisible.toggle()
-                            }) {
-                                Text("Show all running timers").padding()
-                            }
-                            
-                            
-                            Text("Something").onTapGesture {
-                                print(self.profile.parent.activeChild!.activeFeedSession)
-                            }
-                            
-                        }else {
-                            Button("Start a timer") {
-                                withAnimation {
-                                    try? self.profile.parent.activeChild?.startNewFeedSession()
-                                    self.profile.objectWillChange.send()
-                                }
+                    if self.profile.parent.activeChild != nil && self.profile.parent.activeChild!.activeFeedSession != nil{
+                        DashboardFeedTimerView(
+                            profile: self.profile,
+                            feedSession: self.profile.parent.activeChild!.activeFeedSession!,
+                            color: Color.red,
+                            expandedLayout: self.$expanded
+                        ).padding([.leading, .trailing])
+
+                        Button(action: {
+                            self.timersListVisible.toggle()
+                        }) {
+                            Text("Show all running timers").padding()
+                        }
+                        
+                        Text("OK")
+                    }else {
+                        Button("Start a timer") {
+                            withAnimation {
+                                try? self.profile.parent.activeChild?.startNewFeedSession()
+                                self.profile.objectWillChange.send()
                             }
                         }
                     }
-                    .navigationBarTitle(Text("Hello"), displayMode: .large)
                 }
+                .navigationBarTitle(Text("Hello"), displayMode: .large)
             }
             
             DashboardPopupTimersListView(visible: $timersListVisible)

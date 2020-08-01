@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 protocol Timeable {
-    var duration: Int32 {get}
+    var duration: Duration {get}
     
     var calculatedElapsedTime: (hours: Int, minutes: Int, seconds: Int, hseconds: Int) {get}
 }

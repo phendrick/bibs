@@ -28,14 +28,17 @@ struct NappyChangeFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Nappy Change")
-                .font(.system(size: 30))
-                .padding(.top, 20)
-                .padding(.bottom, 80)
+            Text("Nappy Change").font(.title)
+            
+            if profile.parent.activeChildrenArray.count > 1 {
+                ChildrenFormList()
+                    .padding()
+                    .animation(nil)
+            }
             
             Form {
                 Section(
-                    header: Text("Nappy change type")
+                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby")'s nappy was")
                 ) {
                     Picker(selection: self.$nappyType, label: Text("K")) {
                         ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {type in
@@ -70,11 +73,11 @@ struct NappyChangeFormSheet: View {
                             Spacer()
                         }.padding()
 
-                        VStack(alignment: .leading) {
+                        HStack(alignment: .lastTextBaseline) {
                             Text("\(self.nappyChangePoopColor.details.0)")
-                                .font(.headline)
+                                .font(Font.subheadline.weight(.bold))
                             Text("\(self.nappyChangePoopColor.details.1)")
-                                .font(.subheadline)
+                                .font(.caption)
                         }
                         .animation(nil)
                     }

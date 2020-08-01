@@ -9,45 +9,62 @@
 import SwiftUI
 
 struct DashboardHeaderOverviewView: View {
+    @ObservedObject var profile: ProfileObserver
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Today").font(.headline)
+                Text("\(profile.parent.activeChild?.wrappedName ?? "") Today").font(.headline)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color.gray)
-            }
-            .padding([.top, .leading, .trailing], 15)
+            }.padding()
+            
+            Divider().opacity(0.5).offset(y: -10).padding([.leading, .trailing])
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text("12 feeds").font(.subheadline).padding(.bottom, 10).lineLimit(1)
-                    Text("1 hour 32 minutes")
+                    Text("\(profile.parent.todaysFeedsOverview.0) \("feed".pluralize(count: profile.parent.todaysFeedsOverview.0))")
+                        .font(.subheadline).padding(.bottom, 10)
+                    Text("\(profile.parent.todaysFeedsOverview.1)")
                         .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-                        .lineLimit(1).minimumScaleFactor(0.5)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                
+                Divider().frame(height: 50)
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                    Text("Nappies")
+                        .font(.subheadline).padding(.bottom, 10).lineLimit(1)
+                    
+                    HStack {
+                        HStack(spacing: 5) {
+                            Text("\(profile.parent.todaysNappysOverview.1)")
+                            Text("dirty")
+                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
+                        
+                        HStack(spacing: 5) {
+                            Text("\(profile.parent.todaysNappysOverview.2)")
+                            Text("wet")
+                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
+                    }
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 
                 Divider().frame(height: 50)
+                Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("8 changes").font(.subheadline).padding(.bottom, 10).lineLimit(1).lineLimit(1)
-                    Text("3 dirty and 5 wet")
-                        .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-                        .lineLimit(1).minimumScaleFactor(0.5)
-                }.frame(minWidth: 0, maxWidth: .infinity)
-                
-                Divider().frame(height: 50)
-                
-                VStack(alignment: .leading) {
-                    Text("2 naps").font(.subheadline).padding(.bottom, 10).lineLimit(1)
-                    Text("1 hour 32 minutes")
+                    Text("Nap time")
+                        .font(.subheadline).padding(.bottom, 10).lineLimit(1)
+                    Text("\(profile.parent.todaysNapsOverview.1)")
                         .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                         .lineLimit(1).minimumScaleFactor(0.5)
                 }.frame(minWidth: 0, maxWidth: .infinity)
             }
-            .padding([.leading, .trailing])
-            .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
+        .frame(maxWidth: .infinity)
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(10)
     }
@@ -56,10 +73,10 @@ struct DashboardHeaderOverviewView: View {
 struct DashboardHeaderOverviewView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            DashboardHeaderOverviewView()
+            DashboardHeaderOverviewView(profile: ProfileObserver.shared)
                 .previewLayout(.fixed(width: 400, height: 180))
             
-            DashboardHeaderOverviewView()
+            DashboardHeaderOverviewView(profile: ProfileObserver.shared)
                 .previewLayout(.fixed(width: 400, height: 240))
         }
     }
