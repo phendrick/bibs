@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ExpressedMilkDataView: View {
+    @ObservedObject var child: Child
     @State var expressedBottleStorageType: ExpressedBottle.ExpressedBottleStorageStatus = .fresh
     
     var body: some View {
@@ -19,7 +20,7 @@ struct ExpressedMilkDataView: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
-            .labelsHidden()
+            .padding()
             
             DashboardDataView(
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue])
@@ -37,8 +38,8 @@ struct ExpressedMilkDataView: View {
     }
 }
 
-struct ExpressedMilkDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExpressedMilkDataView()
-    }
-}
+//struct ExpressedMilkDataView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExpressedMilkDataView()
+//    }
+//}

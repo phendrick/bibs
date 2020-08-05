@@ -98,7 +98,10 @@ struct ExpressedMilkFormSheet: View {
                 }) {
                     Text("OK")
                 }
+                
+                Spacer()
             }
+            Spacer()
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

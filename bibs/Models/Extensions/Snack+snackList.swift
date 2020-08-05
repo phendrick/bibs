@@ -45,4 +45,8 @@ extension Snack {
             state = newValue.rawValue
         }
     }
+    
+    public var wrappedCreatedAt: Date {
+        createdAt ?? Date()
+    }
 }

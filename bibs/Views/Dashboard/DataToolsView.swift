@@ -17,27 +17,27 @@ struct DataToolsView: View {
     var body: some View {
         VStack {
             List {
-                NavigationLink(destination: TimelineView().environmentObject(self.profile)) {
+                NavigationLink(destination: FeedTimersDataView(child: child) ) {
                     Text("Breast Feeds")
                 }
                 
-                NavigationLink(destination: Text("Data")) {
+                NavigationLink(destination: BottleFeedsDataView(child: child) ) {
                     Text("Bottle Feeds")
                 }
                 
-                NavigationLink(destination: Text("Data")) {
+                NavigationLink(destination: NappyChangesDataView(child: child) ) {
                     Text("Nappy Changes")
                 }
                 
-                NavigationLink(destination: Text("Data")) {
+                NavigationLink(destination: WeaningDataView(child: child) ) {
                     Text("Snacks")
                 }
                 
-                NavigationLink(destination: Text("Data")) {
+                NavigationLink(destination: NaptimesDataView(child: child) ) {
                     Text("Naps")
                 }
                 
-                NavigationLink(destination: Text("Data")) {
+                NavigationLink(destination: ExpressedMilkDataView(child: child) ) {
                     Text("Expressed Milk")
                 }
             }

@@ -28,6 +28,8 @@
 		DA43F41624BA5547002FE487 /* EditFeedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */; };
 		DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */; };
 		DA49B44C24DB5272001C282A /* DataToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B44B24DB5272001C282A /* DataToolsView.swift */; };
+		DA49B45024DB622E001C282A /* WeaningDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B44F24DB622E001C282A /* WeaningDataView.swift */; };
+		DA49B45224DB624F001C282A /* NaptimesDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B45124DB624F001C282A /* NaptimesDataView.swift */; };
 		DA4DEA2A24D4B0B600ADC1EA /* Int32+timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */; };
 		DA4DEA2C24D4C4CF00ADC1EA /* ChildrenFormList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */; };
 		DA4DEA2E24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2D24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift */; };
@@ -151,6 +153,8 @@
 		DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedTimeView.swift; sourceTree = "<group>"; };
 		DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+color.swift"; sourceTree = "<group>"; };
 		DA49B44B24DB5272001C282A /* DataToolsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataToolsView.swift; path = bibs/Views/Dashboard/DataToolsView.swift; sourceTree = SOURCE_ROOT; };
+		DA49B44F24DB622E001C282A /* WeaningDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaningDataView.swift; sourceTree = "<group>"; };
+		DA49B45124DB624F001C282A /* NaptimesDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaptimesDataView.swift; sourceTree = "<group>"; };
 		DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int32+timers.swift"; sourceTree = "<group>"; };
 		DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenFormList.swift; sourceTree = "<group>"; };
 		DA4DEA2D24D4CF0E00ADC1EA /* FoodDiaryFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryFormSheet.swift; sourceTree = "<group>"; };
@@ -361,10 +365,12 @@
 			children = (
 				DABB736924BBA34F0005C2E1 /* Stats */,
 				DA43F41424BA553C002FE487 /* Editing Feeds */,
-				DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */,
+				DAE1A7CF24B92E7B00FFA96E /* FeedTimersDataView.swift */,
 				DAE1A7D124B92FFB00FFA96E /* BottleFeedsDataView.swift */,
 				DAE1A7CD24B92E5800FFA96E /* NappyChangeDataView.swift */,
-				DAE1A7CF24B92E7B00FFA96E /* FeedTimersDataView.swift */,
+				DA49B44F24DB622E001C282A /* WeaningDataView.swift */,
+				DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */,
+				DA49B45124DB624F001C282A /* NaptimesDataView.swift */,
 			);
 			path = "Data Views";
 			sourceTree = "<group>";
@@ -745,6 +751,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB1739C247D458600D94537 /* FeedSession.swift in Sources */,
+				DA49B45024DB622E001C282A /* WeaningDataView.swift in Sources */,
 				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
 				DAEE23D124C979D100E368DC /* DashboardView.swift in Sources */,
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
@@ -814,6 +821,7 @@
 				DA08834024CCF550003B7020 /* Snack+CoreDataClass.swift in Sources */,
 				DA49B44C24DB5272001C282A /* DataToolsView.swift in Sources */,
 				DABB736B24BBA3660005C2E1 /* TimelineView.swift in Sources */,
+				DA49B45224DB624F001C282A /* NaptimesDataView.swift in Sources */,
 				DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
 				DA08835424CEC4E9003B7020 /* Snack+snackList.swift in Sources */,

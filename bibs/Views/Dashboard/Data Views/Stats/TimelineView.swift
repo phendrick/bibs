@@ -14,13 +14,9 @@ struct TimelineView: View {
     @State var date: Date = Date()
     @State var endDate: Date? = nil
     @State var datePickerVisible: Bool = false
-    
     @State var selectedDateRange: ParentProfile.TrackableItemDateRange = .today
     
     fileprivate func viewForRow(row: Int) -> some View {
-//        NappyChangeCalendarRowView()
-        print("Getting item", row)
-//        return FeedSessionCalendarRowView()
         return Text("K")
     }
     
@@ -36,6 +32,7 @@ struct TimelineView: View {
                                 Text("Today")
                             }
                         }
+                        
                         Button(action: {
                             if self.profile.parent.weeklyDataSevenDays {
                                 self.selectedDateRange = .weekFrom(Date().lastSevenDays)
@@ -87,11 +84,11 @@ struct TimelineView: View {
                     }
                 } // header form
                 
-                Section {
-                    ForEach(0 ..< self.profile.parent.trackedItems(within: self.selectedDateRange).count, id: \.self ) { index in
-                        Text("\(self.profile.parent.trackedItems(within: self.selectedDateRange)[index].title)")
-                    }
-                }
+//                Section {
+//                    ForEach(0 ..< self.profile.parent.trackedItems(within: self.selectedDateRange).count, id: \.self ) { index in
+//                        Text("\(self.profile.parent.trackedItems(within: self.selectedDateRange)[index].title)")
+//                    }
+//                }
             }
         }
         .navigationBarTitle(self.selectedDateRange.description)

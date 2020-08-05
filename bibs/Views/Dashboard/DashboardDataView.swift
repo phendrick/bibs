@@ -27,7 +27,7 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
         allowDelete: Bool = true,
         @ViewBuilder content: @escaping(T, Int) -> Content
     ) {
-        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .linear)
+        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
         self.content = content
         self.allowDelete = allowDelete
     }

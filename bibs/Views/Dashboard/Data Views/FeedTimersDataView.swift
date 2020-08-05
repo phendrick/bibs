@@ -10,25 +10,23 @@ import SwiftUI
 
 struct FeedTimersDataView: View {
     @Environment(\.managedObjectContext) var moc
+    
+    @ObservedObject var child: Child
     @State var feedSessionType: FeedSession.FeedSessionStatus = .complete
     
     var body: some View {
         VStack {
-            Picker(selection: self.$feedSessionType, label: Text("")) {
-                Text("Completed").tag(FeedSession.FeedSessionStatus.complete.rawValue)
-                Text("Running").tag(FeedSession.FeedSessionStatus.running.rawValue)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            
             DashboardDataView(
-                predicate: NSPredicate(format: "%K IN %@", "state", [self.feedSessionType.rawValue])
+                predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.feedSessionType.rawValue], child)
             ) {(result: FeedSession, count: Int) in
                 NavigationLink(destination: EditFeedSessionView(feedSession: result, context: self.moc)) {
-                    HStack {
-                        Text("\(result.formattedElapsedTime(include_hsec: false))")
-                        Spacer()
+                    VStack(alignment: .leading, spacing: 15) {
+                        HStack {
+                            Text("\(result.formattedElapsedTime(include_hsec: false))")
+                        }
+                        
                         Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                    }
+                    }.padding([.top, .bottom])
                 }
             }
             

@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct NappyChangeDataView: View {
+struct NappyChangesDataView: View {
+    @ObservedObject var child: Child
     @State var nappyChangeType: NappyChange.NappyChangeType = .wet
-    
     
     var body: some View {
         VStack {
@@ -20,11 +20,12 @@ struct NappyChangeDataView: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
+            .padding()
             
             DashboardDataView(
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.nappyChangeType.rawValue])
             ) {(result: NappyChange, count: Int) in
-                HStack {
+                VStack {
                     HStack {
                         Text("\(result.status.description) ")
                         Text("\(result.wrappedCreatedAt.getFormattedDate())")
