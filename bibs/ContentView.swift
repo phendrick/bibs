@@ -19,7 +19,7 @@ struct ContentView: View {
         VStack {
             if viewSettings.initialView == .dashboard {
 //                DashboardView()
-                DataView(profile: profile)
+                DashboardView(profile: profile)
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
                         self.profile.parent.suspendActiveFeedSessions(as: .terminated)
                     })

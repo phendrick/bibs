@@ -25,17 +25,6 @@ struct DashboardHeaderView: View {
                     .scaledToFit()
                     .clipped()
                     .frame(width: 50, height: 50)
-                    .onTapGesture {
-                        if self.profile.parent.childrenArray.count < 2 {
-                            return
-                        }
-                        
-                        self.childListSheetVisible.toggle()
-                    }
-                    .sheet(isPresented: self.$childListSheetVisible) {
-                        ChildrenListSheet(childrenSheetVisible: self.$childListSheetVisible)
-                            .environmentObject(self.profile)
-                    }
             }
         }
     }

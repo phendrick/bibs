@@ -1,186 +1,76 @@
 //
-//  DashboardView.swift
+//  DataView.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 25/05/2020.
+//  Created by Paul Hendrick on 23/07/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 
 import SwiftUI
-import CoreData
-import SwiftUIPager
-
-enum FeedTool: Int, CaseIterable {
-    case FeedTimer
-    case BottleFeed
-    case NappyChange
-    case DataOverview
-    
-    var navigationBarTitle: String {
-        switch(self) {
-        case .FeedTimer: return "Timers"
-        case .BottleFeed: return "Bottle Feeds"
-        case .NappyChange: return "Nappy Changes"
-        case .DataOverview: return "Data & Tracking"
-        }
-    }
-}
 
 struct DashboardView: View {
-    @EnvironmentObject var profile: ProfileObserver
-    @ObservedObject var viewSettings = ViewSettings()
+    @ObservedObject var profile: ProfileObserver
+    
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     
-    @FetchRequest(
-        entity: FeedSession.entity(),
-        sortDescriptors: [],
-        predicate: NSPredicate(format: "state IN %@", [
-            FeedSession.FeedSessionStatus.running.rawValue, FeedSession.FeedSessionStatus.paused.rawValue
-        ]),
-        animation: .spring()) var activeFeedSessions: FetchedResults<FeedSession>
+    @State var expanded: Bool = true
+    @State var cofeeding: Bool = false
+    @State var timersListVisible: Bool = false
     
-    @FetchRequest(
-        entity: FeedSession.entity(),
-        sortDescriptors: [NSSortDescriptor(key: "createdAt", ascending: false)],
-        predicate: NSPredicate(format: "state IN %@", [FeedSession.FeedSessionStatus.complete.rawValue])
-        ) var completedFeedSessions: FetchedResults<FeedSession>
-        
-    @FetchRequest(
-        entity: Child.entity(),
-        sortDescriptors: [],
-        animation: .spring()) var children: FetchedResults<Child>
+    var count: CGFloat = 2
     
-    @State var activeFeedTool: FeedTool = .FeedTimer
-    @State var showingChildListActionSheet: Bool = false
+    func widthFromGeometry(geometry: GeometryProxy) -> CGFloat {
+        let multipler:CGFloat = count > 1 ? 0.9 : 1.0
+        return geometry.frame(in: .global).width * multipler
+    }
     
-    var cofeeding: Bool {
-        self.activeFeedSessions.count > 1
+    var showChildList: Bool {
+        self.profile.parent.activeChildrenArray.count > 1
     }
     
     var body: some View {
-        NavigationView {
-                    GeometryReader {geometry in
-                        ZStack(alignment: .top) {
-                            ActiveFeedsTrayView(profile: self.profile)
-                                .offset(
-                                    y: (self.activeFeedTool != .FeedTimer && self.profile.parent.currentFeedSessions.count > 0)
-                                        ? 0
-                                        : -geometry.frame(in: .global).minY*2
-                                )
-                                .frame(width: geometry.frame(in: .global).width * 0.9)
-                                .zIndex(2)
-                            
-                            ScrollView(showsIndicators: false) {
-                                VStack {
-                                    DashboardToolsView(
-                                        outerGeometry: geometry,
-                                        activeFeedTool: self.$activeFeedTool
-                                    ).environmentObject(ToolsData())
-                                    
-                                    if self.activeFeedTool == .FeedTimer {
-                                        FeedSessionActionsView()
-                                    }else if self.activeFeedTool == .BottleFeed {
-                                        BottleFeedActionsView()
-                                    }else if self.activeFeedTool == .NappyChange {
-                                        NappyChangeActionsView()
-                                    }else if self.activeFeedTool == .DataOverview {
-                                        //DataToolsView(profile: self.profile)
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    if self.activeFeedTool.rawValue == 0 {
-                                        VStack(spacing: 5) {
-                                            ForEach(self.profile.parent.currentFeedSessions) {session in
-                                                HStack {
-                                                    FeedSessionTimerView(profile: self.profile, feedSession: session)
-                                                    FeedSessionTimerActions(profile: self.profile, feedSession: session)
-                                                }
-                                                .padding()
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10, style: .circular)
-                                                        .foregroundColor(session.child?.theme.0)
-                                                        .opacity(session.isActiveFeedSession ? 1 : 0.25)
-                                                )
-                                                .foregroundColor(.white)
-                                                
-                                            }
-                                        }.frame(maxWidth: geometry.size.width * 0.8)
-                                        
-                                        VStack(spacing: 5) {
-                                            ForEach(self.completedFeedSessions) {session in
-                                                HStack {
-        //                                            Image(uiImage: session.child!.wrappedImage)
-        //                                                .resizable().frame(width: 50, height: 50)
-        //                                                .clipShape(
-        //                                                    Circle()
-        //                                                ).overlay(
-        //                                                    Circle().stroke(lineWidth: 2).foregroundColor(.red)
-        //                                                )
-                                                    FeedSessionTimerView(profile: self.profile, feedSession: session)
-                                                }
-                                                .padding()
-                                            }
-                                        }
-                                    }
-                                    
-                                    Spacer()
-                                }
-                            }
-                        }
+        ZStack(alignment: .bottom) {
+            NavigationView {
+                VStack(spacing: 0) {
+                    DashboardHeaderView().padding()
+
+                    if showChildList {
+                        NavigationLink(destination: ChildrenDashboardListView(profile: self.profile)) {
+                            DashboardHeaderOverviewView(profile: profile).padding()
+                        }.foregroundColor(Color(UIColor.label))
+                    }else if self.profile.parent.activeChild != nil {
+                        NavigationLink(destination: DataToolsView(child: self.profile.parent.activeChild!, profile: self.profile)) {
+                            DashboardHeaderOverviewView(profile: profile).padding()
+                        }.foregroundColor(Color(UIColor.label))
                     }
-                    .navigationBarTitle(self.activeFeedTool.navigationBarTitle)
-                    .navigationBarItems(
-                        leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
-                            Image(systemName: "person.crop.circle").foregroundColor(.red)
-                        },
-                        trailing:
-                            ZStack {
-                                Image(systemName: "heart.circle.fill").foregroundColor(.red)
-                                    .onTapGesture {
-                                        self.showingChildListActionSheet = true
-                                }
-                            }
-                    )
+
+                    DashboardToolsListView().padding([.top, .bottom])
+                    
+                    Spacer()
                 }
-                .navigationViewStyle(StackNavigationViewStyle())
-                .onAppear {
-                    print("Amount: ", self.profile.parent.expressedMilkAmount)
-                    print("Amount: ", self.profile.parent.expressedMilkGiven)
-                }
-    }
-    
-    func childListActionSheetButtons(exclude: Child?) -> [ActionSheet.Button] {
-        guard let activeChild = exclude else {
-            return []
-        }
-        
-        var buttons: [ActionSheet.Button] = []
-        
-        for child in children where child != activeChild {
-            let button = ActionSheet.Button.default(Text("\(child.wrappedName)")) {
-                self.profile.parent.setActiveChild(child: child)
+                .navigationBarTitle(Text("Hello"), displayMode: .large)
+                .navigationBarItems(
+                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
+                        Image(systemName: "person.crop.circle").foregroundColor(.red)
+                    }
+                )
             }
             
-            buttons.append(button)
+            Spacer()
+            
+            ActiveFeedsTrayView(profile: self.profile)
         }
-        
-        buttons.append(.cancel())
-        
-        return buttons
-    }
-
-    func childListActionSheetMessage(current: String ) -> String {
-        return "Active child profile: \(current)"
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        .edgesIgnoringSafeArea(.all)
+        .padding(.top, 2)
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
+struct DataView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        return DashboardView()
-            .environment(\.managedObjectContext, context)
-            .environmentObject(ProfileObserver.shared)
+        DashboardView(profile: ProfileObserver.shared)
+//            .previewLayout(.fixed(width: 400, height: 800))
     }
 }
