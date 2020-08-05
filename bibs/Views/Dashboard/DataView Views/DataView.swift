@@ -26,50 +26,45 @@ struct DataView: View {
         return geometry.frame(in: .global).width * multipler
     }
     
+    var showChildList: Bool {
+        self.profile.parent.activeChildrenArray.count > 1
+    }
+    
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottom) {
             NavigationView {
                 VStack(spacing: 0) {
-                    DashboardHeaderView().padding([.leading, .trailing])
-                    
-                    NavigationLink(destination: Text("OK")) {
-                        DashboardHeaderOverviewView(profile: profile).padding([.leading, .trailing, .bottom])
-                    }.foregroundColor(Color(UIColor.label))
-                    
-                    DashboardToolsListView()
+                    DashboardHeaderView().padding()
+
+                    if showChildList {
+                        NavigationLink(destination: ChildrenDashboardListView(profile: self.profile)) {
+                            DashboardHeaderOverviewView(profile: profile).padding()
+                        }.foregroundColor(Color(UIColor.label))
+                    }else if self.profile.parent.activeChild != nil {
+                        NavigationLink(destination: DataToolsView(child: self.profile.parent.activeChild!, profile: self.profile)) {
+                            DashboardHeaderOverviewView(profile: profile).padding()
+                        }.foregroundColor(Color(UIColor.label))
+                    }
+
+                    DashboardToolsListView().padding([.top, .bottom])
                     
                     Spacer()
-
-                    if self.profile.parent.activeChild != nil && self.profile.parent.activeChild!.activeFeedSession != nil{
-                        DashboardFeedTimerView(
-                            profile: self.profile,
-                            feedSession: self.profile.parent.activeChild!.activeFeedSession!,
-                            color: Color.red,
-                            expandedLayout: self.$expanded
-                        ).padding([.leading, .trailing])
-
-                        Button(action: {
-                            self.timersListVisible.toggle()
-                        }) {
-                            Text("Show all running timers").padding()
-                        }
-                        
-                        Text("OK")
-                    }else {
-                        Button("Start a timer") {
-                            withAnimation {
-                                try? self.profile.parent.activeChild?.startNewFeedSession()
-                                self.profile.objectWillChange.send()
-                            }
-                        }
-                    }
                 }
                 .navigationBarTitle(Text("Hello"), displayMode: .large)
+                .navigationBarItems(
+                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
+                        Image(systemName: "person.crop.circle").foregroundColor(.red)
+                    }
+                )
             }
             
-            DashboardPopupTimersListView(visible: $timersListVisible)
-                .animation(.spring())
+            Spacer()
+            
+            ActiveFeedsTrayView(profile: self.profile)
         }
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        .edgesIgnoringSafeArea(.all)
+        .padding(.top, 2)
     }
 }
 

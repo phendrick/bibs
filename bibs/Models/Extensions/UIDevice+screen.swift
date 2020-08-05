@@ -16,6 +16,14 @@ extension UIDevice {
         return bottom > 0
     }
     
+    var notchHeight: CGFloat {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let notchHeight = window?.safeAreaInsets.top ?? 0
+        
+        print(notchHeight)
+        return notchHeight
+    }
+    
     var hasLargeScreen: Bool {
         UIScreen.main.bounds.size.height > 800
     }

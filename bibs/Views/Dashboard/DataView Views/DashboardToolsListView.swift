@@ -37,7 +37,7 @@ struct DashboardToolsListView: View {
                             ? CGSize(width: 50, height: 0)
                             : .zero
                 }
-                    .font(.headline)
+                .font(.title)
             }
             .padding([.leading])
             
@@ -45,7 +45,7 @@ struct DashboardToolsListView: View {
                 HStack(alignment: .top, spacing: 15) {
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Feed").font(.subheadline)
+                        Text("Bottle Feed").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -58,7 +58,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("nappy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nappies").font(.subheadline)
+                        Text("Nappies").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -71,7 +71,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Weaning").font(.subheadline)
+                        Text("Weaning").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -84,7 +84,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nap time").font(.subheadline)
+                        Text("Nap time").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -97,7 +97,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Timed Feed").font(.subheadline)
+                        Text("Timed Feed").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -110,7 +110,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Expressed Milk").font(.subheadline)
+                        Text("Expressed Milk").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -123,22 +123,22 @@ struct DashboardToolsListView: View {
                     
                     Divider().frame(maxHeight: 100).foregroundColor(.red)
                     
-                    VStack(alignment: .center) {
-                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Food Diary").font(.subheadline)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.foodDiaryFormVisible = true
-                    }.sheet(isPresented: self.$foodDiaryFormVisible) {
-                        FoodDiaryFormSheet(foodDiaryFormVisible: self.$foodDiaryFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
+//                    VStack(alignment: .center) {
+//                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
+//                        Text("Food Diary").font(.body)
+//                    }
+//                    .frame(maxWidth: .infinity)
+//                    .onTapGesture {
+//                        self.foodDiaryFormVisible = true
+//                    }.sheet(isPresented: self.$foodDiaryFormVisible) {
+//                        FoodDiaryFormSheet(foodDiaryFormVisible: self.$foodDiaryFormVisible)
+//                            .environment(\.managedObjectContext, self.moc)
+//                            .environmentObject(self.profile)
+//                    }
                     
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Emotion").font(.subheadline)
+                        Text("Emotion").font(.body)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {

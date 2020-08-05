@@ -20,7 +20,7 @@ struct AddChildView: View {
     @State var name: String = ""
     @State var dueDate: Date = Date()
     @State var isBorn: Bool = true
-    @State var colorScheme: Int = 0
+    @State var colorScheme: Int16 = 0
     
     @State var showDatePicker: Bool = false
     
@@ -38,11 +38,11 @@ struct AddChildView: View {
                                 .shadow(radius: 5)
                                 .scaledToFit()
                                 .frame(maxHeight: 200)
-                                .overlay(
-                                    Circle().stroke(
-                                        Child.ColorSchemes[self.colorScheme], lineWidth: 6
-                                    )
-                                )
+//                                .overlay(
+//                                    Circle().stroke(
+//                                        Child.Themes[self.colorScheme], lineWidth: 6
+//                                    )
+//                                )
 //                                .animation(.linear)
                         }else {
                             VStack {
@@ -90,13 +90,13 @@ struct AddChildView: View {
                     HStack(spacing: 20) {
                         Spacer()
                         
-                        ForEach(Child.ColorSchemes.indices) {index in
+                        ForEach(Child.Themes.keys.sorted(), id: \.self) {index in
                             Rectangle()
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(Child.ColorSchemes[index])
+                                .foregroundColor(Child.Themes[index]?.0)
                                 .clipShape(Circle())
                                 .onTapGesture {
-                                    self.colorScheme = index
+//                                    self.colorScheme = index
                             }
                         }
                         

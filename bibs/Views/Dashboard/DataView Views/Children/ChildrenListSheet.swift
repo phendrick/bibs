@@ -48,7 +48,7 @@ struct ChildrenListSheet: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .background(child.themeColor)
+                    .background(child.theme.0)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     

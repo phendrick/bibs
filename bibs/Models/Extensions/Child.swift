@@ -11,58 +11,43 @@ import CoreData
 import SwiftUI
 import UIKit
 
-typealias ChildTheme = (Color, Color, Color)
+public typealias Theme = (Color, Color)
 
-extension Child: Identifiable, Trackable {
-    public var title: String {
-        "Baby name"
+extension Child: Identifiable {
+    static var Themes: [Int: Theme] {
+        [
+            0: (
+                background: Color(UIColor(named: "HighlightBlue") ?? UIColor.blue),
+                foreground: Color(UIColor(named: "HighlightBlueText") ?? UIColor.white)
+            ),
+            1: (
+                background: Color(UIColor(named: "HighlightGreen") ?? UIColor.green),
+                foreground: Color(UIColor(named: "HighlightGreenText") ?? UIColor.white)
+            ),
+            2: (
+                background: Color(UIColor(named: "HighlightPink") ?? UIColor.systemPink),
+                foreground: Color(UIColor(named: "HighlightPinkText") ?? UIColor.white)
+            ),
+            3: (
+                background: Color(UIColor(named: "HighlightRed") ?? UIColor.red),
+                foreground: Color(UIColor(named: "HighlightRedText") ?? UIColor.white)
+            ),
+            4: (
+                background: Color(UIColor(named: "HighlightYellow") ?? UIColor.yellow),
+                foreground: Color(UIColor(named: "HighlightYellowText") ?? UIColor.white
+            ))
+        ]
     }
     
-    public var details: String {
-        "baby details"
-    }
-    
-    static let ColorSchemes: [Color] = [
-        Color(#colorLiteral(red: 0.9753738046, green: 0.9755367637, blue: 0.9753522277, alpha: 1)),
-        Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)),
-        Color(#colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)),
-        Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)),
-        Color(#colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)),
-        Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)),
-        Color(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
-    ]
-    
-    var themeColor: Color {
-        let defaultColor = UIColor.white
-        var color: UIColor?
-        
-        switch(self.colorScheme) {
-        case 0:
-            color = UIColor(named: "HighlightSilver")
-        case 1:
-            color = UIColor(named: "HighlightYellow")
-        case 2:
-            color = UIColor(named: "HighlightGreen")
-        case 3:
-            color = UIColor(named: "HighlightRed")
-        case 4:
-            color = UIColor(named: "HighlightPink")
-        case 5:
-            color = UIColor(named: "HighlightBlue")
-        case 6:
-            color = UIColor(named: "HighlightPurple")
-        case 7:
-            color = UIColor(named: "HighlightYellow")
-        default:
-            color = UIColor.white
-        }
-        
-        let baseColor = color ?? defaultColor
-        return Color(baseColor)
+    public var theme: Theme {
+        Child.Themes[Int(self.colorScheme)]
+            ??
+            (Color(UIColor(named: "HighlightYellow") ?? UIColor.yellow), Color(UIColor(named: "HighlightYellowText") ?? UIColor.white))
     }
     
     public enum ChildStatuses: Int16 {
         case current
+        case weaned
         case archived
     }
     
@@ -137,29 +122,8 @@ extension Child: Identifiable, Trackable {
     }
     
     var activeFeedSession: FeedSession? {
-        let request: NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
-        
-        let activeSessionValues = [
-            NSNumber(value: FeedSession.FeedSessionStatus.running.rawValue),
-            NSNumber(value: FeedSession.FeedSessionStatus.paused.rawValue),
-        ]
-        
-        request.predicate = NSPredicate(format: "state IN %@", activeSessionValues)
-        request.fetchLimit = 1
-        
-        guard let context = self.managedObjectContext else {
-            print("Error!!")
-            fatalError()
-        }
-        
-        self.parent?.objectWillChange.send()
-        
-        let sessions = try? context.fetch(request) as [FeedSession]
-        
-        if let session = sessions?.first {
-            return session
-        }else {
-            return nil
+        return feedSessionsArray.first {
+            $0.status == .paused || $0.status == .running
         }
     }
     
@@ -193,8 +157,6 @@ extension Child: Identifiable, Trackable {
             try? activeSession.finish()
         }
         
-        print("Starting new feed session")
-        
         let session = self.buildNewFeedSession()
         
         do {
@@ -202,11 +164,9 @@ extension Child: Identifiable, Trackable {
             
             /// if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
-                print("GO")
                 session.resume()
             }
             
-            print("done")
             self.objectWillChange.send()
         }catch {
             print("Error: \(error)")

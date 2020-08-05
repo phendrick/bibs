@@ -94,12 +94,14 @@ struct ProfileEditView: View {
                         }
                     }
                     
-                    HStack {
-                        NavigationLink(destination: ChildEditView()) {
-                            Text("Add another")
-                        }
-                    }
+//                    HStack {
+//                        NavigationLink(destination: ChildEditView()) {
+//                            Text("Add another")
+//                        }
+//                    }
                 }
+                
+                Text("").frame(height: self.profile.trayHeight)
             }
         }
         .navigationBarTitle(Text("Update Profile"), displayMode: .inline)

@@ -16,7 +16,7 @@ struct DashboardHeaderView: View {
         ZStack {
             HStack(alignment: .center) {
                 Text("How are you today?")
-                    .font(.headline)
+                    .font(.title)
                 
                 Spacer()
                 

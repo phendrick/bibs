@@ -9,31 +9,47 @@
 import SwiftUI
 
 struct DataToolsView: View {
-    @EnvironmentObject var profile: ProfileObserver
+    @ObservedObject var child: Child
+    @ObservedObject var profile: ProfileObserver
+    
+    @State var expandedLayout = true
     
     var body: some View {
         VStack {
-            NavigationLink(destination: TimelineView().environmentObject(self.profile)) {
-                Text("Feed timer data")
+            List {
+                NavigationLink(destination: TimelineView().environmentObject(self.profile)) {
+                    Text("Breast Feeds")
+                }
+                
+                NavigationLink(destination: Text("Data")) {
+                    Text("Bottle Feeds")
+                }
+                
+                NavigationLink(destination: Text("Data")) {
+                    Text("Nappy Changes")
+                }
+                
+                NavigationLink(destination: Text("Data")) {
+                    Text("Snacks")
+                }
+                
+                NavigationLink(destination: Text("Data")) {
+                    Text("Naps")
+                }
+                
+                NavigationLink(destination: Text("Data")) {
+                    Text("Expressed Milk")
+                }
             }
             
-            NavigationLink(destination: Text("Data")) {
-                Text("Bottle Feeds")
-            }
+            Spacer()
             
-            NavigationLink(destination: Text("Data")) {
-                Text("Expressed Milk")
-            }
-            
-            NavigationLink(destination: Text("Data")) {
-                Text("Nappy Changes")
-            }
-        }
+        }.navigationBarTitle("\(self.child.wrappedName)'s data")
     }
 }
 
 struct DataToolsView_Previews: PreviewProvider {
     static var previews: some View {
-        DataToolsView()
+        DataToolsView(child: Child(), profile: ProfileObserver.shared)
     }
 }

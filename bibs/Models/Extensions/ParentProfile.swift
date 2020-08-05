@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 extension ParentProfile {
+    /// @UserDefaultSetting var autostartTimer: Bool = true
+    
     public var autostartTimer: Bool {
         get {
             UserDefaults.standard.bool(forKey: "autostartTimers")
@@ -56,7 +58,6 @@ extension ParentProfile {
         }
         
         set(newValue) {
-            print("Setting weeklyDataSevenDays to \(newValue)2")
             UserDefaults.standard.set(newValue, forKey: "weeklyDataSevenDays")
         }
     }
@@ -226,7 +227,17 @@ extension ParentProfile {
             }
         }
         
+        if activeFeedSessions.count > 1 {
+            return activeFeedSessions.sorted { (lhs, rhs) -> Bool in
+                lhs.currentBreastSide == .left
+            }
+        }
+        
         return activeFeedSessions
+    }
+    
+    public var childrenWithoutCurrentFeedSessions: [Child] {
+        return childrenArray.filter {$0.status == .current && $0.activeFeedSession == nil}
     }
     
     public var suspendedFeedSessions: [FeedSession] {
@@ -253,15 +264,12 @@ extension ParentProfile {
         
         for session in activeFeedSessions {
             if suspensionType == .terminated && pauseRunningTimersOnShutdown {
-                print("Pausing...")
                 session.pause()
             }else {
-                print("Suspending...")
                 session.suspend()
             }
         }
         
-        print("Saving")
         try? context.save()
     }
     
@@ -276,16 +284,13 @@ extension ParentProfile {
 //            }
 //        }
 //
-//        print(total)
 //        // 30 mins max drift allowed - fixme: make this a config var
 //        return total < 1800
 //    }
     
     public func resumeSuspendedFeedSessions() {
-        print("Unsuspending...")
         let currentDate = Date()
         
-        print(suspendedFeedSessions.count)
         for session in suspendedFeedSessions {
             let timeDifference = session.suspendedAt?.distance(to: currentDate)
                         
@@ -309,8 +314,6 @@ extension ParentProfile {
         guard let context = self.managedObjectContext else {
             fatalError()
         }
-        
-        print("Pausing active sessions")
         
         for session in activeFeedSessions {
             session.suspendedAt = Date()
@@ -373,13 +376,11 @@ extension ParentProfile {
         
         for bottle in sortedBottles {
             if reducedCounter + bottle.amount > reduceByAmount {
-                print("Reducing bottle amount from \(bottle.amount) by \(reduceByAmount - reducedCounter) ")
                 bottle.amount -= (reduceByAmount - reducedCounter)
                 
                 break
             }
             
-            print("Setting bottle amount to 0")
             reducedCounter += bottle.amount
             bottle.amount = 0
         }

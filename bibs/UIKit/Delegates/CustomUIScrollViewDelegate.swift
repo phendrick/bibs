@@ -26,8 +26,6 @@ class CustomUIScrollViewDelegate: NSObject, UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetIndex = Int(scrollView.contentOffset.x / CGFloat(pageWidth))
         
-        print(scrollView.contentOffset)
-        
         self.scrollViewDidEndDeceleratingCallback(offsetIndex)
     }
 }

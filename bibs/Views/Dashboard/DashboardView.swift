@@ -59,95 +59,95 @@ struct DashboardView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader {geometry in
-                ZStack(alignment: .top) {
-                    ActiveFeedsPreview(profile: self.profile)
-                        .offset(
-                            y: (self.activeFeedTool != .FeedTimer && self.profile.parent.currentFeedSessions.count > 0)
-                                ? 0
-                                : -geometry.frame(in: .global).minY*2
-                        )
-                        .frame(width: geometry.frame(in: .global).width * 0.9)
-                        .zIndex(2)
-                    
-                    ScrollView(showsIndicators: false) {
-                        VStack {
-                            DashboardToolsView(
-                                outerGeometry: geometry,
-                                activeFeedTool: self.$activeFeedTool
-                            ).environmentObject(ToolsData())
+                    GeometryReader {geometry in
+                        ZStack(alignment: .top) {
+                            ActiveFeedsTrayView(profile: self.profile)
+                                .offset(
+                                    y: (self.activeFeedTool != .FeedTimer && self.profile.parent.currentFeedSessions.count > 0)
+                                        ? 0
+                                        : -geometry.frame(in: .global).minY*2
+                                )
+                                .frame(width: geometry.frame(in: .global).width * 0.9)
+                                .zIndex(2)
                             
-                            if self.activeFeedTool == .FeedTimer {
-                                FeedSessionActionsView()
-                            }else if self.activeFeedTool == .BottleFeed {
-                                BottleFeedActionsView()
-                            }else if self.activeFeedTool == .NappyChange {
-                                NappyChangeActionsView()
-                            }else if self.activeFeedTool == .DataOverview {
-                                DataToolsView()
-                            }
-                            
-                            Spacer()
-                            
-                            if self.activeFeedTool.rawValue == 0 {
-                                VStack(spacing: 5) {
-                                    ForEach(self.profile.parent.currentFeedSessions) {session in
-                                        HStack {
-                                            FeedSessionTimerView(profile: self.profile, feedSession: session)
-                                            FeedSessionTimerActions(profile: self.profile, feedSession: session)
-                                        }
-                                        .padding()
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10, style: .circular)
-                                                .foregroundColor(session.child?.themeColor ?? .green)
-                                                .opacity(session.isActiveFeedSession ? 1 : 0.25)
-                                        )
-                                        .foregroundColor(.white)
+                            ScrollView(showsIndicators: false) {
+                                VStack {
+                                    DashboardToolsView(
+                                        outerGeometry: geometry,
+                                        activeFeedTool: self.$activeFeedTool
+                                    ).environmentObject(ToolsData())
+                                    
+                                    if self.activeFeedTool == .FeedTimer {
+                                        FeedSessionActionsView()
+                                    }else if self.activeFeedTool == .BottleFeed {
+                                        BottleFeedActionsView()
+                                    }else if self.activeFeedTool == .NappyChange {
+                                        NappyChangeActionsView()
+                                    }else if self.activeFeedTool == .DataOverview {
+                                        //DataToolsView(profile: self.profile)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    if self.activeFeedTool.rawValue == 0 {
+                                        VStack(spacing: 5) {
+                                            ForEach(self.profile.parent.currentFeedSessions) {session in
+                                                HStack {
+                                                    FeedSessionTimerView(profile: self.profile, feedSession: session)
+                                                    FeedSessionTimerActions(profile: self.profile, feedSession: session)
+                                                }
+                                                .padding()
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10, style: .circular)
+                                                        .foregroundColor(session.child?.theme.0)
+                                                        .opacity(session.isActiveFeedSession ? 1 : 0.25)
+                                                )
+                                                .foregroundColor(.white)
+                                                
+                                            }
+                                        }.frame(maxWidth: geometry.size.width * 0.8)
                                         
-                                    }
-                                }.frame(maxWidth: geometry.size.width * 0.8)
-                                
-                                VStack(spacing: 5) {
-                                    ForEach(self.completedFeedSessions) {session in
-                                        HStack {
-//                                            Image(uiImage: session.child!.wrappedImage)
-//                                                .resizable().frame(width: 50, height: 50)
-//                                                .clipShape(
-//                                                    Circle()
-//                                                ).overlay(
-//                                                    Circle().stroke(lineWidth: 2).foregroundColor(.red)
-//                                                )
-                                            FeedSessionTimerView(profile: self.profile, feedSession: session)
+                                        VStack(spacing: 5) {
+                                            ForEach(self.completedFeedSessions) {session in
+                                                HStack {
+        //                                            Image(uiImage: session.child!.wrappedImage)
+        //                                                .resizable().frame(width: 50, height: 50)
+        //                                                .clipShape(
+        //                                                    Circle()
+        //                                                ).overlay(
+        //                                                    Circle().stroke(lineWidth: 2).foregroundColor(.red)
+        //                                                )
+                                                    FeedSessionTimerView(profile: self.profile, feedSession: session)
+                                                }
+                                                .padding()
+                                            }
                                         }
-                                        .padding()
                                     }
+                                    
+                                    Spacer()
                                 }
                             }
-                            
-                            Spacer()
                         }
                     }
+                    .navigationBarTitle(self.activeFeedTool.navigationBarTitle)
+                    .navigationBarItems(
+                        leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
+                            Image(systemName: "person.crop.circle").foregroundColor(.red)
+                        },
+                        trailing:
+                            ZStack {
+                                Image(systemName: "heart.circle.fill").foregroundColor(.red)
+                                    .onTapGesture {
+                                        self.showingChildListActionSheet = true
+                                }
+                            }
+                    )
                 }
-            }
-            .navigationBarTitle(self.activeFeedTool.navigationBarTitle)
-            .navigationBarItems(
-                leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
-                    Image(systemName: "person.crop.circle").foregroundColor(.red)
-                },
-                trailing:
-                    ZStack {
-                        Image(systemName: "heart.circle.fill").foregroundColor(.red)
-                            .onTapGesture {
-                                self.showingChildListActionSheet = true
-                        }
-                    }
-            )
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear {
-            print("Amount: ", self.profile.parent.expressedMilkAmount)
-            print("Amount: ", self.profile.parent.expressedMilkGiven)
-        }
+                .navigationViewStyle(StackNavigationViewStyle())
+                .onAppear {
+                    print("Amount: ", self.profile.parent.expressedMilkAmount)
+                    print("Amount: ", self.profile.parent.expressedMilkGiven)
+                }
     }
     
     func childListActionSheetButtons(exclude: Child?) -> [ActionSheet.Button] {

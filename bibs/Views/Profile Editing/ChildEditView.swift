@@ -7,9 +7,10 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ChildEditView: View {
-    var child: Child?
+    var child: Child
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var context
@@ -33,51 +34,47 @@ struct ChildEditView: View {
                         Spacer()
                         
                         if image != nil {
-                            image?
-                                .resizable()
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                                .scaledToFit()
-                                .frame(maxHeight: 100)
-                                .overlay(
-                                    Circle().stroke(
-                                        Child.ColorSchemes[self.colorScheme], lineWidth: 6
-                                    )
-                                )
+                            AvatarImageView(image: image, color:Child.Themes[self.colorScheme]!.0)
+                                .frame(width: 200, height: 200)
                                 .animation(.linear)
                         }else {
                             VStack {
                                 Circle()
                                     .opacity(0.2)
-                                    .foregroundColor(Child.ColorSchemes[self.colorScheme])
-                                    .frame(width: 100, height: 100)
+                                    .foregroundColor(child.theme.0)
+                                    .frame(width: 200, height: 200)
                                     .overlay(VStack {
                                         ZStack {
                                             Circle()
-                                                .stroke(Child.ColorSchemes[self.colorScheme], lineWidth: 6)
+                                                .stroke(
+                                                    Child.Themes[self.colorScheme]!.0, lineWidth: 6
+                                                )
                                                 .foregroundColor(.black)
                                             Image(systemName: "camera")
                                                 .font(.system(size: 40))
                                         }
                                     })
                                     .animation(.linear)
-                                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
-                                        ImagePicker(image: self.$inputImage)
-                                    }
-                                    .onTapGesture {
-                                        self.showingImagePicker.toggle()
-                                    }
                             }
                         }
                         
                         Spacer()
-                    }.padding(.top, 25)
+                    }
+                    .padding(.top, 25)
+                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
+                        ImagePicker(image: self.$inputImage)
+                    }
+                    .onTapGesture {
+                        self.showingImagePicker.toggle()
+                    }
                 ) {
                     EmptyView()
                 }
                 
                 Section(header: Text("About your baby")) {
                     TextField("Name", text: $name)
+                }.onTapGesture {
+                    print(self.child.theme)
                 }
                 
                 Section(header: Text("Due date")) {
@@ -93,17 +90,17 @@ struct ChildEditView: View {
                 Section(header: Text("Choose a colour scheme")) {
                     HStack(spacing: 20) {
                         Spacer()
-                        
-                        ForEach(Child.ColorSchemes.indices) {index in
+
+                        ForEach(Child.Themes.keys.sorted(), id: \.self) {index in
                             Rectangle()
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(Child.ColorSchemes[index])
+                                .foregroundColor(Child.Themes[index]?.0)
                                 .clipShape(Circle())
                                 .onTapGesture {
                                     self.colorScheme = index
                             }
                         }
-                        
+
                         Spacer()
                     }.offset(x: -15)
                 }
@@ -114,26 +111,30 @@ struct ChildEditView: View {
             Text("Done")
         })
         .onAppear {
-            self.name = self.child?.wrappedName ?? ""
+            self.name = self.child.wrappedName
             
-            if let _ = self.child?.image {
-                self.image = Image(uiImage: self.child!.wrappedImage)
+            if let _ = self.child.image {
+                self.image = Image(uiImage: self.child.wrappedImage)
             }
             
-            self.isBorn = self.child?.isBorn ?? true
-            self.colorScheme = Int(self.child?.colorScheme ?? 0)
-            self.dueDate = self.child?.dueDate ?? Date()
+            self.isBorn = self.child.isBorn
+            self.colorScheme = Int(self.child.colorScheme)
+            self.dueDate = self.child.dueDate ?? Date()
         }
     }
     
     func save() {
-        self.child?.wrappedCreatedAt = Date()
-        self.child?.wrappedName = self.name
-        self.child?.colorScheme = Int16(self.colorScheme)
-        self.child?.isBorn = self.isBorn
+        self.child.wrappedCreatedAt = Date()
+        self.child.wrappedName = self.name
+        self.child.colorScheme = Int16(self.colorScheme)
+        self.child.isBorn = self.isBorn
         
-        if let inputImage = self.inputImage {
-            self.child?.image = inputImage.pngData()
+        if var inputImage = self.inputImage {
+            if inputImage.size.width > 200 || inputImage.size.height > 200 {
+                inputImage = inputImage.resize(newSize: CGSize(width: 400, height: 400))
+            }
+            
+            self.child.image = inputImage.pngData()
         }
         
         do {
@@ -156,6 +157,10 @@ struct ChildEditView: View {
 
 struct ChildEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ChildEditView()
+        let context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        
+        let child = Child(context: context)
+        
+        return ChildEditView(child: child)
     }
 }
