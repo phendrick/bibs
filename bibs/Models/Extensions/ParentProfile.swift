@@ -461,4 +461,14 @@ extension ParentProfile {
         
         return items
     }
+    
+    public var latestEmotionType: Emotion.EmotionType {
+        let set = emotions as? Set<Emotion> ?? []
+        
+        let sorted: [Emotion] = set.sorted {
+            $0.wrappedCreatedAt < $1.wrappedCreatedAt
+        }
+        
+        return sorted.first?.status ?? Emotion.EmotionType.happy
+    }
 }

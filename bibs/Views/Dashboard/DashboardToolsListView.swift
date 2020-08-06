@@ -22,7 +22,6 @@ struct DashboardToolsListView: View {
     @State var manualFeedTimerFormVisible = false
     
     @State var foodDiaryFormVisible = false
-    @State var emotionFormVisible = false
     
     var iconSize: CGFloat {
         UIDevice.current.hasLargeScreen ? 100 : 80
@@ -117,34 +116,6 @@ struct DashboardToolsListView: View {
                         self.expressedMilkFormVisible = true
                     }.sheet(isPresented: self.$expressedMilkFormVisible) {
                         ExpressedMilkFormSheet(expressedMilkFormVisible: self.$expressedMilkFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
-                    
-                    Divider().frame(maxHeight: 100).foregroundColor(.red)
-                    
-//                    VStack(alignment: .center) {
-//                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-//                        Text("Food Diary").font(.body)
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                    .onTapGesture {
-//                        self.foodDiaryFormVisible = true
-//                    }.sheet(isPresented: self.$foodDiaryFormVisible) {
-//                        FoodDiaryFormSheet(foodDiaryFormVisible: self.$foodDiaryFormVisible)
-//                            .environment(\.managedObjectContext, self.moc)
-//                            .environmentObject(self.profile)
-//                    }
-                    
-                    VStack(alignment: .center) {
-                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Emotion").font(.body)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.emotionFormVisible = true
-                    }.sheet(isPresented: self.$emotionFormVisible) {
-                        EmotionDiaryFormSheet(emotionDiaryFormVisible: self.$emotionFormVisible)
                             .environment(\.managedObjectContext, self.moc)
                             .environmentObject(self.profile)
                     }

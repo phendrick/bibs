@@ -41,7 +41,7 @@ struct DashboardView: View {
                             DashboardHeaderOverviewView(profile: profile).padding()
                         }.foregroundColor(Color(UIColor.label))
                     }else if self.profile.parent.activeChild != nil {
-                        NavigationLink(destination: DataToolsView(child: self.profile.parent.activeChild!, profile: self.profile)) {
+                        NavigationLink(destination: DatapointsListView(child: self.profile.parent.activeChild!, profile: self.profile)) {
                             DashboardHeaderOverviewView(profile: profile).padding()
                         }.foregroundColor(Color(UIColor.label))
                     }

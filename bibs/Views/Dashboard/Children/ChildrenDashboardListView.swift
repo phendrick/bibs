@@ -15,7 +15,7 @@ struct ChildrenDashboardListView: View {
         VStack {
             VStack {
                 List(self.profile.parent.activeChildrenArray) { child in
-                    NavigationLink(destination: DataToolsView(child: child, profile: self.profile)) {
+                    NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
                         Text("\(child.wrappedName)")
                     }
                 }

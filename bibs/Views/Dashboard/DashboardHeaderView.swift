@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct DashboardHeaderView: View {
+    @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
-    @State var childListSheetVisible: Bool = false
+    @State var emotionFormVisible = false
     
     var body: some View {
         ZStack {
@@ -20,11 +21,14 @@ struct DashboardHeaderView: View {
                 
                 Spacer()
                 
-                Image("teddy")
-                    .resizable()
-                    .scaledToFit()
-                    .clipped()
-                    .frame(width: 50, height: 50)
+                Text("\(self.profile.parent.latestEmotionType.emoji)")
+                    .font(.system(size: 50))
+            }.onTapGesture {
+                self.emotionFormVisible = true
+            }.sheet(isPresented: self.$emotionFormVisible) {
+                EmotionDiaryFormSheet(emotionDiaryFormVisible: self.$emotionFormVisible)
+                    .environment(\.managedObjectContext, self.moc)
+                    .environmentObject(self.profile)
             }
         }
     }

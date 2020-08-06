@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct DataToolsView: View {
+struct DatapointsListView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
@@ -50,6 +50,6 @@ struct DataToolsView: View {
 
 struct DataToolsView_Previews: PreviewProvider {
     static var previews: some View {
-        DataToolsView(child: Child(), profile: ProfileObserver.shared)
+        DatapointsListView(child: Child(), profile: ProfileObserver.shared)
     }
 }
