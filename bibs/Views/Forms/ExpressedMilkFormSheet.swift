@@ -93,6 +93,7 @@ struct ExpressedMilkFormSheet: View {
                         try self.moc.save()
                         
                         self.selectedExpressedBottles = []
+                        self.profile.objectWillChange.send()
                     }catch {
                     }
                 }) {

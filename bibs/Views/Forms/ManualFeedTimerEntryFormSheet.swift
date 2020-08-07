@@ -130,7 +130,7 @@ struct ManualFeedTimerEntryFormSheet: View {
                     
                     do {
                         try self.moc.save()
-                        
+                        self.profile.objectWillChange.send()
                         self.feedTimerFormVisible = false
                     }catch {
                         debugPrint("Error saving")

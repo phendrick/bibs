@@ -120,7 +120,7 @@ struct NaptimeFormSheet: View {
                      
                     do {
                         try self.moc.save()
-                        
+                        self.profile.objectWillChange.send()
                         self.naptimeFormVisible = false
                     }catch {
                         debugPrint("Error saving")

@@ -117,6 +117,7 @@ struct NappyChangeFormSheet: View {
                     }catch {
                     }
 
+                    self.profile.objectWillChange.send()
                     self.nappyChangeFormVisible = false
                 }
             }

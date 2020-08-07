@@ -29,16 +29,16 @@ struct DashboardToolsListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("Add an entry")
-                    .onTapGesture {
-                        self.containerOffset = self.containerOffset.width == 0
-                            ? CGSize(width: 50, height: 0)
-                            : .zero
-                }
-                .font(.callout)
-            }
-            .padding([.leading])
+//            HStack {
+//                Text("Add an entry")
+//                    .onTapGesture {
+//                        self.containerOffset = self.containerOffset.width == 0
+//                            ? CGSize(width: 50, height: 0)
+//                            : .zero
+//                }
+//                .font(.callout)
+//            }
+//            .padding([.leading])
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 15) {

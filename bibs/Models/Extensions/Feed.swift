@@ -29,6 +29,13 @@ extension Feed: Identifiable, Timeable {
                 case .right: return (full: "Right side", label: "R", short: "Right")
             }
         }
+        
+        var switched: BreastSide {
+            switch(self) {
+            case .left: return .right
+            case .right: return .left
+            }
+        }
     }
     
     public var wrappedCreatedAt: Date {

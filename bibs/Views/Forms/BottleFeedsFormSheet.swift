@@ -122,7 +122,7 @@ struct BottleFeedsFormSheet: View {
                     
                     do {
                         try self.moc.save()
-                        
+                        self.profile.objectWillChange.send()
                         self.selectedExpressedBottles = []
                     }catch {
                     }

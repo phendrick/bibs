@@ -80,6 +80,7 @@ struct SnackFormSheet: View {
                     
                     try? self.moc.save()
                     self.snackFormVisible = false
+                    self.profile.objectWillChange.send()
                 }
             }
             .frame(maxWidth: .infinity)

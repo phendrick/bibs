@@ -127,7 +127,7 @@ extension Child: Identifiable {
         }
     }
     
-    func buildNewFeedSession() -> FeedSession {
+    func buildNewFeedSession(side: Feed.BreastSide = .left) -> FeedSession {
         guard let context = self.managedObjectContext else {
             fatalError()
         }
@@ -138,7 +138,7 @@ extension Child: Identifiable {
         
         let feed       = Feed(context: context)
         feed.createdAt = Date()
-        feed.breastSide = .left
+        feed.breastSide = side
         
         session.addToFeeds(feed)
         
@@ -157,7 +157,13 @@ extension Child: Identifiable {
             try? activeSession.finish()
         }
         
-        let session = self.buildNewFeedSession()
+        var side: Feed.BreastSide = .left
+        
+        if let currentSession = parent?.currentFeedSessions.filter({$0.child != self}).first {
+            side = currentSession.currentBreastSide == side ? side.switched : side
+        }
+        
+        let session = self.buildNewFeedSession(side: side)
         
         do {
             try context.save()
