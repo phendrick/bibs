@@ -55,7 +55,7 @@ struct DashboardHeaderOverviewView: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("Nap time")
+                    Text("Naps")
                         .font(.subheadline).padding(.bottom, 10).lineLimit(1)
                     Text("\(profile.parent.todaysNapsOverview.1)")
                         .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))

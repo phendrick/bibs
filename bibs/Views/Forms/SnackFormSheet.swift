@@ -28,7 +28,7 @@ struct SnackFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Snacks & Solid foods").font(.title)
+            Text("Weaning").font(.title)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
