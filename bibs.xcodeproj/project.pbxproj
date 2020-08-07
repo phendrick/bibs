@@ -18,6 +18,7 @@
 		DA08835024CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08834F24CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift */; };
 		DA08835224CE50C8003B7020 /* NaptimeFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08835124CE50C8003B7020 /* NaptimeFormSheet.swift */; };
 		DA08835424CEC4E9003B7020 /* Snack+snackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08835324CEC4E9003B7020 /* Snack+snackList.swift */; };
+		DA0D48D924DCB97B000A1195 /* FeedTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D48D824DCB97B000A1195 /* FeedTimerView.swift */; };
 		DA0F7F9B24DABED200955B6B /* UImage+resizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F7F9A24DABED200955B6B /* UImage+resizable.swift */; };
 		DA0F7F9D24DAC65100955B6B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F7F9C24DAC65100955B6B /* AvatarImageView.swift */; };
 		DA18ECE424D6026200211144 /* ChildrenDashboardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18ECE324D6026200211144 /* ChildrenDashboardListView.swift */; };
@@ -142,6 +143,7 @@
 		DA08834F24CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualFeedTimerEntryFormSheet.swift; sourceTree = "<group>"; };
 		DA08835124CE50C8003B7020 /* NaptimeFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaptimeFormSheet.swift; sourceTree = "<group>"; };
 		DA08835324CEC4E9003B7020 /* Snack+snackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snack+snackList.swift"; sourceTree = "<group>"; };
+		DA0D48D824DCB97B000A1195 /* FeedTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTimerView.swift; sourceTree = "<group>"; };
 		DA0F7F9A24DABED200955B6B /* UImage+resizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UImage+resizable.swift"; sourceTree = "<group>"; };
 		DA0F7F9C24DAC65100955B6B /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		DA18ECE324D6026200211144 /* ChildrenDashboardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenDashboardListView.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				DA8307BB24A7426400454F14 /* Datapoints */,
 				DA08835524CF88B2003B7020 /* Children */,
 				DAEE23D024C979D100E368DC /* DashboardView.swift */,
+				DA0D48D824DCB97B000A1195 /* FeedTimerView.swift */,
 				DA51154224A28AC400442543 /* DashboardDataRowView.swift */,
 				DA51154424A2A8FD00442543 /* DashboardDataView.swift */,
 				DAEBBF4E24CB7CA30065B232 /* DashboardToolsListView.swift */,
@@ -763,6 +766,7 @@
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DA08834124CCF550003B7020 /* Snack+CoreDataProperties.swift in Sources */,
 				DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */,
+				DA0D48D924DCB97B000A1195 /* FeedTimerView.swift in Sources */,
 				DA8307B124A7417500454F14 /* FeedSession+CoreDataProperties.swift in Sources */,
 				DAEE23D524C9813600E368DC /* Nap+CoreDataProperties.swift in Sources */,
 				DA2B0FD624C8E64D00209638 /* DispatchQueue+background.swift in Sources */,

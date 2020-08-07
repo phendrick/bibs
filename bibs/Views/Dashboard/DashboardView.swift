@@ -61,6 +61,12 @@ struct DashboardView: View {
             Spacer()
             
             ActiveFeedsTrayView(profile: self.profile)
+                .background(
+                    RoundedRectangle(cornerRadius: 15, style: .continuous)
+                        .foregroundColor(Color(UIColor.secondarySystemBackground))
+                        .clipped(antialiased: true)
+                        .shadow(color: Color.gray.opacity(0.15), radius: 0, x: 0, y: -6)
+                )
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .edgesIgnoringSafeArea(.all)

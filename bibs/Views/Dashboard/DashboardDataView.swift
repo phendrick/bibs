@@ -13,6 +13,7 @@ import CoreData
 
 struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     @Environment(\.managedObjectContext) var moc
+    @ObservedObject var profile: ProfileObserver
     
     var title: String?
     var allowDelete: Bool = true
@@ -23,11 +24,13 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     
     init(
         predicate: NSPredicate? = nil,
+        profile: ProfileObserver,
         sortDescriptors: [NSSortDescriptor] = [],
         allowDelete: Bool = true,
         @ViewBuilder content: @escaping(T, Int) -> Content
     ) {
         fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
+        self.profile = profile
         self.content = content
         self.allowDelete = allowDelete
     }
@@ -38,8 +41,9 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
             self.moc.delete(row)
         }
         
-        self.moc.refreshAllObjects()
+        //self.moc.refreshAllObjects()
         try? self.moc.save()
+        self.profile.objectWillChange.send()
     }
     
     var body: some View {

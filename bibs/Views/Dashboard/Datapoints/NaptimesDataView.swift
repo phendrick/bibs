@@ -10,11 +10,13 @@ import SwiftUI
 
 struct NaptimesDataView: View {
     @ObservedObject var child: Child
+    @ObservedObject var profile: ProfileObserver
     
     var body: some View {
         VStack {
             DashboardDataView(
-                predicate: NSPredicate(format: "child = %@", child)
+                predicate: NSPredicate(format: "child = %@", child),
+                profile: self.profile
             ) {(result: Nap, count: Int) in
                 VStack(alignment: .leading, spacing: 15) {
                     Text("\(result.duration.formattedHoursAndMinutes)")

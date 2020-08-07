@@ -14,7 +14,7 @@ struct DashboardHeaderOverviewView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("\(profile.parent.activeChild?.wrappedName ?? "") Today").font(.headline)
+                Text("So far today").font(.headline)
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color.gray)
@@ -40,12 +40,12 @@ struct DashboardHeaderOverviewView: View {
                     
                     HStack {
                         HStack(spacing: 5) {
-                            Text("\(profile.parent.todaysNappysOverview.1)")
+                            Text("\(profile.parent.todaysNappiesOverview.1)")
                             Text("dirty")
                         }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
                         
                         HStack(spacing: 5) {
-                            Text("\(profile.parent.todaysNappysOverview.2)")
+                            Text("\(profile.parent.todaysNappiesOverview.2)")
                             Text("wet")
                         }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
                     }

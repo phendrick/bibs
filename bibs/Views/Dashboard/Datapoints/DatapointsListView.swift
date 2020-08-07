@@ -17,27 +17,27 @@ struct DatapointsListView: View {
     var body: some View {
         VStack {
             List {
-                NavigationLink(destination: FeedTimersDataView(child: child) ) {
+                NavigationLink(destination: FeedTimersDataView(child: child, profile: self.profile) ) {
                     Text("Breast Feeds")
                 }
                 
-                NavigationLink(destination: BottleFeedsDataView(child: child) ) {
+                NavigationLink(destination: BottleFeedsDataView(child: child, profile: self.profile) ) {
                     Text("Bottle Feeds")
                 }
                 
-                NavigationLink(destination: NappyChangesDataView(child: child) ) {
+                NavigationLink(destination: NappyChangesDataView(child: child, profile: self.profile) ) {
                     Text("Nappy Changes")
                 }
                 
-                NavigationLink(destination: WeaningDataView(child: child) ) {
+                NavigationLink(destination: WeaningDataView(child: child, profile: self.profile) ) {
                     Text("Snacks")
                 }
                 
-                NavigationLink(destination: NaptimesDataView(child: child) ) {
+                NavigationLink(destination: NaptimesDataView(child: child, profile: self.profile) ) {
                     Text("Naps")
                 }
                 
-                NavigationLink(destination: ExpressedMilkDataView(child: child) ) {
+                NavigationLink(destination: ExpressedMilkDataView(child: child, profile: self.profile) ) {
                     Text("Expressed Milk")
                 }
             }

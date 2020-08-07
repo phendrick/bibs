@@ -10,6 +10,8 @@ import SwiftUI
 
 struct WeaningDataView: View {
     @ObservedObject var child: Child
+    @ObservedObject var profile: ProfileObserver
+    
     @State var snackType: Snack.SnackType = .fruit
     
     var body: some View {
@@ -23,7 +25,8 @@ struct WeaningDataView: View {
             .padding()
             
             DashboardDataView(
-                predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.snackType.rawValue], child)
+                predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.snackType.rawValue], child),
+                profile: self.profile
             ) {(result: Snack, count: Int) in
                 VStack(alignment: .leading, spacing: 15) {
                     HStack {

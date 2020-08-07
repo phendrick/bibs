@@ -36,12 +36,25 @@ struct DashboardToolsListView: View {
                             ? CGSize(width: 50, height: 0)
                             : .zero
                 }
-                .font(.title)
+                .font(.callout)
             }
             .padding([.leading])
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 15) {
+                    VStack(alignment: .center) {
+                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
+                        Text("Expressed Milk").font(.body).lineLimit(2)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        self.expressedMilkFormVisible = true
+                    }.sheet(isPresented: self.$expressedMilkFormVisible) {
+                        ExpressedMilkFormSheet(expressedMilkFormVisible: self.$expressedMilkFormVisible)
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(self.profile)
+                    }
+                    
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Bottle Feed").font(.body)
@@ -103,19 +116,6 @@ struct DashboardToolsListView: View {
                         self.manualFeedTimerFormVisible = true
                     }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
                         ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
-                    
-                    VStack(alignment: .center) {
-                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Expressed Milk").font(.body)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.expressedMilkFormVisible = true
-                    }.sheet(isPresented: self.$expressedMilkFormVisible) {
-                        ExpressedMilkFormSheet(expressedMilkFormVisible: self.$expressedMilkFormVisible)
                             .environment(\.managedObjectContext, self.moc)
                             .environmentObject(self.profile)
                     }

@@ -16,4 +16,21 @@ final class ProfileObserver: ObservableObject {
     static let shared = ProfileObserver()
     
     private init() {}
+    
+    func setOffsetForLayout(layout: ActiveFeedsTrayView.ExpandedState) {
+        var height: CGFloat = 0
+        let currentSessions = self.parent.currentFeedSessions.count
+        let inactiveSessions = self.parent.childrenWithoutCurrentFeedSessions.count
+        let currentSessionsMultiplier = layout == .minimised ? 1 : currentSessions
+        
+        if inactiveSessions > 0 {
+            height += 150
+        }
+        
+        let timerHeight = layout == .expanded ? 180 : 150
+        
+        height += CGFloat((timerHeight * currentSessionsMultiplier))
+        
+        self.trayHeight = CGFloat(height)
+    }
 }

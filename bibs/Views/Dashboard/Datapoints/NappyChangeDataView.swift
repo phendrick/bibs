@@ -10,6 +10,8 @@ import SwiftUI
 
 struct NappyChangesDataView: View {
     @ObservedObject var child: Child
+    @ObservedObject var profile: ProfileObserver
+    
     @State var nappyChangeType: NappyChange.NappyChangeType = .wet
     
     var body: some View {
@@ -23,7 +25,8 @@ struct NappyChangesDataView: View {
             .padding()
             
             DashboardDataView(
-                predicate: NSPredicate(format: "%K IN %@", "state", [self.nappyChangeType.rawValue])
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.nappyChangeType.rawValue]),
+                profile: self.profile
             ) {(result: NappyChange, count: Int) in
                 VStack {
                     HStack {

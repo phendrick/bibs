@@ -12,6 +12,11 @@ struct AvatarImageView: View {
     var image: Image!
     var color: Color
     var lineWidth: CGFloat = 10
+    var layout: ActiveFeedsTrayView.ExpandedState = .minimised
+    
+    var imageSize: CGFloat {
+        self.layout == .expanded ? 80 : 60
+    }
     
     var body: some View {
         image
@@ -24,8 +29,9 @@ struct AvatarImageView: View {
                     color, lineWidth: lineWidth
                 )
             )
-            .frame(minWidth: 50, minHeight: 50)
-            .animation(.linear)
+            .frame(minWidth: imageSize, minHeight: imageSize)
+            .frame(maxHeight: imageSize)
+            .animation(nil)
     }
 }
 

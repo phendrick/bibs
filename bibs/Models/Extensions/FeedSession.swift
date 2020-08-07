@@ -26,10 +26,6 @@ extension FeedSession: Identifiable, Trackable {
         }
     }
     
-    enum FeedSessionError: Error {
-        case noCurrentFeed
-    }
-    
     public var status: FeedSessionStatus {
         get {
             FeedSessionStatus.init(rawValue: self.state) ?? .paused
@@ -38,6 +34,10 @@ extension FeedSession: Identifiable, Trackable {
         set(newValue) {
             state = newValue.rawValue
         }
+    }
+    
+    enum FeedSessionError: Error {
+        case noCurrentFeed
     }
     
     var isActiveFeedSession: Bool {
@@ -88,6 +88,10 @@ extension FeedSession: Identifiable, Trackable {
         }
         
         return time
+    }
+    
+    func formattedElapsedTimeHsecs() -> String {
+        return String(format: ".%02i", calculatedElapsedTime.hseconds)
     }
     
     /// a basic timer implementation.

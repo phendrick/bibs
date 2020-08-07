@@ -13,7 +13,7 @@ import SwiftUI
 
 struct ActiveFeedsTrayView: View {
     @ObservedObject var profile: ProfileObserver
-    @State var expanded: ExpandedState = .minimised
+    @State var layout: ExpandedState = .minimal
     @State var dragOffset: CGPoint = .zero
     @State var dragDirection: DragDirection = .up
     @State var isDragging = false
@@ -41,7 +41,7 @@ struct ActiveFeedsTrayView: View {
         
         var description: String {
             switch(self) {
-            case .minimised: return "minimisd"
+            case .minimised: return "minimised"
             case .minimal: return "minimal"
             case .expanded: return "expanded"
             }
@@ -60,7 +60,8 @@ struct ActiveFeedsTrayView: View {
                     AvatarImageView(
                         image: Image(uiImage: child.wrappedImage),
                         color: child.theme.0,
-                        lineWidth: 2
+                        lineWidth: 6,
+                        layout: self.layout
                     )
                     Text("\(child.wrappedName)")
                         .font(.footnote)
@@ -68,8 +69,19 @@ struct ActiveFeedsTrayView: View {
                 }.onTapGesture {
                     try? child.startNewFeedSession()
                     self.profile.objectWillChange.send()
-                }.frame(maxHeight: 100)
+                    self.profile.setOffsetForLayout(layout: self.layout)
+                }//.frame(maxHeight: 100)
             }
+        }
+    }
+    
+    var trayHeight: CGFloat {
+        if self.layout == .minimised {
+            return 100
+        }else if self.layout == .minimal {
+            return 160
+        }else {
+            return 300
         }
     }
     
@@ -86,6 +98,8 @@ struct ActiveFeedsTrayView: View {
             .gesture(
                 DragGesture(minimumDistance: 0, coordinateSpace: .global)
                 .onChanged {translation in
+                    let dragOffset = translation.startLocation.y-translation.location.y
+                    
                     self.dragOffset.y = abs(translation.startLocation.y - translation.location.y)
                     
                     guard self.dragOffset.y >= 20 else {
@@ -101,54 +115,58 @@ struct ActiveFeedsTrayView: View {
                         : .down
                     
                     if dragDirection == .up {
-                        self.expanded = .expanded
+                        self.layout = .expanded
                     }else {
-                        self.expanded = .minimised
+                        self.layout = .minimised
                     }
                 }.onEnded { translation in
-                    var height = 40 + (120 * self.profile.parent.childrenWithoutCurrentFeedSessions.count)
-                    height += 120 * self.profile.parent.currentFeedSessions.count
+                    let dragOffset = translation.startLocation.y-translation.location.y
                     
-                    if self.expanded != .expanded {
-                        height -= 100
+                    var layout: ExpandedState
+                    
+                    if((0..<100).contains(dragOffset)) {
+                        layout = self.layout.next ?? .minimised
+                    }else if((100..<200).contains(dragOffset)) {
+                        layout = .minimal
+                    }else if(dragOffset > 200) {
+                        layout = .expanded
+                    }else {
+                        layout = .minimised
                     }
                     
-                    self.profile.trayHeight = CGFloat(height)
+                    self.layout = layout
+                    self.profile.setOffsetForLayout(layout: self.layout)
                 }
             )
             
-            if self.expanded == .expanded {
-                VStack {
+            if self.layout == .expanded || self.layout == .minimal {
+                VStack(spacing: 20) {
                     self.childActionsList()
                     
                     FeedSessionsList(
-                        profile: self.profile, expanded: self.$expanded
+                        profile: self.profile, layout: self.$layout
                     )
-                }.padding()
+                }
+                .padding()
+                .padding(.bottom, 20)
             }else {
                 VStack {
                     self.childActionsList()
                     
                     HStack(spacing: 10) {
                         FeedSessionsList(
-                            profile: self.profile, expanded: self.$expanded
+                            profile: self.profile, layout: self.$layout
                         )
                     }.padding()
                 }
+                .padding(.bottom, 20)
             }
         }
-        .animation(.interactiveSpring(response: 0.5, dampingFraction: 0.5, blendDuration: 0.5))
+        .animation(.interactiveSpring(response: 0.25, dampingFraction: 0.5, blendDuration: 0.5))
         .frame(maxWidth: .infinity)
         .background(Color(UIColor.systemBackground).opacity(0.5))
         .onAppear {
-            var height = 40 + (120 * self.profile.parent.childrenWithoutCurrentFeedSessions.count)
-            height += 120 * self.profile.parent.currentFeedSessions.count
-            
-            if self.expanded != .expanded {
-                height -= 100
-            }
-            
-            self.profile.trayHeight = CGFloat(height)
+            self.profile.setOffsetForLayout(layout: self.layout)
         }
     }
 }
@@ -162,7 +180,7 @@ struct ActiveFeedsTrayView_Previews: PreviewProvider {
 
 struct FeedSessionsList: View {
     @ObservedObject var profile: ProfileObserver
-    @Binding var expanded: ActiveFeedsTrayView.ExpandedState
+    @Binding var layout: ActiveFeedsTrayView.ExpandedState
     
     var body: some View {
         ForEach(self.profile.parent.currentFeedSessions, id: \.self) {session in
@@ -170,9 +188,9 @@ struct FeedSessionsList: View {
                 profile: self.profile,
                 feedSession: session,
                 color: Color.green,
-                layout: self.$expanded,
+                layout: self.$layout,
                 cofeeding: self.profile.parent.currentFeedSessions.count>1
-            ).padding(self.expanded == .expanded ? 10 : 0)
+            )
         }
     }
 }

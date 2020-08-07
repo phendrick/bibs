@@ -10,6 +10,8 @@ import SwiftUI
 
 struct BottleFeedsDataView: View {
     @ObservedObject var child: Child
+    @ObservedObject var profile: ProfileObserver
+    
     @State var bottleFeedType: BottleFeed.BottleFeedType = .expressedMilk
     
     var body: some View {
@@ -23,7 +25,8 @@ struct BottleFeedsDataView: View {
             .padding()
             
             DashboardDataView(
-                predicate: NSPredicate(format: "%K IN %@", "state", [self.bottleFeedType.rawValue])
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.bottleFeedType.rawValue]),
+                profile: self.profile
             ) {(result: BottleFeed, count: Int) in
                 HStack {
                     VStack(alignment: .leading, spacing: 15) {

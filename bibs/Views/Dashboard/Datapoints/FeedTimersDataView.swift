@@ -12,12 +12,15 @@ struct FeedTimersDataView: View {
     @Environment(\.managedObjectContext) var moc
     
     @ObservedObject var child: Child
+    @ObservedObject var profile: ProfileObserver
+    
     @State var feedSessionType: FeedSession.FeedSessionStatus = .complete
     
     var body: some View {
         VStack {
             DashboardDataView(
-                predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.feedSessionType.rawValue], child)
+                predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.feedSessionType.rawValue], child),
+                profile: self.profile
             ) {(result: FeedSession, count: Int) in
                 NavigationLink(destination: EditFeedSessionView(feedSession: result, context: self.moc)) {
                     VStack(alignment: .leading, spacing: 15) {

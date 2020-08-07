@@ -82,7 +82,9 @@ extension ParentProfile {
         
         let dateRange = dateFrom..<dateTo
         
-        let feeds = activeChild?.completedFeedsWithinRange(dateDange: dateRange) ?? []
+        let feeds = childrenArray.flatMap { child in
+            child.completedFeedsWithinRange(dateDange: dateRange)
+        }
         
         let duration: Duration = feeds.reduce(into: 0, { (result, session) in
             result += session.duration
@@ -99,7 +101,7 @@ extension ParentProfile {
         return (feeds.count, overview)
     }
     
-    public var todaysNappysOverview: (String, Int, Int) {
+    public var todaysNappiesOverview: (String, Int, Int) {
         let date = Date()
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
@@ -109,7 +111,9 @@ extension ParentProfile {
         
         let dateRange = dateFrom..<dateTo
         
-        let nappies = activeChild?.nappyChangesWithinRange(dateDange: dateRange) ?? []
+        let nappies = childrenArray.flatMap { child in
+            child.nappyChangesWithinRange(dateDange: dateRange)
+        }
         
         if nappies.count > 0 {
             let wet = nappies.filter {$0.status == .wet}
@@ -131,7 +135,9 @@ extension ParentProfile {
         
         let dateRange = dateFrom..<dateTo
         
-        let naps = activeChild?.napsWithinRange(dateDange: dateRange) ?? []
+        let naps = childrenArray.flatMap { child in
+            child.napsWithinRange(dateDange: dateRange)
+        }
         
         let duration: Duration = naps.reduce(into: 0, { (result, session) in
             result += session.duration
