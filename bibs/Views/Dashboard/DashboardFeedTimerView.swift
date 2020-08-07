@@ -19,9 +19,9 @@ struct DashboardFeedTimerView: View {
     var timerHeight: CGFloat {
         var height: CGFloat = 60
         switch(self.layout) {
-        case .expanded: height = 120
-        case .minimal: height = 100
-        case .minimised: height = 80
+        case .expanded: height = 160
+        case .minimal: height = 120
+        case .minimised: height = 100
         }
         
         return height
@@ -41,7 +41,7 @@ struct DashboardFeedTimerView: View {
         if self.layout == .expanded || self.layout == .minimal {
             return self.feedSession.currentBreastSide.description.0
         }else {
-            return self.feedSession.currentBreastSide.description.1
+            return self.cofeeding ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
         }
     }
     
@@ -49,7 +49,7 @@ struct DashboardFeedTimerView: View {
         if self.layout == .expanded || self.layout == .minimal {
             return 100
         }else {
-            return 30
+            return self.cofeeding ? 30 : 100
         }
     }
     
@@ -88,9 +88,8 @@ struct DashboardFeedTimerView: View {
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.white)
-                                .frame(width: 40, alignment: .trailing)
+                                .frame(width: 40, alignment: .topTrailing)
                         }
-                        .padding(.leading, 10)
                         .opacity(self.feedSession.status == .paused ? 1 : 0.25)
                     }.frame(maxWidth: .infinity)
                     
@@ -104,7 +103,8 @@ struct DashboardFeedTimerView: View {
                             Text("\(feedSession.formattedElapsedTimeHsecs())")
                                 .font(.custom("RobotoMono-Regular", size: timerFontSize*0.75))
                                 .opacity(0.5)
-                        }.animation(nil)
+                        }
+                        .animation(nil)
                         
                         Spacer()
                         
@@ -126,9 +126,12 @@ struct DashboardFeedTimerView: View {
                     }
                 }
             }
+//            .padding(5)
             .frame(maxWidth: .infinity)
         }
-        .padding(self.layout == .minimised ? 5 : 15)
+        //.padding(self.layout == .minimised ? 5 : 15)
+        .padding([.top, .bottom])
+        .padding([.leading, .trailing], 10)
         .frame(maxWidth: .infinity, maxHeight: timerHeight)
         .background(self.feedSession.child?.theme.0)
         .foregroundColor(.white)

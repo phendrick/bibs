@@ -475,6 +475,6 @@ extension ParentProfile {
             $0.wrappedCreatedAt < $1.wrappedCreatedAt
         }
         
-        return sorted.first?.status ?? Emotion.EmotionType.happy
+        return sorted.last?.status ?? Emotion.EmotionType.happy
     }
 }

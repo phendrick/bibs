@@ -27,11 +27,11 @@ extension Snack {
         }
         var details: String {
             switch(self) {
-            case .vegetables: return "Carrots, broccoli, peas, avocado, cauliflower etc"
-            case .fruit: return "Kiki, strawberries, melon, mango, apples etc"
-            case .roots: return "Pasta, potatoes, quinoa, bread, oats, chapatti etc"
-            case .protein: return "Beans, lentils, chicken, beef, lamb, chickpeas etc"
-            case .dairy: return "Eggs, yoghurt, milk etc"
+            case .vegetables: return "Carrots, broccoli, peas, avocado, cauliflower"
+            case .fruit: return "Kiki, strawberries, melon, mango, apples"
+            case .roots: return "Pasta, potatoes, quinoa, bread, oats, chapatti"
+            case .protein: return "Beans, lentils, chicken, beef, lamb, chickpeas"
+            case .dairy: return "Eggs, yoghurt, milk"
             }
         }
     }

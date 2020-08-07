@@ -15,7 +15,13 @@ struct AvatarImageView: View {
     var layout: ActiveFeedsTrayView.ExpandedState = .minimised
     
     var imageSize: CGFloat {
-        self.layout == .expanded ? 80 : 60
+        if self.layout == .expanded {
+            return 100
+        }else if self.layout == .minimal {
+            return 80
+        }else {
+            return 60
+        }
     }
     
     var body: some View {

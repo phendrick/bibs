@@ -70,18 +70,8 @@ struct ActiveFeedsTrayView: View {
                     try? child.startNewFeedSession()
                     self.profile.objectWillChange.send()
                     self.profile.setOffsetForLayout(layout: self.layout)
-                }//.frame(maxHeight: 100)
+                }
             }
-        }
-    }
-    
-    var trayHeight: CGFloat {
-        if self.layout == .minimised {
-            return 100
-        }else if self.layout == .minimal {
-            return 160
-        }else {
-            return 300
         }
     }
     
@@ -96,45 +86,20 @@ struct ActiveFeedsTrayView: View {
             .padding()
             .animation(.interactiveSpring(response: 0.1, dampingFraction: 0.8, blendDuration: 0.1))
             .gesture(
-                DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                DragGesture(minimumDistance: 10, coordinateSpace: .global)
                 .onChanged {translation in
-                    let dragOffset = translation.startLocation.y-translation.location.y
-                    
-                    self.dragOffset.y = abs(translation.startLocation.y - translation.location.y)
-                    
-                    guard self.dragOffset.y >= 20 else {
-                        return
-                    }
-                    
-                    guard self.profile.parent.currentFeedSessions.count > 0 else {
-                        return
-                    }
+                }.onEnded { translation in
                     
                     let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
-                        ? .up
-                        : .down
+                    ? .up
+                    : .down
                     
                     if dragDirection == .up {
-                        self.layout = .expanded
+                        self.layout = self.layout.next ?? self.layout
                     }else {
-                        self.layout = .minimised
-                    }
-                }.onEnded { translation in
-                    let dragOffset = translation.startLocation.y-translation.location.y
-                    
-                    var layout: ExpandedState
-                    
-                    if((0..<100).contains(dragOffset)) {
-                        layout = self.layout.next ?? .minimised
-                    }else if((100..<200).contains(dragOffset)) {
-                        layout = .minimal
-                    }else if(dragOffset > 200) {
-                        layout = .expanded
-                    }else {
-                        layout = .minimised
+                        self.layout = self.layout.previous ?? self.layout
                     }
                     
-                    self.layout = layout
                     self.profile.setOffsetForLayout(layout: self.layout)
                 }
             )

@@ -12,24 +12,11 @@ struct EmotionDiaryFormSheet: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
     
-    @Binding var emotionDiaryFormVisible: Bool
-    
-    @State var note: String = ""
-    @State var selectedEmotionType: Emotion.EmotionType = .happy
+    @Binding var emotionNote: String
+    @Binding var selectedEmotionType: Emotion.EmotionType?
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.emotionDiaryFormVisible = false
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
-            }
-            
-            Text("How are you?").font(.title)
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
                     ForEach(Emotion.EmotionType.allCases, id: \.self) {emotion in
@@ -54,25 +41,22 @@ struct EmotionDiaryFormSheet: View {
                 Section(
                     header: Text("Add a little note about how you're feeling")
                 ) {
-                    TextField(self.note, text: self.$note)
+                    TextField(self.emotionNote, text: self.$emotionNote)
                 }
             }
             
             if self.selectedEmotionType == .down || self.selectedEmotionType == .sad {
                 Text("Remember, if you're down it's totally normal. Maybe reach out to someone or join some online communities to share your thoughts ❤️ ").font(.caption).padding()
             }
-            
         }
-        .edgesIgnoringSafeArea(.all)
-        .background(Color(UIColor.systemGray6))
     }
 }
 
-struct EmotionDiaryFormSheet_Previews: PreviewProvider {
-    static var previews: some View {
-        EmotionDiaryFormSheet(emotionDiaryFormVisible: .constant(true))
-    }
-}
+//struct EmotionDiaryFormSheet_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EmotionDiaryFormSheet(emotionDiaryFormVisible: .constant(true), emotionNote: .constant(""), )
+//    }
+//}
 
 struct TextView: UIViewRepresentable {
     

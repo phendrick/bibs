@@ -63,7 +63,7 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     /// aggregate duration of all the associated feed instances
-    var duration: Int32 {
+    var duration: Duration {
         return feedsArray.reduce(into: 0) { (total, feed) in
             total += feed.duration
         }

@@ -11,7 +11,9 @@ import SwiftUI
 struct DashboardHeaderView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
-    @State var emotionFormVisible = false
+    
+    @State var parentTrackerFormVisible = false
+    @State var selectedEmotionType: Emotion.EmotionType?
     
     var body: some View {
         ZStack {
@@ -24,12 +26,19 @@ struct DashboardHeaderView: View {
                 Text("\(self.profile.parent.latestEmotionType.emoji)")
                     .font(.system(size: 50))
             }.onTapGesture {
-                self.emotionFormVisible = true
-            }.sheet(isPresented: self.$emotionFormVisible) {
-                EmotionDiaryFormSheet(emotionDiaryFormVisible: self.$emotionFormVisible)
-                    .environment(\.managedObjectContext, self.moc)
-                    .environmentObject(self.profile)
+                self.parentTrackerFormVisible = true
+            }.sheet(isPresented: self.$parentTrackerFormVisible) {
+                ParentTrackerFormSheet(
+                    profile: self.profile,
+                    parentTrackerFormVisible: self.$parentTrackerFormVisible,
+                    selectedEmotionType: self.selectedEmotionType
+                )
+                .environment(\.managedObjectContext, self.moc)
+                .environmentObject(self.profile)
             }
+        }.onAppear {
+            print(self.profile.parent.latestEmotionType)
+            self.selectedEmotionType = self.profile.parent.latestEmotionType
         }
     }
 }

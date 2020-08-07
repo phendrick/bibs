@@ -55,7 +55,7 @@ extension NappyChange: Identifiable, Trackable {
             case .green:  return UIColor.systemGreen
             case .brown:  return UIColor.brown
             case .yellow: return UIColor.systemYellow
-            case .white:  return UIColor.quaternarySystemFill
+            case .white:  return UIColor(red: 0.949, green: 0.949, blue: 0.953, alpha: 1.000)
             case .red:    return UIColor.systemRed
             }
         }
