@@ -36,16 +36,10 @@ struct DashboardView: View {
                 VStack(spacing: 0) {
                     DashboardHeaderView().padding()
 
-                    if showChildList {
-                        NavigationLink(destination: ChildrenDashboardListView(profile: self.profile)) {
-                            DashboardHeaderOverviewView(profile: profile).padding()
-                        }.foregroundColor(Color(UIColor.label))
-                    }else if self.profile.parent.activeChild != nil {
-                        NavigationLink(destination: DatapointsListView(child: self.profile.parent.activeChild!, profile: self.profile)) {
-                            DashboardHeaderOverviewView(profile: profile).padding()
-                        }.foregroundColor(Color(UIColor.label))
-                    }
-
+                    NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
+                        DashboardHeaderOverviewView(profile: profile).padding()
+                    }.foregroundColor(Color(UIColor.label))
+                    
                     DashboardToolsListView().padding([.top, .bottom])
                     
                     Spacer()
@@ -56,7 +50,7 @@ struct DashboardView: View {
                         Image(systemName: "person.crop.circle").foregroundColor(.red)
                     }
                 )
-            }
+            }.padding(.bottom, self.profile.trayHeight)
             
             Spacer()
             

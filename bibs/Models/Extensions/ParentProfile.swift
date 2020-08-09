@@ -118,8 +118,9 @@ extension ParentProfile {
         if nappies.count > 0 {
             let wet = nappies.filter {$0.status == .wet}
             let dirty = nappies.filter {$0.status == .dirty}
+            let both = nappies.filter {$0.status == .both}
             
-            return ("\(nappies.count)", wet.count, dirty.count)
+            return ("\(nappies.count)", wet.count+both.count, dirty.count+both.count)
         }else {
             return ("None today", 0, 0)
         }

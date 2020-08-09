@@ -37,6 +37,16 @@ extension FoodDiaryEntry {
             case .sweets: return "Dried fruits, fruit rolls, chocolate"
             }
         }
+        var emoji: String {
+            switch(self) {
+            case .vegetables: return "🌽"
+            case .fruit: return "🍏"
+            case .roots: return "🥔"
+            case .protein: return "🍗"
+            case .dairy: return "🥛"
+            case .sweets: return "🍭"
+            }
+        }
     }
     
     var foodType: FoodType {

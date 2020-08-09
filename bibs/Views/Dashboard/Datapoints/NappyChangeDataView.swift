@@ -25,13 +25,18 @@ struct NappyChangesDataView: View {
             .padding()
             
             DashboardDataView(
+                profile: self.profile,
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.nappyChangeType.rawValue]),
-                profile: self.profile
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ]
             ) {(result: NappyChange, count: Int) in
-                VStack {
-                    HStack {
-                        Text("\(result.status.description) ")
-                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                NavigationLink(destination: EditNappyChangeView(profile: self.profile, nappyChange: result)) {
+                    VStack {
+                        HStack {
+                            Text("\(result.status.description) ")
+                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                        }
                     }
                 }
             }

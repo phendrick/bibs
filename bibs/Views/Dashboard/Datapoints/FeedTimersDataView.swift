@@ -8,9 +8,7 @@
 
 import SwiftUI
 
-struct FeedTimersDataView: View {
-    @Environment(\.managedObjectContext) var moc
-    
+struct FeedTimersDataView: View {    
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
@@ -19,10 +17,13 @@ struct FeedTimersDataView: View {
     var body: some View {
         VStack {
             DashboardDataView(
+                profile: self.profile,
                 predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.feedSessionType.rawValue], child),
-                profile: self.profile
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ]
             ) {(result: FeedSession, count: Int) in
-                NavigationLink(destination: EditFeedSessionView(feedSession: result, context: self.moc)) {
+                NavigationLink(destination: EditFeedSessionView(profile: self.profile, feedSession: result)) {
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("\(result.formattedElapsedTime(include_hsec: false))")

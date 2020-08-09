@@ -40,7 +40,7 @@ struct ParentTrackerFormSheet: View {
             Spacer()
             
             VStack {
-                Button("Save") {
+                Button("Save \(self.form == 0 ? "Emotion" : "Food diary")") {
                     if self.form == 0 {
                         guard let emotionType = self.selectedEmotionType else {
                             return

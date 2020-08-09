@@ -36,10 +36,6 @@ struct DatapointsListView: View {
                 NavigationLink(destination: NaptimesDataView(child: child, profile: self.profile) ) {
                     Text("Naps")
                 }
-                
-                NavigationLink(destination: ExpressedMilkDataView(child: child, profile: self.profile) ) {
-                    Text("Expressed Milk")
-                }
             }
             
             Spacer()

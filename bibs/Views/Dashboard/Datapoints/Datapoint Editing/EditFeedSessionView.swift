@@ -10,8 +10,20 @@ import SwiftUI
 import CoreData
 
 struct EditFeedSessionView: View {
+    @Environment(\.managedObjectContext) var context
+    @ObservedObject var profile: ProfileObserver
     @ObservedObject var feedSession: FeedSession
-    var context: NSManagedObjectContext
+    
+    func removeRows(at offsets: IndexSet) {
+        for index in offsets {
+            let row = feedSession.feedsArray[index]
+            self.context.delete(row)
+        }
+        
+        //self.moc.refreshAllObjects()
+        try? self.context.save()
+        self.profile.objectWillChange.send()
+    }
     
     var body: some View {
         Form {
@@ -27,9 +39,7 @@ struct EditFeedSessionView: View {
                                 Text("\(feed.breastSide.description.0)").foregroundColor(.gray)
                             }
                         }
-                    }.onDelete { (index) in
-                        print("delete")
-                    }
+                    }.onDelete(perform: removeRows)
                 }
             }
         }
@@ -49,6 +59,6 @@ struct EditFeedSessionView_Previews: PreviewProvider {
         
         let context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
-        return EditFeedSessionView(feedSession: session, context: context)
+        return EditFeedSessionView(profile: ProfileObserver.shared, feedSession: session)
     }
 }

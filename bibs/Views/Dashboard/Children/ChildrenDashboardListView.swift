@@ -13,15 +13,35 @@ struct ChildrenDashboardListView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                List(self.profile.parent.activeChildrenArray) { child in
-                    NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
-                        Text("\(child.wrappedName)")
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(profile.parent.activeChildrenArray, id: \.self) {child in
+                    HStack {
+                        NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
+                            VStack(alignment: .leading) {
+                                Text("\(child.wrappedName)")
+                                    .font(.callout)
+                                    .padding(.bottom, 5)
+                                    .foregroundColor(.white)
+                                    .animation(nil)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .animation(.easeInOut)
+                    .padding(10)
+                    .background(child.theme.0)
+                    .onTapGesture {
+                        self.profile.parent.activeChild = child
+                        self.profile.objectWillChange.send()
                     }
                 }
-                .listStyle(GroupedListStyle())
             }
-            .navigationBarTitle("Children")
+            .cornerRadius(15)
+            .navigationBarTitle("Data")
         }
     }
 }

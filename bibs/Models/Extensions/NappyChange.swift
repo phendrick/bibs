@@ -92,6 +92,16 @@ extension NappyChange: Identifiable, Trackable {
         }
     }
     
+    public var poopColor: NappyChangePoopColor {
+        get {
+            NappyChangePoopColor.init(rawValue: Int(self.color)) ?? .brown
+        }
+        
+        set(newValue) {
+            color = Int16(newValue.rawValue)
+        }
+    }
+    
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
     }

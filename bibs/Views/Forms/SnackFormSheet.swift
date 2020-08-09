@@ -74,9 +74,15 @@ struct SnackFormSheet: View {
             
             VStack {
                 Button("Save") {
+                    guard let child = self.profile.parent.activeChild else {
+                        debugPrint("No activeChild")
+                        return
+                    }
+                    
                     let snack = Snack(context: self.moc)
                     snack.note = self.note
                     snack.snackType = self.selectedSnackType
+                    child.addToSnacks(snack)
                     
                     try? self.moc.save()
                     self.snackFormVisible = false

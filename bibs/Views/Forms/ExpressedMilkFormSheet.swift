@@ -14,11 +14,7 @@ struct ExpressedMilkFormSheet: View {
     
     @Binding var expressedMilkFormVisible: Bool
     
-    @State var pickerFeedType: Int = 0
-    @State var pickerFeedSource: BottleFeed.BottleFeedType = .expressedMilk
-    @State var feedAmount: Int = 5
     @State var expressedAmount: Int = 0
-    @State var selectedExpressedBottles: [ExpressedBottle] = []
     @State var expressedMilkStorage: ExpressedBottle.ExpressedBottleStorageStatus = .refridgerated
     
     var body: some View {
@@ -73,27 +69,15 @@ struct ExpressedMilkFormSheet: View {
             
             VStack {
                 Button(action: {
-                    if self.pickerFeedType == 0 {
-                        let bottleFeed = BottleFeed(context: self.moc)
-                        bottleFeed.amount = Int16(self.feedAmount)
-                        bottleFeed.createdAt = Date()
-                        bottleFeed.status = self.pickerFeedSource
-                        self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
-                        
-                        self.profile.parent.reduceExpressedBottles(self.selectedExpressedBottles, by: Int16(self.feedAmount))
-                    }else {
-                        let expressedBottle = ExpressedBottle(context: self.moc)
-                        expressedBottle.status = .fresh
-                        expressedBottle.amount = Int16(self.expressedAmount)
-                        expressedBottle.createdAt = Date()
-                        self.profile.parent.addToExpressedBottles(expressedBottle)
-                    }
+                    let storedMilk = ExpressedBottle(context: self.moc)
+                    storedMilk.status = self.expressedMilkStorage
+                    storedMilk.amount = Int16(self.expressedAmount)
                     
                     do {
                         try self.moc.save()
                         
-                        self.selectedExpressedBottles = []
                         self.profile.objectWillChange.send()
+                        self.expressedMilkFormVisible = false
                     }catch {
                     }
                 }) {

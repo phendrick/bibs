@@ -14,11 +14,13 @@ struct DashboardHeaderOverviewView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("So far today").font(.headline)
+                Text("Today").font(.headline)
+                
                 Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundColor(Color.gray)
-            }.padding()
+                Text("View all data")
+                    .font(.footnote)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+            }.padding([.leading, .top, .trailing]).padding(.bottom, 5)
             
             Divider().opacity(0.5).offset(y: -10).padding([.leading, .trailing])
             
@@ -41,12 +43,12 @@ struct DashboardHeaderOverviewView: View {
                     HStack {
                         HStack(spacing: 5) {
                             Text("\(profile.parent.todaysNappiesOverview.1)")
-                            Text("dirty")
+                            Text("wet")
                         }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
                         
                         HStack(spacing: 5) {
                             Text("\(profile.parent.todaysNappiesOverview.2)")
-                            Text("wet")
+                            Text("dirty")
                         }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
                     }
                 }.frame(minWidth: 0, maxWidth: .infinity)

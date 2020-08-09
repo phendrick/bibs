@@ -11,6 +11,7 @@ import SwiftUI
 struct BottleFeedsDataView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
+    @Environment(\.managedObjectContext) var moc
     
     @State var bottleFeedType: BottleFeed.BottleFeedType = .expressedMilk
     
@@ -25,17 +26,22 @@ struct BottleFeedsDataView: View {
             .padding()
             
             DashboardDataView(
+                profile: self.profile,
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.bottleFeedType.rawValue]),
-                profile: self.profile
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ]
             ) {(result: BottleFeed, count: Int) in
-                HStack {
-                    VStack(alignment: .leading, spacing: 15) {
-                        HStack {
-                            Text("\(result.amount)ml").fontWeight(.bold)  +
-                            Text(" at ") + 
-                            Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                        }
-                    }.padding([.top, .bottom])
+                NavigationLink(destination: EditBottleFeedView(profile: self.profile, bottleFeed: result)) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 15) {
+                            HStack {
+                                Text("\(result.amount)ml").fontWeight(.bold)  +
+                                Text(" at ") +
+                                Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+                            }
+                        }.padding([.top, .bottom])
+                    }
                 }
             }
             

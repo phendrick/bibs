@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ExpressedMilkDataView: View {
-    @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
     @State var expressedBottleStorageType: ExpressedBottle.ExpressedBottleStorageStatus = .fresh
@@ -25,8 +24,11 @@ struct ExpressedMilkDataView: View {
             .padding()
             
             DashboardDataView(
+                profile: self.profile,
                 predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue]),
-                profile: self.profile
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ]
             ) {(result: ExpressedBottle, count: Int) in
                 HStack {
                     Text("\(result.convertedAmount) ")

@@ -100,8 +100,6 @@ struct ProfileEditView: View {
 //                        }
 //                    }
                 }
-                
-                Text("").frame(height: self.profile.trayHeight)
             }
         }
         .navigationBarTitle(Text("Update Profile"), displayMode: .inline)

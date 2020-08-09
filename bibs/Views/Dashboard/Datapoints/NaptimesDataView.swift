@@ -15,13 +15,20 @@ struct NaptimesDataView: View {
     var body: some View {
         VStack {
             DashboardDataView(
+                profile: self.profile,
                 predicate: NSPredicate(format: "child = %@", child),
-                profile: self.profile
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ]
             ) {(result: Nap, count: Int) in
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("\(result.duration.formattedHoursAndMinutes)")
-                    Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                }.padding([.top, .bottom])
+                NavigationLink(destination: EditNapView(profile: self.profile, nap: result)) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 15) {
+                            Text("\(result.duration.formattedHoursAndMinutes)")
+                            Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+                        }.padding([.top, .bottom])
+                    }
+                }
             }
             
             Spacer()

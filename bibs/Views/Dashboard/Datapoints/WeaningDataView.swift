@@ -25,17 +25,22 @@ struct WeaningDataView: View {
             .padding()
             
             DashboardDataView(
+                profile: self.profile,
                 predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.snackType.rawValue], child),
-                profile: self.profile
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ]
             ) {(result: Snack, count: Int) in
-                VStack(alignment: .leading, spacing: 15) {
-                    HStack {
-                        Text("\(result.snackType.description) ") +
-                        Text(result.note ?? "")
-                    }
-                    
-                    Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                }.padding([.top, .bottom])
+                NavigationLink(destination: EditSnackView(profile: self.profile, snack: result)) {
+                    VStack(alignment: .leading, spacing: 15) {
+                        HStack {
+                            Text("\(result.snackType.description) ") +
+                            Text(result.note ?? "")
+                        }
+                        
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+                    }.padding([.top, .bottom])
+                }
             }
             
             Spacer()

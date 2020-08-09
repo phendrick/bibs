@@ -54,7 +54,8 @@ struct EditFeedTimeView: View {
             }
             
             Section(
-                header: Text("Which side did \(self.feed.feedSession?.child?.wrappedName ?? "") feed from")
+                header: Text("Which side did \(self.feed.feedSession?.child?.wrappedName ?? "") feed from"),
+                footer: Text("If you change this, all of the feeds in this session will be switched for you")
             ) {
                 Picker(selection: self.$breastSide, label: Text("Side")) {
                     ForEach(Feed.BreastSide.allCases, id: \.self) {side in
@@ -74,29 +75,26 @@ struct EditFeedTimeView: View {
         .navigationBarTitle("\(self.feed.feedSession?.child?.wrappedName ?? "")'s feed")
         .navigationBarItems(
             trailing: Button(action: {
-                print("Save")
+                let _ = self.feed.setDurationFromValues(
+                    hours: Int(self.adjustedHours) ?? 0,
+                    minutes: Int(self.adjustedMinutes) ?? 0,
+                    seconds: Int(self.adjustedSeconds) ?? 0
+                )
                 
-//                if let _ = self.feed.setDurationFromStrings(hours: self.adjustedHours, minutes: self.adjustedMinutes, seconds: self.adjustedSeconds) {
-//                    self.feed.breastSide = self.breastSide
-//                }else {
-//                    print("Error saving time")
-//                }
-//                
-//                do {
-//                    self.feed.objectWillChange.send()
-//                    self.feed.feedSession?.objectWillChange.send()
-//                    
-//                    try self.context.save()
-//                    
-//                    // force the data in the "Manage" view to be reloaded since it's rendering a plain
-//                    // set of CoreData objects, not observed objects on a publisher
-//                    
-//                    self.context.refreshAllObjects()
-//                }catch {
-//                    print("Error saving context")
-//                }
-//                
-//                self.presentationMode.wrappedValue.dismiss()
+                if self.feed.breastSide != self.breastSide {
+                    for feed in self.feed.feedSession!.feedsArray {
+                        feed.breastSide = feed.breastSide.switched
+                    }
+                }
+                
+                do {
+                    self.feed.objectWillChange.send()
+                    self.context.refreshAllObjects()
+                    try self.context.save()
+                    self.presentationMode.wrappedValue.dismiss()
+                }catch {
+                    fatalError("Couldn't save")
+                }
             }) {
                 Text("Save")
             }

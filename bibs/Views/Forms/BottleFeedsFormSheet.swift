@@ -58,7 +58,7 @@ struct BottleFeedsFormSheet: View {
                 
                 
                 Section(
-                    header: Text("Of")
+                    header: Text("Which was")
                 ){
                     Picker(selection: self.$pickerFeedSource, label: Text("")) {
                         ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {feedType in
@@ -72,7 +72,6 @@ struct BottleFeedsFormSheet: View {
             
             if self.pickerFeedSource == .expressedMilk {
                 Section {
-                    Text("Choose from stored milk supply").font(.subheadline)
                     List {
                         ForEach(self.expressedBottles, id: \.self) {bottle in
                             HStack {

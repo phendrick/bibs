@@ -1,41 +1,26 @@
 //
-//  NappyChangeFormSheet.swift
+//  EditNappyChangeView.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 26/07/2020.
+//  Created by Paul Hendrick on 09/08/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 
 import SwiftUI
 
-struct NappyChangeFormSheet: View {
-    @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var profile: ProfileObserver
+struct EditNappyChangeView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var context
     
-    @Binding var nappyChangeFormVisible: Bool
+    @ObservedObject var profile: ProfileObserver
+    @ObservedObject var nappyChange: NappyChange
+    
     @State var nappyType: Int = 0
     @State var nappyChangeAmountType: Int = 0
     @State var nappyChangePoopColor: NappyChange.NappyChangePoopColor = .brown
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.nappyChangeFormVisible = false
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
-            }
-            
-            Text("Nappy Change").font(.title)
-            
-            if profile.parent.activeChildrenArray.count > 1 {
-                ChildrenFormList()
-                    .padding()
-                    .animation(nil)
-            }
-            
             Form {
                 Section(
                     header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby")'s nappy was")
@@ -102,42 +87,30 @@ struct NappyChangeFormSheet: View {
                     
                 }.animation(.spring())
             }
-            
-            Spacer()
-            
-            VStack {
-                Button("Save") {
-                    guard let child = self.profile.parent.activeChild else {
-                        debugPrint("No activeChild")
-                        return
-                    }
-                    
-                    let nappyChange = NappyChange(context: self.moc)
-                    nappyChange.state = Int16(self.nappyType)
-                    nappyChange.amount = Int16(self.nappyChangeAmountType)
-                    nappyChange.poopColor = self.nappyChangePoopColor
-                    nappyChange.createdAt = Date()
-                    child.addToNappyChanges(nappyChange)
-
-                    do {
-                        try self.moc.save()
-                        self.profile.objectWillChange.send()
-                        self.nappyChangeFormVisible = false
-                    }catch {
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
-            .background(Color(UIColor.systemBackground))
         }
-        .edgesIgnoringSafeArea(.all)
-        .background(Color(UIColor.systemGray6))
+        .onAppear(perform: {
+            self.nappyType = Int(self.nappyChange.state)
+            self.nappyChangeAmountType = Int(self.nappyChange.amount)
+            self.nappyChangePoopColor = self.nappyChange.poopColor
+        })
+        .navigationBarItems(trailing: Button("Save") {
+            self.nappyChange.state = Int16(self.nappyType)
+            self.nappyChange.amount = Int16(self.nappyChangeAmountType)
+            self.nappyChange.poopColor = self.nappyChangePoopColor
+            
+            do {
+                try self.context.save()
+                self.profile.objectWillChange.send()
+                self.presentationMode.wrappedValue.dismiss()
+            }catch {
+            }
+        })
     }
 }
 
-struct NappyChangeFormSheet_Previews: PreviewProvider {
+struct EditNappyChangeView_Previews: PreviewProvider {
     static var previews: some View {
-        NappyChangeFormSheet(nappyChangeFormVisible: .constant(true))
+        let nappy = NappyChange()
+        return EditNappyChangeView(profile: ProfileObserver.shared, nappyChange: nappy)
     }
 }

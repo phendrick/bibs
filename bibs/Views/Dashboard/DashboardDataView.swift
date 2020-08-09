@@ -23,8 +23,8 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     var content: (T, Int) -> Content
     
     init(
-        predicate: NSPredicate? = nil,
         profile: ProfileObserver,
+        predicate: NSPredicate? = nil,
         sortDescriptors: [NSSortDescriptor] = [],
         allowDelete: Bool = true,
         @ViewBuilder content: @escaping(T, Int) -> Content
