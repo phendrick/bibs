@@ -11,7 +11,7 @@ import SwiftUI
 struct ExpressedMilkDataView: View {
     @ObservedObject var profile: ProfileObserver
     
-    @State var expressedBottleStorageType: ExpressedBottle.ExpressedBottleStorageStatus = .fresh
+    @State var expressedBottleStorageType: ExpressedBottle.ExpressedBottleStorageStatus = .refridgerated
     
     var body: some View {
         VStack {
@@ -30,9 +30,11 @@ struct ExpressedMilkDataView: View {
                     NSSortDescriptor(key: "createdAt", ascending: false)
                 ]
             ) {(result: ExpressedBottle, count: Int) in
-                HStack {
-                    Text("\(result.convertedAmount) ")
-                    Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                NavigationLink(destination: EditExpressedMilkView(profile: self.profile, expressedBottle: result)) {
+                    HStack {
+                        Text("\(result.convertedAmount) ")
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                    }
                 }
             }
             

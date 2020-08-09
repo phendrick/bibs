@@ -74,12 +74,21 @@ struct BottleFeedsFormSheet: View {
                 Section {
                     List {
                         ForEach(self.expressedBottles, id: \.self) {bottle in
-                            HStack {
-                                Text("\(bottle.convertedAmount) ")
-                                Text("\(bottle.wrappedCreatedAt.getFormattedDate())")
+                            HStack(alignment: .center) {
+                                VStack(alignment: .leading, spacing: 15) {
+                                    HStack {
+                                        if bottle.status.emoji != "" {
+                                            Text("\(bottle.status.emoji)")
+                                        }
+                                        
+                                        Text("\(bottle.convertedAmount)").fontWeight(.bold)
+                                    }
+                                    
+                                    Text("\(bottle.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+                                }.padding([.top, .bottom], 2)
 
                                 Spacer()
-
+                                
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(Color(UIColor.systemGreen) )
                                     .opacity(self.selectedExpressedBottles.contains(bottle) ? 1 : 0.2)
@@ -115,6 +124,7 @@ struct BottleFeedsFormSheet: View {
                         let expressedBottle = ExpressedBottle(context: self.moc)
                         expressedBottle.status = .fresh
                         expressedBottle.amount = Int16(self.expressedAmount)
+                        print("Setting expressedBottle createdAt")
                         expressedBottle.createdAt = Date()
                         self.profile.parent.addToExpressedBottles(expressedBottle)
                     }

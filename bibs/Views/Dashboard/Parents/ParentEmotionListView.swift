@@ -11,6 +11,12 @@ import SwiftUI
 struct ParentEmotionListView: View {
     @ObservedObject var profile: ProfileObserver
     
+    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
+        return VStack {
+            Text("Hello")
+        }
+    }
+    
     var body: some View {
         VStack {
             DashboardDataView(
@@ -23,11 +29,12 @@ struct ParentEmotionListView: View {
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("\(result.status.emoji)")
-                            Text("\(result.status.description)").fontWeight(.bold)
+                            Text("\(result.note ?? "")")
                         }
-                        HStack {
-                            Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                        }
+                        VStack(alignment: .leading) {
+                            Text("\(result.status.description)").font(.footnote)
+                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                        }.foregroundColor(.gray)
                     }.padding([.top, .bottom])
                 }
             }

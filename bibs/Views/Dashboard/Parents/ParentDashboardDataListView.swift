@@ -75,12 +75,6 @@ struct ParentDashboardDataListView: View {
                 .animation(.easeInOut)
                 .padding(10)
                 .background(Color(UIColor.systemFill))
-                
-                /*
-                 NavigationLink(destination: ExpressedMilkDataView(child: child, profile: self.profile) ) {
-                     Text("Expressed Milk")
-                 }
-                 */
             }
             .cornerRadius(15)
             .navigationBarTitle("Data")

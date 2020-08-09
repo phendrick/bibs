@@ -14,6 +14,12 @@ struct FeedTimersDataView: View {
     
     @State var feedSessionType: FeedSession.FeedSessionStatus = .complete
     
+    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
+        return VStack {
+            Text("Hello")
+        }
+    }
+    
     var body: some View {
         VStack {
             DashboardDataView(

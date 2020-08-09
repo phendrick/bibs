@@ -12,6 +12,12 @@ struct NaptimesDataView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
+    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
+        return VStack {
+            Text("Hello")
+        }
+    }
+    
     var body: some View {
         VStack {
             DashboardDataView(

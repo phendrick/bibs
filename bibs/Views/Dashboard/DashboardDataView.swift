@@ -60,14 +60,3 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     }
 }
 
-//struct DashboardDataView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//
-//        return DashboardDataView(title: "OK") { (result: Child, index) in
-//            Text("OK")
-//        }
-//        .environment(\.managedObjectContext, context)
-//    }
-//}
-

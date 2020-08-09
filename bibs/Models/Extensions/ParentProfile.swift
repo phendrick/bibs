@@ -382,6 +382,10 @@ extension ParentProfile {
         var reducedCounter: Int16 = 0
         
         for bottle in sortedBottles {
+            if bottle.status == .frozen {
+                bottle.status = .thawed
+            }
+            
             if reducedCounter + bottle.amount > reduceByAmount {
                 bottle.amount -= (reduceByAmount - reducedCounter)
                 

@@ -1,35 +1,25 @@
 //
-//  ExpressedMilkSheet.swift
+//  EditExpressedMilkView.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 27/07/2020.
+//  Created by Paul Hendrick on 09/08/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 
 import SwiftUI
 
-struct ExpressedMilkFormSheet: View {
-    @Environment(\.managedObjectContext) var moc
-    @EnvironmentObject var profile: ProfileObserver
+struct EditExpressedMilkView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.managedObjectContext) var context
     
-    @Binding var expressedMilkFormVisible: Bool
+    @ObservedObject var profile: ProfileObserver
+    @ObservedObject var expressedBottle: ExpressedBottle
     
     @State var expressedAmount: Int = 0
     @State var expressedMilkStorage: ExpressedBottle.ExpressedBottleStorageStatus = .refridgerated
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.expressedMilkFormVisible = false
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
-            }
-            
-            Text("Stored Milk").font(.title)
-            
             Form {
                 Section(
                     header: Text("I've expressed ")
@@ -64,42 +54,36 @@ struct ExpressedMilkFormSheet: View {
                     }
                 }
             }
-            
-            Spacer()
-            
-            VStack {
-                Button(action: {
-                    let storedMilk = ExpressedBottle(context: self.moc)
-                    storedMilk.status = self.expressedMilkStorage
-                    storedMilk.amount = Int16(self.expressedAmount)
-                    storedMilk.createdAt = Date()
+            .onAppear(perform: {
+                self.expressedAmount = Int(self.expressedBottle.amount)
+                self.expressedMilkStorage = self.expressedBottle.status
+            })
+            .navigationBarTitle("Edit Stored Milk")
+            .navigationBarItems(
+                trailing: Button(action: {
+                    self.expressedBottle.amount = Int16(self.expressedAmount)
+                    self.expressedBottle.status = self.expressedMilkStorage
                     
                     do {
-                        try self.moc.save()
-                        
-                        self.profile.objectWillChange.send()
-                        self.expressedMilkFormVisible = false
+                        self.context.refreshAllObjects()
+                        try self.context.save()
+                        self.presentationMode.wrappedValue.dismiss()
                     }catch {
+                        fatalError("Couldn't save")
                     }
                 }) {
                     Text("Save")
                 }
-            }
-            .frame(maxWidth: .infinity)
-           .frame(height: UIScreen.main.bounds.height/8)
-           .background(Color(UIColor.systemBackground))
+            )
         }
-        .edgesIgnoringSafeArea(.all)
-        .background(Color(UIColor.systemGray6))
     }
 }
 
-struct ExpressedMilkFormSheet_Previews: PreviewProvider {
+struct EditExpressedMilkView_Previews: PreviewProvider {
     static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let expressedBottle = ExpressedBottle()
+        expressedBottle.amount = 12
         
-        return ExpressedMilkFormSheet(expressedMilkFormVisible: .constant(true))
-            .environment(\.managedObjectContext, context)
-            .environmentObject(ProfileObserver.shared)
+        return EditExpressedMilkView(profile: ProfileObserver.shared, expressedBottle: expressedBottle)
     }
 }

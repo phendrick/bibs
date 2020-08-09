@@ -13,6 +13,7 @@ extension ExpressedBottle: Identifiable, Trackable {
         case refridgerated
         case fresh
         case frozen
+        case thawed
         case donated
         case disposed
         
@@ -21,6 +22,7 @@ extension ExpressedBottle: Identifiable, Trackable {
                 case .refridgerated: return "Refridgerate"
                 case .fresh: return "Keep at room temperature"
                 case .frozen: return "Freeze"
+                case .thawed: return "Thawed"
                 case .disposed: return "Dispose of"
                 case .donated: return "Donate"
             }
@@ -31,7 +33,19 @@ extension ExpressedBottle: Identifiable, Trackable {
                 case .refridgerated: return "Refridgerated milk will last for"
                 case .fresh: return "Make sure to dispose if..."
                 case .frozen: return "You can keep milk in the freezer for"
+                case .thawed: return "You can keep thawed milk for"
                 case .disposed: return "Safely dispose of. Or consider donating"
+                case .donated: return "❤️"
+            }
+        }
+        
+        var emoji: String {
+            switch(self) {
+                case .refridgerated: return ""
+                case .fresh: return ""
+                case .frozen: return "❄️"
+                case .thawed: return "🍼"
+                case .disposed: return ""
                 case .donated: return "❤️"
             }
         }
@@ -48,7 +62,7 @@ extension ExpressedBottle: Identifiable, Trackable {
     }
     
     static var permittedUsableStates: [ExpressedBottleStorageStatus] {
-        [.fresh, .refridgerated, .frozen]
+        [.fresh, .refridgerated, .frozen, .thawed]
     }
     
     public var wrappedCreatedAt: Date {

@@ -14,6 +14,12 @@ struct NappyChangesDataView: View {
     
     @State var nappyChangeType: NappyChange.NappyChangeType = .wet
     
+    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
+        return VStack {
+            Text("Hello")
+        }
+    }
+    
     var body: some View {
         VStack {
             Picker(selection: self.$nappyChangeType, label: Text("")) {

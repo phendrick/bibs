@@ -11,6 +11,12 @@ import SwiftUI
 struct ParentFoodDiaryListView: View {
     @ObservedObject var profile: ProfileObserver
     
+    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
+        return VStack {
+            Text("Hello")
+        }
+    }
+    
     var body: some View {
         VStack {
             DashboardDataView(
@@ -26,6 +32,7 @@ struct ParentFoodDiaryListView: View {
                             Text("\(result.foodType.emoji)")
                             Text("\(result.foodType.description)").fontWeight(.bold)
                         }
+                        
                         HStack {
                             Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
                         }
