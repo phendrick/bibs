@@ -25,6 +25,7 @@ extension Snack {
             case .dairy: return "Dairy"
             }
         }
+        
         var details: String {
             switch(self) {
             case .vegetables: return "Carrots, broccoli, peas, avocado, cauliflower"

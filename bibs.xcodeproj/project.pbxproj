@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DA08834024CCF550003B7020 /* Snack+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08833E24CCF550003B7020 /* Snack+CoreDataClass.swift */; };
 		DA08834124CCF550003B7020 /* Snack+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08833F24CCF550003B7020 /* Snack+CoreDataProperties.swift */; };
-		DA08834324CD7608003B7020 /* DashboardPopupTimersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08834224CD7608003B7020 /* DashboardPopupTimersListView.swift */; };
 		DA08834524CD794F003B7020 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08834424CD794F003B7020 /* View+roundedCorners.swift */; };
 		DA08834824CE15A0003B7020 /* NappyChangeFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08834724CE15A0003B7020 /* NappyChangeFormSheet.swift */; };
 		DA08834A24CE423E003B7020 /* BottleFeedsFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08834924CE423E003B7020 /* BottleFeedsFormSheet.swift */; };
@@ -144,7 +143,6 @@
 /* Begin PBXFileReference section */
 		DA08833E24CCF550003B7020 /* Snack+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snack+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA08833F24CCF550003B7020 /* Snack+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snack+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DA08834224CD7608003B7020 /* DashboardPopupTimersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPopupTimersListView.swift; sourceTree = "<group>"; };
 		DA08834424CD794F003B7020 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
 		DA08834724CE15A0003B7020 /* NappyChangeFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeFormSheet.swift; sourceTree = "<group>"; };
 		DA08834924CE423E003B7020 /* BottleFeedsFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedsFormSheet.swift; sourceTree = "<group>"; };
@@ -369,7 +367,6 @@
 				DAEBBF4C24CB7C900065B232 /* DashboardFeedTimerView.swift */,
 				DAEBBF4A24CB7C790065B232 /* DashboardHeaderOverviewView.swift */,
 				DAEBBF4824CB7C6C0065B232 /* DashboardHeaderView.swift */,
-				DA08834224CD7608003B7020 /* DashboardPopupTimersListView.swift */,
 				DAEBBF4E24CB7CA30065B232 /* DashboardToolsListView.swift */,
 				DAEE23D024C979D100E368DC /* DashboardView.swift */,
 				DA0D48D824DCB97B000A1195 /* FeedTimerView.swift */,
@@ -841,7 +838,6 @@
 				DAEBBF4D24CB7C900065B232 /* DashboardFeedTimerView.swift in Sources */,
 				DAEE23D424C9813600E368DC /* Nap+CoreDataClass.swift in Sources */,
 				DA4DEA3024D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift in Sources */,
-				DA08834324CD7608003B7020 /* DashboardPopupTimersListView.swift in Sources */,
 				DA08834C24CE45EA003B7020 /* ExpressedMilkFormSheet.swift in Sources */,
 				DA8307B424A7417500454F14 /* NappyChange+CoreDataClass.swift in Sources */,
 				DA224EB424DFF6BD006FCFC3 /* EditNapView.swift in Sources */,

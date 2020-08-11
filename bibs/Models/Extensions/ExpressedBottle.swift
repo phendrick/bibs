@@ -19,12 +19,12 @@ extension ExpressedBottle: Identifiable, Trackable {
         
         var description: String {
             switch(self) {
-                case .refridgerated: return "Refridgerate"
-                case .fresh: return "Keep at room temperature"
-                case .frozen: return "Freeze"
+                case .refridgerated: return "Refridgerated"
+                case .fresh: return "Room temperature"
+                case .frozen: return "Frozen"
                 case .thawed: return "Thawed"
-                case .disposed: return "Dispose of"
-                case .donated: return "Donate"
+                case .disposed: return "Disposed of"
+                case .donated: return "Donated"
             }
         }
         

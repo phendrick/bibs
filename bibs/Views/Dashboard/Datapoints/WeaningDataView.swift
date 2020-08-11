@@ -12,12 +12,67 @@ struct WeaningDataView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
-    @State var snackType: Snack.SnackType = .fruit
+    @State var snackType: Snack.SnackType = .vegetables
     
-    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
-        return VStack {
-            Text("Hello")
+    @State var dateFilter: DataViewDateFilter = .today
+    @State var dateFilterStartDate: Date = Date().beginningOfMonth
+    @State var dateFilterEndDate: Date = Date().endOfMonth
+    @State var dateOptionsSheetVisible: Bool = false
+    
+    func statsForResults(results: [Snack]) -> String {
+        guard results.count > 0 else {
+            return ""
         }
+        
+        return "\(results.count) \("snack".pluralize(count: results.count))"
+    }
+    
+    @ViewBuilder func headerView(results: [Snack]) -> some View {
+        VStack(alignment: .leading) {
+            Text("\(statsForResults(results: results))")
+            
+            Divider()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 25) {
+                    ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
+                        Button(filter.description) {
+                            if filter != .date {
+                                self.dateFilter = filter
+                            }
+                            
+                            self.dateOptionsSheetVisible = filter == .date
+                        }
+                    }
+                }
+                .padding()
+                .font(.callout)
+            }
+        }
+    }
+    
+    func filterPredicate() -> NSPredicate {
+        var startDate = Date().beginningOfDay
+        var endDate = Date().endOfDay
+        
+        if self.dateFilter == .today {
+            startDate = Date().beginningOfDay
+            endDate = Date().endOfDay
+        }else if self.dateFilter == .week {
+            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            endDate = startDate.plusWeek
+        }else if self.dateFilter == .month {
+            startDate = Date().beginningOfMonth
+            endDate   = startDate.endOfMonth
+        }else {
+            startDate = self.dateFilterStartDate
+            endDate   = self.dateFilterEndDate
+        }
+        
+        return NSPredicate(
+            format: "%K IN %@ AND child = %@ AND createdAt >= %@ AND createdAt <= %@", "state",
+            [self.snackType.rawValue], child, startDate as NSDate, endDate as NSDate
+        )
     }
     
     var body: some View {
@@ -32,10 +87,11 @@ struct WeaningDataView: View {
             
             DashboardDataView(
                 profile: self.profile,
-                predicate: NSPredicate(format: "%K IN %@ AND child = %@", "state", [self.snackType.rawValue], child),
+                predicate: filterPredicate(),
                 sortDescriptors: [
                     NSSortDescriptor(key: "createdAt", ascending: false)
-                ]
+                ],
+                headerView: headerView
             ) {(result: Snack, count: Int) in
                 NavigationLink(destination: EditSnackView(profile: self.profile, snack: result)) {
                     VStack(alignment: .leading, spacing: 15) {
@@ -51,6 +107,35 @@ struct WeaningDataView: View {
             
             Spacer()
         }
+        .sheet(isPresented: $dateOptionsSheetVisible) {
+            VStack {
+                Form {
+                    Section(header: Text("Date from")) {
+                        DatePicker(selection: self.$dateFilterStartDate, displayedComponents: .date) {
+                            Text("")
+                        }.labelsHidden()
+                    }
+                    
+                    Section(header: Text("Date to")) {
+                        DatePicker(selection: self.$dateFilterEndDate, displayedComponents: .date) {
+                            Text("")
+                        }.labelsHidden()
+                    }
+                }
+                
+                Spacer()
+                
+                Button("Done") {
+                    self.dateOptionsSheetVisible = false
+                }
+            }
+            .onAppear(perform: {
+                print(self.dateFilterStartDate)
+            })
+            .onDisappear {
+                self.dateFilter = .date
+            }
+        }   
         .navigationBarTitle(Text("Weaning"), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }

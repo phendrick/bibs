@@ -52,10 +52,21 @@ extension Date {
         return Calendar.current.startOfDay(for: self)
     }
     
+    var endOfDay: Date {
+        return Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+    
     var beginningOfWeek: Date {
         let components: DateComponents = Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         
         return Calendar.current.date(from: components)!
+    }
+    
+    var plusWeek: Date {
+        let delta:Double = 3600*24*7
+        let date = self.advanced(by: delta)
+        
+        return date
     }
     
     var beginningOfWeekMonday: Date {
@@ -66,6 +77,10 @@ extension Date {
         let components: DateComponents = Calendar.current.dateComponents([.year, .month], from: self)
         
         return Calendar.current.date(from: components)!
+    }
+    
+    var endOfMonth: Date {
+        Calendar.current.date(byAdding: .month, value: 1, to: self)!
     }
     
     var beginningOfYear: Date {

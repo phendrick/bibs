@@ -27,9 +27,7 @@ struct EditExpressedMilkView: View {
                     Stepper("\(self.expressedAmount)ml", value: self.$expressedAmount, in: 0...2000).padding()
                 }
                 
-                Section(
-                    header: Text("Which I'll")
-                ) {
+                Section {
                     List {
                         ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
                             HStack(alignment: .center) {

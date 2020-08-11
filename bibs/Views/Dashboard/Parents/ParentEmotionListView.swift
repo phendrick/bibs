@@ -11,34 +11,37 @@ import SwiftUI
 struct ParentEmotionListView: View {
     @ObservedObject var profile: ProfileObserver
     
-    @ViewBuilder func aggregateCallback(results: [FeedSession]) -> some View {
-        return VStack {
-            Text("Hello")
-        }
-    }
+    var centerPoint:CGFloat = UIScreen.main.bounds.size.height
     
     var body: some View {
         VStack {
-            DashboardDataView(
-                profile: self.profile,
-                sortDescriptors: [
-                    NSSortDescriptor(key: "createdAt", ascending: false)
-                ]
-            ) {(result: Emotion, count: Int) in
-                HStack {
-                    VStack(alignment: .leading, spacing: 15) {
-                        HStack {
-                            Text("\(result.status.emoji)")
-                            Text("\(result.note ?? "")")
+            ZStack {
+                VStack {
+                    Text("OK")
+                }
+                .frame(maxHeight: .infinity)
+                .frame(width: 1)
+                .border(Color.gray.opacity(0.35))
+                
+                ScrollView(.vertical, showsIndicators: false) {
+                    ForEach(self.profile.parent.emotionsArray.reversed(), id: \.self) {emotion in
+                        VStack {
+                            Text("\(emotion.status.description)").font(.footnote).padding(.bottom, 5)
+                            Text("\(emotion.status.emoji)").font(.system(size: 80))
+                            
+                            VStack(spacing: 5) {
+                                Text("\(emotion.note ?? "")")
+                                    .font(.caption).foregroundColor(Color(UIColor.label).opacity(0.75))
+                                
+                                Text("\(emotion.wrappedCreatedAt.getFormattedDate())")
+                                    .font(.caption).foregroundColor(Color(UIColor.label).opacity(0.75))
+                            }
                         }
-                        VStack(alignment: .leading) {
-                            Text("\(result.status.description)").font(.footnote)
-                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
-                        }.foregroundColor(.gray)
-                    }.padding([.top, .bottom])
+                        .padding(.bottom, 45)
+                    }
                 }
             }
-        }.navigationBarTitle("Emotions")
+        }.navigationBarTitle(Text("Emotions"), displayMode: .inline)
     }
 }
 

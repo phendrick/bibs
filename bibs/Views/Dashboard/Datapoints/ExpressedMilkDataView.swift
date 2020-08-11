@@ -8,37 +8,66 @@
 
 import SwiftUI
 
+
 struct ExpressedMilkDataView: View {
     @ObservedObject var profile: ProfileObserver
     
     @State var expressedBottleStorageType: ExpressedBottle.ExpressedBottleStorageStatus = .refridgerated
+
+    @State var dateFilter: DataViewDateFilter = .today
+    @State var dateFilterStartDate: Date = Date().beginningOfMonth
+    @State var dateFilterEndDate: Date = Date().endOfMonth
+    @State var dateOptionsSheetVisible: Bool = false
+    
+    func statsForResults(results: [Snack]) -> String {
+        guard results.count > 0 else {
+            return ""
+        }
+        
+        return "\(results.count) \("snack".pluralize(count: results.count))"
+    }
+    
+    @ViewBuilder func headerView(results: [ExpressedBottle]) -> some View {
+        guard results.count > 0 else {
+            return ""
+        }
+        
+        return "\(results.count) \("bottle".pluralize(count: results.count))"
+    }
+    
+    @ViewBuilder func headerView(results: [Snack]) -> some View {
+        Section {
+            Text("\(statsForResults(results: results))")
+        }
+    }
     
     var body: some View {
         VStack {
-            Picker(selection: self.$expressedBottleStorageType, label: Text("")) {
-                ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
-                    Text("\(storage.description)").tag(storage.rawValue)
+            Form {
+                Section {
+                    Picker(selection: self.$expressedBottleStorageType, label: Text("")) {
+                        ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
+                            Text("\(storage.description)").tag(storage.rawValue)
+                        }
+                    }
                 }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            DashboardDataView(
-                profile: self.profile,
-                predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue]),
-                sortDescriptors: [
-                    NSSortDescriptor(key: "createdAt", ascending: false)
-                ]
-            ) {(result: ExpressedBottle, count: Int) in
-                NavigationLink(destination: EditExpressedMilkView(profile: self.profile, expressedBottle: result)) {
-                    HStack {
-                        Text("\(result.convertedAmount) ")
-                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                
+                DashboardDataView(
+                    profile: self.profile,
+                    predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue]),
+                    sortDescriptors: [
+                        NSSortDescriptor(key: "createdAt", ascending: false)
+                    ],
+                    headerView: headerView
+                ) {(result: ExpressedBottle, count: Int) in
+                    NavigationLink(destination: EditExpressedMilkView(profile: self.profile, expressedBottle: result)) {
+                        HStack {
+                            Text("\(result.convertedAmount) ")
+                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                        }
                     }
                 }
             }
-            
-            Spacer()
         }
         .navigationBarTitle(Text("Expressed Milk"), displayMode: .large)
         .navigationBarItems(trailing: EditButton())

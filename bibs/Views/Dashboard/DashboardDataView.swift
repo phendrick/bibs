@@ -11,7 +11,7 @@
 import SwiftUI
 import CoreData
 
-struct DashboardDataView<T: NSManagedObject, Content: View>: View {
+struct DashboardDataView<T: NSManagedObject, Header: View, Content: View>: View {
     @Environment(\.managedObjectContext) var moc
     @ObservedObject var profile: ProfileObserver
     
@@ -19,7 +19,9 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     var allowDelete: Bool = true
     var fetchRequest: FetchRequest<T>
     var results: FetchedResults<T> { fetchRequest.wrappedValue }
+    var dateFilter: DataViewDateFilter = .today
     
+    var headerView: ([T]) -> Header
     var content: (T, Int) -> Content
     
     init(
@@ -27,10 +29,12 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
         predicate: NSPredicate? = nil,
         sortDescriptors: [NSSortDescriptor] = [],
         allowDelete: Bool = true,
+        @ViewBuilder headerView: @escaping([T]) -> Header,
         @ViewBuilder content: @escaping(T, Int) -> Content
     ) {
         fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
         self.profile = profile
+        self.headerView = headerView
         self.content = content
         self.allowDelete = allowDelete
     }
@@ -48,6 +52,8 @@ struct DashboardDataView<T: NSManagedObject, Content: View>: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            self.headerView(Array(fetchRequest.wrappedValue)).padding().font(.caption)
+            
             List {
                 ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
                     DashboardDataRowView(index: index) {

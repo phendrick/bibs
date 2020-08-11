@@ -9,6 +9,10 @@ extension String {
     }
     
     func pluralize(count: Int) -> String {
+        guard count > 0 else {
+            return "\(self)s"
+        }
+        
         return count < 2 ? self : "\(self)s"
     }
 }

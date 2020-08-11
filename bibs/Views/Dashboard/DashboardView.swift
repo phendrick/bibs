@@ -44,7 +44,7 @@ struct DashboardView: View {
                     
                     Spacer()
                 }
-                .navigationBarTitle(Text("Hello"), displayMode: .large)
+                .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
                 .navigationBarItems(
                     leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
                         Image(systemName: "person.crop.circle").foregroundColor(.red)

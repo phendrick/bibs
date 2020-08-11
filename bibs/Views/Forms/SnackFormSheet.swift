@@ -82,6 +82,7 @@ struct SnackFormSheet: View {
                     let snack = Snack(context: self.moc)
                     snack.note = self.note
                     snack.snackType = self.selectedSnackType
+                    snack.createdAt = Date()
                     child.addToSnacks(snack)
                     
                     try? self.moc.save()

@@ -57,8 +57,6 @@ struct EditFeedSessionView_Previews: PreviewProvider {
         feed.duration   = 1234
         session.addToFeeds(feed)
         
-        let context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        
         return EditFeedSessionView(profile: ProfileObserver.shared, feedSession: session)
     }
 }
