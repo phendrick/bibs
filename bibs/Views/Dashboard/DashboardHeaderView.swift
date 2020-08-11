@@ -19,7 +19,7 @@ struct DashboardHeaderView: View {
         ZStack {
             HStack(alignment: .center) {
                 Text(dashboardSubtitle(for: self.profile.parent))
-                    .font(.title)
+                    .font(.body)
                 
                 Spacer()
                 

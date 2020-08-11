@@ -40,8 +40,10 @@ func dashboardSubtitle(for parent: ParentProfile) -> String {
     switch(timeOfDayType) {
     case .lateNight:
         greeting = lateNightGreetingPrefixes.randomElement()!
+    case .evening:
+        greeting = "Had a good day?"
     default:
-    greeting = "How are you today?"
+        greeting = "How are you today?"
     }
     
     return greeting
