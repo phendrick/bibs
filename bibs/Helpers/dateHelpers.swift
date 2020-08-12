@@ -30,16 +30,36 @@ func dashboardGreeting(for parent: ParentProfile) -> String {
 
 func dashboardSubtitle(for parent: ParentProfile) -> String {
     let timeOfDayType = Date().timeOfDayType()
+    let latestEmotion = parent.latestEmotionType
+    
+    print(latestEmotion.rawValue)
     
     let lateNightGreetingPrefixes: [String] = [
         "Keep going", "You're amazing"
     ]
     
+    var lateNightgreeting: String {
+         lateNightGreetingPrefixes.randomElement()!
+    }
+    
+//    let greetingVariants: [Emotion.EmotionType: [(Date.TimeOfDayTypes, String)]] = [
+//
+//        .down: [],
+//        .enthusiastic: [],
+//        .excited: [],
+//        .happy: [],
+//        .loved: [],
+//        .sad: [
+//            (Date.TimeOfDayTypes.lateNight, "Need support"), (Date.TimeOfDayTypes.lateNight, "Sometimes it's easier to talk to someone")
+//        ],
+//        .tired: []
+//    ]
+    
     var greeting = ""
     
     switch(timeOfDayType) {
     case .lateNight:
-        greeting = lateNightGreetingPrefixes.randomElement()!
+        greeting = lateNightgreeting
     case .evening:
         greeting = "Had a good day?"
     default:

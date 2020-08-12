@@ -43,33 +43,31 @@ struct ExpressedMilkDataView: View {
     
     var body: some View {
         VStack {
-            Form {
-                Section {
-                    Picker(selection: self.$expressedBottleStorageType, label: Text("")) {
-                        ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
-                            Text("\(storage.description)").tag(storage.rawValue)
-                        }
+            Section {
+                Picker(selection: self.$expressedBottleStorageType, label: Text("Storage Type")) {
+                    ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
+                        Text("\(storage.description)").tag(storage.rawValue)
                     }
-                }
-                
-                DashboardDataView(
-                    profile: self.profile,
-                    predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue]),
-                    sortDescriptors: [
-                        NSSortDescriptor(key: "createdAt", ascending: false)
-                    ],
-                    headerView: headerView
-                ) {(result: ExpressedBottle, count: Int) in
-                    NavigationLink(destination: EditExpressedMilkView(profile: self.profile, expressedBottle: result)) {
-                        HStack {
-                            Text("\(result.convertedAmount) ")
-                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
-                        }
+                }.labelsHidden()
+            }
+            
+            DashboardDataView(
+                profile: self.profile,
+                predicate: NSPredicate(format: "%K IN %@", "state", [self.expressedBottleStorageType.rawValue]),
+                sortDescriptors: [
+                    NSSortDescriptor(key: "createdAt", ascending: false)
+                ],
+                headerView: headerView
+            ) {(result: ExpressedBottle, count: Int) in
+                NavigationLink(destination: EditExpressedMilkView(profile: self.profile, expressedBottle: result)) {
+                    HStack {
+                        Text("\(result.convertedAmount) ")
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
                     }
                 }
             }
         }
-        .navigationBarTitle(Text("Expressed Milk"), displayMode: .large)
+        .navigationBarTitle(Text("Stored Milk"), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }
 }

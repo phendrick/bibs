@@ -15,12 +15,12 @@ struct AddChildView: View {
     
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
-    @State var image: Image? = Image("baby")
+    @State var image: Image?
     
     @State var name: String = ""
     @State var dueDate: Date = Date()
     @State var isBorn: Bool = true
-    @State var colorScheme: Int16 = 0
+    @State var colorScheme: Int = 0
     
     @State var showDatePicker: Bool = false
     
@@ -37,21 +37,23 @@ struct AddChildView: View {
                                 .clipShape(Circle())
                                 .shadow(radius: 5)
                                 .scaledToFit()
-                                .frame(maxHeight: 200)
-//                                .overlay(
-//                                    Circle().stroke(
-//                                        Child.Themes[self.colorScheme], lineWidth: 6
-//                                    )
-//                                )
-//                                .animation(.linear)
+                                .frame(width: 160, height: 160)
+                                .overlay(
+                                    Circle().stroke(
+                                        Child.Themes[self.colorScheme]!.0, lineWidth: 10
+                                    )
+                                )
+                                .animation(.linear)
                         }else {
                             VStack {
                                 Circle()
                                     .foregroundColor(Color.white)
-                                    .frame(width: 200, height: 200)
+                                    .frame(width: 160, height: 160)
                                     .overlay(VStack {
                                         ZStack {
-                                            Circle().stroke(Color.gray, lineWidth: 2)
+                                            Circle().stroke(
+                                                Child.Themes[self.colorScheme]!.0, lineWidth: 10
+                                            )
                                             Image(systemName: "camera")
                                                 .font(.system(size: 40))
                                         }
@@ -96,7 +98,7 @@ struct AddChildView: View {
                                 .foregroundColor(Child.Themes[index]?.0)
                                 .clipShape(Circle())
                                 .onTapGesture {
-//                                    self.colorScheme = index
+                                    self.colorScheme = index
                             }
                         }
                         

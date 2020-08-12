@@ -69,8 +69,21 @@ struct DashboardToolsListView: View {
                     }
                     
                     VStack(alignment: .center) {
+                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
+                        Text("Breastfeed").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        self.manualFeedTimerFormVisible = true
+                    }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
+                        ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(self.profile)
+                    }
+                    
+                    VStack(alignment: .center) {
                         Image("nappy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nappies").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Nappy Change").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -103,19 +116,6 @@ struct DashboardToolsListView: View {
                         self.naptimeFormVisible = true
                     }.sheet(isPresented: self.$naptimeFormVisible) {
                         NaptimeFormSheet(naptimeFormVisible: self.$naptimeFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
-                    
-                    VStack(alignment: .center) {
-                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Timed Feed").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.manualFeedTimerFormVisible = true
-                    }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
-                        ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
                             .environment(\.managedObjectContext, self.moc)
                             .environmentObject(self.profile)
                     }

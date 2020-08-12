@@ -29,22 +29,11 @@ struct WelcomeView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    
+                Button("Next") {
                     self.showAddAboutYouView = true
-                }) {
-                    Text("Next")
-                }
+                }.padding()
                 
-
                 VStack {
-                    HStack(alignment: .lastTextBaseline) {
-                        Image(systemName: "info.circle.fill")
-                            .foregroundColor(.orange)
-                            .opacity(0.2)
-                        Text("Feeding for two?").padding(.bottom, 10)
-                    }
-
                     HStack {
                         Text("If you're co-feeding you can add another profile later.")
                             .font(.custom("OpenSans-Regular", size: 14))
@@ -52,7 +41,6 @@ struct WelcomeView: View {
                     }
                 }
             }
-            .navigationBarTitle("Welcome")
         }
     }
 }
