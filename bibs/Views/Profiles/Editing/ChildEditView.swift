@@ -10,11 +10,12 @@ import SwiftUI
 import CoreData
 
 struct ChildEditView: View {
-    var child: Child
-    
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var profile: ProfileObserver
+    
+    var child: Child
+    var edited: Bool = true
     
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
@@ -131,6 +132,8 @@ struct ChildEditView: View {
         do {
             try self.context.save()
             
+            self.profile.parent.addToChildren(self.child)
+            self.profile.objectWillChange.send()
             self.presentationMode.wrappedValue.dismiss()
         }catch {
             debugPrint(error)

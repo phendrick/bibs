@@ -34,7 +34,7 @@ struct DashboardView: View {
         ZStack(alignment: .bottom) {
             NavigationView {
                 VStack(spacing: 0) {
-                    DashboardHeaderView().padding().overlay(Text("\(self.profile.trayHeight)").offset(y: 40))
+                    DashboardHeaderView().padding()
 
                     NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                         DashboardHeaderOverviewView(profile: profile).padding()

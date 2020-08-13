@@ -19,10 +19,15 @@ struct AvatarImageView: View {
     var imageSize: CGFloat {
         if self.layout == .expanded {
             return imageBaseHeight * 1.5
-        }else if self.layout == .minimal {
-            return imageBaseHeight * 1.2
         }else {
             return imageBaseHeight
+        }
+    }
+    
+    var avatarHeight: CGFloat {
+        switch(self.layout) {
+        case .expanded: return UIScreen.main.bounds.height/8
+        case .minimised: return UIScreen.main.bounds.height/12
         }
     }
     
@@ -32,13 +37,13 @@ struct AvatarImageView: View {
             .clipShape(Circle())
             .shadow(radius: 5)
             .scaledToFit()
+            .clipped()
             .overlay(
                 Circle().stroke(
                     color, lineWidth: lineWidth
                 )
             )
-//            .frame(minWidth: imageSize, minHeight: imageSize)
-//            .frame(maxHeight: imageSize)
+            .frame(width: UIScreen.main.bounds.width/5, height: imageSize)
             .animation(nil)
     }
 }

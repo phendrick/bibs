@@ -20,7 +20,6 @@ struct DashboardFeedTimerView: View {
         var height: CGFloat = UIScreen.main.bounds.size.height / 12
         switch(self.layout) {
         case .expanded: height *= 2
-        case .minimal: height *= 1.7
         case .minimised: height *= 1.4
         }
         
@@ -30,8 +29,6 @@ struct DashboardFeedTimerView: View {
     var timerFontSize: CGFloat {
         if self.layout == .expanded {
             return 32
-        }else if self.layout == .minimal && !self.profile.multipleWaiting {
-            return self.cofeeding ? 20 :  24
         }else {
             return self.cofeeding ? 20 :  22
         }
@@ -46,7 +43,7 @@ struct DashboardFeedTimerView: View {
     }
     
     var breastSideLabelWidth: CGFloat {
-        if self.layout == .expanded || self.layout == .minimal {
+        if self.layout == .expanded {
             return 100
         }else {
             return self.cofeeding ? 30 : 100
@@ -110,21 +107,19 @@ struct DashboardFeedTimerView: View {
                         
                         Spacer()
                         
-                        if self.layout != .minimised || (self.layout == .minimised && self.profile.multipleWaiting) {
-                            Text(breastSideLabel)
-                            .padding(2)
-                            .padding([.leading, .trailing], 10)
-                            .onTapGesture {
-                                guard !self.cofeeding else {
-                                    return
-                                }
-                                
-                                self.feedSession.switchSide()
+                        Text(breastSideLabel)
+                        .padding(2)
+                        .padding([.leading, .trailing], 10)
+                        .onTapGesture {
+                            guard !self.cofeeding else {
+                                return
                             }
-                            .overlay(Capsule().stroke(Color.white, lineWidth: 1).frame(maxWidth: breastSideLabelWidth))
-                            .font(.caption)
-                            .animation(nil)
+                            
+                            self.feedSession.switchSide()
                         }
+                        .overlay(Capsule().stroke(Color.white, lineWidth: 1).frame(maxWidth: breastSideLabelWidth))
+                        .font(.caption)
+                        .animation(nil)
                     }
                 }
             }

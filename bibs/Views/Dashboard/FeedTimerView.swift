@@ -17,10 +17,6 @@ struct FeedTimerView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("00:00:00.99")
             }
-        }else if self.layout == .minimal {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("00:00:00.99")
-            }
         }else {
             HStack(spacing: 10) {
                 Text("00:00:00.99")
@@ -30,14 +26,6 @@ struct FeedTimerView: View {
     
     @ViewBuilder func actionsView() -> some View {
         if self.layout == .expanded {
-            HStack {
-                Text("Paul")
-                
-                Text("(Left)")
-                
-                Text("||")
-            }
-        }else if self.layout == .minimal {
             HStack {
                 Text("Paul")
                 
@@ -83,9 +71,6 @@ struct FeedTimerView_Previews: PreviewProvider {
         Group {
             FeedTimerView(layout: .expanded, cofeeding: false)
                 .previewLayout(.fixed(width: 420, height: 220))
-            
-            FeedTimerView(layout: .minimal, cofeeding: false)
-                .previewLayout(.fixed(width: 420, height: 160))
             
             FeedTimerView(layout: .minimised, cofeeding: false)
                 .previewLayout(.fixed(width: 400, height: 100))

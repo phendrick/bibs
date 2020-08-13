@@ -26,13 +26,12 @@ final class ProfileObserver: ObservableObject {
             return
         }
         
-        let padding: CGFloat = 65
+        let padding: CGFloat = 70
         
         var height: CGFloat = (UIScreen.main.bounds.size.height / 12)
         
         switch(layout) {
         case .expanded: height *= 2
-        case .minimal: height *= 1.7
         case .minimised: height *= 1.4
         }
         

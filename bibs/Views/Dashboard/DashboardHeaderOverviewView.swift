@@ -44,12 +44,12 @@ struct DashboardHeaderOverviewView: View {
                         HStack(spacing: 5) {
                             Text("\(profile.parent.todaysNappiesOverview.1)")
                             Text("wet")
-                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
+                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                         
                         HStack(spacing: 5) {
                             Text("\(profile.parent.todaysNappiesOverview.2)")
                             Text("dirty")
-                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel)).lineLimit(1).minimumScaleFactor(0.5)
+                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                     }
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 
@@ -60,8 +60,7 @@ struct DashboardHeaderOverviewView: View {
                     Text("Naps")
                         .font(.subheadline).padding(.bottom, 10).lineLimit(1)
                     Text("\(profile.parent.todaysNapsOverview.1)")
-                        .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-                        .lineLimit(1).minimumScaleFactor(0.5)
+                        .font(.caption).foregroundColor(Color(UIColor.secondaryLabel))
                 }.frame(minWidth: 0, maxWidth: .infinity)
             }
         }

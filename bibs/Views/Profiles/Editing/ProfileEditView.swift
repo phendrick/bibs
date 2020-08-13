@@ -92,6 +92,10 @@ struct ProfileEditView: View {
                                 }
                             }
                         }
+                        
+                        NavigationLink(destination: ChildEditView(child: Child(context: self.context), edited: false)) {
+                            Text("Add a new child")
+                        }
                     }
                     
 //                    HStack {
