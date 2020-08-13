@@ -10,13 +10,17 @@ import Foundation
 
 extension Emotion {
     public enum EmotionType: Int16, CaseIterable {
-        case happy = 5
-        case tired = 4
-        case down = 2
+        
+        case happy = 4
+        case enthusiastic = 5
+        case excited = 6
+        case loved = 7
+        
+        case tired = 3
+        
         case sad = 1
-        case excited = 7
-        case enthusiastic = 6
-        case loved = 8
+        case down = 2
+        
         
         var description: String {
             switch(self) {

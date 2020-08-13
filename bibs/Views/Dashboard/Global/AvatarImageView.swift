@@ -14,13 +14,15 @@ struct AvatarImageView: View {
     var lineWidth: CGFloat = 10
     var layout: ActiveFeedsTrayView.ExpandedState = .minimised
     
+    let imageBaseHeight = UIScreen.main.bounds.size.height / 12
+    
     var imageSize: CGFloat {
         if self.layout == .expanded {
-            return 100
+            return imageBaseHeight * 1.5
         }else if self.layout == .minimal {
-            return 80
+            return imageBaseHeight * 1.2
         }else {
-            return 60
+            return imageBaseHeight
         }
     }
     
@@ -35,8 +37,8 @@ struct AvatarImageView: View {
                     color, lineWidth: lineWidth
                 )
             )
-            .frame(minWidth: imageSize, minHeight: imageSize)
-            .frame(maxHeight: imageSize)
+//            .frame(minWidth: imageSize, minHeight: imageSize)
+//            .frame(maxHeight: imageSize)
             .animation(nil)
     }
 }

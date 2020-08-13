@@ -17,20 +17,25 @@ final class ProfileObserver: ObservableObject {
     
     private init() {}
     
+    var multipleWaiting: Bool {
+        (self.parent.currentFeedSessions.count > 0 && self.parent.childrenWithoutCurrentFeedSessions.count > 1)
+    }
+    
     func setOffsetForLayout(layout: ActiveFeedsTrayView.ExpandedState) {
-        var height: CGFloat = 0
-        let currentSessions = self.parent.currentFeedSessions.count
-        let inactiveSessions = self.parent.childrenWithoutCurrentFeedSessions.count
-        let currentSessionsMultiplier = layout == .minimised ? 1 : currentSessions
-        
-        if inactiveSessions > 0 {
-            height += 150
+        guard layout != .expanded else {
+            return
         }
         
-        let timerHeight = layout == .expanded ? 180 : 150
+        let padding: CGFloat = 65
         
-        height += CGFloat((timerHeight * currentSessionsMultiplier))
+        var height: CGFloat = (UIScreen.main.bounds.size.height / 12)
         
-        self.trayHeight = CGFloat(height)
+        switch(layout) {
+        case .expanded: height *= 2
+        case .minimal: height *= 1.7
+        case .minimised: height *= 1.4
+        }
+        
+        self.trayHeight = CGFloat(height + padding)
     }
 }

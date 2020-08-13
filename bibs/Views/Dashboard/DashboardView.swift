@@ -34,7 +34,7 @@ struct DashboardView: View {
         ZStack(alignment: .bottom) {
             NavigationView {
                 VStack(spacing: 0) {
-                    DashboardHeaderView().padding()
+                    DashboardHeaderView().padding().overlay(Text("\(self.profile.trayHeight)").offset(y: 40))
 
                     NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                         DashboardHeaderOverviewView(profile: profile).padding()
@@ -56,10 +56,10 @@ struct DashboardView: View {
             
             ActiveFeedsTrayView(profile: self.profile)
                 .background(
-                    RoundedRectangle(cornerRadius: 15, style: .continuous)
-                        .foregroundColor(Color(UIColor.secondarySystemBackground))
+                    RoundedRectangle(cornerRadius: 45, style: .continuous)
+                        .foregroundColor(Color(UIColor.secondarySystemBackground).opacity(0.75))
                         .clipped(antialiased: true)
-                        .shadow(color: Color.gray.opacity(0.15), radius: 0, x: 0, y: -6)
+                        .shadow(color: Color.gray.opacity(0.15), radius: 0, x: 0, y: -10)
                 )
         }
         .frame(maxHeight: .infinity, alignment: .bottom)

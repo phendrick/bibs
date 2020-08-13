@@ -17,16 +17,16 @@ struct ParentEmotionListView: View {
         VStack {
             ZStack {
                 VStack {
-                    Text("OK")
+                    Text("")
                 }
                 .frame(maxHeight: .infinity)
-                .frame(width: 1)
+                .frame(width: 0)
                 .border(Color.gray.opacity(0.35))
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     ForEach(self.profile.parent.emotionsArray.reversed(), id: \.self) {emotion in
                         VStack {
-                            Text("\(emotion.status.description)").font(.footnote).padding(.bottom, 5)
+                            Text("\(emotion.status.description)").font(.headline).padding(.bottom, 5)
                             Text("\(emotion.status.emoji)").font(.system(size: 80))
                             
                             VStack(spacing: 5) {

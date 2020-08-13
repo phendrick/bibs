@@ -31,12 +31,11 @@ struct ChildEditView: View {
             Form {
                 Section(header:
                     HStack {
-                        Spacer()
-                        
                         if image != nil {
-                            AvatarImageView(image: image, color:Child.Themes[self.colorScheme]!.0)
-                                .frame(width: 200, height: 200)
+                            Spacer()
+                            AvatarImageView(image: image, color:Child.Themes[self.colorScheme]!.0, layout: .expanded)
                                 .animation(.linear)
+                            Spacer()
                         }else {
                             VStack {
                                 Circle()
@@ -57,8 +56,6 @@ struct ChildEditView: View {
                                     .animation(.linear)
                             }
                         }
-                        
-                        Spacer()
                     }
                     .padding(.top, 25)
                     .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
@@ -73,15 +70,9 @@ struct ChildEditView: View {
                 
                 Section(header: Text("About your baby")) {
                     TextField("Name", text: $name)
-                }.onTapGesture {
-                    print(self.child.theme)
                 }
                 
                 Section(header: Text("Due date")) {
-                    Toggle(isOn: self.$isBorn) {
-                        Text("They're here!")
-                    }
-                    
                     DatePicker(selection: self.$dueDate) {
                         Text(self.isBorn ? "Date of birth" : "Due date")
                     }
@@ -106,7 +97,7 @@ struct ChildEditView: View {
                 }
             }
         }
-        .navigationBarTitle("Welcome, baby")
+        .navigationBarTitle("\(child.wrappedName)")
         .navigationBarItems(trailing: Button(action: save) {
             Text("Done")
         })

@@ -33,7 +33,7 @@ struct NaptimeFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Add a nap").font(.title)
+            Text("Nap time").font(.title)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()

@@ -53,6 +53,14 @@ struct ActiveFeedsTrayView: View {
         case down
     }
     
+    var avatarHeight: CGFloat {
+        switch(self.layout) {
+        case .expanded: return UIScreen.main.bounds.height/8
+        case .minimal: return UIScreen.main.bounds.height/10
+        case .minimised: return UIScreen.main.bounds.height/12
+        }
+    }
+    
     @ViewBuilder func childActionsList() -> some View {
         HStack(spacing: 10) {
             ForEach(self.profile.parent.childrenWithoutCurrentFeedSessions) { child in
@@ -62,9 +70,10 @@ struct ActiveFeedsTrayView: View {
                         color: child.theme.0,
                         lineWidth: 6,
                         layout: self.layout
-                    )
+                    ).frame(maxHeight: self.avatarHeight)
+                    
                     Text("\(child.wrappedName)")
-                        .font(.footnote)
+                        .font(.headline)
                         .foregroundColor(Color(UIColor.systemGray))
                 }.onTapGesture {
                     try? child.startNewFeedSession()
@@ -73,6 +82,26 @@ struct ActiveFeedsTrayView: View {
                 }
             }
         }
+    }
+    
+    @ViewBuilder func feedTimersList() -> some View {
+        if self.layout == .expanded {
+            VStack {
+                FeedSessionsList(
+                    profile: self.profile, layout: self.$layout
+                )
+            }
+        }else {
+            HStack {
+                FeedSessionsList(
+                    profile: self.profile, layout: self.$layout
+                )
+            }
+        }
+    }
+    
+    var useVerticalLayout: Bool {
+        return self.layout == .expanded || !self.profile.multipleWaiting
     }
     
     var body: some View {
@@ -89,7 +118,6 @@ struct ActiveFeedsTrayView: View {
                 DragGesture(minimumDistance: 10, coordinateSpace: .global)
                 .onChanged {translation in
                 }.onEnded { translation in
-                    
                     let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
                     ? .up
                     : .down
@@ -104,27 +132,26 @@ struct ActiveFeedsTrayView: View {
                 }
             )
             
-            if self.layout == .expanded || self.layout == .minimal {
-                VStack(spacing: 20) {
-                    self.childActionsList()
-                    
-                    FeedSessionsList(
-                        profile: self.profile, layout: self.$layout
-                    )
+            if self.useVerticalLayout {
+                VStack(spacing: 10) {
+                    if self.profile.parent.currentFeedSessions.count < 2 {
+                        self.childActionsList()
+                    }
+
+                    feedTimersList()
                 }
-                .padding()
+                .padding([.leading, .trailing])
                 .padding(.bottom, 20)
             }else {
-                VStack {
+                HStack(spacing: 10) {
+                    if self.profile.parent.currentFeedSessions.count < 2 {
+                        feedTimersList()
+                    }
+
                     self.childActionsList()
-                    
-                    HStack(spacing: 10) {
-                        FeedSessionsList(
-                            profile: self.profile, layout: self.$layout
-                        )
-                    }.padding()
                 }
-                .padding(.bottom, 20)
+                .padding([.leading, .trailing], 10)
+                .padding(.bottom, 10)
             }
         }
         .animation(.interactiveSpring(response: 0.25, dampingFraction: 0.5, blendDuration: 0.5))
@@ -156,6 +183,7 @@ struct FeedSessionsList: View {
                 layout: self.$layout,
                 cofeeding: self.profile.parent.currentFeedSessions.count>1
             )
+            .padding(5)
         }
     }
 }

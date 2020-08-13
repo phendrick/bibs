@@ -15,7 +15,6 @@ struct BottleFeedsFormSheet: View {
     
     @Binding var bottleFeedFormVisible: Bool
     
-    @State var pickerFeedType: Int = 0
     @State var pickerFeedSource: BottleFeed.BottleFeedType = .expressedMilk
     @State var feedAmount: Int = 5
     @State var expressedAmount: Int = 0
@@ -112,26 +111,18 @@ struct BottleFeedsFormSheet: View {
             
             VStack {
                 Button(action: {
-                    if self.pickerFeedType == 0 {
-                        let bottleFeed = BottleFeed(context: self.moc)
-                        bottleFeed.amount = Int16(self.feedAmount)
-                        bottleFeed.createdAt = Date()
-                        bottleFeed.status = self.pickerFeedSource
-                        self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
-                        
-                        self.profile.parent.reduceExpressedBottles(self.selectedExpressedBottles, by: Int16(self.feedAmount))
-                    }else {
-                        let expressedBottle = ExpressedBottle(context: self.moc)
-                        expressedBottle.status = .fresh
-                        expressedBottle.amount = Int16(self.expressedAmount)
-                        print("Setting expressedBottle createdAt")
-                        expressedBottle.createdAt = Date()
-                        self.profile.parent.addToExpressedBottles(expressedBottle)
-                    }
+                    let bottleFeed = BottleFeed(context: self.moc)
+                    bottleFeed.amount = Int16(self.feedAmount)
+                    bottleFeed.createdAt = Date()
+                    bottleFeed.status = self.pickerFeedSource
+                    self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
+                    
+                    self.profile.parent.reduceExpressedBottles(self.selectedExpressedBottles, by: Int16(self.feedAmount))
                     
                     do {
                         try self.moc.save()
                         self.profile.objectWillChange.send()
+                        self.bottleFeedFormVisible = false
                         self.selectedExpressedBottles = []
                     }catch {
                     }

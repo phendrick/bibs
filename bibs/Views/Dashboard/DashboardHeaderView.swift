@@ -37,7 +37,6 @@ struct DashboardHeaderView: View {
                 .environmentObject(self.profile)
             }
         }.onAppear {
-            print(self.profile.parent.latestEmotionType)
             self.selectedEmotionType = self.profile.parent.latestEmotionType
         }
     }

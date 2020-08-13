@@ -17,11 +17,11 @@ struct DashboardFeedTimerView: View {
     var cofeeding: Bool
     
     var timerHeight: CGFloat {
-        var height: CGFloat = 60
+        var height: CGFloat = UIScreen.main.bounds.size.height / 12
         switch(self.layout) {
-        case .expanded: height = 160
-        case .minimal: height = 120
-        case .minimised: height = 100
+        case .expanded: height *= 2
+        case .minimal: height *= 1.7
+        case .minimised: height *= 1.4
         }
         
         return height
@@ -30,18 +30,18 @@ struct DashboardFeedTimerView: View {
     var timerFontSize: CGFloat {
         if self.layout == .expanded {
             return 32
-        }else if self.layout == .minimal {
-            return 28
+        }else if self.layout == .minimal && !self.profile.multipleWaiting {
+            return self.cofeeding ? 20 :  24
         }else {
-            return 22
+            return self.cofeeding ? 20 :  22
         }
     }
     
     var breastSideLabel: String {
-        if self.layout == .expanded || self.layout == .minimal {
+        if self.layout == .expanded  {
             return self.feedSession.currentBreastSide.description.0
         }else {
-            return self.cofeeding ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
+            return (self.cofeeding || self.profile.multipleWaiting) ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
         }
     }
     
@@ -100,15 +100,17 @@ struct DashboardFeedTimerView: View {
                             Text("\(feedSession.formattedElapsedTime(include_hsec: false))")
                                 .font(.custom("RobotoMono-Regular", size: timerFontSize))
                                 .layoutPriority(10)
+                                .minimumScaleFactor(0.75)
                             Text("\(feedSession.formattedElapsedTimeHsecs())")
                                 .font(.custom("RobotoMono-Regular", size: timerFontSize*0.75))
                                 .opacity(0.5)
+                                .minimumScaleFactor(0.75)
                         }
                         .animation(nil)
                         
                         Spacer()
                         
-                        if self.layout != .minimised || !self.cofeeding {
+                        if self.layout != .minimised || (self.layout == .minimised && self.profile.multipleWaiting) {
                             Text(breastSideLabel)
                             .padding(2)
                             .padding([.leading, .trailing], 10)
@@ -120,16 +122,14 @@ struct DashboardFeedTimerView: View {
                                 self.feedSession.switchSide()
                             }
                             .overlay(Capsule().stroke(Color.white, lineWidth: 1).frame(maxWidth: breastSideLabelWidth))
-                            .font(.callout)
+                            .font(.caption)
                             .animation(nil)
                         }
                     }
                 }
             }
-//            .padding(5)
             .frame(maxWidth: .infinity)
         }
-        //.padding(self.layout == .minimised ? 5 : 15)
         .padding([.top, .bottom])
         .padding([.leading, .trailing], 10)
         .frame(maxWidth: .infinity, maxHeight: timerHeight)
