@@ -44,7 +44,6 @@ struct AvatarImageView: View {
                 )
             )
             .frame(width: UIScreen.main.bounds.width/5, height: imageSize)
-            .animation(nil)
     }
 }
 

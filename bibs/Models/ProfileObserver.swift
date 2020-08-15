@@ -22,19 +22,24 @@ final class ProfileObserver: ObservableObject {
     }
     
     func setOffsetForLayout(layout: ActiveFeedsTrayView.ExpandedState) {
-        guard layout != .expanded else {
-            return
+        var height: CGFloat = 180
+        
+        guard layout == .expanded else {
+            self.trayHeight = height
+            return 
         }
         
-        let padding: CGFloat = 70
+        let feedSessionHeight: CGFloat = 140
+        let spacingHeight: CGFloat = 10
         
-        var height: CGFloat = (UIScreen.main.bounds.size.height / 12)
+        height += (feedSessionHeight + spacingHeight) * CGFloat(self.parent.currentFeedSessions.count)
         
-        switch(layout) {
-        case .expanded: height *= 2
-        case .minimised: height *= 1.4
+        print("HEIGHT: \(height)")
+        // if we're feeding two children we dont show the tools so adjust the height down
+        if self.parent.currentFeedSessions.count == 2 {
+            height -= 140
         }
         
-        self.trayHeight = CGFloat(height + padding)
+        self.trayHeight = height
     }
 }

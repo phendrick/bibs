@@ -124,6 +124,7 @@ struct DashboardToolsListView: View {
                 .frame(maxWidth: .infinity)
                 .padding([.leading, .trailing], 15)
             }
+            .animation(nil)
             .frame(maxWidth: .infinity, alignment: .top)
             .offset(containerOffset)
         }

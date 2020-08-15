@@ -28,9 +28,9 @@ struct DashboardFeedTimerView: View {
     
     var timerFontSize: CGFloat {
         if self.layout == .expanded {
-            return 32
+            return 30
         }else {
-            return self.cofeeding ? 20 :  22
+            return self.cofeeding ? 26 : 28
         }
     }
     
@@ -39,14 +39,6 @@ struct DashboardFeedTimerView: View {
             return self.feedSession.currentBreastSide.description.0
         }else {
             return (self.cofeeding || self.profile.multipleWaiting) ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
-        }
-    }
-    
-    var breastSideLabelWidth: CGFloat {
-        if self.layout == .expanded {
-            return 100
-        }else {
-            return self.cofeeding ? 30 : 100
         }
     }
     
@@ -68,7 +60,7 @@ struct DashboardFeedTimerView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HStack(alignment: .firstTextBaseline) {
                         Text("\(self.feedSession.child?.wrappedName ?? "")")
-                            .font(.system(size: timerFontSize * 0.75))
+                            .font(.system(size: timerFontSize * 0.65))
                             .layoutPriority(10)
                             .animation(nil)
                         
@@ -81,53 +73,52 @@ struct DashboardFeedTimerView: View {
                             
                             self.profile.objectWillChange.send()
                             self.feedSession.complete()
-                            self.profile.setOffsetForLayout(layout: self.layout)
+                            let _ = self.profile.setOffsetForLayout(layout: self.layout)
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.white)
                                 .frame(width: 40, alignment: .topTrailing)
                         }
                         .opacity(self.feedSession.status == .paused ? 1 : 0.25)
-                    }.frame(maxWidth: .infinity)
+                    }
+                    .frame(maxWidth: .infinity)
                     
                     Spacer()
-                       
-                    HStack {
+                    
+                    HStack(alignment: .lastTextBaseline) {
                         HStack(alignment: .lastTextBaseline, spacing: 0) {
                             Text("\(feedSession.formattedElapsedTime(include_hsec: false))")
-                                .font(.custom("RobotoMono-Regular", size: timerFontSize))
+                                .font(.custom("RobotoMono-Regular", size: timerFontSize*0.80))
                                 .layoutPriority(10)
                                 .minimumScaleFactor(0.75)
                             Text("\(feedSession.formattedElapsedTimeHsecs())")
-                                .font(.custom("RobotoMono-Regular", size: timerFontSize*0.75))
+                                .font(.custom("RobotoMono-Regular", size: timerFontSize*0.6))
                                 .opacity(0.5)
-                                .minimumScaleFactor(0.75)
                         }
-                        .animation(nil)
                         
                         Spacer()
                         
-                        Text(breastSideLabel)
-                        .padding(2)
-                        .padding([.leading, .trailing], 10)
-                        .onTapGesture {
-                            guard !self.cofeeding else {
-                                return
+                        if layout != .minimised {
+                            Text(breastSideLabel)
+                            .onTapGesture {
+                                guard !self.cofeeding else {
+                                    return
+                                }
+                                
+                                self.feedSession.switchSide()
                             }
-                            
-                            self.feedSession.switchSide()
+                            .padding([.leading, .trailing], 10).padding([.top, .bottom], 5)
+                            .overlay(Capsule().stroke(Color.white, lineWidth: 1))
+                            .font(.headline)
+                            .animation(nil)
                         }
-                        .overlay(Capsule().stroke(Color.white, lineWidth: 1).frame(maxWidth: breastSideLabelWidth))
-                        .font(.caption)
-                        .animation(nil)
                     }
                 }
             }
-            .frame(maxWidth: .infinity)
         }
-        .padding([.top, .bottom])
-        .padding([.leading, .trailing], 10)
-        .frame(maxWidth: .infinity, maxHeight: timerHeight)
+        .animation(nil)
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(self.feedSession.child?.theme.0)
         .foregroundColor(.white)
         .cornerRadius(10)

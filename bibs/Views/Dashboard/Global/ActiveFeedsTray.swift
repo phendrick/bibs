@@ -54,33 +54,30 @@ struct ActiveFeedsTrayView: View {
             ForEach(self.profile.parent.childrenWithoutCurrentFeedSessions) { child in
                 VStack {
                     AvatarImageView(
-                        image: Image(uiImage: child.wrappedImage),
+                        image: Image("baby"),
                         color: child.theme.0,
                         lineWidth: 6,
                         layout: self.layout
                     )
-                    
-//                    Text("\(child.wrappedName)")
-//                        .font(.subheadline)
-//                        .foregroundColor(Color(UIColor.systemGray))
                 }.onTapGesture {
                     try? child.startNewFeedSession()
                     self.profile.objectWillChange.send()
-                    self.profile.setOffsetForLayout(layout: self.layout)
+                    let _ = self.profile.setOffsetForLayout(layout: self.layout)
                 }
             }
         }
+        .frame(height: 100)
     }
     
     @ViewBuilder func feedTimersList() -> some View {
         if self.layout == .expanded {
-            VStack {
+            VStack(spacing: 20) {
                 FeedSessionsList(
                     profile: self.profile, layout: self.$layout
                 )
             }
         }else {
-            HStack {
+            HStack(spacing: 10) {
                 FeedSessionsList(
                     profile: self.profile, layout: self.$layout
                 )
@@ -89,77 +86,78 @@ struct ActiveFeedsTrayView: View {
     }
     
     var useVerticalLayout: Bool {
-        return self.layout == .expanded //|| !self.profile.multipleWaiting
+        return self.layout == .expanded
     }
     
     var body: some View {
         VStack {
-            HStack(alignment: .top) {
-                Rectangle()
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .foregroundColor(Color.gray.opacity(0.5))
-                    .frame(width: 40, height: 6)
+            VStack {
+                HStack(alignment: .top) {
+                    Rectangle()
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .foregroundColor(Color.gray.opacity(0.5))
+                        .frame(width: 40, height: 6)
+                        .padding(.top)
+                        .offset(y: -8)
+                }
+                
+                if self.useVerticalLayout {
+                    VStack(spacing: 10) {
+                        if self.profile.parent.currentFeedSessions.count < 2 {
+                            self.childActionsList()
+                        }
+                        
+                        feedTimersList()
+                    }
+                }else {
+                    HStack(alignment: .top, spacing: 10) {
+                        feedTimersList()
+                        
+                        if self.profile.parent.currentFeedSessions.count < 2 {
+                            self.childActionsList()
+                        }
+                    }
+                }
+                
+                Spacer()
             }
-            .padding()
-            .animation(.interactiveSpring(response: 0.1, dampingFraction: 0.8, blendDuration: 0.1))
-            .gesture(
-                DragGesture(minimumDistance: 10, coordinateSpace: .global)
-                .onChanged {translation in
-                    let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
-                                       ? .up
-                                       : .down
-                    
-                    if dragDirection == .up, let layout = self.layout.next {
-                        self.layout = layout
-                    }else if dragDirection == .down, let layout = self.layout.previous {
-                        self.layout = layout
-                    }
-                    
-                    self.profile.setOffsetForLayout(layout: self.layout)
-                }
-                .onEnded { translation in
-                    let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
-                    ? .up
-                    : .down
-
-                    if dragDirection == .up {
-                        self.layout = self.layout.next ?? self.layout
-                    }else {
-                        self.layout = self.layout.previous ?? self.layout
-                    }
-
-                    self.profile.setOffsetForLayout(layout: self.layout)
-                }
-            )
-            
-            if self.useVerticalLayout {
-                VStack(spacing: 10) {
-                    if self.profile.parent.currentFeedSessions.count < 2 {
-                        self.childActionsList()
-                    }
-
-                    feedTimersList()
-                }
-                .padding([.leading, .trailing])
-                .padding(.bottom, 20)
-            }else {
-                HStack(spacing: 10) {
-                    feedTimersList()
-
-                    if self.profile.parent.currentFeedSessions.count < 2 {
-                        self.childActionsList()
-                    }
-                }
-                .padding([.leading, .trailing], 10)
-                .padding(.bottom, 10)
-            }
+            .padding(10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
         }
-        .animation(.interactiveSpring(response: 0.25, dampingFraction: 0.5, blendDuration: 0.5))
+        .animation(.spring(response: 0.25, dampingFraction: 0.55, blendDuration: 0.25))
         .frame(maxWidth: .infinity)
-        .background(Color(UIColor.systemBackground).opacity(0.5))
+        .frame(height: self.profile.trayHeight)
         .onAppear {
             self.profile.setOffsetForLayout(layout: self.layout)
         }
+        .gesture(
+            DragGesture(minimumDistance: 10, coordinateSpace: .global)
+            .onChanged {translation in
+                let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
+                                   ? .up
+                                   : .down
+                
+                if dragDirection == .up, let layout = self.layout.next {
+                    self.layout = layout
+                }else if dragDirection == .down, let layout = self.layout.previous {
+                    self.layout = layout
+                }
+            }
+            .onEnded { translation in
+                let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
+                ? .up
+                : .down
+
+                if dragDirection == .up {
+                    self.layout = self.layout.next ?? self.layout
+                }else {
+                    self.layout = self.layout.previous ?? self.layout
+                }
+                
+                let _ = self.profile.setOffsetForLayout(layout: self.layout)
+            }
+        )
     }
 }
 
@@ -182,8 +180,7 @@ struct FeedSessionsList: View {
                 color: Color.green,
                 layout: self.$layout,
                 cofeeding: self.profile.parent.currentFeedSessions.count>1
-            )
-            .padding(5)
+            ).frame(minHeight: 100, maxHeight: 140)
         }
     }
 }
