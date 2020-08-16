@@ -16,17 +16,15 @@ struct DashboardFeedTimerView: View {
     @Binding var layout: ActiveFeedsTrayView.ExpandedState
     var cofeeding: Bool
     
-    var timerHeight: CGFloat {
-        var height: CGFloat = UIScreen.main.bounds.size.height / 12
-        switch(self.layout) {
-        case .expanded: height *= 2
-        case .minimised: height *= 1.4
+    var timerFontSize: CGFloat {
+        if self.layout == .expanded {
+            return 30
+        }else {
+            return self.cofeeding ? 26 : 28
         }
-        
-        return height
     }
     
-    var timerFontSize: CGFloat {
+    var brestSideLabelFontSize: CGFloat {
         if self.layout == .expanded {
             return 30
         }else {
@@ -54,10 +52,15 @@ struct DashboardFeedTimerView: View {
         self.layout != .minimised || !self.cofeeding
     }
     
+    var showBreastSideLabel: Bool {
+        !self.cofeeding && self.profile.parent.childrenWithoutCurrentFeedSessions.count == 0
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading, spacing: 10) {
+                    // timer header - name and actions
                     HStack(alignment: .firstTextBaseline) {
                         Text("\(self.feedSession.child?.wrappedName ?? "")")
                             .font(.system(size: timerFontSize * 0.65))
@@ -73,7 +76,7 @@ struct DashboardFeedTimerView: View {
                             
                             self.profile.objectWillChange.send()
                             self.feedSession.complete()
-                            let _ = self.profile.setOffsetForLayout(layout: self.layout)
+                            print("Stoping feed - set height")
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.white)
@@ -83,8 +86,9 @@ struct DashboardFeedTimerView: View {
                     }
                     .frame(maxWidth: .infinity)
                     
-                    Spacer()
+//                    Spacer()
                     
+                    // timer footer - time and details
                     HStack(alignment: .lastTextBaseline) {
                         HStack(alignment: .lastTextBaseline, spacing: 0) {
                             Text("\(feedSession.formattedElapsedTime(include_hsec: false))")
@@ -95,30 +99,31 @@ struct DashboardFeedTimerView: View {
                                 .font(.custom("RobotoMono-Regular", size: timerFontSize*0.6))
                                 .opacity(0.5)
                         }
-                        
+
                         Spacer()
-                        
-                        if layout != .minimised {
+
+                        if self.showBreastSideLabel {
                             Text(breastSideLabel)
                             .onTapGesture {
                                 guard !self.cofeeding else {
                                     return
                                 }
-                                
+
                                 self.feedSession.switchSide()
                             }
                             .padding([.leading, .trailing], 10).padding([.top, .bottom], 5)
                             .overlay(Capsule().stroke(Color.white, lineWidth: 1))
-                            .font(.headline)
+                            .font(.subheadline)
                             .animation(nil)
                         }
                     }
+                    // timer footer
                 }
             }
         }
         .animation(nil)
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity)
         .background(self.feedSession.child?.theme.0)
         .foregroundColor(.white)
         .cornerRadius(10)

@@ -61,6 +61,8 @@ struct DashboardDataView<T: NSManagedObject, Header: View, Content: View>: View 
                     }
                 }
                 .onDelete(perform: removeRows)
+                
+                Text("").padding(.bottom, self.profile.trayHeight)
             }
         }
     }

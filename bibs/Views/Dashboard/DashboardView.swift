@@ -50,17 +50,11 @@ struct DashboardView: View {
                         Image(systemName: "person.crop.circle").foregroundColor(.red)
                     }
                 )
-            }.padding(.bottom, self.profile.trayHeight)
+            }
             
             Spacer()
             
             ActiveFeedsTrayView(profile: self.profile)
-//                .background(
-//                    RoundedRectangle(cornerRadius: 45, style: .continuous)
-//                        .foregroundColor(Color(UIColor.secondarySystemBackground).opacity(0.75))
-//                        .clipped(antialiased: true)
-//                        .shadow(color: Color.gray.opacity(0.15), radius: 0, x: 0, y: -10)
-//                )
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .edgesIgnoringSafeArea(.all)

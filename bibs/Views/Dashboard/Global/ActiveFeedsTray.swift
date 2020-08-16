@@ -62,7 +62,8 @@ struct ActiveFeedsTrayView: View {
                 }.onTapGesture {
                     try? child.startNewFeedSession()
                     self.profile.objectWillChange.send()
-                    let _ = self.profile.setOffsetForLayout(layout: self.layout)
+                    
+                    print("Started Feed - set offset height")
                 }
             }
         }
@@ -89,6 +90,12 @@ struct ActiveFeedsTrayView: View {
         return self.layout == .expanded
     }
     
+    var showActions: Bool {
+        let childrenNotFeeding = self.profile.parent.childrenWithoutCurrentFeedSessions.count > 0
+        
+        return childrenNotFeeding && self.profile.parent.currentFeedSessions.count < 2
+    }
+    
     var body: some View {
         VStack {
             VStack {
@@ -100,37 +107,33 @@ struct ActiveFeedsTrayView: View {
                         .padding(.top)
                         .offset(y: -8)
                 }
-                
+
                 if self.useVerticalLayout {
                     VStack(spacing: 10) {
-                        if self.profile.parent.currentFeedSessions.count < 2 {
+                        if showActions {
                             self.childActionsList()
                         }
-                        
+
                         feedTimersList()
                     }
                 }else {
                     HStack(alignment: .top, spacing: 10) {
                         feedTimersList()
-                        
-                        if self.profile.parent.currentFeedSessions.count < 2 {
+
+                        if showActions {
                             self.childActionsList()
                         }
                     }
                 }
-                
-                Spacer()
             }
             .padding(10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity)
             .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.55, blendDuration: 0.25))
         .frame(maxWidth: .infinity)
-        .frame(height: self.profile.trayHeight)
-        .onAppear {
-            self.profile.setOffsetForLayout(layout: self.layout)
-        }
+        .frame(minHeight: 140)
         .gesture(
             DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onChanged {translation in
@@ -155,7 +158,7 @@ struct ActiveFeedsTrayView: View {
                     self.layout = self.layout.previous ?? self.layout
                 }
                 
-                let _ = self.profile.setOffsetForLayout(layout: self.layout)
+                print("Drag ended - set offset height")
             }
         )
     }
@@ -180,7 +183,11 @@ struct FeedSessionsList: View {
                 color: Color.green,
                 layout: self.$layout,
                 cofeeding: self.profile.parent.currentFeedSessions.count>1
-            ).frame(minHeight: 100, maxHeight: 140)
+            )
+            .frame(minHeight: 70)
+            .frame(maxHeight: self.layout == .expanded ? 140 : 100)
+            .fixedSize()
+            .padding(.bottom, 20)
         }
     }
 }

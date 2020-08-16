@@ -18,13 +18,16 @@ struct DashboardHeaderView: View {
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                Text(dashboardSubtitle(for: self.profile.parent))
-                    .font(.body)
+                VStack(alignment: .leading, spacing: 0) {
+//                    Text(dashboardGreeting(for: self.profile.parent)).font(.largeTitle)
+                    Text(dashboardSubtitle(for: self.profile.parent)).font(.body)
+                }
                 
                 Spacer()
                 
                 Text("\(self.profile.parent.latestEmotionType.emoji)")
                     .font(.system(size: 50))
+
             }.onTapGesture {
                 self.parentTrackerFormVisible = true
             }.sheet(isPresented: self.$parentTrackerFormVisible) {

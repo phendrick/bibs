@@ -39,9 +39,11 @@ struct ParentEmotionListView: View {
                         }
                         .padding(.bottom, 45)
                     }
+                    .padding(.bottom, self.profile.trayHeight)
                 }
             }
-        }.navigationBarTitle(Text("Emotions"), displayMode: .inline)
+        }
+        .navigationBarTitle(Text("Emotions"), displayMode: .inline)
     }
 }
 

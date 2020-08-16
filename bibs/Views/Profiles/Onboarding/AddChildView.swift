@@ -121,6 +121,8 @@ struct AddChildView: View {
         child.image = self.inputImage?.pngData()
         child.colorScheme = Int16(self.colorScheme)
         
+        self.profile.parent.addToChildren(child)
+        
         do {
             try self.context.save()
             self.profile.parent.setActiveChild(child: child)

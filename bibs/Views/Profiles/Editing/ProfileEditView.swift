@@ -76,10 +76,10 @@ struct ProfileEditView: View {
                 
                 Section(
                     header: Text("Update your baby profiles"),
-                    footer: HStack {
+                    footer: HStack(alignment: .top) {
                         Image(systemName: "lightbulb")
                         Text("If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!")
-                    }
+                    }.padding(.bottom, self.profile.trayHeight)
                 ) {
                     List {
                         ForEach(self.profile.parent.childrenArray) {child in
@@ -93,16 +93,10 @@ struct ProfileEditView: View {
                             }
                         }
                         
-                        NavigationLink(destination: ChildEditView(child: Child(context: self.context), edited: false)) {
+                        NavigationLink(destination: ChildEditView(child: self.profile.parent.buildChildObject())) {
                             Text("Add a new child")
                         }
                     }
-                    
-//                    HStack {
-//                        NavigationLink(destination: ChildEditView()) {
-//                            Text("Add another")
-//                        }
-//                    }
                 }
             }
         }

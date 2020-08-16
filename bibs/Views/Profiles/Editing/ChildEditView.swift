@@ -15,7 +15,6 @@ struct ChildEditView: View {
     @EnvironmentObject var profile: ProfileObserver
     
     var child: Child
-    var edited: Bool = true
     
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
@@ -116,24 +115,34 @@ struct ChildEditView: View {
     }
     
     func save() {
-        self.child.wrappedCreatedAt = Date()
+        guard self.name != "" else {
+            print("Returning...")
+            return
+        }
+        
+        if self.child.objectID.persistentStore == nil {
+            print("Adding new child to parent")
+            self.child.wrappedCreatedAt = Date()
+            self.profile.parent.addToChildren(child)
+        }
+        
         self.child.wrappedName = self.name
         self.child.colorScheme = Int16(self.colorScheme)
         self.child.isBorn = self.isBorn
         
-        if var inputImage = self.inputImage {
-            if inputImage.size.width > 200 || inputImage.size.height > 200 {
-                inputImage = inputImage.resize(newSize: CGSize(width: 400, height: 400))
-            }
-            
-            self.child.image = inputImage.pngData()
-        }
+//        if var inputImage = self.inputImage {
+//            if inputImage.size.width > 400 || inputImage.size.height > 400 {
+//                inputImage = inputImage.resize(newSize: CGSize(width: 400, height: 400))
+//            }
+//
+//            self.child.image = inputImage.pngData()
+//        }
         
         do {
             try self.context.save()
             
-            self.profile.parent.addToChildren(self.child)
             self.profile.objectWillChange.send()
+            print("Saved \(self.presentationMode.wrappedValue)")
             self.presentationMode.wrappedValue.dismiss()
         }catch {
             debugPrint(error)

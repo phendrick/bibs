@@ -183,8 +183,6 @@ extension ParentProfile {
         child.id = UUID()
         child.createdAt = Date()
         
-        self.addToChildren(child)
-        
         return child
     }
     
