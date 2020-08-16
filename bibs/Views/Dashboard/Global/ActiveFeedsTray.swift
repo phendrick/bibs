@@ -76,7 +76,9 @@ struct ActiveFeedsTrayView: View {
                 FeedSessionsList(
                     profile: self.profile, layout: self.$layout
                 )
+                .frame(maxWidth: .infinity)
             }
+            .frame(maxWidth: .infinity)
         }else {
             HStack(spacing: 10) {
                 FeedSessionsList(
@@ -116,6 +118,7 @@ struct ActiveFeedsTrayView: View {
 
                         feedTimersList()
                     }
+                    .frame(maxWidth: .infinity)
                 }else {
                     HStack(alignment: .top, spacing: 10) {
                         feedTimersList()
@@ -127,9 +130,8 @@ struct ActiveFeedsTrayView: View {
                 }
             }
             .padding(10)
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .frame(maxWidth: .infinity)
-            .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
+            .background(Color(UIColor.secondarySystemGroupedBackground).opacity(0.5))
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.55, blendDuration: 0.25))
         .frame(maxWidth: .infinity)
@@ -186,7 +188,7 @@ struct FeedSessionsList: View {
             )
             .frame(minHeight: 70)
             .frame(maxHeight: self.layout == .expanded ? 140 : 100)
-            .fixedSize()
+            .frame(maxWidth: .infinity)
             .padding(.bottom, 20)
         }
     }

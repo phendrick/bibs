@@ -39,7 +39,7 @@ struct BottleFeedsFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Bottle Feed").font(.title)
+            Text("Bottle Feed").font(.headline)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()

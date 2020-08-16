@@ -44,12 +44,14 @@ struct DashboardView: View {
                     
                     Spacer()
                 }
-                .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
-                .navigationBarItems(
-                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
-                        Image(systemName: "person.crop.circle").foregroundColor(.red)
-                    }
-                )
+                .navigationBarTitle(Text(""), displayMode: .inline)
+                .offset(y: -20)
+//                .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
+//                .navigationBarItems(
+//                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
+//                        Image(systemName: "person.crop.circle").foregroundColor(.red)
+//                    }
+//                )
             }
             
             Spacer()

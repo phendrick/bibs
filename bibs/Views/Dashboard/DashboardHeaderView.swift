@@ -18,8 +18,8 @@ struct DashboardHeaderView: View {
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                VStack(alignment: .leading, spacing: 0) {
-//                    Text(dashboardGreeting(for: self.profile.parent)).font(.largeTitle)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(dashboardGreeting(for: self.profile.parent)).font(.largeTitle)
                     Text(dashboardSubtitle(for: self.profile.parent)).font(.body)
                 }
                 

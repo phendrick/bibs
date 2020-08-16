@@ -86,8 +86,6 @@ struct DashboardFeedTimerView: View {
                     }
                     .frame(maxWidth: .infinity)
                     
-//                    Spacer()
-                    
                     // timer footer - time and details
                     HStack(alignment: .lastTextBaseline) {
                         HStack(alignment: .lastTextBaseline, spacing: 0) {

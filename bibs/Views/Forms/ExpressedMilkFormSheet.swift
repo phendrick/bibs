@@ -28,7 +28,7 @@ struct ExpressedMilkFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Stored Milk").font(.title)
+            Text("Stored Milk").font(.headline)
             
             Form {
                 Section(

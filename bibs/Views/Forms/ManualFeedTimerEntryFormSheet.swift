@@ -29,7 +29,8 @@ struct ManualFeedTimerEntryFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Add a feed").font(.title)
+            Text("Add a feed").font(.headline)
+            
             Text("If you've forgotten to start a timer, you can add a feed time here")
                 .padding()
                 .font(.subheadline).foregroundColor(Color(UIColor.secondaryLabel))

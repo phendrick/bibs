@@ -28,7 +28,7 @@ struct NappyChangeFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Nappy Change").font(.title)
+            Text("Nappy Change").font(.headline)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -48,7 +48,14 @@ struct NappyChangeFormSheet: View {
                     .pickerStyle(SegmentedPickerStyle())
 
                     VStack(alignment: .leading) {
-                        Text("What was the colour?").font(.subheadline)
+                        HStack(alignment: .lastTextBaseline) {
+                            Text("\(self.nappyChangePoopColor.details.0)")
+                                .font(Font.subheadline.weight(.bold))
+                            Text("\(self.nappyChangePoopColor.details.1)")
+                                .font(.caption)
+                        }
+                        .animation(nil)
+                        
                         HStack(alignment: .center) {
                             Spacer()
                             ForEach(NappyChange.NappyChangePoopColor.allCases, id: \.self) {poopColor in
@@ -70,16 +77,8 @@ struct NappyChangeFormSheet: View {
                                     self.nappyChangePoopColor = poopColor
                                 }
                             }
-                            Spacer()
+                            
                         }.padding()
-
-                        HStack(alignment: .lastTextBaseline) {
-                            Text("\(self.nappyChangePoopColor.details.0)")
-                                .font(Font.subheadline.weight(.bold))
-                            Text("\(self.nappyChangePoopColor.details.1)")
-                                .font(.caption)
-                        }
-                        .animation(nil)
                     }
                     .padding(.top, 15)
                     .opacity(
