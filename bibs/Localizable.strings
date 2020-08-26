@@ -5,3 +5,34 @@
   Created by Paul Hendrick on 25/08/2020.
   Copyright © 2020 Paul Hendrick. All rights reserved.
 */
+
+// translations with arguments are really strformat's with a NSLocalizedString parameter. ie.
+// String(format: NSLocalizedString(translation_name, comment: ""), name)
+
+
+// welcomes
+"Morning" = "Morning, %@";
+"Hi" = "Hi, %@";
+"Evening" = "Evening, %@";
+
+// dashboard
+"Today" = "Today";
+"Yesterday" = "Yesterday";
+"View all data" = "View all data";
+"Feeds" = "Feeds";
+"Nappies" = "Nappies";
+"Naps" = "Naps";
+
+// tool names
+"Stored Milk" = "Stored Milk";
+"Bottle Feed" = "Bottle Feed";
+"Breastfeed" = "Breastfeed";
+"Nappy Change" = "Nappy Change";
+"Weaning" = "Weaning";
+"Nap Time" = "Nap Time";
+
+// greetings
+"How are you today?" = "How are you today?";
+"Had a good day?" = "Had a good day?";
+"Keep going" = "Keep going!";
+"You're amazing" = "You're amazing!";

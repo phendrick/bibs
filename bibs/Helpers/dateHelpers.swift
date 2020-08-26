@@ -12,20 +12,21 @@ func dashboardGreeting(for parent: ParentProfile) -> String {
     let timeOfDayType = Date().timeOfDayType()
     let name = parent.wrappedName
     
-    var greeting = "Hi, \(name)"
+    var greeting: String
     
     switch(timeOfDayType) {
     case .morning:
-        greeting = "Morning, \(name)"
+        greeting = "Morning"
     case .afternoon:
-        greeting = "Hi, \(name)"
+        greeting = "Hi"
     case .evening:
-        greeting = "Evening, \(name)"
+        greeting = "Evening"
     case .lateNight:
-        greeting = "Evening, \(name)"
+        greeting = "Evening"
     }
     
-    return greeting
+    
+    return String(format: greeting.localized, name)
 }
 
 func dashboardSubtitle(for parent: ParentProfile) -> String {
@@ -40,19 +41,6 @@ func dashboardSubtitle(for parent: ParentProfile) -> String {
          lateNightGreetingPrefixes.randomElement()!
     }
     
-//    let greetingVariants: [Emotion.EmotionType: [(Date.TimeOfDayTypes, String)]] = [
-//
-//        .down: [],
-//        .enthusiastic: [],
-//        .excited: [],
-//        .happy: [],
-//        .loved: [],
-//        .sad: [
-//            (Date.TimeOfDayTypes.lateNight, "Need support"), (Date.TimeOfDayTypes.lateNight, "Sometimes it's easier to talk to someone")
-//        ],
-//        .tired: []
-//    ]
-    
     var greeting = ""
     
     switch(timeOfDayType) {
@@ -64,5 +52,5 @@ func dashboardSubtitle(for parent: ParentProfile) -> String {
         greeting = "How are you today?"
     }
     
-    return greeting
+    return greeting.localized
 }

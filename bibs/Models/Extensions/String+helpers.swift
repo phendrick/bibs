@@ -1,3 +1,5 @@
+import UIKit
+
 extension String {
     func toPaddedNumber() -> String {
         guard self.count < 2 else {
@@ -14,5 +16,9 @@ extension String {
         }
         
         return count < 2 ? self : "\(self)s"
+    }
+    
+    var localized: String {
+        NSLocalizedString(self, comment: "")
     }
 }

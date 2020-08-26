@@ -14,10 +14,10 @@ struct DashboardHeaderOverviewView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Today").font(.headline)
+                Text("Today".localized).font(.headline)
                 
                 Spacer()
-                Text("View all data")
+                Text("View all data".localized)
                     .font(.footnote)
                     .foregroundColor(Color(UIColor.secondaryLabel))
             }.padding([.leading, .top, .trailing]).padding(.bottom, 5)
@@ -26,9 +26,10 @@ struct DashboardHeaderOverviewView: View {
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text("\(profile.parent.todaysFeedsOverview.0) \("feed".pluralize(count: profile.parent.todaysFeedsOverview.0))")
+                    Text("Feeds".localized)
                         .font(.subheadline).padding(.bottom, 10)
-                    Text("\(profile.parent.todaysFeedsOverview.1)")
+                    
+                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld tracked %@ today", comment: "todays feed counter"), "feed", profile.parent.todaysFeedsOverview.0))
                         .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -37,30 +38,21 @@ struct DashboardHeaderOverviewView: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("Nappies")
-                        .font(.subheadline).padding(.bottom, 10).lineLimit(1)
+                    Text("Nappies".localized)
+                        .font(.subheadline).padding(.bottom, 10)
                     
-                    HStack {
-                        HStack(spacing: 5) {
-                            Text("\(profile.parent.todaysNappiesOverview.1)")
-                            Text("wet")
-                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-                        
-                        HStack(spacing: 5) {
-                            Text("\(profile.parent.todaysNappiesOverview.2)")
-                            Text("dirty")
-                        }.font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-                    }
+                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld and %ld nappies today", comment: "todays feed counter"), 5, "", 0)).font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 
                 Divider().frame(height: 50)
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Text("Naps")
-                        .font(.subheadline).padding(.bottom, 10).lineLimit(1)
-                    Text("\(profile.parent.todaysNapsOverview.1)")
-                        .font(.caption).foregroundColor(Color(UIColor.secondaryLabel))
+                    Text("Naps".localized)
+                        .font(.subheadline).padding(.bottom, 10)
+                    
+                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld tracked %@ today", comment: "todays feed counter"), "feed", profile.parent.todaysNapsOverview.0))
+                        .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                 }.frame(minWidth: 0, maxWidth: .infinity)
             }
         }

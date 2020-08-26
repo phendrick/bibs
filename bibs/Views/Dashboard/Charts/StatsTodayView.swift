@@ -24,7 +24,7 @@ struct StatsTodayView: View {
     
     var previousDaysChartLabel: String {
         if chartData.range.lowerBound.isYesterday {
-            return "Yesterday"
+            return NSLocalizedString("Yesterday", comment: "")
         }else {
             return chartData.range.lowerBound.getFormattedDate(format: "EEEE, MMMM d")
         }
@@ -40,9 +40,9 @@ struct StatsTodayView: View {
     
     func labelForDate(date: Date) -> String {
         if date.isToday {
-            return "Today"
+            return NSLocalizedString("Today", comment: "")
         }else if date.isYesterday {
-            return "Yesterday"
+            return NSLocalizedString("Yesterday", comment: "")
         }else {
             return date.getFormattedDate(format: "EEEE, MMMM d")
         }
@@ -83,8 +83,7 @@ struct StatsTodayView: View {
         
         let diff = abs( dataForPreviousDate.count - dataForLatestDate.count )
         let ls = NSLocalizedString("%@ feed %ld increase", comment: "increase or decrease in todays feeds")
-        
-        return String.localizedStringWithFormat(ls, self.child.wrappedName, 5)
+        return String.localizedStringWithFormat(ls, self.child.wrappedName, diff)
     }
     
     var body: some View {

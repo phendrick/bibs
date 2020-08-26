@@ -29,5 +29,70 @@
 			<string>%1$@ has fed %2$ld times so far today. </string>
 		</dict>
 	</dict>
+	<key>%ld tracked %@ today</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@name@%#@amount@</string>
+		<key>name</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string></string>
+		</dict>
+		<key>amount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>None today</string>
+			<key>other</key>
+			<string>%d today</string>
+		</dict>
+	</dict>
+	<key>%ld and %ld nappies today</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@wet@%#@join@%#@dirty@</string>
+		<key>wet</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>No wet</string>
+			<key>one</key>
+			<string>%d wet</string>
+			<key>other</key>
+			<string>%d wet nappies</string>
+		</dict>
+		<key>join</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string> </string>
+		</dict>
+		<key>dirty</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>but no dirty ones</string>
+			<key>one</key>
+			<string>and %d dirty nappy</string>
+			<key>other</key>
+			<string>and %d dirty</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

@@ -44,7 +44,8 @@ struct DashboardToolsListView: View {
                 HStack(alignment: .top, spacing: 15) {
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Stored\nMilk").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Stored Milk".localized)
+                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -57,7 +58,8 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Bottle Feed").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Bottle Feed".localized)
+                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -70,7 +72,8 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Breastfeed").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Breastfeed".localized)
+                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -83,7 +86,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("nappy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nappy Change").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Nappy Change".localized).font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -96,7 +99,8 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Weaning").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Weaning".localized)
+                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -109,7 +113,8 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nap time").font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Nap Time".localized)
+                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
