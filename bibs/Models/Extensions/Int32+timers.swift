@@ -22,19 +22,6 @@ extension Duration {
     var formattedHoursAndMinutes: String {
         let (hours, minutes, seconds) = self.toHoursMinutesSeconds
         
-        var info = ""
-        if hours > 0 {
-            let hourLabel = hours > 1 ? "hours" : "hour"
-            info.append("\(hours) \(hourLabel) ")
-        }
-        
-        if hours < 1 && minutes < 1 && seconds > 0 {
-            info = "Less than a minute"
-        }else {
-            let minsLabel = "minute".pluralize(count: minutes)
-            info.append("\(minutes) \(minsLabel)")
-        }
-        
-        return info
+        return String.localizedStringWithFormat("%ld hours %ld minutes %ld secs", hours, minutes, seconds)
     }
 }

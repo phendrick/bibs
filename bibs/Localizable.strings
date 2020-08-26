@@ -15,6 +15,12 @@
 "Hi" = "Hi, %@";
 "Evening" = "Evening, %@";
 
+// greetings
+"How are you today?" = "How are you today?";
+"Had a good day?" = "Had a good day?";
+"Keep going" = "Keep going!";
+"You're amazing" = "You're amazing!";
+
 // dashboard
 "Today" = "Today";
 "Yesterday" = "Yesterday";
@@ -23,16 +29,115 @@
 "Nappies" = "Nappies";
 "Naps" = "Naps";
 
-// tool names
+"Overview" = "Overview";
+
+// tools & forms
 "Stored Milk" = "Stored Milk";
 "Bottle Feed" = "Bottle Feed";
 "Breastfeed" = "Breastfeed";
 "Nappy Change" = "Nappy Change";
 "Weaning" = "Weaning";
 "Nap Time" = "Nap Time";
+"Food Diary" = "Food Diary";
+"Emotions" = "Emotions";
+"Emotion" = "Emotion";
 
-// greetings
-"How are you today?" = "How are you today?";
-"Had a good day?" = "Had a good day?";
-"Keep going" = "Keep going!";
-"You're amazing" = "You're amazing!";
+// forms
+"I've expressed" = "I've expressed";
+"Refridgerated" = "Refridgerated";
+"Room Temperature" = "Room Temperature";
+"Frozen" = "Frozen";
+"Thawed" = "Thawed";
+"Donated" = "Donated";
+"Disposed" = "Disposed";
+
+"Add a feed" = "Add a feed";
+"Add a note" = "Add a note";
+
+"About You" = "About You";
+"How are you?" = "How are you?";
+"Your food diary" = "Your food diary";
+
+"Which was" = "Which was";
+"Expressed Milk" = "Expressed Milk";
+"Donor Milk" = "Donor Milk";
+"Formula Milk" = "Formula Milk";
+
+"Forgotten to set a timer?" = "Forgotten to set a timer? Just add one here";
+
+"Wet" = "Wet";
+"Dirty" = "Dirty";
+"West & Dirty" = "West & Dirty";
+"Dry" = "Dry";
+"Black" = "Black";
+"Green" = "Green";
+"Brown" = "Brown";
+"Yellow" = "Yellow";
+"White" = "White";
+"Red" = "Red";
+
+"Seek medical advice" = "Seek medical advice";
+"Totally normal in newborns" = "Totally normal in newborns";
+"Can be caused by medication or allergies" = "Can be caused by medication or allergies";
+"Normal" = "Normal";
+"Normal when breastfeeding" = "Normal when breastfeeding";
+
+"Amount" = "Amount";
+"Light" = "Light";
+"Regular" = "Regular";
+"Heavy" = "Heavy";
+
+"Happy" = "Happy";
+"Enthusiastic" = "Enthusiastic";
+"Excited" = "Excited";
+"Loved" = "Loved";
+"Tired" = "Tired";
+"Sad" = "Sad";
+"Down" = "Down";
+
+"Food type" = "Food type";
+"Vegetables" = "Vegetables";
+"Fruit" = "Fruit";
+"Starchy foods" = "Starchy foods";
+"Proteins" = "Proteins";
+"Dairy" = "Dairy";
+
+// foods
+"Carrots, broccoli, pease, avocado, cauliflower" = "Carrots, broccoli, pease, avocado, cauliflower";
+"Kiwi, strawberries, melon, mango, apples" = "Kiwi, strawberries, melon, mango, apples";
+"Pasta, potatoes, quinoa, bread, oats, chapatti" = "Pasta, potatoes, quinoa, bread, oats, chapatti";
+"Beans, lentils, chicken, beef, lamb, chickpeas" = "Beans, lentils, chicken, beef, lamb, chickpeas";
+"Eggs, yoghurt, milk" = "Eggs, yoghurt, milk";
+
+
+// data
+"None today" = "None today";
+
+// string appends
+"Baby had" = "%@ had";
+"Baby fed from" = "%@ fed from";
+"Baby's nappy was" = "%@ nappy was";
+"Baby napped from" = "%@ napped from";
+
+//
+"For" = "For";
+"Save" = "Save";
+
+//
+"Hours" = "Hours";
+"Minutes" = "Minutes";
+"Seconds" = "Seconds";
+
+// settings
+"Edit your details" = "Edit your details";
+"Your name" = "Your name";
+"Timer options" = "Timer options";
+"Automatically start new timers" = "Auto start new timers";
+"Pause timers when switching breasts" = "Pause timers when switching breasts";
+"Dates" = "Dates";
+"Weekly data starts on Monday" = "Weekly data starts on Monday";
+"Pause timers when closing" = "Pause timers when closing";
+"Update your baby profiles" = "Update your baby profiles";
+"If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!" = "If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!";
+"New baby profile" = "New baby profile";
+"Update Profile" = "Update Profile";

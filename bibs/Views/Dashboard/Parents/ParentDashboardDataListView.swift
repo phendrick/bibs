@@ -77,7 +77,7 @@ struct ParentDashboardDataListView: View {
                 .background(Color(UIColor.systemFill))
             }
             .cornerRadius(15)
-            .navigationBarTitle("Data")
+            .navigationBarTitle("Overview".localized)
         }
     }
 }

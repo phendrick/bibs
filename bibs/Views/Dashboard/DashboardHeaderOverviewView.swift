@@ -41,7 +41,7 @@ struct DashboardHeaderOverviewView: View {
                     Text("Nappies".localized)
                         .font(.subheadline).padding(.bottom, 10)
                     
-                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld and %ld nappies today", comment: "todays feed counter"), 5, "", 0)).font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
+                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld and %ld nappies today", comment: "todays feed counter"), profile.parent.todaysNappiesOverview.1, 2, profile.parent.todaysNappiesOverview.2)).font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
                 }.frame(minWidth: 0, maxWidth: .infinity)
                 
                 Divider().frame(height: 50)

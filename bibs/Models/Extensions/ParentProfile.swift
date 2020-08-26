@@ -95,7 +95,7 @@ extension ParentProfile {
         if duration > 0 {
             overview = duration.formattedHoursAndMinutes
         }else {
-            overview = "None today"
+            overview = "None today".localized
         }
         
         return (feeds.count, overview)
@@ -122,7 +122,7 @@ extension ParentProfile {
             
             return ("\(nappies.count)", wet.count+both.count, dirty.count+both.count)
         }else {
-            return ("None today", 0, 0)
+            return ("None today".localized, 0, 0)
         }
     }
     

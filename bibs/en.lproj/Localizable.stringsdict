@@ -24,9 +24,11 @@
 			<key>zero</key>
 			<string>%1$@ hasn&apos;t fed today. </string>
 			<key>one</key>
-			<string>%1$@ has fed once today. </string>
+			<string>%1$@ has fed once more today than at this time yesterday.</string>
+			<key>two</key>
+			<string>%1$@ has fed twice more today than at this time yesterday.</string>
 			<key>other</key>
-			<string>%1$@ has fed %2$ld times so far today. </string>
+			<string>%1$@ has fed %2$ld times more so far today than at this time yesterday.</string>
 		</dict>
 	</dict>
 	<key>%ld tracked %@ today</key>
@@ -65,9 +67,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>No wet</string>
+			<string>No wet nappies</string>
 			<key>one</key>
-			<string>%d wet</string>
+			<string>%d wet nappy</string>
 			<key>other</key>
 			<string>%d wet nappies</string>
 		</dict>
@@ -77,8 +79,10 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
+			<key>two</key>
+			<string>and</string>
 			<key>other</key>
-			<string> </string>
+			<string>, </string>
 		</dict>
 		<key>dirty</key>
 		<dict>
@@ -87,11 +91,109 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>but no dirty ones</string>
+			<string>no dirty nappies</string>
 			<key>one</key>
-			<string>and %d dirty nappy</string>
+			<string>%d dirty nappy</string>
 			<key>other</key>
-			<string>and %d dirty</string>
+			<string>%d dirty nappies</string>
+		</dict>
+	</dict>
+	<key>%ld hours %ld minutes %ld secs</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@hours@%#@minutes@%#@seconds@</string>
+		<key>hours</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string></string>
+			<key>one</key>
+			<string>%d hour</string>
+			<key>other</key>
+			<string>%d hours</string>
+		</dict>
+		<key>minutes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d minutes</string>
+			<key>one</key>
+			<string>%d minute</string>
+			<key>other</key>
+			<string>%d minutes</string>
+		</dict>
+		<key>seconds</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d seconds</string>
+			<key>one</key>
+			<string>%d second</string>
+			<key>other</key>
+			<string>%d seconds</string>
+		</dict>
+	</dict>
+	<key>%ld hours</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@hours@</string>
+		<key>hours</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d hours</string>
+			<key>one</key>
+			<string>%d hour</string>
+			<key>other</key>
+			<string>%d hours</string>
+		</dict>
+	</dict>
+	<key>%ld minutes</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@minutes@</string>
+		<key>minutes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d minutes</string>
+			<key>one</key>
+			<string>%d minute</string>
+			<key>other</key>
+			<string>%d minutes</string>
+		</dict>
+	</dict>
+	<key>%ld seconds</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@seconds@</string>
+		<key>seconds</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d seconds</string>
+			<key>one</key>
+			<string>%d second</string>
+			<key>other</key>
+			<string>%d seconds</string>
 		</dict>
 	</dict>
 </dict>

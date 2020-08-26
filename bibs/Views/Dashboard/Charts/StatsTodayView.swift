@@ -92,6 +92,7 @@ struct StatsTodayView: View {
                 
                 VStack(alignment: .leading, spacing: 40) {
                     VStack(alignment: .leading, spacing: 5) {
+                        
                         HStack(alignment: .firstTextBaseline) {
                             Text("\(self.dataForLatestDate.count)").font(.headline)
                             Text("feeds").font(.subheadline)

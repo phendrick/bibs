@@ -30,55 +30,55 @@ struct ProfileEditView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("Edit your details")
+                    header: Text("Edit your details".localized)
                 ) {
-                    TextField("Your name", text: self.$name).autocapitalization(.none)
+                    TextField("Your name".localized, text: self.$name).autocapitalization(.none)
                 }
                 
                 Section(
-                    header: Text("Timer options")
+                    header: Text("Timer options".localized)
                 ) {
                     Toggle(isOn: self.$autostartTimer) {
-                        Text("Automatically start new feed timers")
+                        Text("Automatically start new timers".localized)
                     }
                     
                     Toggle(isOn: self.$pauseTimerWhenSwitching) {
-                        Text("Pause the timer when switching sides")
+                        Text("Pause timers when switching breasts".localized)
                     }
                 }
                 
                 Section(
-                    header: Text("Data")
+                    header: Text("Dates".localized)
                 ) {
                     Toggle(isOn: self.$startOfWeekDay) {
                         VStack(alignment: .leading) {
-                            Text("Weekly data starts on Monday")
+                            Text("Weekly data starts on Monday".localized)
                         }
                     }
                     
-                    Toggle(isOn: self.$weeklyDataSevenDays) {
-                        VStack(alignment: .leading) {
-                            Text("Week view shows last 7 days")
-                        }
-                    }
+//                    Toggle(isOn: self.$weeklyDataSevenDays) {
+//                        VStack(alignment: .leading) {
+//                            Text("Week view shows last 7 days")
+//                        }
+//                    }
                 }
                 
                 Section(
                     header: Text("Background timer behaviour"),
-                    footer: Text("This option doesn't affect behaviour when switching to another app - Bibs will always continue its active timers in the background")
+                    footer: Text("This option doesn't affect behaviour when switching to another app - Bibs will always continue its active timers in the background".localized)
                 ) {
                     Toggle(isOn: self.$pauseRunningTimersOnShutdown) {
                         VStack(alignment: .leading) {
-                            Text("Pause timers when closing Bibs")
+                            Text("Pause timers when closing".localized)
                         }
                     }
                 }
                 
                 Section(
-                    header: Text("Update your baby profiles"),
+                    header: Text("Update your baby profiles".localized),
                     footer: HStack(alignment: .top) {
                         Image(systemName: "lightbulb")
-                        Text("If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!")
+                        Text("If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!".localized)
                     }.padding(.bottom, self.profile.trayHeight)
                 ) {
                     List {
@@ -94,13 +94,13 @@ struct ProfileEditView: View {
                         }
                         
                         NavigationLink(destination: ChildEditView(child: self.profile.parent.buildChildObject())) {
-                            Text("Add a new child")
+                            Text("Add a new child".localized)
                         }
                     }
                 }
             }
         }
-        .navigationBarTitle(Text("Update Profile"), displayMode: .inline)
+        .navigationBarTitle(Text("Update Profile".localized), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: save) {
             Text("Save")
         })

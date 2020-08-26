@@ -46,7 +46,7 @@ struct ChildrenDashboardListView: View {
                 }
             }
             .cornerRadius(15)
-            .navigationBarTitle("Data")
+            .navigationBarTitle("Overview".localized)
         }
     }
 }
