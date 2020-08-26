@@ -42,8 +42,9 @@ extension Date {
     }
     
     var lastSevenDays: Date {
-        let delta:Double = 3600*24*7
-        let date = Date().advanced(by: -delta)
+        guard let date = Calendar.current.date(byAdding: .day, value: -7, to: Date()) else {
+            return self
+        }
         
         return date.beginningOfDay
     }
@@ -60,6 +61,20 @@ extension Date {
         let components: DateComponents = Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
         
         return Calendar.current.date(from: components)!
+    }
+    
+    var weekAgo: Date {
+        let delta:Double = 3600*24*7
+        let date = self.advanced(by: -delta)
+        
+        return date
+    }
+    
+    var dayAgo: Date {
+        let delta:Double = 3600*24*1
+        let date = self.advanced(by: -delta)
+        
+        return date
     }
     
     var plusWeek: Date {
@@ -80,12 +95,65 @@ extension Date {
     }
     
     var endOfMonth: Date {
-        Calendar.current.date(byAdding: .month, value: 1, to: self)!
+        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self.beginningOfMonth) else {
+            return self
+        }
+        
+        return date.advanced(by: -1)
+    }
+    
+    var previousMonth: Date {
+        guard let date = Calendar.current.date(byAdding: .month, value: -1, to: self) else {
+            return self
+        }
+        
+        return date.beginningOfMonth
+    }
+    
+    var nextMonth: Date {
+        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self) else {
+            return self
+        }
+        
+        return date.beginningOfMonth
     }
     
     var beginningOfYear: Date {
         let components: DateComponents = Calendar.current.dateComponents([.year], from: self)
         
         return Calendar.current.date(from: components)!
+    }
+    
+    func advancedDate(component: Calendar.Component, by value: Int) -> Date {
+        guard let date = Calendar.current.date(byAdding: component, value: value, to: self) else {
+            return self
+        }
+        
+        let delta = self.distance(to: date)
+        print("ADJUSTING BY \(value) - \(delta), \(self)")
+        
+        return self.advanced(by: delta)
+    }
+    
+    var isToday: Bool {
+        return self.beginningOfDay == Date().beginningOfDay
+    }
+    
+    var isYesterday: Bool {
+        guard let yesterdaysDate = Calendar.current.date(byAdding: .day, value: -1, to: Date().beginningOfDay) else {
+            return false
+        }
+        
+        let yesterday = yesterdaysDate...yesterdaysDate.endOfDay
+        
+        return yesterday.contains(self)
+    }
+    
+    var isBeforeYesterday: Bool {
+        guard let yesterdaysDate = Calendar.current.date(byAdding: .day, value: -1, to: Date().beginningOfDay) else {
+            return false
+        }
+        
+        return yesterdaysDate > self.beginningOfDay
     }
 }

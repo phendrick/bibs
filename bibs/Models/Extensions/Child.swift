@@ -13,6 +13,12 @@ import UIKit
 
 public typealias Theme = (Color, Color)
 
+protocol ChartDataDelegate {
+}
+
+extension Child: ChartDataDelegate {
+}
+
 extension Child: Identifiable {
     static var Themes: [Int: Theme] {
         [

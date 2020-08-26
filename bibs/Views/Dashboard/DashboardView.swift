@@ -21,6 +21,34 @@ struct DashboardView: View {
     
     var count: CGFloat = 2
     
+//    init(profile: ProfileObserver) {
+    
+    
+//    https://filipmolcik.com/navigationview-dynamic-background-color-in-swiftui/
+//        let standard = UINavigationBarAppearance()
+//        let navigationBar = UINavigationBar.appearance()
+//
+//        standard.backgroundColor = UIColor(named: "HighlightYellow")! //When you scroll or you have title (small one)
+//        standard.shadowColor = UIColor(named: "HighlightYellow")!
+//        standard.shadowImage = nil
+//
+//        let compact = UINavigationBarAppearance()
+//        compact.backgroundColor = UIColor(named: "HighlightYellow")! //compact-height
+//        compact.shadowColor = UIColor(named: "HighlightYellow")!
+//        compact.shadowImage = nil
+//
+//        let scrollEdge = UINavigationBarAppearance()
+//        scrollEdge.backgroundColor = UIColor(named: "HighlightYellow")! //When you have large title
+//        scrollEdge.shadowColor = UIColor(named: "HighlightYellow")!
+//        scrollEdge.shadowImage = nil
+//
+//        navigationBar.standardAppearance = standard
+//        navigationBar.compactAppearance = compact
+//        navigationBar.scrollEdgeAppearance = scrollEdge
+//
+//        self.profile = profile
+//    }
+    
     func widthFromGeometry(geometry: GeometryProxy) -> CGFloat {
         let multipler:CGFloat = count > 1 ? 0.9 : 1.0
         return geometry.frame(in: .global).width * multipler
@@ -35,12 +63,33 @@ struct DashboardView: View {
             NavigationView {
                 VStack(spacing: 0) {
                     DashboardHeaderView().padding()
-
+                        //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
+                    
+//                    Text("DATA").onTapGesture {
+//                        let dailyReport = FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .today)
+//
+//                        print(dailyReport)
+////                        print(dailyReport.dailyOv
+//
+//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .today).data.keys)
+//                        print("\n\n\n\n")
+//
+//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .todayAndMostRecentDay, includeAllDatesInRange: false).data.keys)
+//                        print("\n\n\n\n")
+//
+//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .lastSevenDays).data.keys)
+//                        print("\n\n\n\n")
+//
+//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .thisMonth).data.keys)
+//                    }
+                    
                     NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                         DashboardHeaderOverviewView(profile: profile).padding()
+                            //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
                     }.foregroundColor(Color(UIColor.label))
                     
                     DashboardToolsListView().padding([.top, .bottom])
+                        //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
                     
                     Spacer()
                 }
@@ -57,6 +106,7 @@ struct DashboardView: View {
             Spacer()
             
             ActiveFeedsTrayView(profile: self.profile)
+                //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .edgesIgnoringSafeArea(.all)

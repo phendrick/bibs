@@ -39,7 +39,6 @@ struct DatapointsListView: View {
             }
             
             Spacer()
-            
         }.navigationBarTitle("\(self.child.wrappedName)'s data")
     }
 }

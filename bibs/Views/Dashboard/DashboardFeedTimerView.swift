@@ -53,7 +53,7 @@ struct DashboardFeedTimerView: View {
     }
     
     var showBreastSideLabel: Bool {
-        !self.cofeeding && self.profile.parent.childrenWithoutCurrentFeedSessions.count == 0
+        return self.layout == .expanded || (!self.cofeeding && self.profile.parent.childrenWithoutCurrentFeedSessions.count < 2)
     }
     
     var body: some View {

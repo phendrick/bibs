@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA053CD824F5CD2B00A1D825 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = DA053CDA24F5CD2B00A1D825 /* Localizable.stringsdict */; };
 		DA08834024CCF550003B7020 /* Snack+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08833E24CCF550003B7020 /* Snack+CoreDataClass.swift */; };
 		DA08834124CCF550003B7020 /* Snack+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08833F24CCF550003B7020 /* Snack+CoreDataProperties.swift */; };
 		DA08834524CD794F003B7020 /* View+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA08834424CD794F003B7020 /* View+roundedCorners.swift */; };
@@ -29,6 +30,7 @@
 		DA2B0FD824C8FAC100209638 /* Image+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B0FD724C8FAC100209638 /* Image+async.swift */; };
 		DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A512498055C00E9D811 /* Trackable.swift */; };
 		DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */; };
+		DA3A7CC824F5C61D00E0946A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3A7CC724F5C61D00E0946A /* Localizable.strings */; };
 		DA43F41624BA5547002FE487 /* EditFeedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */; };
 		DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */; };
 		DA49B44C24DB5272001C282A /* DatapointsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B44B24DB5272001C282A /* DatapointsListView.swift */; };
@@ -54,7 +56,6 @@
 		DA8307B524A7417500454F14 /* NappyChange+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AB24A7417500454F14 /* NappyChange+CoreDataProperties.swift */; };
 		DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */; };
 		DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */; };
-		DA86DEA024AA476900107ED3 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = DA86DE9F24AA476900107ED3 /* SwiftUIPager */; };
 		DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */; };
 		DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */; };
 		DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */; };
@@ -65,7 +66,6 @@
 		DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DB92488549D00CF9028 /* OpenSans.ttf */; };
 		DAAA33F424AFCD9B0015E03F /* ParentProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA33F324AFCD9B0015E03F /* ParentProfile.swift */; };
 		DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAFD6024AC7FD10064B263 /* ProfileEditView.swift */; };
-		DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = DAAF5DB024A10A8500A7C499 /* Introspect */; };
 		DAAF7B3424D2107F0019C4C4 /* Emotion+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3224D2107F0019C4C4 /* Emotion+CoreDataClass.swift */; };
 		DAAF7B3524D2107F0019C4C4 /* Emotion+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3324D2107F0019C4C4 /* Emotion+CoreDataProperties.swift */; };
 		DAAF7B3724D210900019C4C4 /* FoodDiaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF7B3624D210900019C4C4 /* FoodDiaryEntry.swift */; };
@@ -78,6 +78,12 @@
 		DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ProfileObserver.swift */; };
 		DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePicker.swift */; };
 		DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */; };
+		DAD5CC5224EA864D00E0EE77 /* StatsWeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5124EA864D00E0EE77 /* StatsWeeklyView.swift */; };
+		DAD5CC5A24EA868E00E0EE77 /* StatsTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5924EA868E00E0EE77 /* StatsTodayView.swift */; };
+		DAD5CC5C24EA869400E0EE77 /* StatsMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5B24EA869400E0EE77 /* StatsMonthlyView.swift */; };
+		DAD5CC5F24EA87F600E0EE77 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5E24EA87F600E0EE77 /* BarView.swift */; };
+		DAD5CC6324EA8CC300E0EE77 /* MultiBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC6224EA8CC300E0EE77 /* MultiBarView.swift */; };
+		DAD5CC6524EADB0800E0EE77 /* ChildChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC6424EADB0800E0EE77 /* ChildChartsView.swift */; };
 		DAD7E7C724DDF18400BF5283 /* ParentTrackerFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7E7C624DDF18400BF5283 /* ParentTrackerFormSheet.swift */; };
 		DADBBD5724DF4B3E0082F820 /* ParentDashboardDataListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBBD5624DF4B3E0082F820 /* ParentDashboardDataListView.swift */; };
 		DADBBD5924DF4EED0082F820 /* ParentEmotionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBBD5824DF4EED0082F820 /* ParentEmotionListView.swift */; };
@@ -141,6 +147,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA053CD924F5CD2B00A1D825 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		DA08833E24CCF550003B7020 /* Snack+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snack+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA08833F24CCF550003B7020 /* Snack+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Snack+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA08834424CD794F003B7020 /* View+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+roundedCorners.swift"; sourceTree = "<group>"; };
@@ -163,6 +170,7 @@
 		DA2B0FD724C8FAC100209638 /* Image+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+async.swift"; sourceTree = "<group>"; };
 		DA2D2A512498055C00E9D811 /* Trackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
 		DA2D2A53249805A100E9D811 /* Child+TrackableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Child+TrackableItems.swift"; sourceTree = "<group>"; };
+		DA3A7CC724F5C61D00E0946A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedTimeView.swift; sourceTree = "<group>"; };
 		DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+color.swift"; sourceTree = "<group>"; };
 		DA49B44B24DB5272001C282A /* DatapointsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatapointsListView.swift; path = bibs/Views/Dashboard/Datapoints/DatapointsListView.swift; sourceTree = SOURCE_ROOT; };
@@ -211,6 +219,12 @@
 		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpressedMilkView.swift; sourceTree = "<group>"; };
+		DAD5CC5124EA864D00E0EE77 /* StatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWeeklyView.swift; sourceTree = "<group>"; };
+		DAD5CC5924EA868E00E0EE77 /* StatsTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTodayView.swift; sourceTree = "<group>"; };
+		DAD5CC5B24EA869400E0EE77 /* StatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMonthlyView.swift; sourceTree = "<group>"; };
+		DAD5CC5E24EA87F600E0EE77 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
+		DAD5CC6224EA8CC300E0EE77 /* MultiBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBarView.swift; sourceTree = "<group>"; };
+		DAD5CC6424EADB0800E0EE77 /* ChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildChartsView.swift; sourceTree = SOURCE_ROOT; };
 		DAD7E7C624DDF18400BF5283 /* ParentTrackerFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTrackerFormSheet.swift; sourceTree = "<group>"; };
 		DADBBD5624DF4B3E0082F820 /* ParentDashboardDataListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDashboardDataListView.swift; sourceTree = "<group>"; };
 		DADBBD5824DF4EED0082F820 /* ParentEmotionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentEmotionListView.swift; sourceTree = "<group>"; };
@@ -267,8 +281,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA86DEA024AA476900107ED3 /* SwiftUIPager in Frameworks */,
-				DAAF5DB124A10A8500A7C499 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +322,18 @@
 				DA18ECE324D6026200211144 /* ChildrenDashboardListView.swift */,
 			);
 			path = Children;
+			sourceTree = "<group>";
+		};
+		DA242A4924EA5B58002931D9 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				DAD5CC6424EADB0800E0EE77 /* ChildChartsView.swift */,
+				DAD5CC5D24EA87E400E0EE77 /* components */,
+				DAD5CC5924EA868E00E0EE77 /* StatsTodayView.swift */,
+				DAD5CC5124EA864D00E0EE77 /* StatsWeeklyView.swift */,
+				DAD5CC5B24EA869400E0EE77 /* StatsMonthlyView.swift */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		DA43F41424BA553C002FE487 /* Datapoint Editing */ = {
@@ -358,6 +382,7 @@
 		DA5DB18E24A5304700DE2E01 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				DA242A4924EA5B58002931D9 /* Charts */,
 				DADBBD5524DF4B0F0082F820 /* Parents */,
 				DA8307BB24A7426400454F14 /* Datapoints */,
 				DA08835524CF88B2003B7020 /* Children */,
@@ -490,6 +515,15 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		DAD5CC5D24EA87E400E0EE77 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				DAD5CC5E24EA87F600E0EE77 /* BarView.swift */,
+				DAD5CC6224EA8CC300E0EE77 /* MultiBarView.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
 		DAD7E7C824DDF56D00BF5283 /* Parent Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -557,6 +591,8 @@
 				DADD78FB2478609600791F61 /* bibs.xcdatamodeld */,
 				DADD79022478609700791F61 /* Preview Content */,
 				DA9BD44B2486F47B00025C3F /* Fonts */,
+				DA3A7CC724F5C61D00E0946A /* Localizable.strings */,
+				DA053CDA24F5CD2B00A1D825 /* Localizable.stringsdict */,
 			);
 			path = bibs;
 			sourceTree = "<group>";
@@ -655,8 +691,6 @@
 			);
 			name = bibs;
 			packageProductDependencies = (
-				DAAF5DB024A10A8500A7C499 /* Introspect */,
-				DA86DE9F24AA476900107ED3 /* SwiftUIPager */,
 			);
 			productName = bibs;
 			productReference = DADD78F42478609600791F61 /* bibs.app */;
@@ -731,8 +765,6 @@
 			);
 			mainGroup = DADD78EB2478609600791F61;
 			packageReferences = (
-				DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				DA86DE9E24AA476900107ED3 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = DADD78F52478609600791F61 /* Products */;
 			projectDirPath = "";
@@ -750,6 +782,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA053CD824F5CD2B00A1D825 /* Localizable.stringsdict in Resources */,
 				DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */,
 				DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */,
 				DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */,
@@ -758,6 +791,7 @@
 				DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */,
 				DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */,
 				DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */,
+				DA3A7CC824F5C61D00E0946A /* Localizable.strings in Resources */,
 				DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */,
 				DADD79012478609700791F61 /* Assets.xcassets in Resources */,
 				DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */,
@@ -796,14 +830,17 @@
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
 				DA08834524CD794F003B7020 /* View+roundedCorners.swift in Sources */,
 				DAF7518124B7D2AA00C83F33 /* BottleFeed+CoreDataProperties.swift in Sources */,
+				DAD5CC6524EADB0800E0EE77 /* ChildChartsView.swift in Sources */,
 				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */,
+				DAD5CC5F24EA87F600E0EE77 /* BarView.swift in Sources */,
 				DAB3EF15248AEFBD00667F19 /* String+helpers.swift in Sources */,
 				DA08834E24CE4917003B7020 /* SnackFormSheet.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
 				DA08834824CE15A0003B7020 /* NappyChangeFormSheet.swift in Sources */,
 				DA224EB824E000BA006FCFC3 /* EditSnackView.swift in Sources */,
+				DAD5CC5224EA864D00E0EE77 /* StatsWeeklyView.swift in Sources */,
 				DAEBBF4F24CB7CA30065B232 /* DashboardToolsListView.swift in Sources */,
 				DA43F41624BA5547002FE487 /* EditFeedTimeView.swift in Sources */,
 				DA08835024CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift in Sources */,
@@ -816,12 +853,14 @@
 				DAEE23D524C9813600E368DC /* Nap+CoreDataProperties.swift in Sources */,
 				DA2B0FD624C8E64D00209638 /* DispatchQueue+background.swift in Sources */,
 				DAE1A7CC24B9200C00FFA96E /* ExpressedMilkDataView.swift in Sources */,
+				DAD5CC5C24EA869400E0EE77 /* StatsMonthlyView.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
 				DAA0490424B53449007D290D /* ActiveFeedsTray.swift in Sources */,
 				DAE1A7D024B92E7B00FFA96E /* FeedTimersDataView.swift in Sources */,
 				DAF7518024B7D2AA00C83F33 /* BottleFeed+CoreDataClass.swift in Sources */,
 				DA0F7F9D24DAC65100955B6B /* AvatarImageView.swift in Sources */,
 				DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */,
+				DAD5CC6324EA8CC300E0EE77 /* MultiBarView.swift in Sources */,
 				DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */,
 				DAAF7B3A24D210C70019C4C4 /* FoodDiaryEntry+CoreDataClass.swift in Sources */,
 				DAF7518224B7D2AA00C83F33 /* Child+CoreDataClass.swift in Sources */,
@@ -879,6 +918,7 @@
 				DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */,
 				DAD7E7C724DDF18400BF5283 /* ParentTrackerFormSheet.swift in Sources */,
 				DAEBBF4B24CB7C790065B232 /* DashboardHeaderOverviewView.swift in Sources */,
+				DAD5CC5A24EA868E00E0EE77 /* StatsTodayView.swift in Sources */,
 				DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,
 				DA0F7F9B24DABED200955B6B /* UImage+resizable.swift in Sources */,
@@ -919,6 +959,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DA053CDA24F5CD2B00A1D825 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA053CD924F5CD2B00A1D825 /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		DADD79052478609700791F61 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -934,6 +982,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -994,6 +1043,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1208,38 +1258,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		DA86DE9E24AA476900107ED3 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.4.0;
-			};
-		};
-		DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/timbersoftware/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		DA86DE9F24AA476900107ED3 /* SwiftUIPager */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA86DE9E24AA476900107ED3 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
-			productName = SwiftUIPager;
-		};
-		DAAF5DB024A10A8500A7C499 /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DAAF5DAF24A10A8500A7C499 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DADD78FB2478609600791F61 /* bibs.xcdatamodeld */ = {

@@ -14,7 +14,7 @@ extension UINavigationController {
         super.viewDidLoad()
 
         let standard = UINavigationBarAppearance()
-        
+
         standard.backgroundColor = UIColor.systemBackground //When you scroll or you have title (small one)
         standard.shadowColor = .clear
         standard.shadowImage = nil
@@ -23,7 +23,7 @@ extension UINavigationController {
         compact.backgroundColor = UIColor.systemBackground //compact-height
         compact.shadowColor = .clear
         compact.shadowImage = nil
-        
+
         let scrollEdge = UINavigationBarAppearance()
         scrollEdge.backgroundColor = UIColor.systemBackground //When you have large title
         scrollEdge.shadowColor = .clear

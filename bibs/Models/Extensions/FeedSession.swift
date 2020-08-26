@@ -181,6 +181,7 @@ extension FeedSession: Identifiable, Trackable {
         }
         
         self.status = .complete
+        self.child?.objectWillChange.send()
         
         do {
             try context.save()

@@ -85,4 +85,44 @@ extension Child {
             dateDange.contains($0.wrappedCreatedAt)
         }
     }
+    
+    enum TrackableDataDateRange {
+        case today
+        case yesterday
+        case week
+        case month
+        
+        var dateRange: Range<Date> {
+            switch(self) {
+                case .today: return Date().beginningOfDay..<Date().endOfDay
+                case .yesterday: return Date().dayAgo.beginningOfDay..<Date().beginningOfDay.advanced(by: -1)
+                case .week:  return Date().weekAgo..<Date().endOfDay
+                case .month: return Date().beginningOfMonth..<Date().endOfMonth
+            }
+        }
+    }
+    
+    func feedSessionsData(inRange: TrackableDataDateRange) -> (Duration, [Duration]) {
+        let sessions: [Duration] = self.completedFeedsWithinRange(dateDange: inRange.dateRange).map {session in
+            session.duration
+        }.reversed()
+        
+        let max = sessions.max() ?? 0
+        
+        return (max: max, sessions: sessions)
+    }
+    
+//    func yesterdaysFeedSessionsData() -> (Duration, Duration, [FeedSession]) {
+//        let dateRange = Date().dayAgo.beginningOfDay..<Date().beginningOfDay
+//
+//        let sessions:[FeedSession] = self.completedFeedsWithinRange(dateDange: dateRange)
+//        let durations: [Duration] = sessions.map {session in
+//            session.duration
+//        }.reversed()
+//
+//        let min = durations.min() ?? 0
+//        let max = durations.max() ?? 0
+//
+//        return (min: min, max: max, sessions: sessions)
+//    }
 }

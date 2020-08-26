@@ -123,6 +123,8 @@ struct DashboardToolsListView: View {
                 .animation(nil)
                 .frame(maxWidth: .infinity)
                 .padding([.leading, .trailing], 15)
+                
+                Spacer()
             }
             .animation(nil)
             .frame(maxWidth: .infinity, alignment: .top)

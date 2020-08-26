@@ -131,9 +131,9 @@ struct ActiveFeedsTrayView: View {
             }
             .padding(10)
             .frame(maxWidth: .infinity)
-            .background(Color(UIColor.secondarySystemGroupedBackground).opacity(0.5))
+            .background(Color(UIColor.systemBackground).opacity(0.75))
         }
-        .animation(.spring(response: 0.25, dampingFraction: 0.55, blendDuration: 0.25))
+        .animation(.spring(response: 0.55, dampingFraction: 0.55, blendDuration: 0.25))
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .gesture(

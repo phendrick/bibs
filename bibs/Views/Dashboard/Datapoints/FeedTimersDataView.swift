@@ -47,6 +47,12 @@ struct FeedTimersDataView: View {
         return "\(results.count) \("feed".pluralize(count: results.count)) totalling \(time.0) hour \(time.1) minutes and \(time.2) seconds."
     }
     
+    func chartDataFrom(results: [FeedSession]) -> [Double] {
+        return results.map {
+            Double(Int($0.duration) / 100)
+        }
+    }
+    
     @ViewBuilder func headerView(results: [FeedSession]) -> some View {
         VStack(alignment: .leading) {
             Text("\(statsForResults(results: results))")
@@ -67,6 +73,17 @@ struct FeedTimersDataView: View {
                 }
                 .padding()
                 .font(.callout)
+            }
+            
+            VStack {
+                HStack {
+                    ForEach(results, id: \.self) {result in
+                        Capsule()
+                            .overlay(Capsule().stroke().foregroundColor(.green))
+                            .frame(width: 14, height: Array(repeating: 3, count: 40).randomElement()!)
+                            .foregroundColor(Color.orange)
+                    }
+                }
             }
         }
     }

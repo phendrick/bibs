@@ -16,19 +16,24 @@ struct ChildrenDashboardListView: View {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(profile.parent.activeChildrenArray, id: \.self) {child in
                     HStack {
-                        NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
+                        NavigationLink(destination: ChildChartsView(child: child, profile: self.profile)) {
                             VStack(alignment: .leading) {
-                                Text("\(child.wrappedName)")
-                                    .font(.callout)
-                                    .padding(.bottom, 5)
-                                    .foregroundColor(.white)
-                                    .animation(nil)
+                                Text("test")
                             }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
                         }
+//                        NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
+//                            VStack(alignment: .leading) {
+//                                Text("\(child.wrappedName)")
+//                                    .font(.callout)
+//                                    .padding(.bottom, 5)
+//                                    .foregroundColor(.white)
+//                                    .animation(nil)
+//                            }
+//
+//                            Spacer()
+//
+//                            Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
+//                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .animation(.easeInOut)

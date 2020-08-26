@@ -31,7 +31,8 @@ extension Duration {
         if hours < 1 && minutes < 1 && seconds > 0 {
             info = "Less than a minute"
         }else {
-            info.append("\(minutes) minutes")
+            let minsLabel = "minute".pluralize(count: minutes)
+            info.append("\(minutes) \(minsLabel)")
         }
         
         return info
