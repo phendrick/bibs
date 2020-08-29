@@ -113,4 +113,8 @@ extension NappyChange: Identifiable, Trackable {
     public var details: String {
         "nappy change description"
     }
+    
+    public var trackableUnit: Int {
+        0
+    }
 }

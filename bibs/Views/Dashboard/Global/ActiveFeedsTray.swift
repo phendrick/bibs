@@ -62,8 +62,6 @@ struct ActiveFeedsTrayView: View {
                 }.onTapGesture {
                     try? child.startNewFeedSession()
                     self.profile.objectWillChange.send()
-                    
-                    print("Started Feed - set offset height")
                 }
             }
         }
@@ -133,7 +131,7 @@ struct ActiveFeedsTrayView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemBackground).opacity(0.75))
         }
-        .animation(.spring(response: 0.55, dampingFraction: 0.55, blendDuration: 0.25))
+        .animation(.easeInOut)
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .gesture(

@@ -110,7 +110,7 @@ extension Child: Identifiable {
     public var completedFeedSessionsArray: [FeedSession] {
         let feedSessions = feedSessionsArray.filter {$0.status == .complete}
         
-        return Array(feedSessions.prefix(5))
+        return feedSessions
     }
     
     public var nappyChangesArray: [NappyChange] {
@@ -127,11 +127,12 @@ extension Child: Identifiable {
         }
     }
     
-    var activeFeedSession: FeedSession? {
-        return feedSessionsArray.first {
-            $0.status == .paused || $0.status == .running
-        }
-    }
+//    var activeFeedSession: FeedSession? {
+//        print("Getting feedSessionsArray")
+//        return feedSessionsArray.first {
+//            $0.status == .paused || $0.status == .running
+//        }
+//    }
     
     func buildNewFeedSession(side: Feed.BreastSide = .left) -> FeedSession {
         guard let context = self.managedObjectContext else {

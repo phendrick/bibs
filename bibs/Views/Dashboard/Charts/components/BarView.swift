@@ -13,15 +13,16 @@ struct BarChartBarView: View {
     var value: CGFloat = 0
     var chartHeight: CGFloat = 0
     var color: Color = .white
-    
     var axis: Axis.Set = .vertical
     
+    @State var barValue: CGFloat = 0
+    
     var barWidth: CGFloat {
-        self.axis == .vertical ? self.width : self.value
+        self.axis == .vertical ? self.width : self.barValue
     }
     
     var barHeight: CGFloat {
-        self.axis == .vertical ? self.value : self.width
+        self.axis == .vertical ? self.barValue : self.width
     }
     
     var backgroundWidth: CGFloat {
@@ -44,20 +45,9 @@ struct BarChartBarView: View {
                 .frame(width: barWidth, height: barHeight)
                 .opacity(1)
         }
-        .animation(.interactiveSpring(response: 0.25, dampingFraction: 0.5, blendDuration: 0.5))
-        .cornerRadius(5)
+        .onAppear {
+            self.barValue = self.value
+        }
+        .animation(.easeOut(duration: Double( self.chartHeight / self.value )))
     }
 }
-
-//struct BarChartBarView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            BarChartBarView(width: 10, value: 50, maxValue: 100, color: .red)
-//                .previewLayout(.fixed(width: 400, height: 200)).animation(.spring())
-//            
-//            BarChartBarView(width: 10, value: 50, maxValue: 100, color: .red, axis: .horizontal)
-//                .previewLayout(.fixed(width: 400, height: 200))
-//            
-//        }
-//    }
-//}

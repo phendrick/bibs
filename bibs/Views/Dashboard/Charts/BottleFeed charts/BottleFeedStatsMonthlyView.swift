@@ -9,21 +9,12 @@
 import SwiftUI
 import CoreData
 
-struct StatsMonthlyView: View {
+struct BottleFeedChartsViewStatsMonthlyView: View {
     @ObservedObject var child: Child
     @ObservedObject var chartData: FeedSessionChartData
     
     @State var month: Date = Date()
     @State var dateRange: ClosedRange<Date> = Date().beginningOfMonth.previousMonth...Date().endOfMonth
-    
-    func barValue(value: CGFloat, maxValue: Double, chartHeight: CGFloat = 160) -> CGFloat {
-        guard value > 0 else {
-            return value
-        }
-        
-        let multiplier = chartHeight / CGFloat(maxValue)
-        return (value * multiplier)
-    }
     
     var showThisMonthButton: Bool {
         let activeComponents = Calendar.current.dateComponents([.year, .month], from: self.month)
@@ -115,7 +106,7 @@ struct StatsMonthlyView: View {
                         ForEach(chartData.data.keys.sorted(), id: \.self) { date in
                             BarChartBarView(
                                 width: 8,
-                                value: self.barValue(
+                                value: barValue(
                                     value:    CGFloat( chartData.data[date]!.reduce(into: 0) {$0 += $1.duration } ),
                                     maxValue: Double( chartData.max )
                                 ),

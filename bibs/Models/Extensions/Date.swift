@@ -42,11 +42,11 @@ extension Date {
     }
     
     var lastSevenDays: Date {
-        guard let date = Calendar.current.date(byAdding: .day, value: -7, to: Date()) else {
+        guard let date = Calendar.current.date(byAdding: .day, value: -6, to: Date().endOfDay) else {
             return self
         }
         
-        return date.beginningOfDay
+        return date
     }
     
     var beginningOfDay: Date {

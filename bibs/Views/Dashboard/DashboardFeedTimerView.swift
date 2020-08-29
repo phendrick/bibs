@@ -76,7 +76,6 @@ struct DashboardFeedTimerView: View {
                             
                             self.profile.objectWillChange.send()
                             self.feedSession.complete()
-                            print("Stoping feed - set height")
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.white)

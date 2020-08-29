@@ -9,18 +9,9 @@
 import SwiftUI
 import CoreData
 
-struct StatsTodayView: View {
+struct BottleFeedStatsTodayView: View {
     @ObservedObject var child: Child
     @ObservedObject var chartData: FeedSessionChartData
-    
-    func barValue(value: CGFloat, maxValue: Double, chartHeight: CGFloat = 160) -> CGFloat {
-        guard value > 0 else {
-            return value
-        }
-        
-        let multiplier = chartHeight / CGFloat(maxValue)
-        return (value * multiplier)
-    }
     
     var previousDaysChartLabel: String {
         if chartData.range.lowerBound.isYesterday {
@@ -102,7 +93,7 @@ struct StatsTodayView: View {
                             ZStack(alignment: .leading) {
                                 BarChartBarView(
                                     width: 30,
-                                    value:  self.barValue(value: CGFloat(self.dataForLatestDate.count), maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ), chartHeight: geometry.size.width ),
+                                    value:  barValue(value: CGFloat(self.dataForLatestDate.count), maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ), chartHeight: geometry.size.width ),
                                     chartHeight: geometry.size.width,
                                     color: .orange,
                                     axis: .horizontal
@@ -124,7 +115,7 @@ struct StatsTodayView: View {
                             ZStack(alignment: .leading) {
                                 BarChartBarView(
                                     width: 30,
-                                    value:  self.barValue(value: CGFloat(self.dataForPreviousDate.count), maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ), chartHeight: geometry.size.width ),
+                                    value:  barValue(value: CGFloat(self.dataForPreviousDate.count), maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ), chartHeight: geometry.size.width ),
                                     chartHeight: geometry.size.width,
                                     color: Color(UIColor.systemFill).opacity(0.5),
                                     axis: .horizontal
@@ -152,7 +143,7 @@ struct StatsTodayView: View {
                                         ForEach(30...41, id: \.self) {value in
                                             BarChartBarView(
                                                 width: 2,
-                                                value: self.barValue(value: CGFloat( value ), maxValue: 41, chartHeight: 100),
+                                                value: barValue(value: CGFloat( value ), maxValue: 41, chartHeight: 100),
                                                 chartHeight: 100
                                             )
                                         }

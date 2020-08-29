@@ -12,4 +12,5 @@ public protocol Trackable {
     var wrappedCreatedAt: Date {get}
     var title: String {get}
     var details: String {get}
+    var trackableUnit: Int {get}
 }

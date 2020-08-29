@@ -167,6 +167,10 @@ extension FeedSession: Identifiable, Trackable {
         
         self.status = .running
         timer.fire()
+        
+        self.child?.activeFeedSession = self
+        self.child?.objectWillChange.send()
+        
         RunLoop.main.add(timer, forMode: .common)
         
         do {
@@ -181,8 +185,8 @@ extension FeedSession: Identifiable, Trackable {
         }
         
         self.status = .complete
+        self.child?.activeFeedSession = nil
         self.child?.objectWillChange.send()
-        
         do {
             try context.save()
         }catch {
@@ -252,5 +256,9 @@ extension FeedSession: Identifiable, Trackable {
     
     public var details: String {
         "bottle feed details"
+    }
+    
+    public var trackableUnit: Int {
+        Int(self.duration)
     }
 }

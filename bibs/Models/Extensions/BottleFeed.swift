@@ -44,4 +44,8 @@ extension BottleFeed: Identifiable, Trackable {
     public var details: String {
         "bottle feed details"
     }
+    
+    public var trackableUnit: Int {
+        Int(self.amount)
+    }
 }

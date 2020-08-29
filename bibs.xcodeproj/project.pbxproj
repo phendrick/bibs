@@ -77,13 +77,17 @@
 		DAB3EF15248AEFBD00667F19 /* String+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB3EF14248AEFBD00667F19 /* String+helpers.swift */; };
 		DAB56B8F247A733300C80E1E /* ProfileObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B8E247A733300C80E1E /* ProfileObserver.swift */; };
 		DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB56B93247AD4B500C80E1E /* ImagePicker.swift */; };
+		DABE2EBA24F9D00700EA6E5D /* TrackableChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EB924F9D00700EA6E5D /* TrackableChartData.swift */; };
+		DABE2EBC24F9D20700EA6E5D /* BottleFeedChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EBB24F9D20700EA6E5D /* BottleFeedChartData.swift */; };
+		DABE2EBE24F9D20A00EA6E5D /* NappyChangeChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */; };
+		DABE2EC424F9D54A00EA6E5D /* chartHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */; };
 		DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */; };
-		DAD5CC5224EA864D00E0EE77 /* StatsWeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5124EA864D00E0EE77 /* StatsWeeklyView.swift */; };
-		DAD5CC5A24EA868E00E0EE77 /* StatsTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5924EA868E00E0EE77 /* StatsTodayView.swift */; };
-		DAD5CC5C24EA869400E0EE77 /* StatsMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5B24EA869400E0EE77 /* StatsMonthlyView.swift */; };
+		DAD5CC5224EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5124EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift */; };
+		DAD5CC5A24EA868E00E0EE77 /* FeedSessionStatsTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5924EA868E00E0EE77 /* FeedSessionStatsTodayView.swift */; };
+		DAD5CC5C24EA869400E0EE77 /* FeedSessionStatsMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5B24EA869400E0EE77 /* FeedSessionStatsMonthlyView.swift */; };
 		DAD5CC5F24EA87F600E0EE77 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5E24EA87F600E0EE77 /* BarView.swift */; };
 		DAD5CC6324EA8CC300E0EE77 /* MultiBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC6224EA8CC300E0EE77 /* MultiBarView.swift */; };
-		DAD5CC6524EADB0800E0EE77 /* ChildChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC6424EADB0800E0EE77 /* ChildChartsView.swift */; };
+		DAD5CC6524EADB0800E0EE77 /* FeedSessionChildChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC6424EADB0800E0EE77 /* FeedSessionChildChartsView.swift */; };
 		DAD7E7C724DDF18400BF5283 /* ParentTrackerFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7E7C624DDF18400BF5283 /* ParentTrackerFormSheet.swift */; };
 		DADBBD5724DF4B3E0082F820 /* ParentDashboardDataListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBBD5624DF4B3E0082F820 /* ParentDashboardDataListView.swift */; };
 		DADBBD5924DF4EED0082F820 /* ParentEmotionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADBBD5824DF4EED0082F820 /* ParentEmotionListView.swift */; };
@@ -218,13 +222,25 @@
 		DAB56B8E247A733300C80E1E /* ProfileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObserver.swift; sourceTree = "<group>"; };
 		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DABE2EB924F9D00700EA6E5D /* TrackableChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableChartData.swift; sourceTree = "<group>"; };
+		DABE2EBB24F9D20700EA6E5D /* BottleFeedChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedChartData.swift; sourceTree = "<group>"; };
+		DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeChartData.swift; sourceTree = "<group>"; };
+		DABE2EBF24F9D43000EA6E5D /* NappyChangesChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangesChildChartsView.swift; sourceTree = "<group>"; };
+		DABE2EC024F9D43000EA6E5D /* NappyChangesStatsTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangesStatsTodayView.swift; sourceTree = "<group>"; };
+		DABE2EC124F9D43000EA6E5D /* NappyChangesStatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangesStatsWeeklyView.swift; sourceTree = "<group>"; };
+		DABE2EC224F9D43000EA6E5D /* NappyChangesStatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangesStatsMonthlyView.swift; sourceTree = "<group>"; };
+		DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chartHelpers.swift; sourceTree = "<group>"; };
+		DACA663324F9CDB30039B56B /* BottleFeedStatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedStatsMonthlyView.swift; sourceTree = "<group>"; };
+		DACA663424F9CDB30039B56B /* BottleFeedStatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedStatsWeeklyView.swift; sourceTree = "<group>"; };
+		DACA663524F9CDB30039B56B /* BottleFeedChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedChildChartsView.swift; sourceTree = "<group>"; };
+		DACA663624F9CDB30039B56B /* BottleFeedStatsTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedStatsTodayView.swift; sourceTree = "<group>"; };
 		DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpressedMilkView.swift; sourceTree = "<group>"; };
-		DAD5CC5124EA864D00E0EE77 /* StatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWeeklyView.swift; sourceTree = "<group>"; };
-		DAD5CC5924EA868E00E0EE77 /* StatsTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTodayView.swift; sourceTree = "<group>"; };
-		DAD5CC5B24EA869400E0EE77 /* StatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMonthlyView.swift; sourceTree = "<group>"; };
+		DAD5CC5124EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionStatsWeeklyView.swift; sourceTree = "<group>"; };
+		DAD5CC5924EA868E00E0EE77 /* FeedSessionStatsTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionStatsTodayView.swift; sourceTree = "<group>"; };
+		DAD5CC5B24EA869400E0EE77 /* FeedSessionStatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionStatsMonthlyView.swift; sourceTree = "<group>"; };
 		DAD5CC5E24EA87F600E0EE77 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		DAD5CC6224EA8CC300E0EE77 /* MultiBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiBarView.swift; sourceTree = "<group>"; };
-		DAD5CC6424EADB0800E0EE77 /* ChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildChartsView.swift; sourceTree = SOURCE_ROOT; };
+		DAD5CC6424EADB0800E0EE77 /* FeedSessionChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedSessionChildChartsView.swift; path = "bibs/Views/Dashboard/Charts/FeedSession charts/FeedSessionChildChartsView.swift"; sourceTree = SOURCE_ROOT; };
 		DAD7E7C624DDF18400BF5283 /* ParentTrackerFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTrackerFormSheet.swift; sourceTree = "<group>"; };
 		DADBBD5624DF4B3E0082F820 /* ParentDashboardDataListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDashboardDataListView.swift; sourceTree = "<group>"; };
 		DADBBD5824DF4EED0082F820 /* ParentEmotionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentEmotionListView.swift; sourceTree = "<group>"; };
@@ -327,11 +343,10 @@
 		DA242A4924EA5B58002931D9 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				DAD5CC6424EADB0800E0EE77 /* ChildChartsView.swift */,
+				DACA663224F9CD9A0039B56B /* NappyChange charts */,
+				DACA663124F9CD8B0039B56B /* BottleFeed charts */,
+				DACA663024F9CD7F0039B56B /* FeedSession charts */,
 				DAD5CC5D24EA87E400E0EE77 /* components */,
-				DAD5CC5924EA868E00E0EE77 /* StatsTodayView.swift */,
-				DAD5CC5124EA864D00E0EE77 /* StatsWeeklyView.swift */,
-				DAD5CC5B24EA869400E0EE77 /* StatsMonthlyView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -515,6 +530,49 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		DABE2EB824F9CFFC00EA6E5D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DABE2EBB24F9D20700EA6E5D /* BottleFeedChartData.swift */,
+				DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */,
+				DABE2EB924F9D00700EA6E5D /* TrackableChartData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DACA663024F9CD7F0039B56B /* FeedSession charts */ = {
+			isa = PBXGroup;
+			children = (
+				DAD5CC6424EADB0800E0EE77 /* FeedSessionChildChartsView.swift */,
+				DAD5CC5924EA868E00E0EE77 /* FeedSessionStatsTodayView.swift */,
+				DAD5CC5124EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift */,
+				DAD5CC5B24EA869400E0EE77 /* FeedSessionStatsMonthlyView.swift */,
+			);
+			path = "FeedSession charts";
+			sourceTree = "<group>";
+		};
+		DACA663124F9CD8B0039B56B /* BottleFeed charts */ = {
+			isa = PBXGroup;
+			children = (
+				DACA663524F9CDB30039B56B /* BottleFeedChildChartsView.swift */,
+				DACA663624F9CDB30039B56B /* BottleFeedStatsTodayView.swift */,
+				DACA663424F9CDB30039B56B /* BottleFeedStatsWeeklyView.swift */,
+				DACA663324F9CDB30039B56B /* BottleFeedStatsMonthlyView.swift */,
+			);
+			path = "BottleFeed charts";
+			sourceTree = "<group>";
+		};
+		DACA663224F9CD9A0039B56B /* NappyChange charts */ = {
+			isa = PBXGroup;
+			children = (
+				DABE2EBF24F9D43000EA6E5D /* NappyChangesChildChartsView.swift */,
+				DABE2EC024F9D43000EA6E5D /* NappyChangesStatsTodayView.swift */,
+				DABE2EC124F9D43000EA6E5D /* NappyChangesStatsWeeklyView.swift */,
+				DABE2EC224F9D43000EA6E5D /* NappyChangesStatsMonthlyView.swift */,
+			);
+			path = "NappyChange charts";
+			sourceTree = "<group>";
+		};
 		DAD5CC5D24EA87E400E0EE77 /* components */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				DADBE69A24B1CFEF00B1E3B1 /* dateHelpers.swift */,
+				DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -666,6 +725,7 @@
 		DAFE323B2479D8780009B737 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DABE2EB824F9CFFC00EA6E5D /* Data */,
 				DAB1739A247D455600D94537 /* Extensions */,
 				DADD792A247864AD00791F61 /* Core Data */,
 				DAFE323C2479D8890009B737 /* ViewSettings.swift */,
@@ -830,7 +890,7 @@
 				DADD78F82478609600791F61 /* AppDelegate.swift in Sources */,
 				DA08834524CD794F003B7020 /* View+roundedCorners.swift in Sources */,
 				DAF7518124B7D2AA00C83F33 /* BottleFeed+CoreDataProperties.swift in Sources */,
-				DAD5CC6524EADB0800E0EE77 /* ChildChartsView.swift in Sources */,
+				DAD5CC6524EADB0800E0EE77 /* FeedSessionChildChartsView.swift in Sources */,
 				DAAAFD6124AC7FD10064B263 /* ProfileEditView.swift in Sources */,
 				DAB1739F247D45B600D94537 /* Timeable.swift in Sources */,
 				DAB56B94247AD4B500C80E1E /* ImagePicker.swift in Sources */,
@@ -838,11 +898,13 @@
 				DAB3EF15248AEFBD00667F19 /* String+helpers.swift in Sources */,
 				DA08834E24CE4917003B7020 /* SnackFormSheet.swift in Sources */,
 				DAB173A1247D513D00D94537 /* Feed.swift in Sources */,
+				DABE2EBE24F9D20A00EA6E5D /* NappyChangeChartData.swift in Sources */,
 				DA08834824CE15A0003B7020 /* NappyChangeFormSheet.swift in Sources */,
 				DA224EB824E000BA006FCFC3 /* EditSnackView.swift in Sources */,
-				DAD5CC5224EA864D00E0EE77 /* StatsWeeklyView.swift in Sources */,
+				DAD5CC5224EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift in Sources */,
 				DAEBBF4F24CB7CA30065B232 /* DashboardToolsListView.swift in Sources */,
 				DA43F41624BA5547002FE487 /* EditFeedTimeView.swift in Sources */,
+				DABE2EC424F9D54A00EA6E5D /* chartHelpers.swift in Sources */,
 				DA08835024CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift in Sources */,
 				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DA08834124CCF550003B7020 /* Snack+CoreDataProperties.swift in Sources */,
@@ -853,9 +915,10 @@
 				DAEE23D524C9813600E368DC /* Nap+CoreDataProperties.swift in Sources */,
 				DA2B0FD624C8E64D00209638 /* DispatchQueue+background.swift in Sources */,
 				DAE1A7CC24B9200C00FFA96E /* ExpressedMilkDataView.swift in Sources */,
-				DAD5CC5C24EA869400E0EE77 /* StatsMonthlyView.swift in Sources */,
+				DAD5CC5C24EA869400E0EE77 /* FeedSessionStatsMonthlyView.swift in Sources */,
 				DA8307B324A7417500454F14 /* Feed+CoreDataClass.swift in Sources */,
 				DAA0490424B53449007D290D /* ActiveFeedsTray.swift in Sources */,
+				DABE2EBA24F9D00700EA6E5D /* TrackableChartData.swift in Sources */,
 				DAE1A7D024B92E7B00FFA96E /* FeedTimersDataView.swift in Sources */,
 				DAF7518024B7D2AA00C83F33 /* BottleFeed+CoreDataClass.swift in Sources */,
 				DA0F7F9D24DAC65100955B6B /* AvatarImageView.swift in Sources */,
@@ -878,6 +941,7 @@
 				DAEE23D424C9813600E368DC /* Nap+CoreDataClass.swift in Sources */,
 				DA4DEA3024D4CF1700ADC1EA /* EmotionDiaryFormSheet.swift in Sources */,
 				DA08834C24CE45EA003B7020 /* ExpressedMilkFormSheet.swift in Sources */,
+				DABE2EBC24F9D20700EA6E5D /* BottleFeedChartData.swift in Sources */,
 				DA8307B424A7417500454F14 /* NappyChange+CoreDataClass.swift in Sources */,
 				DA224EB424DFF6BD006FCFC3 /* EditNapView.swift in Sources */,
 				DA18ECE424D6026200211144 /* ChildrenDashboardListView.swift in Sources */,
@@ -918,7 +982,7 @@
 				DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */,
 				DAD7E7C724DDF18400BF5283 /* ParentTrackerFormSheet.swift in Sources */,
 				DAEBBF4B24CB7C790065B232 /* DashboardHeaderOverviewView.swift in Sources */,
-				DAD5CC5A24EA868E00E0EE77 /* StatsTodayView.swift in Sources */,
+				DAD5CC5A24EA868E00E0EE77 /* FeedSessionStatsTodayView.swift in Sources */,
 				DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,
 				DA0F7F9B24DABED200955B6B /* UImage+resizable.swift in Sources */,

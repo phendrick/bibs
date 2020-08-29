@@ -9,15 +9,9 @@
 import SwiftUI
 import CoreData
 
-struct StatsWeeklyView: View {
+struct FeedSessionStatsWeeklyView<T: Trackable>: View {
     @ObservedObject var child: Child
-    @ObservedObject var chartData: FeedSessionChartData
-    
-    func barHeight(value: CGFloat, maxValue: Double, chartHeight: CGFloat) -> CGFloat {
-        let multiplier = chartHeight / CGFloat(maxValue)
-        
-        return (value * multiplier)
-    }
+    @ObservedObject var chartData: TrackableChartData<T>
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,7 +34,7 @@ struct StatsWeeklyView: View {
                                         ForEach(0..<7, id: \.self) {index in
                                             BarChartBarView(
                                                 width: 10,
-                                                value: self.barHeight(
+                                                value: barValue(
                                                     value: CGFloat((40..<70).randomElement()!),
                                                     maxValue: 100,
                                                     chartHeight: 100

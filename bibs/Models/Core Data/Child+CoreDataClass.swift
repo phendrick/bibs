@@ -12,5 +12,5 @@ import CoreData
 
 
 public class Child: NSManagedObject {
-
+    var activeFeedSession: FeedSession?
 }

@@ -63,33 +63,72 @@ struct DashboardView: View {
             NavigationView {
                 VStack(spacing: 0) {
                     DashboardHeaderView().padding()
-                        //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
-                    
-//                    Text("DATA").onTapGesture {
-//                        let dailyReport = FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .today)
-//
-//                        print(dailyReport)
-////                        print(dailyReport.dailyOv
-//
-//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .today).data.keys)
-//                        print("\n\n\n\n")
-//
-//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .todayAndMostRecentDay, includeAllDatesInRange: false).data.keys)
-//                        print("\n\n\n\n")
-//
-//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .lastSevenDays).data.keys)
-//                        print("\n\n\n\n")
-//
-//                        print(FeedSessionChartData(child: self.profile.parent.activeChild!).feedSessionDataInRange(range: .thisMonth).data.keys)
-//                    }
-                    
                     NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                         DashboardHeaderOverviewView(profile: profile).padding()
-                            //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
                     }.foregroundColor(Color(UIColor.label))
                     
+                    HStack(spacing: 20) {
+                        Button("Add Data") {
+                            guard var startDate = Calendar.current.date(byAdding: .month, value: -6, to: Date()) else {
+                                return
+                            }
+                            guard let child = self.profile.parent.childrenArray.first else {
+                                print("no child to add data to")
+                                return
+                            }
+                            
+                            repeat {
+                                print("\nDate: \(startDate)\n")
+                                
+                                for _ in 0...5 {
+                                    let feedSession = FeedSession(context: self.moc)
+                                    let feed = Feed(context: self.moc)
+                                    feedSession.addToFeeds(feed)
+                                    feedSession.createdAt = startDate
+                                    feedSession.status = .complete
+                                    feed.createdAt = startDate
+                                    feed.duration = Int32.random(in: 1000...303030)
+                                    feed.breastSide = Feed.BreastSide.allCases.randomElement()!
+                                    child.addToFeedSessions(feedSession)
+                                    
+                                    let bottleFeed = BottleFeed(context: self.moc)
+                                    bottleFeed.createdAt = startDate
+                                    bottleFeed.amount = Int16.random(in: 10...40)
+                                    child.addToBottleFeeds(bottleFeed)
+                                    
+                                    let nappyChange = NappyChange(context: self.moc)
+                                    nappyChange.createdAt = startDate
+                                    nappyChange.status = NappyChange.NappyChangeType.allCases.randomElement()!
+                                    
+                                    if nappyChange.status == .dirty {
+                                        nappyChange.poopColor = NappyChange.NappyChangePoopColor.allCases.randomElement()!
+                                    }
+                                    
+                                    child.addToNappyChanges(nappyChange)
+                                }
+                                
+                                startDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
+                            }while(startDate.beginningOfDay < Date().endOfDay)
+                            
+                            print("Done")
+                            try? self.moc.save()
+                        }
+                        
+                        Button("Clear Data") {
+                            guard let child = self.profile.parent.childrenArray.first else {
+                                print("no child to add data to")
+                                return
+                            }
+                            
+                            child.bottleFeedsArray.forEach { self.moc.delete($0) }
+                            child.nappyChangesArray.forEach { self.moc.delete($0) }
+                            child.feedSessionsArray.forEach { self.moc.delete($0) }
+                            
+                            try? self.moc.save()
+                        }
+                    }
+                    
                     DashboardToolsListView().padding([.top, .bottom])
-                        //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
                     
                     Spacer()
                 }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ChildChartsView: View {
+struct ChildBottleFeedChartsView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
@@ -35,30 +35,30 @@ struct ChildChartsView: View {
                 VStack(spacing: 0) {
                     StatsTodayView(
                         child: self.child,
-                        chartData: FeedSessionChartData(
+                        chartData: BottleFeedsChartData(
                             child: child,
                             range: self.getLastTwoDaysDateRange(),
                             includeAllDatesInRange: false
                         )
                     )
                     
-//                    StatsWeeklyView(
-//                        child: self.child,
-//                        chartData: FeedSessionChartData(
-//                            child: child,
-//                            range: Date().lastSevenDays...Date().endOfDay,
-//                            includeAllDatesInRange: true
-//                        )
-//                    )
-//
-//                    StatsMonthlyView(
-//                        child: self.child,
-//                        chartData: FeedSessionChartData(
-//                            child: child,
-//                            range: Date().beginningOfMonth...Date().endOfMonth,
-//                            includeAllDatesInRange: true
-//                        )
-//                    )
+                    StatsWeeklyView(
+                        child: self.child,
+                        chartData: BottleFeedsChartData(
+                            child: child,
+                            range: Date().lastSevenDays...Date().endOfDay,
+                            includeAllDatesInRange: true
+                        )
+                    )
+
+                    StatsMonthlyView(
+                        child: self.child,
+                        chartData: BottleFeedsChartData(
+                            child: child,
+                            range: Date().beginningOfMonth...Date().endOfMonth,
+                            includeAllDatesInRange: true
+                        )
+                    )
                 }
             }
         }
