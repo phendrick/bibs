@@ -95,7 +95,7 @@ struct BottleFeedStatsTodayView: View {
                                     width: 30,
                                     value:  barValue(value: CGFloat(self.dataForLatestDate.count), maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ), chartHeight: geometry.size.width ),
                                     chartHeight: geometry.size.width,
-                                    color: .orange,
+                                    color: .white,
                                     axis: .horizontal
                                 )
                                 

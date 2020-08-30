@@ -37,9 +37,11 @@ struct FeedSessionStatsWeeklyView<T: Trackable>: View {
                                                 value: barValue(
                                                     value: CGFloat((40..<70).randomElement()!),
                                                     maxValue: 100,
-                                                    chartHeight: 100
+                                                    chartSize: 100
                                                 ),
-                                                chartHeight: 100
+                                                chartSize: 100,
+                                                color: .white,
+                                                axis: .vertical
                                             )
                                         }
                                     }

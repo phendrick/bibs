@@ -20,11 +20,9 @@ struct FeedSessionChildChartsView: View {
         }
         
         let earliestSession = sorted.first {
-            print("\($0.wrappedCreatedAt.beginningOfDay) != \(latest.beginningOfDay) = \($0.wrappedCreatedAt.beginningOfDay != latest.beginningOfDay)")
-            return $0.wrappedCreatedAt.beginningOfDay != latest.beginningOfDay
+            $0.wrappedCreatedAt.beginningOfDay != latest.beginningOfDay
         }
         
-        print("No earlier date")
         guard let earliest = earliestSession?.wrappedCreatedAt else {
             return latest.beginningOfDay...latest.endOfDay
         }
@@ -55,7 +53,7 @@ struct FeedSessionChildChartsView: View {
                             allItems: self.child.completedFeedSessionsArray
                         )
                     )
-                    
+
                     FeedSessionStatsMonthlyView<FeedSession>(
                         child: self.child,
                         chartData: TrackableChartData<FeedSession>(

@@ -26,8 +26,7 @@ struct FeedSessionStatsTodayView<T: Trackable>: View {
     }
     
     var earliestDate: Date {
-        print(self.chartData.data?.data.keys.sorted())
-        return self.chartData.data?.data.keys.sorted().first ?? Date()
+        self.chartData.data?.data.keys.sorted().first ?? Date()
     }
     
     func labelForDate(date: Date) -> String {
@@ -70,13 +69,129 @@ struct FeedSessionStatsTodayView<T: Trackable>: View {
         return String.localizedStringWithFormat(ls, self.child.wrappedName, diff)
     }
     
+    var maxChartValue: Double {
+        let maxVal = Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) )
+        return 8
+    }
+    
     var body: some View {
+        VStack {
+            VStack(spacing: 60) {
+                VStack(alignment: .leading) {
+                    Text("Hello").foregroundColor(.white).font(.headline)
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            BarChartBarView(
+                                width: 40,
+                                value:  barValue(
+                                            value: CGFloat(self.dataForLatestDate.count),
+                                            maxValue: self.maxChartValue,
+                                            chartSize: geometry.frame(in: .local).size.width
+                                        ),
+                                chartSize: geometry.frame(in: .local).size.width,
+                                axis: .horizontal
+                            ).cornerRadius(5)
+                            
+                            Text(self.labelForDate(date: self.latestDate))
+                                .padding(5)
+                                .foregroundColor(self.child.theme.0)
+                                .font(.caption)
+                        }.frame(width: geometry.frame(in: .global).size.width)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                
+                VStack(alignment: .leading) {
+                    Text("Hello").foregroundColor(.white).font(.headline)
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            BarChartBarView(
+                                width: 40,
+                                value:  barValue(
+                                            value: CGFloat(self.dataForPreviousDate.count),
+                                            maxValue: self.maxChartValue,
+                                            chartSize: geometry.frame(in: .local).size.width
+                                        ),
+                                chartSize: geometry.frame(in: .local).size.width,
+                                axis: .horizontal
+                            ).cornerRadius(5)
+                            
+                            Text(self.labelForDate(date: self.earliestDate))
+                                .padding(5)
+                                .foregroundColor(self.child.theme.0)
+                                .font(.caption)
+                        }.frame(width: geometry.frame(in: .global).size.width)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                
+                Spacer()
+                
+                
+            }.padding()
+        }
+    }
+    
+    var body2: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 
-                VStack(alignment: .leading, spacing: 10) {
-//                    VStack(alignment: .leading, spacing: 5) {
+                VStack {
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            BarChartBarView(
+                                width: 30,
+                                value:  barValue(
+                                            value: CGFloat(self.dataForPreviousDate.count),
+                                            maxValue: self.maxChartValue,
+                                            chartSize: geometry.frame(in: .global).size.width
+                                        ),
+                                chartSize: geometry.frame(in: .global).size.width,
+                                color: Color.green,
+                                axis: .horizontal
+                            ).onTapGesture {
+                                print(geometry)
+                            }
+
+                            Text("Chart Label").padding(5).font(.caption)
+                        }.frame(width: geometry.frame(in: .global).size.width)
+                    }
+                }.frame(maxWidth: .infinity)
+                
+//                VStack(alignment: .leading, spacing: 5) {
+//                    HStack(alignment: .firstTextBaseline) {
+//                        Text("\(self.dataForPreviousDate.count)").font(.headline)
+//                        Text("feeds").font(.subheadline)
+//                    }
 //
+//                    GeometryReader { geometry in
+//                        ZStack(alignment: .leading) {
+//                            BarChartBarView(
+//                                width: 30,
+//                                value:  barValue(
+//                                            value: CGFloat(self.dataForPreviousDate.count),
+//                                            maxValue: Double(
+//                                                max( self.dataForLatestDate.count, self.dataForPreviousDate.count)
+//                                            ),
+//                                            chartSize: geometry.frame(in: .global).size.width
+//                                        ),
+//                                chartSize: geometry.frame(in: .global).size.width,
+//                                color: Color.green,
+//                                axis: .horizontal
+//                            ).onTapGesture {
+//                                print(geometry)
+//                            }
+//
+//                            Text(self.labelForDate(date: self.earliestDate)).padding(5).font(.caption)
+//                        }.frame(width: geometry.frame(in: .global).size.width)
+//                    }
+//                }
+//                .frame(height: 80)
+//                .background(Color.blue)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Test")
+//                    VStack(alignment: .leading, spacing: 5) {
 //                        HStack(alignment: .firstTextBaseline) {
 //                            Text("\(self.dataForLatestDate.count)").font(.headline)
 //                            Text("feeds").font(.subheadline)
@@ -86,71 +201,47 @@ struct FeedSessionStatsTodayView<T: Trackable>: View {
 //                            ZStack(alignment: .leading) {
 //                                BarChartBarView(
 //                                    width: 30,
-//                                    value:  barValue(
-//                                                value: CGFloat(self.dataForLatestDate.count),
-//                                                maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ),
-//                                                chartHeight: geometry.size.width
-//                                            ),
-//                                    chartHeight: geometry.size.width,
+//                                    value: barValue(
+//                                               value: CGFloat(self.dataForLatestDate.count),
+//                                               maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ),
+//                                               chartSize: 382
+//                                           ),
+//                                    chartSize: 382,
+//                                    color: Color.green.opacity(0.5),
 //                                    axis: .horizontal
 //                                )
 //
-//                                Text(self.labelForDate(date: self.latestDate)).padding(5).font(.caption)
-//                                Text("\(self.chartData.data?.min ?? 0), \(self.chartData.data?.max ?? 0)").foregroundColor(.red)
+////                                Text(self.labelForDate(date: self.latestDate)).padding(5).font(.caption)
 //                            }
 //                        }
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                    }
+//                    }.frame(height: 80).background(Color.blue)
                     
-                    VStack(alignment: .leading, spacing: 5) {
-                        HStack(alignment: .firstTextBaseline) {
-                            Text("\(self.dataForLatestDate.count)").font(.headline)
-                            Text("feeds").font(.subheadline)
-                        }
-                        
-                        GeometryReader { geometry in
-                            ZStack(alignment: .leading) {
-                                BarChartBarView(
-                                    width: 30,
-                                    value:  barValue(
-                                                value: CGFloat(self.dataForPreviousDate.count),
-                                                maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ),
-                                                chartHeight: geometry.size.width
-                                            ),
-                                    chartHeight: geometry.size.width,
-                                    color: Color(UIColor.systemFill).opacity(0.5),
-                                    axis: .horizontal
-                                )
-
-                                Text(self.labelForDate(date: self.latestDate)).padding(5).font(.caption)
-                            }
-                        }.frame(height: 30, alignment: .leading)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 5) {
-                        HStack(alignment: .firstTextBaseline) {
-                            Text("\(self.dataForPreviousDate.count)").font(.headline)
-                            Text("feeds").font(.subheadline)
-                        }
-                        
-                        GeometryReader { geometry in
-                            ZStack(alignment: .leading) {
-                                BarChartBarView(
-                                    width: 30,
-                                    value:  barValue(
-                                                value: CGFloat(self.dataForPreviousDate.count),
-                                                maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ),
-                                                chartHeight: geometry.size.width
-                                            ),
-                                    chartHeight: geometry.size.width,
-                                    color: Color(UIColor.systemFill).opacity(0.5),
-                                    axis: .horizontal
-                                )
-
-                                Text(self.labelForDate(date: self.earliestDate)).padding(5).font(.caption)
-                            }
-                        }.frame(height: 30, alignment: .leading)
-                    }
+//                    VStack(alignment: .leading, spacing: 5) {
+//                        HStack(alignment: .firstTextBaseline) {
+//                            Text("\(self.dataForPreviousDate.count)").font(.headline)
+//                            Text("feeds").font(.subheadline)
+//                        }
+//
+//                        GeometryReader { geometry in
+//                            ZStack(alignment: .leading) {
+//                                BarChartBarView(
+//                                    width: 30,
+//                                    value:  barValue(
+//                                                value: CGFloat(self.dataForPreviousDate.count),
+//                                                maxValue: Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) ),
+//                                                chartSize: geometry.size.width
+//                                            ),
+//                                    chartSize: geometry.size.width,
+//                                    color: Color.green,
+//                                    axis: .horizontal
+//                                ).onTapGesture {
+//                                    print(geometry)
+//                                }
+//
+////                                Text(self.labelForDate(date: self.earliestDate)).padding(5).font(.caption)
+//                            }
+//                        }.frame(maxWidth: .infinity) //UIScreen.main.bounds.size.width
+//                    }.frame(height: 80).background(Color.blue)
                 }
                 
                 HStack(alignment: .bottom) {
@@ -161,20 +252,6 @@ struct FeedSessionStatsTodayView<T: Trackable>: View {
                                     Text(self.dailyOverviewIntro).font(.subheadline)
                                     Text("The longest feed is 18 minutes 13 seconds, which is 1 minute longer than the average from yesterday. ").font(.caption)
                                 }
-                                
-                                VStack {
-                                    HStack(alignment: .bottom) {
-                                        ForEach(30...41, id: \.self) {value in
-                                            BarChartBarView(
-                                                width: 2,
-                                                value: barValue(value: CGFloat( value ), maxValue: 41, chartHeight: 100),
-                                                chartHeight: 100
-                                            )
-                                        }
-                                    }
-                                }
-                                .frame(maxHeight: 120)
-                                .frame(width: geometry.size.width * 0.5, alignment: .bottomTrailing)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         }

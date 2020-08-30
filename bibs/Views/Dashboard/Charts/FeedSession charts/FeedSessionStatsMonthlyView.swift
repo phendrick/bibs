@@ -113,7 +113,9 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
                                     value:    CGFloat( chartData.data[date]!.reduce(into: 0) {$0 += $1.trackableUnit } ),
                                     maxValue: Double( chartData.max )
                                 ),
-                                chartHeight: 160
+                                chartSize: 160,
+                                color: .white,
+                                axis: .vertical
                             )
                         }
                     }

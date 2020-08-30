@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-func barValue(value: CGFloat, maxValue: Double, chartHeight: CGFloat = 160) -> CGFloat {
-    guard value > 0 else {
+func barValue(value: CGFloat, maxValue: Double, chartSize: CGFloat = 160) -> CGFloat {
+    guard value > 0, maxValue > 0 else {
         return value
     }
     
-    let multiplier = chartHeight / CGFloat(maxValue)
+    let multiplier = chartSize / CGFloat(maxValue)
+    
     return (value * multiplier)
 }
