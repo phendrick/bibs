@@ -98,7 +98,7 @@ extension FeedSession: Identifiable, Trackable {
     /// the timer stops incrementing and invalidate's itself when the current timer `.status` is set to `.paused`, so
     /// we can call `feedSession.pause()` or  `feedSession.setStatus(to: .paused)` to stop a timer
     var timer: Timer {
-        Timer(timeInterval: 0.01, repeats: true) { (timer) in
+        Timer(timeInterval: 0.1, repeats: true) { (timer) in
             guard let feed = self.currentFeed else {
                 timer.invalidate()
                 return
@@ -108,7 +108,7 @@ extension FeedSession: Identifiable, Trackable {
                 timer.invalidate()
             }
             
-            feed.duration += 1
+            feed.duration += 10
             self.objectWillChange.send()
         }
     }
@@ -261,4 +261,22 @@ extension FeedSession: Identifiable, Trackable {
     public var trackableUnit: Int32 {
         Int32(self.duration)
     }
+    
+//    public static func trackableItemsWithinRange(range: ClosedRange<Date>, context: NSManagedObjectContext) -> [FeedSession] {
+//        
+//        var calendar = Calendar.current
+//        calendar.timeZone = NSTimeZone.local
+//        
+//        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
+//        let dateToPredicate   = NSPredicate(format: "createdAt < %@",  range.upperBound as NSDate)
+//
+//        let datePredicate = NSCompoundPredicate(
+//            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
+//        )
+//        
+//        var request:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
+//        request.predicate = datePredicate
+//        
+//        return try context.fetch(request) ?? []
+//    }
 }

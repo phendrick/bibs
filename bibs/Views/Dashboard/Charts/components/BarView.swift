@@ -52,6 +52,5 @@ struct BarChartBarView: View {
             print(self.backgroundHeight, self.barValue)
         }
         .animation(.easeOut(duration: Double( self.value / self.chartSize )))
-        //.animation(Animation.easeOut(duration: 1).delay(0.5))
     }
 }

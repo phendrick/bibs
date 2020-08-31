@@ -34,33 +34,30 @@ struct FeedSessionChildChartsView: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    FeedSessionStatsTodayView<FeedSession>(
-                        child: self.child,
-                        chartData: TrackableChartData<FeedSession>(
-                            child: child,
-                            range: self.getLastTwoDaysDateRange(),
-                            includeAllDatesInRange: false,
-                            allItems: self.child.completedFeedSessionsArray
-                        )
-                    )
-
-                    FeedSessionStatsWeeklyView<FeedSession>(
-                        child: self.child,
-                        chartData: TrackableChartData<FeedSession>(
-                            child: self.child,
-                            range: Date().lastSevenDays...Date().endOfDay,
-                            includeAllDatesInRange: true,
-                            allItems: self.child.completedFeedSessionsArray
-                        )
-                    )
+//                    FeedSessionStatsTodayView<FeedSession>(
+//                        child: self.child,
+//                        chartData: TrackableChartData<FeedSession>(
+//                            child: child,
+//                            range: self.getLastTwoDaysDateRange(),
+//                            includeAllDatesInRange: false
+//                        )
+//                    )
+//
+//                    FeedSessionStatsWeeklyView<FeedSession>(
+//                        child: self.child,
+//                        chartData: TrackableChartData<FeedSession>(
+//                            child: self.child,
+//                            range: Date().lastSevenDays...Date().endOfDay,
+//                            includeAllDatesInRange: true
+//                        )
+//                    )
 
                     FeedSessionStatsMonthlyView<FeedSession>(
                         child: self.child,
                         chartData: TrackableChartData<FeedSession>(
                             child: self.child,
                             range: Date().beginningOfMonth...Date().endOfMonth,
-                            includeAllDatesInRange: true,
-                            allItems: self.child.completedFeedSessionsArray
+                            includeAllDatesInRange: true
                         )
                     )
                 }

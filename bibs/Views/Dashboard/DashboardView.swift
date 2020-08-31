@@ -69,7 +69,7 @@ struct DashboardView: View {
                     
                     HStack(spacing: 20) {
                         Button("Add Data") {
-                            guard var startDate = Calendar.current.date(byAdding: .month, value: -8, to: Date()) else {
+                            guard var startDate = Calendar.current.date(byAdding: .month, value: -14, to: Date()) else {
                                 return
                             }
                             guard let child = self.profile.parent.childrenArray.first else {

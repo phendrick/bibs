@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct FeedSessionStatsWeeklyView<T: Trackable>: View {
+struct FeedSessionStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
     @ObservedObject var child: Child
     @ObservedObject var chartData: TrackableChartData<T>
     

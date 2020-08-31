@@ -7,26 +7,45 @@
 //
 
 import Foundation
-
-class TrackableChartData<T: Trackable>: ObservableObject {
+import CoreData
+import UIKit
+    
+class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObject {
     @Published var data: (data: [Date: [T]], min: Int32, max: Int32, average: Int32)?
     
     var includeAllDatesInRange = true
     var child: Child
     var range: ClosedRange<Date>
-    var allItems: [T]
+    var moc: NSManagedObjectContext 
     
-    init(child: Child, range: ClosedRange<Date>, includeAllDatesInRange: Bool, allItems: [T]) {
+    init(child: Child, range: ClosedRange<Date>, includeAllDatesInRange: Bool) {
         self.child = child
         self.range = range
         self.includeAllDatesInRange = includeAllDatesInRange
-        self.allItems = allItems
+        self.moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         self.regenerateData()
     }
     
+    private func fetchData() -> [T] {
+        let fetchRequest = NSFetchRequest<T>(entityName: String(describing: T.self))
+        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
+        let dateToPredicate   = NSPredicate(format: "createdAt < %@",  range.upperBound as NSDate)
+
+        let datePredicate = NSCompoundPredicate(
+            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
+        )
+        fetchRequest.predicate = datePredicate
+        
+        let results = try? self.moc.fetch(fetchRequest)
+        
+        return results ?? []
+    }
+    
     func generateDataInRange() -> (data: [Date: [T]], min: Int32, max: Int32, average: Int32)? {
-        let items = self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
+        let items = self.fetchData()
+        
+        //let items: [T] = [] //self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
         var data: [Date: [T]] = [:]
         
         // if we're including all dates in the given range, build the dictionary

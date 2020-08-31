@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct FeedSessionStatsMonthlyView<T: Trackable>: View {
+struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
     @ObservedObject var child: Child
     @ObservedObject var chartData: TrackableChartData<T>
     
@@ -127,6 +127,7 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
                             
                             Spacer()
                         }
+                        .frame(height: 220)
                         .frame(maxHeight: .infinity)
                     }
                 }.frame(height: 220)
