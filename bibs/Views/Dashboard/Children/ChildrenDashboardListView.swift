@@ -16,7 +16,7 @@ struct ChildrenDashboardListView: View {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(profile.parent.activeChildrenArray, id: \.self) {child in
                     HStack {
-                        NavigationLink(destination: FeedSessionChildChartsView(child: child, profile: self.profile)) {
+                        NavigationLink(destination: ChildDataTypeListView(child: child, profile: self.profile)) {
                             VStack(alignment: .leading) {
                                 Text("test")
                             }

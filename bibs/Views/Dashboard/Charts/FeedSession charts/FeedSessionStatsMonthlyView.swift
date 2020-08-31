@@ -13,11 +13,10 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
     @ObservedObject var child: Child
     @ObservedObject var chartData: TrackableChartData<T>
     
-    @State var month: Date = Date()
-    @State var dateRange: ClosedRange<Date> = Date().beginningOfMonth.previousMonth...Date().endOfMonth
+    @State var dateRange: ClosedRange<Date> = Date().beginningOfMonth...Date().endOfMonth
     
     var showThisMonthButton: Bool {
-        let activeComponents = Calendar.current.dateComponents([.year, .month], from: self.month)
+        let activeComponents = Calendar.current.dateComponents([.year, .month], from: self.dateRange.lowerBound)
         let currentComponents = Calendar.current.dateComponents([.year, .month], from: Date())
         
         return activeComponents != currentComponents
@@ -28,11 +27,11 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
     }
     
     var nextMonthButtonEnabled: Bool {
-        return self.month < Date().beginningOfMonth
+        return self.dateRange.lowerBound < Date().beginningOfMonth
     }
     
     var previousMonthName: String {
-        guard let date = Calendar.current.date(byAdding: .month, value: -1, to: self.month) else {
+        guard let date = Calendar.current.date(byAdding: .month, value: -1, to: self.dateRange.lowerBound) else {
             return ""
         }
         
@@ -40,7 +39,7 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
     }
     
     var nextMonthName: String {
-        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self.month) else {
+        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self.dateRange.lowerBound) else {
             return ""
         }
         
@@ -48,7 +47,23 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
     }
     
     var activeMonthName: String {
-        return self.month.getFormattedDate(format: "LLLL")
+        return self.dateRange.lowerBound.getFormattedDate(format: "LLLL")
+    }
+    
+    func showPreviousMonth() {
+        let lower = self.dateRange.lowerBound.previousMonth
+        self.dateRange = lower...lower.endOfMonth
+        
+        self.chartData.range = self.dateRange
+        self.chartData.regenerateData()
+    }
+    
+    func showNextMonth() {
+        let lower = self.dateRange.lowerBound.nextMonth
+        self.dateRange = lower...lower.endOfMonth
+        
+        self.chartData.range = self.dateRange
+        self.chartData.regenerateData()
     }
     
     var body: some View {
@@ -61,11 +76,10 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
                     
                     HStack {
                         Button("This month") {
-                            self.month = Date().beginningOfMonth
-                            let dateRange = self.month...self.month.endOfMonth
+                            let dateRange = Date().beginningOfMonth...Date().endOfMonth
                             
                             self.chartData.range = dateRange
-                            let _ = self.chartData.generateDataInRange()
+                            self.chartData.regenerateData()
                         }
                         .frame(width: 80)
                         .opacity(self.showThisMonthButton ? 1 : 0 ).disabled(!self.showThisMonthButton)
@@ -74,24 +88,14 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
                             HStack {
                                 Image(systemName: "chevron.left").scaledToFill()
                                 
-                                Text("\(self.previousMonthName)").onTapGesture {
-                                    self.month = self.month.previousMonth.beginningOfMonth
-                                    
-                                    let previousMonth = self.month.previousMonth.beginningOfMonth
-                                    let dateRange = previousMonth...previousMonth.endOfMonth
-                                    
-                                    self.chartData.range = dateRange
-                                    let _ = self.chartData.generateDataInRange()
+                                Button("\(self.previousMonthName)") {
+                                    self.showPreviousMonth()
                                 }
                             }.frame(width: 80)
                             
                             HStack {
-                                Text("\(self.nextMonthName)").onTapGesture {
-                                    self.month = self.month.nextMonth.beginningOfMonth
-                                    let dateRange = self.month...self.month.endOfMonth
-                                    
-                                    self.chartData.range = dateRange
-                                    let _ = self.chartData.generateDataInRange()
+                                Button("\(self.nextMonthName)") {
+                                    self.showNextMonth()
                                 }
                                 
                                 Image(systemName: "chevron.right")
@@ -102,27 +106,30 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View {
                 
                 Divider()
                 
-                HStack(alignment: .bottom, spacing: 2) {
-                    Spacer()
-                    
+                GeometryReader { geometry in
                     self.chartData.data.map { chartData in
-                        ForEach(chartData.data.keys.sorted(), id: \.self) { date in
-                            BarChartBarView(
-                                width: 8,
-                                value: barValue(
-                                    value:    CGFloat( chartData.data[date]!.reduce(into: 0) {$0 += $1.trackableUnit } ),
-                                    maxValue: Double( chartData.max )
-                                ),
-                                chartSize: 160,
-                                color: .white,
-                                axis: .vertical
-                            )
+                        HStack(alignment: .center, spacing: 2) {
+                            Spacer()
+                            
+                            ForEach(chartData.data.keys.sorted(), id: \.self) { date in
+                                BarChartBarView(
+                                    width: 10,
+                                    value: barValue(
+                                        value: CGFloat( (chartData.data[date] as! [FeedSession]).reduce(into: 0) {$0 += $1.trackableUnit} ),
+                                        maxValue: Double( chartData.max ),
+                                        chartSize: 180
+                                    ),
+                                    chartSize: 180,
+                                    color: .white,
+                                    axis: .vertical
+                                )
+                            }
+                            
+                            Spacer()
                         }
+                        .frame(maxHeight: .infinity)
                     }
-                    
-                    Spacer()
-                }
-                .frame(height: 160)
+                }.frame(height: 220)
                 
                 Divider().padding(.top, 10)
                 

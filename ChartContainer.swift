@@ -9,33 +9,35 @@
 import SwiftUI
 
 struct ChartContainer: View {
+    var introLabel: String {
+        let ls = NSLocalizedString("feed count", comment: "")
+        return String.localizedStringWithFormat(ls, "Paul", 2)
+    }
+    
+    var timeLabel: String {
+        let ls = NSLocalizedString("%ld hours %ld minutes %ld secs", comment: "")
+        return String.localizedStringWithFormat(ls, 0, 20, 30)
+    }
+    
+    /*
+     You've fed $BABY 11 times so far today.
+     That's 3 times more than at this time yesterday.
+     
+     In total today, $BABY has fed for 3 hours 7 minutes and
+     14 seconds, with an average feed time of around 25 minutes.
+    */
+    
     var body: some View {
         VStack {
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    BarChartBarView(
-                        width: 30,
-                        value:  barValue(
-                                    value: 50,
-                                    maxValue: 100,
-                                    chartSize: geometry.frame(in: .global).size.width
-                                ),
-                        chartSize: geometry.frame(in: .global).size.width,
-                        color: Color.green,
-                        axis: .horizontal
-                    ).onTapGesture {
-                        print(geometry)
-                    }
-
-                    Text("Chart Label").padding(5).font(.caption)
-                }.frame(width: geometry.frame(in: .global).size.width)
-            }
-        }.frame(maxWidth: .infinity)
+            Text(self.introLabel)
+            Text(self.timeLabel).background(Color.red)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 struct ChartContainer_Previews: PreviewProvider {
     static var previews: some View {
-        ChartContainer().previewLayout(.fixed(width: 400, height: 260))
+        ChartContainer().previewLayout(.fixed(width: 250, height: 200))
     }
 }

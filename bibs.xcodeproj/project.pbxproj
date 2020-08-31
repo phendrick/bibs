@@ -82,6 +82,7 @@
 		DABE2EBE24F9D20A00EA6E5D /* NappyChangeChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */; };
 		DABE2EC424F9D54A00EA6E5D /* chartHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */; };
 		DABE2EC624FB9F2B00EA6E5D /* ChartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EC524FB9F2B00EA6E5D /* ChartContainer.swift */; };
+		DAC52E5324FC76DE00CF613D /* ChildDataTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */; };
 		DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */; };
 		DAD5CC5224EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5124EA864D00E0EE77 /* FeedSessionStatsWeeklyView.swift */; };
 		DAD5CC5A24EA868E00E0EE77 /* FeedSessionStatsTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5924EA868E00E0EE77 /* FeedSessionStatsTodayView.swift */; };
@@ -232,6 +233,7 @@
 		DABE2EC224F9D43000EA6E5D /* NappyChangesStatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangesStatsMonthlyView.swift; sourceTree = "<group>"; };
 		DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chartHelpers.swift; sourceTree = "<group>"; };
 		DABE2EC524FB9F2B00EA6E5D /* ChartContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartContainer.swift; sourceTree = SOURCE_ROOT; };
+		DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDataTypeListView.swift; sourceTree = "<group>"; };
 		DACA663324F9CDB30039B56B /* BottleFeedStatsMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedStatsMonthlyView.swift; sourceTree = "<group>"; };
 		DACA663424F9CDB30039B56B /* BottleFeedStatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedStatsWeeklyView.swift; sourceTree = "<group>"; };
 		DACA663524F9CDB30039B56B /* BottleFeedChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedChildChartsView.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			children = (
 				DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */,
 				DA18ECE324D6026200211144 /* ChildrenDashboardListView.swift */,
+				DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */,
 			);
 			path = Children;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				DAB1739C247D458600D94537 /* FeedSession.swift in Sources */,
 				DA49B45024DB622E001C282A /* WeaningDataView.swift in Sources */,
 				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
+				DAC52E5324FC76DE00CF613D /* ChildDataTypeListView.swift in Sources */,
 				DAEE23D124C979D100E368DC /* DashboardView.swift in Sources */,
 				DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */,
 				DAF7518924B7D6BC00C83F33 /* ExpressedBottle.swift in Sources */,

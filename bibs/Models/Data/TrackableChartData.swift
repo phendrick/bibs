@@ -9,7 +9,7 @@
 import Foundation
 
 class TrackableChartData<T: Trackable>: ObservableObject {
-    @Published var data: (data: [Date: [T]], min: Int, max: Int)?
+    @Published var data: (data: [Date: [T]], min: Int32, max: Int32, average: Int32)?
     
     var includeAllDatesInRange = true
     var child: Child
@@ -25,9 +25,8 @@ class TrackableChartData<T: Trackable>: ObservableObject {
         self.regenerateData()
     }
     
-    func generateDataInRange() -> (data: [Date: [T]], min: Int, max: Int)? {
+    func generateDataInRange() -> (data: [Date: [T]], min: Int32, max: Int32, average: Int32)? {
         let items = self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
-        
         var data: [Date: [T]] = [:]
         
         // if we're including all dates in the given range, build the dictionary
@@ -49,8 +48,9 @@ class TrackableChartData<T: Trackable>: ObservableObject {
         // get the min and max values for the range - we'll use these to plot the charts
         let min = allValues.values.min() ?? 0
         let max = allValues.values.max() ?? 0
+        let average = allValues.values.reduce(into: 0){$0+=$1} / Int32(allValues.count)
         
-        return (data: data, min: min, max: max)
+        return (data: data, min: min, max: max, average: average)
     }
     
     func regenerateData() {

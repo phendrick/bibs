@@ -69,7 +69,7 @@ struct DashboardView: View {
                     
                     HStack(spacing: 20) {
                         Button("Add Data") {
-                            guard var startDate = Calendar.current.date(byAdding: .month, value: -6, to: Date()) else {
+                            guard var startDate = Calendar.current.date(byAdding: .month, value: -8, to: Date()) else {
                                 return
                             }
                             guard let child = self.profile.parent.childrenArray.first else {
@@ -77,10 +77,10 @@ struct DashboardView: View {
                                 return
                             }
                             
+                            print("Starting at date \(startDate)")
+                            
                             repeat {
-                                print("\nDate: \(startDate)\n")
-                                
-                                for _ in 0...5 {
+                                for _ in 5...Int.random(in: 10...15) {
                                     let feedSession = FeedSession(context: self.moc)
                                     let feed = Feed(context: self.moc)
                                     feedSession.addToFeeds(feed)
@@ -110,7 +110,7 @@ struct DashboardView: View {
                                 startDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
                             }while(startDate.beginningOfDay < Date().endOfDay)
                             
-                            print("Done")
+                            print("Done at date \(startDate)")
                             try? self.moc.save()
                         }
                         

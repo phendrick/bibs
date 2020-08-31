@@ -43,12 +43,12 @@ struct FeedSessionChildChartsView: View {
                             allItems: self.child.completedFeedSessionsArray
                         )
                     )
-                    
+
                     FeedSessionStatsWeeklyView<FeedSession>(
                         child: self.child,
                         chartData: TrackableChartData<FeedSession>(
                             child: self.child,
-                            range: Date().beginningOfMonth...Date().endOfMonth,
+                            range: Date().lastSevenDays...Date().endOfDay,
                             includeAllDatesInRange: true,
                             allItems: self.child.completedFeedSessionsArray
                         )
@@ -67,7 +67,7 @@ struct FeedSessionChildChartsView: View {
             }
         }
         .padding(.bottom, self.profile.trayHeight + 30)
-        .background(Color(UIColor(named: "HighlightYellow")!))
+        .background(child.theme.0)
         .navigationBarTitle("Charts")
     }
 }

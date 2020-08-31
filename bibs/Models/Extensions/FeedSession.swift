@@ -258,7 +258,7 @@ extension FeedSession: Identifiable, Trackable {
         "bottle feed details"
     }
     
-    public var trackableUnit: Int {
-        Int(self.duration)
+    public var trackableUnit: Int32 {
+        Int32(self.duration)
     }
 }

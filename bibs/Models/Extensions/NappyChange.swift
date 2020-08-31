@@ -114,7 +114,7 @@ extension NappyChange: Identifiable, Trackable {
         "nappy change description"
     }
     
-    public var trackableUnit: Int {
+    public var trackableUnit: Int32 {
         0
     }
 }

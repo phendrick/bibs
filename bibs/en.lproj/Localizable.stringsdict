@@ -22,13 +22,40 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>%1$@ hasn&apos;t fed today. </string>
+			<string>That&apos;s the same amount as at this time yesterday.</string>
 			<key>one</key>
-			<string>%1$@ has fed once more today than at this time yesterday.</string>
+			<string>That&apos;s once more today than at this time yesterday.</string>
 			<key>two</key>
-			<string>%1$@ has fed twice more today than at this time yesterday.</string>
+			<string>That&apos;s twice more than at this time yesterday.</string>
 			<key>other</key>
-			<string>%1$@ has fed %2$ld times more so far today than at this time yesterday.</string>
+			<string>That&apos;s %2$ld times more today than at this time yesterday.</string>
+		</dict>
+	</dict>
+	<key>%@ feed %ld decrease</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@name@%#@feed_count_increase@</string>
+		<key>name</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string></string>
+		</dict>
+		<key>feed_count_increase</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>That&apos;s one feed fewer than at this time yesterday.</string>
+			<key>two</key>
+			<string>That&apos;s two feeds fewer than at this time yesterday.</string>
+			<key>other</key>
+			<string>That&apos;s %2$ld times fewer today than at this time yesterday.</string>
 		</dict>
 	</dict>
 	<key>%ld tracked %@ today</key>
@@ -142,6 +169,24 @@
 			<string>%d seconds</string>
 		</dict>
 	</dict>
+	<key>%ld feeds</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@feeds@</string>
+		<key>feeds</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d feeds</string>
+			<key>one</key>
+			<string>%d feed</string>
+			<key>other</key>
+			<string>%d feeds</string>
+		</dict>
+	</dict>
 	<key>%ld hours</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -194,6 +239,35 @@
 			<string>%d second</string>
 			<key>other</key>
 			<string>%d seconds</string>
+		</dict>
+	</dict>
+	<key>todays feed count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@name@%#@count@</string>
+		<key>name</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string></string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>You&apos;ve haven&apos;t fed %1$@ today</string>
+			<key>one</key>
+			<string>You&apos;ve fed %1$@ once so far today</string>
+			<key>two</key>
+			<string>You&apos;ve fed %1$@ twice so far today</string>
+			<key>other</key>
+			<string>%1$@ has fed %d times today</string>
 		</dict>
 	</dict>
 </dict>

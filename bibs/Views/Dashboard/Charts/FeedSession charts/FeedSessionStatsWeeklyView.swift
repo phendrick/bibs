@@ -29,14 +29,14 @@ struct FeedSessionStatsWeeklyView<T: Trackable>: View {
                                     Text("this weeks summary").font(.caption)
                                 }
                                 
-                                VStack {
-                                    HStack(alignment: .bottom) {
-                                        ForEach(0..<7, id: \.self) {index in
+                                self.chartData.data.map { chartData in
+                                    HStack {
+                                        ForEach(chartData.data.keys.sorted(), id: \.self) { date in
                                             BarChartBarView(
                                                 width: 10,
                                                 value: barValue(
-                                                    value: CGFloat((40..<70).randomElement()!),
-                                                    maxValue: 100,
+                                                    value: CGFloat( (chartData.data[date] as! [FeedSession]).reduce(into: 0) {$0 += $1.trackableUnit} ),
+                                                    maxValue: Double( chartData.max ),
                                                     chartSize: 100
                                                 ),
                                                 chartSize: 100,
@@ -45,9 +45,9 @@ struct FeedSessionStatsWeeklyView<T: Trackable>: View {
                                             )
                                         }
                                     }
+                                    .frame(maxHeight: .infinity)
+                                    .frame(width: geometry.size.width * 0.55, alignment: .bottomTrailing)
                                 }
-                                .frame(maxHeight: .infinity)
-                                .frame(width: geometry.size.width * 0.55, alignment: .bottomTrailing)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         }

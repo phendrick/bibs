@@ -15,14 +15,14 @@ struct BarChartBarView: View {
     var color: Color = .white
     var axis: Axis.Set = .vertical
     
-//    @State var barValue: CGFloat = 0
+    @State var barValue: CGFloat = 0
     
     var barWidth: CGFloat {
-        self.axis == .vertical ? self.width : self.value
+        self.axis == .vertical ? self.width : self.barValue
     }
     
     var barHeight: CGFloat {
-        self.axis == .vertical ? self.value : self.width
+        self.axis == .vertical ? self.barValue : self.width
     }
     
     var backgroundWidth: CGFloat {
@@ -45,7 +45,13 @@ struct BarChartBarView: View {
                 .foregroundColor(color)
                 .frame(width: barWidth, height: barHeight)
                 .opacity(1)
+        }.onAppear {
+            self.barValue = self.value
         }
-        .animation(.easeOut(duration: Double( self.chartSize / self.value )))
+        .onTapGesture {
+            print(self.backgroundHeight, self.barValue)
+        }
+        .animation(.easeOut(duration: Double( self.value / self.chartSize )))
+        //.animation(Animation.easeOut(duration: 1).delay(0.5))
     }
 }

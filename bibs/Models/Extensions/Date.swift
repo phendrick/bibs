@@ -42,7 +42,7 @@ extension Date {
     }
     
     var lastSevenDays: Date {
-        guard let date = Calendar.current.date(byAdding: .day, value: -6, to: Date().endOfDay) else {
+        guard let date = Calendar.current.date(byAdding: .day, value: -6, to: Date().beginningOfDay) else {
             return self
         }
         
@@ -95,11 +95,11 @@ extension Date {
     }
     
     var endOfMonth: Date {
-        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self.beginningOfMonth) else {
-            return self
-        }
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
         
-        return date.advanced(by: -1)
+        return Calendar.current.date(byAdding: components, to: self.beginningOfMonth)!
     }
     
     var previousMonth: Date {

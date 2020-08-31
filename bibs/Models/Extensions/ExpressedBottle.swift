@@ -88,7 +88,7 @@ extension ExpressedBottle: Identifiable, Trackable {
         "bottle feed details"
     }
     
-    public var trackableUnit: Int {
-        Int(self.amount)
+    public var trackableUnit: Int32 {
+        Int32(self.amount)
     }
 }
