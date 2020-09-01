@@ -48,19 +48,21 @@ struct FeedSessionStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     }
     
     var dataForPreviousDate: (min: Double, max: Double, count: Int) {
-        let data = self.chartData.data?.data[earliestDate] ?? []
-        let min = data.map { $0.trackableUnit }.min() ?? 0
-        let max = data.map { $0.trackableUnit }.max() ?? 0
+        let data = self.chartData.data?.data
         
-        return (min: Double(min), max: Double(max), count: data.count)
+        let min = self.chartData.data?.min ?? 0
+        let max = self.chartData.data?.max ?? 0
+        
+        return (min: Double(min), max: Double(max), count: data?.count ?? 0)
     }
     
     var dataForLatestDate: (min: Double, max: Double, count: Int) {
-        let data = self.chartData.data?.data[latestDate] ?? []
-        let min = data.map { $0.trackableUnit }.min() ?? 0
-        let max = data.map { $0.trackableUnit }.max() ?? 0
+        let data = self.chartData.data?.data
+
+        let min = self.chartData.data?.min ?? 0
+        let max = self.chartData.data?.max ?? 0
         
-        return (min: Double(min), max: Double(max), count: data.count)
+        return (min: Double(min), max: Double(max), count: data?.count ?? 0)
     }
     
     var dailyOverviewIntro: String {

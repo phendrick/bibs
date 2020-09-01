@@ -17,7 +17,6 @@ struct NappyChangesChartsViewStatsWeeklyView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("This week").font(.headline)
-                
                 Divider()
                 
                 HStack(alignment: .bottom) {

@@ -13,10 +13,10 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
     @ObservedObject var child: Child
     @ObservedObject var chartData: TrackableChartData<T>
     
-    @State var dateRange: ClosedRange<Date> = Date().beginningOfMonth...Date().endOfMonth
+    @State var month = Date()
     
     var showThisMonthButton: Bool {
-        let activeComponents = Calendar.current.dateComponents([.year, .month], from: self.dateRange.lowerBound)
+        let activeComponents = Calendar.current.dateComponents([.year, .month], from: self.month.beginningOfMonth)
         let currentComponents = Calendar.current.dateComponents([.year, .month], from: Date())
         
         return activeComponents != currentComponents
@@ -27,11 +27,11 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
     }
     
     var nextMonthButtonEnabled: Bool {
-        return self.dateRange.lowerBound < Date().beginningOfMonth
+        return self.month.beginningOfMonth < Date().beginningOfMonth
     }
     
     var previousMonthName: String {
-        guard let date = Calendar.current.date(byAdding: .month, value: -1, to: self.dateRange.lowerBound) else {
+        guard let date = Calendar.current.date(byAdding: .month, value: -1, to: self.month.beginningOfMonth) else {
             return ""
         }
         
@@ -39,7 +39,7 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
     }
     
     var nextMonthName: String {
-        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self.dateRange.lowerBound) else {
+        guard let date = Calendar.current.date(byAdding: .month, value: 1, to: self.month.beginningOfMonth) else {
             return ""
         }
         
@@ -47,22 +47,22 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
     }
     
     var activeMonthName: String {
-        return self.dateRange.lowerBound.getFormattedDate(format: "LLLL")
+        return self.month.beginningOfMonth.getFormattedDate(format: "LLLL")
     }
     
     func showPreviousMonth() {
-        let lower = self.dateRange.lowerBound.previousMonth
-        self.dateRange = lower...lower.endOfMonth
+        self.month = self.month.beginningOfMonth.previousMonth
         
-        self.chartData.range = self.dateRange
+        let dateRange = self.month...self.month.endOfMonth
+        self.chartData.range = dateRange
         self.chartData.regenerateData()
     }
     
     func showNextMonth() {
-        let lower = self.dateRange.lowerBound.nextMonth
-        self.dateRange = lower...lower.endOfMonth
+        self.month = self.month.beginningOfMonth.nextMonth
         
-        self.chartData.range = self.dateRange
+        let dateRange = self.month...self.month.endOfMonth
+        self.chartData.range = dateRange
         self.chartData.regenerateData()
     }
     
@@ -76,7 +76,8 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
                     
                     HStack {
                         Button("This month") {
-                            let dateRange = Date().beginningOfMonth...Date().endOfMonth
+                            self.month = Date()
+                            let dateRange = self.month.beginningOfMonth...self.month.endOfMonth
                             
                             self.chartData.range = dateRange
                             self.chartData.regenerateData()
@@ -103,6 +104,7 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
                         }
                     }.font(.caption)
                 }
+                .animation(nil)
                 
                 Divider()
                 
@@ -115,7 +117,7 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
                                 BarChartBarView(
                                     width: 10,
                                     value: barValue(
-                                        value: CGFloat( (chartData.data[date] as! [FeedSession]).reduce(into: 0) {$0 += $1.trackableUnit} ),
+                                        value: CGFloat( (chartData.data[date] ?? 0 ) ),
                                         maxValue: Double( chartData.max ),
                                         chartSize: 180
                                     ),
@@ -135,7 +137,7 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
                 Divider().padding(.top, 10)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Monthly intro: \(self.chartData.data?.data.values.filter {$0.count>0}.count ?? 0)").font(.caption)
+                    Text("Monthly intro: \(self.chartData.data?.data.values.count ?? 0)").font(.caption)
                     Text("Monthly summary: \(self.chartData.data?.data.keys.count ?? 0)").font(.caption).onTapGesture {
                         self.chartData.objectWillChange.send()
                     }

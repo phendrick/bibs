@@ -35,7 +35,7 @@ struct FeedSessionStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
                                             BarChartBarView(
                                                 width: 10,
                                                 value: barValue(
-                                                    value: CGFloat( (chartData.data[date] as! [FeedSession]).reduce(into: 0) {$0 += $1.trackableUnit} ),
+                                                    value: CGFloat( (chartData.data[date] ?? 0 ) ),
                                                     maxValue: Double( chartData.max ),
                                                     chartSize: 100
                                                 ),

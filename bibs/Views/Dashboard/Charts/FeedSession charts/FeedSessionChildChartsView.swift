@@ -34,23 +34,23 @@ struct FeedSessionChildChartsView: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-//                    FeedSessionStatsTodayView<FeedSession>(
-//                        child: self.child,
-//                        chartData: TrackableChartData<FeedSession>(
-//                            child: child,
-//                            range: self.getLastTwoDaysDateRange(),
-//                            includeAllDatesInRange: false
-//                        )
-//                    )
-//
-//                    FeedSessionStatsWeeklyView<FeedSession>(
-//                        child: self.child,
-//                        chartData: TrackableChartData<FeedSession>(
-//                            child: self.child,
-//                            range: Date().lastSevenDays...Date().endOfDay,
-//                            includeAllDatesInRange: true
-//                        )
-//                    )
+                    FeedSessionStatsTodayView<FeedSession>(
+                        child: self.child,
+                        chartData: TrackableChartData<FeedSession>(
+                            child: child,
+                            range: self.getLastTwoDaysDateRange(),
+                            includeAllDatesInRange: false
+                        )
+                    )
+
+                    FeedSessionStatsWeeklyView<FeedSession>(
+                        child: self.child,
+                        chartData: TrackableChartData<FeedSession>(
+                            child: self.child,
+                            range: Date().lastSevenDays...Date().endOfDay,
+                            includeAllDatesInRange: true
+                        )
+                    )
 
                     FeedSessionStatsMonthlyView<FeedSession>(
                         child: self.child,

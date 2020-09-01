@@ -11,7 +11,7 @@ import CoreData
 import UIKit
     
 class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObject {
-    @Published var data: (data: [Date: [T]], min: Int32, max: Int32, average: Int32)?
+    @Published var data: (data: [Date: Int32], min: Int32, max: Int32, average: Int32)?
     
     var includeAllDatesInRange = true
     var child: Child
@@ -42,34 +42,26 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         return results ?? []
     }
     
-    func generateDataInRange() -> (data: [Date: [T]], min: Int32, max: Int32, average: Int32)? {
+    func generateDataInRange() -> (data: [Date: Int32], min: Int32, max: Int32, average: Int32)? {
         let items = self.fetchData()
         
         //let items: [T] = [] //self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
-        var data: [Date: [T]] = [:]
+        var data: [Date: Int32] = [:]
         
         // if we're including all dates in the given range, build the dictionary
         if includeAllDatesInRange {
-            data = buildData(within: self.range, from: items) as [Date: [T]]
+            data = buildData(within: self.range, from: items) as [Date: Int32]
         }else {
             // if we're not including all the dates in the range, just get the data for each of the bounds
-            data[self.range.lowerBound] = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.lowerBound.beginningOfDay}
-            data[self.range.upperBound] = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.upperBound.beginningOfDay}
-        }
-        
-        // from our data for this range, collect the aggregate durations from the keys
-        let allValues = data.mapValues { (items) in
-            items.reduce(into: 0) { (total, item) in
-                total += item.trackableUnit
-            }
+            data[self.range.lowerBound] = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.lowerBound.beginningOfDay}.reduce(into: 0) {$0 += $1.trackableUnit}
+            data[self.range.upperBound] = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.upperBound.beginningOfDay}.reduce(into: 0) {$0 += $1.trackableUnit}
         }
         
         // get the min and max values for the range - we'll use these to plot the charts
-        let min = allValues.values.min() ?? 0
-        let max = allValues.values.max() ?? 0
-        let average = allValues.values.reduce(into: 0){$0+=$1} / Int32(allValues.count)
+        let min = data.values.min() ?? 0
+        let max = data.values.max() ?? 0
         
-        return (data: data, min: min, max: max, average: average)
+        return (data: data, min: min, max: max, average: 0)
     }
     
     func regenerateData() {
@@ -83,24 +75,27 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         }
     }
     
-    private func buildData(within dateRange: ClosedRange<Date>, from sessions: [T]) -> [Date: [T]] {
+    private func buildData(within dateRange: ClosedRange<Date>, from sessions: [T]) -> [Date: Int32] {
         var nextDate: Date = dateRange.lowerBound
-        
-        var grouped = Dictionary(grouping: sessions) {
+
+        let grouped = Dictionary(grouping: sessions) {
             $0.wrappedCreatedAt.beginningOfDay
         }
         
+        var groupedValues: [Date: Int32] = [:]
+        
         repeat {
-            if let _ = grouped.index(forKey: nextDate.beginningOfDay) {
+            if let index = grouped.index(forKey: nextDate.beginningOfDay) {
+                groupedValues[nextDate.beginningOfDay] = grouped[index].value.reduce(into: 0) {$0 += $1.trackableUnit}
             }else {
-                grouped[nextDate.beginningOfDay] = []
+                groupedValues[nextDate.beginningOfDay] = 0
             }
-            
+
             if let date = Calendar.current.date(byAdding: .day, value: 1, to: nextDate, wrappingComponents: false) {
                 nextDate = date
             }
         }while(nextDate < dateRange.upperBound)
-        
-        return grouped
+
+        return groupedValues
     }
 }
