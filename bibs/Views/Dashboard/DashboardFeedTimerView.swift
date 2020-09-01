@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct DashboardFeedTimerView: View {
-    @ObservedObject var profile: ProfileObserver
     @ObservedObject var feedSession: FeedSession
     var color: Color
     
@@ -36,7 +35,7 @@ struct DashboardFeedTimerView: View {
         if self.layout == .expanded  {
             return self.feedSession.currentBreastSide.description.0
         }else {
-            return (self.cofeeding || self.profile.multipleWaiting) ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
+            return (self.cofeeding) ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
         }
     }
     
@@ -53,7 +52,7 @@ struct DashboardFeedTimerView: View {
     }
     
     var showBreastSideLabel: Bool {
-        return self.layout == .expanded || (!self.cofeeding && self.profile.parent.childrenWithoutCurrentFeedSessions.count < 2)
+        return self.layout == .expanded || (!self.cofeeding)
     }
     
     var body: some View {
@@ -74,7 +73,6 @@ struct DashboardFeedTimerView: View {
                                 return
                             }
                             
-                            self.profile.objectWillChange.send()
                             self.feedSession.complete()
                         }) {
                             Image(systemName: "xmark.circle.fill")
@@ -149,7 +147,6 @@ struct DashboardFeedTimerView_Previews: PreviewProvider {
         
         return Group {
             DashboardFeedTimerView(
-                profile: ProfileObserver.shared,
                 feedSession: session,
                 color: .green,
                 layout: .constant(ActiveFeedsTrayView.ExpandedState.minimised),
@@ -157,7 +154,6 @@ struct DashboardFeedTimerView_Previews: PreviewProvider {
             ).previewLayout(.fixed(width: 160, height: 280))
 
             DashboardFeedTimerView(
-                profile: ProfileObserver.shared,
                 feedSession: session,
                 color: .green,
                 layout: .constant(ActiveFeedsTrayView.ExpandedState.expanded),

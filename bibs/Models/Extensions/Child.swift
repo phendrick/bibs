@@ -95,6 +95,7 @@ extension Child: Identifiable {
     }
     
     public var feedSessionsArray: [FeedSession] {
+        print("child.feedSessionsArray")
         let set = feedSessions as? Set<FeedSession> ?? []
         return set.sorted {
             $0.wrappedCreatedAt > $1.wrappedCreatedAt
@@ -102,12 +103,14 @@ extension Child: Identifiable {
     }
     
     public var latestFeedSessionsArray: [FeedSession] {
+        print("latestFeedSessionsArray")
         let feedSessions = feedSessionsArray
         
-        return Array(feedSessions.prefix(5))
+        return feedSessions
     }
     
     public var completedFeedSessionsArray: [FeedSession] {
+        print("completedFeedSessionsArray")
         let feedSessions = feedSessionsArray.filter {$0.status == .complete}
         
         return feedSessions
@@ -160,26 +163,26 @@ extension Child: Identifiable {
         }
         
         /// mark any old feed sessions as complete
-        for activeSession in feedSessionsArray where activeSession.status != .complete {
-            try? activeSession.finish()
-        }
+        try? self.activeFeedSession?.finish()
         
         var side: Feed.BreastSide = .left
         
+        print("Getting current session")
         if let currentSession = parent?.currentFeedSessions.filter({$0.child != self}).first {
             side = currentSession.currentBreastSide == side ? side.switched : side
         }
         
         let session = self.buildNewFeedSession(side: side)
         
+        self.activeFeedSession = session
+        
         do {
-            try context.save()
-            
             /// if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
                 session.resume()
             }
             
+            try context.save()
             self.objectWillChange.send()
         }catch {
             print("Error: \(error)")

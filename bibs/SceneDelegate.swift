@@ -34,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let parent = try? context.fetch(parentProfileFetchRequest).first, parent.childrenArray.count > 0 {
             _ = parent.restoreActiveChild()
             profileObserver.parent = parent
+            parent.profileObserver = profileObserver
             
             initialView = .dashboard
         }else {

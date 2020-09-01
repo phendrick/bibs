@@ -12,5 +12,6 @@ import CoreData
 
 
 public class ParentProfile: NSManagedObject {
+    var profileObserver: ProfileObserver?
     var activeChild: Child?
 }

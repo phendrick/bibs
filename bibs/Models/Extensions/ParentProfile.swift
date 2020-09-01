@@ -156,6 +156,7 @@ extension ParentProfile {
     }
     
     public var childrenArray: [Child] {
+        print("childrenArray")
         let set = children as? Set<Child> ?? []
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
@@ -187,6 +188,7 @@ extension ParentProfile {
     }
     
     func setActiveChild(child: Child?) {
+        print("setActiveChild")
         guard let child = child, let id = child.id?.description, child.status == .current else {
             return
         }
@@ -196,6 +198,7 @@ extension ParentProfile {
     }
     
     func restoreActiveChild() -> Bool {
+        print("restoreActiveChild")
         let id = UserDefaults.standard.string(forKey: "ActiveChild")
         
         let child = childrenArray.first { (child) -> Bool in
@@ -216,20 +219,28 @@ extension ParentProfile {
     }
     
     public var activeFeedSessions: [FeedSession] {
-        let activeFeedSessions = childrenArray.flatMap { (child) in
-            child.feedSessionsArray.filter { (feedSession) -> Bool in
-                feedSession.status == .running
+        print("activeFeedSessions")
+        let activeFeedSessions:[FeedSession] = childrenArray.compactMap { (child) in
+            guard let feedSession = child.activeFeedSession else {
+                return nil
             }
+            
+            return feedSession.status == .running ? feedSession : nil
         }
         
         return activeFeedSessions
     }
     
     public var currentFeedSessions: [FeedSession] {
-        let activeFeedSessions = childrenArray.flatMap { (child) in
-            child.feedSessionsArray.filter { (feedSession) -> Bool in
-                feedSession.status == .running || feedSession.status == .paused
+        print("currentFeedSessions")
+        let activeFeedSessions:[FeedSession] = childrenArray.compactMap { (child) in
+            guard let feedSession = child.activeFeedSession else {
+                return nil
             }
+            
+            let currentStatuses = [FeedSession.FeedSessionStatus.running, FeedSession.FeedSessionStatus.paused]
+            
+            return currentStatuses.contains(feedSession.status) ? feedSession : nil
         }
         
         if activeFeedSessions.count > 1 {
@@ -242,10 +253,12 @@ extension ParentProfile {
     }
     
     public var childrenWithoutCurrentFeedSessions: [Child] {
+        print("childrenWithoutCurrentFeedSessions")
         return childrenArray.filter {$0.status == .current && $0.activeFeedSession == nil}
     }
     
     public var suspendedFeedSessions: [FeedSession] {
+        print("suspendedFeedSessions")
         let activeFeedSessions = childrenArray.flatMap { (child) in
             child.feedSessionsArray.filter { (feedSession) -> Bool in
                 feedSession.status == .suspended

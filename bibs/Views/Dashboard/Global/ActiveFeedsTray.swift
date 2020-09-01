@@ -61,7 +61,6 @@ struct ActiveFeedsTrayView: View {
                     )
                 }.onTapGesture {
                     try? child.startNewFeedSession()
-                    self.profile.objectWillChange.send()
                 }
             }
         }
@@ -72,7 +71,8 @@ struct ActiveFeedsTrayView: View {
         if self.layout == .expanded {
             VStack(spacing: 20) {
                 FeedSessionsList(
-                    profile: self.profile, layout: self.$layout
+                    sessions: self.profile.parent.currentFeedSessions,
+                    layout: self.$layout
                 )
                 .frame(maxWidth: .infinity)
             }
@@ -80,7 +80,8 @@ struct ActiveFeedsTrayView: View {
         }else {
             HStack(spacing: 10) {
                 FeedSessionsList(
-                    profile: self.profile, layout: self.$layout
+                    sessions: self.profile.parent.currentFeedSessions,
+                    layout: self.$layout
                 )
             }
         }
@@ -172,17 +173,16 @@ struct ActiveFeedsTrayView_Previews: PreviewProvider {
 }
 
 struct FeedSessionsList: View {
-    @ObservedObject var profile: ProfileObserver
+    var sessions: [FeedSession]
     @Binding var layout: ActiveFeedsTrayView.ExpandedState
     
     var body: some View {
-        ForEach(self.profile.parent.currentFeedSessions, id: \.self) {session in
+        ForEach(self.sessions, id: \.self) {session in
             DashboardFeedTimerView(
-                profile: self.profile,
                 feedSession: session,
                 color: Color.green,
                 layout: self.$layout,
-                cofeeding: self.profile.parent.currentFeedSessions.count>1
+                cofeeding: self.sessions.count>1
             )
             .frame(minHeight: 70)
             .frame(maxHeight: self.layout == .expanded ? 140 : 100)

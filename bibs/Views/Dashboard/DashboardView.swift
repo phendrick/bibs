@@ -63,6 +63,7 @@ struct DashboardView: View {
             NavigationView {
                 VStack(spacing: 0) {
                     DashboardHeaderView().padding()
+                    
                     NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                         DashboardHeaderOverviewView(profile: profile).padding()
                     }.foregroundColor(Color(UIColor.label))
@@ -126,6 +127,25 @@ struct DashboardView: View {
                             
                             try? self.moc.save()
                         }
+                        
+                        Button("Profile") {
+                            self.profile.objectWillChange.send()
+                        }
+                        
+                        Button("Add timer") {
+                            guard let child = self.profile.parent.childrenArray.first else {
+                                print("no child to add data to")
+                                return
+                            }
+                            
+                            if let activeSession = child.activeFeedSession {
+                                print("Completing previous timer")
+                                activeSession.complete()
+                            }
+                            
+                            self.profile.objectWillChange.send()
+                            try? child.startNewFeedSession()
+                        }
                     }
                     
                     DashboardToolsListView().padding([.top, .bottom])
@@ -134,18 +154,11 @@ struct DashboardView: View {
                 }
                 .navigationBarTitle(Text(""), displayMode: .inline)
                 .offset(y: -20)
-//                .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
-//                .navigationBarItems(
-//                    leading:  NavigationLink(destination: ProfileEditView().environmentObject(self.profile)) {
-//                        Image(systemName: "person.crop.circle").foregroundColor(.red)
-//                    }
-//                )
             }
             
             Spacer()
             
             ActiveFeedsTrayView(profile: self.profile)
-                //.background(Color(UIColor(named: "HighlightYellow")!)).foregroundColor(.white)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .edgesIgnoringSafeArea(.all)

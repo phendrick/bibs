@@ -18,3 +18,17 @@ func barValue(value: CGFloat, maxValue: Double, chartSize: CGFloat = 160) -> CGF
     
     return (value * multiplier)
 }
+
+func printTimeElapsedWhenRunningCode(title:String, operation:()->()) {
+    let startTime = CFAbsoluteTimeGetCurrent()
+    operation()
+    let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+    print("\n\nTime elapsed for \(title): \(timeElapsed) s.\n\n")
+}
+
+func timeElapsedInSecondsWhenRunningCode(operation: ()->()) -> Double {
+    let startTime = CFAbsoluteTimeGetCurrent()
+    operation()
+    let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+    return Double(timeElapsed)
+}
