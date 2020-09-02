@@ -11,14 +11,15 @@ import CoreData
 import UIKit
     
 class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObject {
-    @Published var data: (data: [Date: Int32], min: Int32, max: Int32, average: Int32)?
+    @Published var data: (data: [Date: Int32], counts: ClosedRange<Int>, min: Int32, max: Int32, average: Int32)?
     
     var includeAllDatesInRange = true
     var child: Child
     var range: ClosedRange<Date>
     var moc: NSManagedObjectContext 
+    var predicates: [NSPredicate] = []
     
-    init(child: Child, range: ClosedRange<Date>, includeAllDatesInRange: Bool) {
+    init(child: Child, range: ClosedRange<Date>, includeAllDatesInRange: Bool, predicates: [NSPredicate] = [] ) {
         self.child = child
         self.range = range
         self.includeAllDatesInRange = includeAllDatesInRange
@@ -31,10 +32,18 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         let fetchRequest = NSFetchRequest<T>(entityName: String(describing: T.self))
         let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
         let dateToPredicate   = NSPredicate(format: "createdAt < %@",  range.upperBound as NSDate)
-
+        let childPredicate    = NSPredicate(format: "child = %@", self.child)
+        
+        var predicates = [dateFromPredicate, dateToPredicate, childPredicate]
+        
+        self.predicates.forEach {
+            predicates.append($0)
+        }
+        
         let datePredicate = NSCompoundPredicate(
-            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
+            andPredicateWithSubpredicates: predicates
         )
+        
         fetchRequest.predicate = datePredicate
         
         let results = try? self.moc.fetch(fetchRequest)
@@ -42,26 +51,31 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         return results ?? []
     }
     
-    func generateDataInRange() -> (data: [Date: Int32], min: Int32, max: Int32, average: Int32)? {
+    func generateDataInRange() -> (data: [Date: Int32], counts: ClosedRange<Int>, min: Int32, max: Int32, average: Int32)? {
         let items = self.fetchData()
         
         //let items: [T] = [] //self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
         var data: [Date: Int32] = [:]
+        var counts: ClosedRange<Int> = 0...0
         
         // if we're including all dates in the given range, build the dictionary
         if includeAllDatesInRange {
             data = buildData(within: self.range, from: items) as [Date: Int32]
         }else {
+            let lowerBoundResults = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.lowerBound.beginningOfDay}
+            let upperBoundResults = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.upperBound.beginningOfDay}
+            
+            counts = lowerBoundResults.count...upperBoundResults.count
             // if we're not including all the dates in the range, just get the data for each of the bounds
-            data[self.range.lowerBound] = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.lowerBound.beginningOfDay}.reduce(into: 0) {$0 += $1.trackableUnit}
-            data[self.range.upperBound] = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.upperBound.beginningOfDay}.reduce(into: 0) {$0 += $1.trackableUnit}
+            data[self.range.lowerBound] = lowerBoundResults.reduce(into: 0) {$0 += $1.trackableUnit}
+            data[self.range.upperBound] = upperBoundResults.reduce(into: 0) {$0 += $1.trackableUnit}
         }
         
         // get the min and max values for the range - we'll use these to plot the charts
         let min = data.values.min() ?? 0
         let max = data.values.max() ?? 0
         
-        return (data: data, min: min, max: max, average: 0)
+        return (data: data, counts: counts, min: min, max: max, average: 0)
     }
     
     func regenerateData() {

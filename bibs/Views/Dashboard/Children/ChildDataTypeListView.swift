@@ -20,17 +20,25 @@ struct ChildDataTypeListView: View {
                 }
             }
             
-            NavigationLink(destination: FeedSessionChildChartsView(child: child, profile: self.profile)) {
+            NavigationLink(destination: BottleFeedChildChartsView(child: child, profile: self.profile)) {
                 VStack(alignment: .leading) {
                     Text("bottle feed charts")
                 }
             }
             
-            NavigationLink(destination: FeedSessionChildChartsView(child: child, profile: self.profile)) {
+            NavigationLink(destination: NapTimeChildChartsView(child: child, profile: self.profile)) {
+                VStack(alignment: .leading) {
+                    Text("nap time charts")
+                }
+            }
+            
+            NavigationLink(destination: NappyChangeChildChartsView(child: child, profile: self.profile)) {
                 VStack(alignment: .leading) {
                     Text("nappy change charts")
                 }
             }
+            
+            Divider()
             
             NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
                 VStack(alignment: .leading) {

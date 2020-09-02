@@ -9,7 +9,7 @@
 import Foundation
 
 extension ExpressedBottle: Identifiable, Trackable {
-    public enum ExpressedBottleStorageStatus: Int16, CaseIterable {
+    public enum ExpressedBottleStorageStatus: Int16, CaseIterable, Hashable {
         case refridgerated
         case fresh
         case frozen

@@ -9,9 +9,9 @@
 import SwiftUI
 import CoreData
 
-struct BottleFeedChartsViewStatsWeeklyView: View {
+struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
     @ObservedObject var child: Child
-    @ObservedObject var chartData: FeedSessionChartData
+    @ObservedObject var chartData: TrackableChartData<T>
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -29,23 +29,25 @@ struct BottleFeedChartsViewStatsWeeklyView: View {
                                     Text("this weeks summary").font(.caption)
                                 }
                                 
-                                VStack {
-                                    HStack(alignment: .bottom) {
-                                        ForEach(0..<7, id: \.self) {index in
+                                self.chartData.data.map { chartData in
+                                    HStack {
+                                        ForEach(chartData.data.keys.sorted(), id: \.self) { date in
                                             BarChartBarView(
                                                 width: 10,
                                                 value: barValue(
-                                                    value: CGFloat((40..<70).randomElement()!),
-                                                    maxValue: 100,
-                                                    chartHeight: 100
+                                                    value: CGFloat( (chartData.data[date] ?? 0 ) ),
+                                                    maxValue: Double( chartData.max ),
+                                                    chartSize: 100
                                                 ),
-                                                chartHeight: 100
+                                                chartSize: 100,
+                                                color: .white,
+                                                axis: .vertical
                                             )
                                         }
                                     }
+                                    .frame(maxHeight: .infinity)
+                                    .frame(width: geometry.size.width * 0.55, alignment: .bottomTrailing)
                                 }
-                                .frame(maxHeight: .infinity)
-                                .frame(width: geometry.size.width * 0.55, alignment: .bottomTrailing)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         }

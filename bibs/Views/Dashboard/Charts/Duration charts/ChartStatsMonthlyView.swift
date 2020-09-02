@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
+struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
     @ObservedObject var child: Child
     @ObservedObject var chartData: TrackableChartData<T>
     
@@ -69,12 +69,11 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text("\(self.activeMonthName)").font(.headline)
-                    
-                    Spacer()
-                    
-                    HStack {
+                HStack(alignment: .lastTextBaseline) {
+                    HStack(alignment: .lastTextBaseline) {
+                        Text("\(self.activeMonthName)")
+                            .font(.subheadline)
+                        
                         Button("This month") {
                             self.month = Date()
                             let dateRange = self.month.beginningOfMonth...self.month.endOfMonth
@@ -82,25 +81,29 @@ struct FeedSessionStatsMonthlyView<T: Trackable>: View where T: NSManagedObject 
                             self.chartData.range = dateRange
                             self.chartData.regenerateData()
                         }
-                        .frame(width: 80)
+                        .font(.caption)
                         .opacity(self.showThisMonthButton ? 1 : 0 ).disabled(!self.showThisMonthButton)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Spacer()
                         
                         HStack {
-                            HStack {
-                                Image(systemName: "chevron.left").scaledToFill()
-                                
-                                Button("\(self.previousMonthName)") {
-                                    self.showPreviousMonth()
-                                }
-                            }.frame(width: 80)
+                            Image(systemName: "chevron.left").scaledToFill()
                             
-                            HStack {
-                                Button("\(self.nextMonthName)") {
-                                    self.showNextMonth()
-                                }
-                                
-                                Image(systemName: "chevron.right")
-                            }.frame(width: 80)
+                            Button("\(self.previousMonthName)") {
+                                self.showPreviousMonth()
+                            }
+                        }
+                        
+                        HStack {
+                            Button("\(self.nextMonthName)") {
+                                self.showNextMonth()
+                            }
+                            
+                            Image(systemName: "chevron.right")
                         }
                     }.font(.caption)
                 }

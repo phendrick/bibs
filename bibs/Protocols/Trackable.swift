@@ -9,8 +9,11 @@
 import Foundation
 
 public protocol Trackable {
+    associatedtype StatusType: Hashable
+    
     var wrappedCreatedAt: Date {get}
     var title: String {get}
     var details: String {get}
     var trackableUnit: Int32 {get}
+    var status: StatusType {get set}
 }

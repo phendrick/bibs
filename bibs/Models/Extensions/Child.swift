@@ -51,7 +51,7 @@ extension Child: Identifiable {
             (Color(UIColor(named: "HighlightYellow") ?? UIColor.yellow), Color(UIColor(named: "HighlightYellowText") ?? UIColor.white))
     }
     
-    public enum ChildStatuses: Int16 {
+    public enum ChildStatuses: Int16, Hashable {
         case current
         case weaned
         case archived
@@ -95,7 +95,6 @@ extension Child: Identifiable {
     }
     
     public var feedSessionsArray: [FeedSession] {
-        print("child.feedSessionsArray")
         let set = feedSessions as? Set<FeedSession> ?? []
         return set.sorted {
             $0.wrappedCreatedAt > $1.wrappedCreatedAt
@@ -103,14 +102,12 @@ extension Child: Identifiable {
     }
     
     public var latestFeedSessionsArray: [FeedSession] {
-        print("latestFeedSessionsArray")
         let feedSessions = feedSessionsArray
         
         return feedSessions
     }
     
     public var completedFeedSessionsArray: [FeedSession] {
-        print("completedFeedSessionsArray")
         let feedSessions = feedSessionsArray.filter {$0.status == .complete}
         
         return feedSessions

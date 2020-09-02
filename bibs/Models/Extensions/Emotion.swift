@@ -9,7 +9,7 @@
 import Foundation
 
 extension Emotion {
-    public enum EmotionType: Int16, CaseIterable {
+    public enum EmotionType: Int16, CaseIterable, Hashable {
         
         case happy = 4
         case enthusiastic = 5

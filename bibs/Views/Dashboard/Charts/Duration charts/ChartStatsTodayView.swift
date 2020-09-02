@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreData
 
-struct FeedSessionStatsTodayView<T: Trackable>: View where T: NSManagedObject {
+struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     @ObservedObject var child: Child
     @ObservedObject var chartData: TrackableChartData<T>
     
@@ -47,26 +47,28 @@ struct FeedSessionStatsTodayView<T: Trackable>: View where T: NSManagedObject {
         return dateComponents?.count ?? 0 > 1
     }
     
-    var dataForPreviousDate: (min: Double, max: Double, count: Int) {
+    var dataForPreviousDate: (min: Double, max: Double, counts: ClosedRange<Int>) {
         let data = self.chartData.data?.data
         
         let min = self.chartData.data?.min ?? 0
         let max = self.chartData.data?.max ?? 0
+        let counts = self.chartData.data?.counts ?? 0...0
         
-        return (min: Double(min), max: Double(max), count: data?.count ?? 0)
+        return (min: Double(min), max: Double(max), counts: counts)
     }
     
-    var dataForLatestDate: (min: Double, max: Double, count: Int) {
+    var dataForLatestDate: (min: Double, max: Double, counts: ClosedRange<Int>) {
         let data = self.chartData.data?.data
 
         let min = self.chartData.data?.min ?? 0
         let max = self.chartData.data?.max ?? 0
+        let counts = self.chartData.data?.counts ?? 0...0
         
-        return (min: Double(min), max: Double(max), count: data?.count ?? 0)
+        return (min: Double(min), max: Double(max), counts: counts)
     }
     
     var dailyOverviewIntro: String {
-        let diff = abs( dataForPreviousDate.count - dataForLatestDate.count )
+        let diff = abs( dataForPreviousDate.counts.lowerBound - dataForLatestDate.counts.upperBound )
         let ls = NSLocalizedString("%@ feed %ld increase", comment: "increase or decrease in todays feeds")
         return String.localizedStringWithFormat(ls, self.child.wrappedName, diff)
     }
@@ -77,27 +79,29 @@ struct FeedSessionStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     }
     
     var maxChartValue: Double {
-        return Double( max( self.dataForLatestDate.count, self.dataForPreviousDate.count) )
+        return Double( max( self.dataForLatestDate.counts.max() ?? 0, self.dataForPreviousDate.counts.max() ?? 0) )
     }
     
     var body: some View {
         VStack {
             VStack(spacing: 60) {
                 VStack(alignment: .leading) {
-                    Text("Hello").foregroundColor(.white).font(.headline)
+                    Text(self.feedCountLabel(count: self.dataForLatestDate.counts.upperBound)).foregroundColor(.white).font(.headline)
+                    
                     GeometryReader { geometry in
                         self.chartData.data.map { chartData in
                             ZStack(alignment: .leading) {
                                 BarChartBarView(
                                     width: 40,
                                     value:  barValue(
-                                                value: CGFloat(self.dataForLatestDate.count),
+                                                value: CGFloat(self.dataForLatestDate.counts.upperBound),
                                                 maxValue: self.maxChartValue,
                                                 chartSize: geometry.frame(in: .local).size.width
                                             ),
                                     chartSize: geometry.frame(in: .local).size.width,
                                     axis: .horizontal
-                                ).cornerRadius(5)
+                                )
+                                .cornerRadius(5)
                                 
                                 Text(self.labelForDate(date: self.latestDate))
                                     .padding(5)
@@ -110,14 +114,14 @@ struct FeedSessionStatsTodayView<T: Trackable>: View where T: NSManagedObject {
                 .frame(maxWidth: .infinity)
                 
                 VStack(alignment: .leading) {
-                    Text(self.feedCountLabel(count: self.dataForPreviousDate.count)).foregroundColor(.white).font(.headline)
+                    Text(self.feedCountLabel(count: self.dataForPreviousDate.counts.lowerBound)).foregroundColor(.white).font(.headline)
                     GeometryReader { geometry in
                         self.chartData.data.map { chartData in
                             ZStack(alignment: .leading) {
                                 BarChartBarView(
                                     width: 40,
                                     value:  barValue(
-                                                value: CGFloat(self.dataForPreviousDate.count),
+                                                value: CGFloat(self.dataForPreviousDate.counts.lowerBound),
                                                 maxValue: self.maxChartValue,
                                                 chartSize: geometry.frame(in: .local).size.width
                                             ),

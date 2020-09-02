@@ -13,7 +13,7 @@ extension BottleFeed: Identifiable, Trackable {
         createdAt ?? Date()
     }
     
-    public enum BottleFeedType: Int, CaseIterable {
+    public enum BottleFeedType: Int, CaseIterable, Hashable {
         case expressedMilk
         case donorMilk
         case formula

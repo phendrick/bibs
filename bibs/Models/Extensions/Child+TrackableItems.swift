@@ -11,7 +11,7 @@ import CoreData
 
 extension Child {
     /// fetch all trackable entities (feeds, nappy changes etc)
-    func allTrackableEntities() -> [Trackable] {
+    func allTrackableEntities<T: Trackable>() -> [T] {
         guard let context = self.managedObjectContext else {
             return []
         }
@@ -21,7 +21,7 @@ extension Child {
         do {
             let feedSessions = try context.fetch(feedSessionFetchRequest)
 
-            return feedSessions
+            return feedSessions as! [T]
         }catch {
             return []
         }

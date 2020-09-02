@@ -1,19 +1,19 @@
 //
-//  ChildChartsView.swift
+//  NapTimeChildChartsView.swift
 //  bibs
 //
-//  Created by Paul Hendrick on 17/08/2020.
+//  Created by Paul Hendrick on 01/09/2020.
 //  Copyright © 2020 Paul Hendrick. All rights reserved.
 //
 
 import SwiftUI
 
-struct FeedSessionChildChartsView: View {
+struct NapTimeChildChartsView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
     
     func getLastTwoDaysDateRange() -> ClosedRange<Date> {
-        let sorted = self.child.completedFeedSessionsArray.sorted { $0.wrappedCreatedAt > $1.wrappedCreatedAt }
+        let sorted = self.child.napsArray.sorted { $0.wrappedCreatedAt > $1.wrappedCreatedAt }
         
         guard let latest = sorted.first?.wrappedCreatedAt else {
             return Date().beginningOfDay...Date().endOfDay
@@ -34,27 +34,27 @@ struct FeedSessionChildChartsView: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    FeedSessionStatsTodayView<FeedSession>(
+                    ChartStatsTodayView<Nap>(
                         child: self.child,
-                        chartData: TrackableChartData<FeedSession>(
+                        chartData: TrackableChartData<Nap>(
                             child: child,
                             range: self.getLastTwoDaysDateRange(),
                             includeAllDatesInRange: false
                         )
                     )
 
-                    FeedSessionStatsWeeklyView<FeedSession>(
+                    ChartStatsWeeklyView<Nap>(
                         child: self.child,
-                        chartData: TrackableChartData<FeedSession>(
+                        chartData: TrackableChartData<Nap>(
                             child: self.child,
                             range: Date().lastSevenDays...Date().endOfDay,
                             includeAllDatesInRange: true
                         )
                     )
 
-                    FeedSessionStatsMonthlyView<FeedSession>(
+                    ChartStatsMonthlyView<Nap>(
                         child: self.child,
-                        chartData: TrackableChartData<FeedSession>(
+                        chartData: TrackableChartData<Nap>(
                             child: self.child,
                             range: Date().beginningOfMonth...Date().endOfMonth,
                             includeAllDatesInRange: true
@@ -69,8 +69,8 @@ struct FeedSessionChildChartsView: View {
     }
 }
 
-//struct ChildChartsView_Previews: PreviewProvider {
+//struct NapTimeChildChartsView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ChildChartsView()
+//        NapTimeChildChartsView()
 //    }
 //}

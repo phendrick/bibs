@@ -99,7 +99,7 @@ extension Date {
         components.month = 1
         components.second = -1
         
-        return Calendar.current.date(byAdding: components, to: self.beginningOfMonth)!
+        return Calendar.current.date(byAdding: components, to: self.beginningOfDay)!
     }
     
     var previousMonth: Date {

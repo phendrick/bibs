@@ -156,7 +156,6 @@ extension ParentProfile {
     }
     
     public var childrenArray: [Child] {
-        print("childrenArray")
         let set = children as? Set<Child> ?? []
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
@@ -188,7 +187,6 @@ extension ParentProfile {
     }
     
     func setActiveChild(child: Child?) {
-        print("setActiveChild")
         guard let child = child, let id = child.id?.description, child.status == .current else {
             return
         }
@@ -198,7 +196,6 @@ extension ParentProfile {
     }
     
     func restoreActiveChild() -> Bool {
-        print("restoreActiveChild")
         let id = UserDefaults.standard.string(forKey: "ActiveChild")
         
         let child = childrenArray.first { (child) -> Bool in
@@ -219,7 +216,6 @@ extension ParentProfile {
     }
     
     public var activeFeedSessions: [FeedSession] {
-        print("activeFeedSessions")
         let activeFeedSessions:[FeedSession] = childrenArray.compactMap { (child) in
             guard let feedSession = child.activeFeedSession else {
                 return nil
@@ -232,7 +228,6 @@ extension ParentProfile {
     }
     
     public var currentFeedSessions: [FeedSession] {
-        print("currentFeedSessions")
         let activeFeedSessions:[FeedSession] = childrenArray.compactMap { (child) in
             guard let feedSession = child.activeFeedSession else {
                 return nil
@@ -253,12 +248,10 @@ extension ParentProfile {
     }
     
     public var childrenWithoutCurrentFeedSessions: [Child] {
-        print("childrenWithoutCurrentFeedSessions")
         return childrenArray.filter {$0.status == .current && $0.activeFeedSession == nil}
     }
     
     public var suspendedFeedSessions: [FeedSession] {
-        print("suspendedFeedSessions")
         let activeFeedSessions = childrenArray.flatMap { (child) in
             child.feedSessionsArray.filter { (feedSession) -> Bool in
                 feedSession.status == .suspended
@@ -460,22 +453,22 @@ extension ParentProfile {
         }
     }
     
-    public func trackedItems(type: TrackableItemScope = .activeChild, within dateRange: TrackableItemDateRange) -> [Trackable] {
+    public func trackedItems<T: Trackable>(type: TrackableItemScope = .activeChild, within dateRange: TrackableItemDateRange) -> [T] {
         let expressedBottles = self.expressedBottlesArray
         let nappies = self.activeChild?.nappyChangesArray ?? []
         let bottles = self.activeChild?.bottleFeedsArray ?? []
         
-        var items: [Trackable] = []
+        var items: [T] = []
         
-        if let range = dateRange.range {
-            items.append(contentsOf: expressedBottles.filter { range.contains($0.wrappedCreatedAt)} )
-            items.append(contentsOf: nappies.filter { range.contains($0.wrappedCreatedAt)} )
-            items.append(contentsOf: bottles.filter { range.contains($0.wrappedCreatedAt)} )
-        }else {
-            items.append(contentsOf: expressedBottles)
-            items.append(contentsOf: nappies)
-            items.append(contentsOf: bottles)
-        }
+//        if let range = dateRange.range {
+//            items.append(contentsOf: expressedBottles.filter { range.contains($0.wrappedCreatedAt)} )
+//            items.append(contentsOf: nappies.filter { range.contains($0.wrappedCreatedAt)} )
+//            items.append(contentsOf: bottles.filter { range.contains($0.wrappedCreatedAt)} )
+//        }else {
+//            items.append(contentsOf: expressedBottles)
+//            items.append(contentsOf: nappies)
+//            items.append(contentsOf: bottles)
+//        }
         
         items.sort { (lhs, rhs) -> Bool in
             lhs.wrappedCreatedAt < rhs.wrappedCreatedAt

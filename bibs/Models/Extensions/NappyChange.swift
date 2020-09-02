@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 extension NappyChange: Identifiable, Trackable {
-    public enum NappyChangeType: Int, CaseIterable {
+    public enum NappyChangeType: Int, CaseIterable, Hashable {
         case wet
         case dirty
         case both
@@ -24,6 +24,10 @@ extension NappyChange: Identifiable, Trackable {
                 case .both: return "Wet & Dirty"
                 case .dry: return "Dry"
             }
+        }
+        
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(self.rawValue)
         }
     }
     

@@ -9,7 +9,33 @@
 import Foundation
 import CoreData
 
-extension Nap: Identifiable, Timeable {
+public enum NapStatus {
+    case napping
+    case done
+}
+
+extension Nap: Identifiable, Timeable, Trackable {
+    public var status: NapStatus {
+        get {
+            return .done
+        }
+        
+        set {
+        }
+    }
+    
+    public var title: String {
+        return self.child?.wrappedName ?? ""
+    }
+    
+    public var details: String {
+        return ""
+    }
+    
+    public var trackableUnit: Int32 {
+        return duration
+    }
+    
     public var wrappedCreatedAt: Date {
         createdAt ?? Date()
     }
