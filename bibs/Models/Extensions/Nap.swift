@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-public enum NapStatus {
+public enum NapStatus: CaseIterable {
     case napping
     case done
 }

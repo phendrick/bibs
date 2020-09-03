@@ -60,6 +60,7 @@
 		DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */; };
 		DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */; };
 		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
+		DA8C169D25004F6900FA559F /* NappyChangeDailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */; };
 		DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */; };
 		DA92439824DE0AAE00339810 /* DatapointsIndexListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */; };
 		DAA0490424B53449007D290D /* ActiveFeedsTray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA0490324B53449007D290D /* ActiveFeedsTray.swift */; };
@@ -88,6 +89,7 @@
 		DABE2EBA24F9D00700EA6E5D /* TrackableChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EB924F9D00700EA6E5D /* TrackableChartData.swift */; };
 		DABE2EBE24F9D20A00EA6E5D /* NappyChangeChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */; };
 		DABE2EC424F9D54A00EA6E5D /* chartHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */; };
+		DAC0236B2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0236A2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift */; };
 		DAC52E5324FC76DE00CF613D /* ChildDataTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */; };
 		DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */; };
 		DAD5CC5F24EA87F600E0EE77 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5E24EA87F600E0EE77 /* BarView.swift */; };
@@ -208,6 +210,7 @@
 		DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
+		DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeDailyChartView.swift; sourceTree = "<group>"; };
 		DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIScrollViewDelegate.swift; sourceTree = "<group>"; };
 		DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatapointsIndexListView.swift; sourceTree = "<group>"; };
 		DAA0490324B53449007D290D /* ActiveFeedsTray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedsTray.swift; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		DABE2EBB24F9D20700EA6E5D /* BottleFeedChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedChartData.swift; sourceTree = "<group>"; };
 		DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeChartData.swift; sourceTree = "<group>"; };
 		DABE2EC324F9D54A00EA6E5D /* chartHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chartHelpers.swift; sourceTree = "<group>"; };
+		DAC0236A2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeWeeklyChartView.swift; sourceTree = "<group>"; };
 		DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDataTypeListView.swift; sourceTree = "<group>"; };
 		DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpressedMilkView.swift; sourceTree = "<group>"; };
 		DAD5CC5E24EA87F600E0EE77 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
@@ -345,7 +349,8 @@
 		DA242A4924EA5B58002931D9 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				DAA5BBB324FF019F00ED234D /* Count charts */,
+				DA8C169B25004F4700FA559F /* CountStatesChart */,
+				DA8C169A25004F2800FA559F /* Nappy Change Charts */,
 				DAA5BBB224FF018D00ED234D /* Duration charts */,
 				DAA5BBA524FEE1FE00ED234D /* FeedSessionChildChartsView.swift */,
 				DAA5BBAC24FEE43000ED234D /* BottleFeedChildChartsView.swift */,
@@ -443,6 +448,23 @@
 			path = Datapoints;
 			sourceTree = "<group>";
 		};
+		DA8C169A25004F2800FA559F /* Nappy Change Charts */ = {
+			isa = PBXGroup;
+			children = (
+				DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */,
+				DAC0236A2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift */,
+			);
+			path = "Nappy Change Charts";
+			sourceTree = "<group>";
+		};
+		DA8C169B25004F4700FA559F /* CountStatesChart */ = {
+			isa = PBXGroup;
+			children = (
+				DAA5BBB424FF021E00ED234D /* CountStatesChartView.swift */,
+			);
+			path = CountStatesChart;
+			sourceTree = "<group>";
+		};
 		DA918F8424A637D3006DFF99 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,14 +514,6 @@
 				DAA5BBA724FEE1FE00ED234D /* ChartStatsMonthlyView.swift */,
 			);
 			path = "Duration charts";
-			sourceTree = "<group>";
-		};
-		DAA5BBB324FF019F00ED234D /* Count charts */ = {
-			isa = PBXGroup;
-			children = (
-				DAA5BBB424FF021E00ED234D /* CountStatesChartView.swift */,
-			);
-			path = "Count charts";
 			sourceTree = "<group>";
 		};
 		DAAAFD5F24AC7FB70064B263 /* Profiles */ = {
@@ -875,6 +889,7 @@
 				DAA5BBAB24FEE27100ED234D /* ChartStatsMonthlyView.swift in Sources */,
 				DAB1739C247D458600D94537 /* FeedSession.swift in Sources */,
 				DA49B45024DB622E001C282A /* WeaningDataView.swift in Sources */,
+				DA8C169D25004F6900FA559F /* NappyChangeDailyChartView.swift in Sources */,
 				DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */,
 				DAC52E5324FC76DE00CF613D /* ChildDataTypeListView.swift in Sources */,
 				DAEE23D124C979D100E368DC /* DashboardView.swift in Sources */,
@@ -960,6 +975,7 @@
 				DA49B45224DB624F001C282A /* NaptimesDataView.swift in Sources */,
 				DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
+				DAC0236B2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift in Sources */,
 				DA08835424CEC4E9003B7020 /* Snack+snackList.swift in Sources */,
 				DA224EB624DFF946006FCFC3 /* EditNappyChangeView.swift in Sources */,
 				DAF7518324B7D2AA00C83F33 /* Child+CoreDataProperties.swift in Sources */,

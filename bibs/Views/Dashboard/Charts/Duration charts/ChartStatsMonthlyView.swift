@@ -113,12 +113,12 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                 
                 GeometryReader { geometry in
                     self.chartData.data.map { chartData in
-                        HStack(alignment: .center, spacing: 2) {
+                        HStack(alignment: .top, spacing: 4) {
                             Spacer()
                             
                             ForEach(chartData.data.keys.sorted(), id: \.self) { date in
                                 BarChartBarView(
-                                    width: 10,
+                                    width: 6,
                                     value: barValue(
                                         value: CGFloat( (chartData.data[date] ?? 0 ) ),
                                         maxValue: Double( chartData.max ),
@@ -126,18 +126,18 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                                     ),
                                     chartSize: 180,
                                     color: .white,
-                                    axis: .vertical
+                                    axis: .vertical,
+                                    cornerRadius: 5
                                 )
                             }
                             
                             Spacer()
                         }
+                        .padding(0)
                         .frame(height: 220)
                         .frame(maxHeight: .infinity)
                     }
                 }.frame(height: 220)
-                
-                Divider().padding(.top, 10)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Monthly intro: \(self.chartData.data?.data.values.count ?? 0)").font(.caption)
@@ -152,16 +152,3 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
         .foregroundColor(Color.white)
     }
 }
-
-//struct StatsMonthlyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-//        
-//        let child = Child(context: context)
-//        child.wrappedName = "Child Name"
-//        
-//        return StatsMonthlyView(
-//            chartData: FeedSessionChartData(child: child)
-//        )
-//    }
-//}

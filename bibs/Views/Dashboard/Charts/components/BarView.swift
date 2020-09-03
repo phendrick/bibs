@@ -14,6 +14,7 @@ struct BarChartBarView: View {
     var chartSize: CGFloat = 0
     var color: Color = .white
     var axis: Axis.Set = .vertical
+    var cornerRadius: CGFloat = 5
     
     @State var barValue: CGFloat = 0
     
@@ -40,11 +41,13 @@ struct BarChartBarView: View {
                 .foregroundColor(color)
                 .opacity(0.25)
                 .animation(nil)
-
+                .cornerRadius(self.cornerRadius)
+            
             Rectangle()
                 .foregroundColor(color)
                 .frame(width: barWidth, height: barHeight)
                 .opacity(1)
+                .cornerRadius(self.cornerRadius)
         }.onAppear {
             self.barValue = self.value
         }

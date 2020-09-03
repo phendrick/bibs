@@ -11,7 +11,7 @@ import CoreData
 import UIKit
     
 class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObject {
-    @Published var data: (data: [Date: Int32], counts: ClosedRange<Int>, min: Int32, max: Int32, average: Int32)?
+    @Published var data: (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, average: Int32)?
     
     var includeAllDatesInRange = true
     var child: Child
@@ -51,12 +51,12 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         return results ?? []
     }
     
-    func generateDataInRange() -> (data: [Date: Int32], counts: ClosedRange<Int>, min: Int32, max: Int32, average: Int32)? {
+    func generateDataInRange() -> (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, average: Int32)? {
         let items = self.fetchData()
         
         //let items: [T] = [] //self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
         var data: [Date: Int32] = [:]
-        var counts: ClosedRange<Int> = 0...0
+        var counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)) = (previous: (count: 0, duration: 0), latest: (count: 0, duration: 0))
         
         // if we're including all dates in the given range, build the dictionary
         if includeAllDatesInRange {
@@ -65,7 +65,11 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
             let lowerBoundResults = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.lowerBound.beginningOfDay}
             let upperBoundResults = items.filter { $0.wrappedCreatedAt.beginningOfDay == self.range.upperBound.beginningOfDay}
             
-            counts = lowerBoundResults.count...upperBoundResults.count
+            let lowerBoundDuration = lowerBoundResults.reduce(into: 0) {$0 += $1.trackableUnit}
+            let upperBoundDuration = upperBoundResults.reduce(into: 0) {$0 += $1.trackableUnit}
+            
+            counts = (previous: (count: lowerBoundResults.count, duration: lowerBoundDuration), latest: (count: upperBoundResults.count, duration: upperBoundDuration))
+            
             // if we're not including all the dates in the range, just get the data for each of the bounds
             data[self.range.lowerBound] = lowerBoundResults.reduce(into: 0) {$0 += $1.trackableUnit}
             data[self.range.upperBound] = upperBoundResults.reduce(into: 0) {$0 += $1.trackableUnit}

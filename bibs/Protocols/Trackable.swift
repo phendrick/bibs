@@ -9,11 +9,16 @@
 import Foundation
 
 public protocol Trackable {
-    associatedtype StatusType: Hashable
+    associatedtype StatusType: Hashable & CaseIterable
     
     var wrappedCreatedAt: Date {get}
     var title: String {get}
     var details: String {get}
     var trackableUnit: Int32 {get}
     var status: StatusType {get set}
+}
+
+public protocol TrackableStatus {
+    var description: String {get}
+    var emoji: String {get}
 }

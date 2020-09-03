@@ -454,9 +454,9 @@ extension ParentProfile {
     }
     
     public func trackedItems<T: Trackable>(type: TrackableItemScope = .activeChild, within dateRange: TrackableItemDateRange) -> [T] {
-        let expressedBottles = self.expressedBottlesArray
-        let nappies = self.activeChild?.nappyChangesArray ?? []
-        let bottles = self.activeChild?.bottleFeedsArray ?? []
+//        let expressedBottles = self.expressedBottlesArray
+//        let nappies = self.activeChild?.nappyChangesArray ?? []
+//        let bottles = self.activeChild?.bottleFeedsArray ?? []
         
         var items: [T] = []
         

@@ -16,61 +16,45 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text("This week").font(.headline)
+                Text("This week".localized).font(.headline)
                 
                 Divider()
                 
-                HStack(alignment: .bottom) {
-                    GeometryReader { geometry in
-                        ZStack {
-                            HStack(alignment: .bottom) {
-                                VStack(alignment: .leading, spacing: 15) {
-                                    Text("this weeks intro").font(.caption)
-                                    Text("this weeks summary").font(.caption)
-                                }
-                                
+                VStack {
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading, spacing: 15) {
+                            Text("So far this week Baby has fed 38 times for a total of around 3 hours 48 minutes and 13 seconds. ")
+                                .font(.body)
+                        }
+                        
+                        Spacer()
+                        
+                        HStack {
+                            HStack {
                                 self.chartData.data.map { chartData in
-                                    HStack {
-                                        ForEach(chartData.data.keys.sorted(), id: \.self) { date in
-                                            BarChartBarView(
-                                                width: 10,
-                                                value: barValue(
-                                                    value: CGFloat( (chartData.data[date] ?? 0 ) ),
-                                                    maxValue: Double( chartData.max ),
-                                                    chartSize: 100
-                                                ),
-                                                chartSize: 100,
-                                                color: .white,
-                                                axis: .vertical
-                                            )
-                                        }
+                                    ForEach(chartData.data.keys.sorted(), id: \.self) { date in
+                                        BarChartBarView(
+                                            width: 10,
+                                            value: barValue(
+                                                value: CGFloat( (chartData.data[date] ?? 0 ) ),
+                                                maxValue: Double( chartData.max ),
+                                                chartSize: 130
+                                            ),
+                                            chartSize: 130,
+                                            color: .white,
+                                            axis: .vertical
+                                        )
                                     }
-                                    .frame(maxHeight: .infinity)
-                                    .frame(width: geometry.size.width * 0.55, alignment: .bottomTrailing)
                                 }
                             }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         }
-                        .frame(maxHeight: .infinity, alignment: .bottom)
+                        .padding(.leading, 30)
+                        .layoutPriority(10)
                     }
-                }
-                .frame(height: 160)
+                }.frame(height: 150)
             }
         }
         .padding()
         .foregroundColor(Color.white)
     }
 }
-
-//struct StatsWeeklyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-//        
-//        let child = Child(context: context)
-//        child.wrappedName = "Child Name"
-//        
-//        return StatsWeeklyView(
-//            chartData: FeedSessionChartData(child: child)
-//        )
-//    }
-//}

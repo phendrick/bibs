@@ -9,7 +9,9 @@
 import SwiftUI
 import CoreData
 
-struct CountStatesChartView<T: Trackable, U>: View where T: NSManagedObject, U: CaseIterable {
+typealias TrackableStatusType = CaseIterable & Hashable & TrackableStatus
+
+struct CountStatesChartView<T: Trackable, U: TrackableStatusType>: View where T: NSManagedObject, U.AllCases == Array<U> {
     enum CountStatesChartDateRange {
         case today
         case week
@@ -29,14 +31,14 @@ struct CountStatesChartView<T: Trackable, U>: View where T: NSManagedObject, U: 
             var dates: ClosedRange<Date>
             
             switch(self) {
-            case .today:
-                dates = Date().beginningOfDay...Date().endOfDay
-            case .week:
-                dates = Date().beginningOfWeek.endOfDay...Date().beginningOfWeek.plusWeek.endOfDay
-            case .month:
-                dates = Date().beginningOfMonth...Date().endOfMonth
-            case .dateRange(let dateRange):
-                dates = dateRange
+                case .today:
+                    dates = Date().beginningOfDay...Date().endOfDay
+                case .week:
+                    dates = Date().beginningOfWeek.endOfDay...Date().beginningOfWeek.plusWeek.endOfDay
+                case .month:
+                    dates = Date().beginningOfMonth...Date().endOfMonth
+                case .dateRange(let dateRange):
+                    dates = dateRange
             }
             
             return NSPredicate(
@@ -58,6 +60,7 @@ struct CountStatesChartView<T: Trackable, U>: View where T: NSManagedObject, U: 
         
         var allPredicates = [range.predicate]
         predicates.forEach { allPredicates.append($0) }
+        
         let predicates = NSCompoundPredicate(
             andPredicateWithSubpredicates: allPredicates
         )
@@ -66,10 +69,13 @@ struct CountStatesChartView<T: Trackable, U>: View where T: NSManagedObject, U: 
     }
     
     func groupedResults() -> [T.StatusType : [T]] {
-        var grouped = Dictionary(grouping: results) {$0.status}
-
+        var grouped = Dictionary(grouping: results) { $0.status }
+        
+        print(grouped)
+        
         U.self.allCases.forEach { caseType in
-            let key = caseType as! Dictionary<T.StatusType, [FetchedResults<T>.Element]>.Keys.Element // todo - figure out what this is all about
+            // todo - figure out what this is all about
+            let key = caseType as! Dictionary<T.StatusType, [FetchedResults<T>.Element]>.Keys.Element
             
             if grouped[key] == nil {
                 grouped[key] = []
@@ -81,10 +87,9 @@ struct CountStatesChartView<T: Trackable, U>: View where T: NSManagedObject, U: 
     
     var body: some View {
         VStack {
-            Text("Chart").onTapGesture {
-                print(self.groupedResults())
+            ForEach(Array(U.allCases), id: \.self) { key in
+                Text("OK")
             }
-            
         }
     }
 }

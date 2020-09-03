@@ -34,19 +34,16 @@ struct NappyChangeChildChartsView: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    CountStatesChartView<NappyChange, NappyChange.NappyChangeType>(
+                    NappyChangeDailyChartView(
                         range: .today,
-                        predicates: [NSPredicate(format: "child = %@", child)]
+                        predicates: [NSPredicate(format: "child = %@", child)],
+                        child: self.child
                     )
 
-                    CountStatesChartView<NappyChange, NappyChange.NappyChangeType>(
+                    NappyChangeWeeklyChartView(
                         range: .week,
-                        predicates: [NSPredicate(format: "child = %@", child)]
-                    )
-                    
-                    CountStatesChartView<NappyChange, NappyChange.NappyChangeType>(
-                        range: .dateRange(Date().beginningOfMonth...Date().endOfMonth),
-                        predicates: [NSPredicate(format: "child = %@", child)]
+                        predicates: [NSPredicate(format: "child = %@", child)],
+                        child: self.child
                     )
                 }
             }
