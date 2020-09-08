@@ -208,39 +208,380 @@
 	<key>FeedSession_summary</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@today@%#@name@%#@day@</string>
-		<key>today</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>d</string>
-			<key>one</key>
-			<string>Today </string>
-			<key>other</key>
-			<string>On %3$@ </string>
-		</dict>
-		<key>name</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>S</string>
-			<key>one</key>
-			<string></string>
-			<key>other</key>
-			<string>name </string>
-		</dict>
+		<string>%#@day@ %@ %#@tense@ %#@count@ for %#@time@.</string>
 		<key>day</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>one</key>
-			<string>one day </string>
+			<key>zero</key>
+			<string>So far today</string>
 			<key>other</key>
-			<string>day </string>
+			<string>Yesterday</string>
+		</dict>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has fed</string>
+			<key>other</key>
+			<string>fed</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>once</string>
+			<key>other</key>
+			<string>%d times</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>pojpowejdpojwpdojw</string>
+			<key>other</key>
+			<string>%4@</string>
+		</dict>
+	</dict>
+	<key>Nap_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day@ %@ %#@tense@ %#@count@ for %#@time@.</string>
+		<key>day</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>So far today</string>
+			<key>other</key>
+			<string>Yesterday</string>
+		</dict>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has napped</string>
+			<key>other</key>
+			<string>napped</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>once</string>
+			<key>other</key>
+			<string>%d times</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string></string>
+			<key>other</key>
+			<string>%4@</string>
+		</dict>
+	</dict>
+	<key>BottleFeed_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@day@ %@ %#@tense@ %#@count@.</string>
+		<key>day</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>So far today</string>
+			<key>other</key>
+			<string>Yesterday</string>
+		</dict>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has had</string>
+			<key>other</key>
+			<string>had</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>no bottle feeds</string>
+			<key>one</key>
+			<string>1 bottle feed</string>
+			<key>other</key>
+			<string>%d bottle feeds</string>
+		</dict>
+	</dict>
+	<key>FeedSession_weekly_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>This week, %@ %#@tense@ %#@count@ for %#@time@.</string>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>has fed</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>once</string>
+			<key>other</key>
+			<string>%d times</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>pojpowejdpojwpdojw</string>
+			<key>other</key>
+			<string>%4@</string>
+		</dict>
+	</dict>
+	<key>Nap_weekly_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>This week, %@ %#@tense@ %#@count@ for %#@time@.</string>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>has napped</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>once</string>
+			<key>other</key>
+			<string>%d times</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string></string>
+			<key>other</key>
+			<string>%4@</string>
+		</dict>
+	</dict>
+	<key>BottleFeed_weekly_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>This week, %@ %#@tense@ %#@count@.</string>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>has had</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>bottle feeds</string>
+			<key>one</key>
+			<string>bottle feed</string>
+			<key>other</key>
+			<string>%d bottle feeds</string>
+		</dict>
+	</dict>
+	<key>FeedSession_monthly_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>In %@, %@ %#@tense@ %#@count@ for %#@time@.</string>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has fed</string>
+			<key>other</key>
+			<string>fed</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>once</string>
+			<key>other</key>
+			<string>%d times</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>pojpowejdpojwpdojw</string>
+			<key>other</key>
+			<string>%4@</string>
+		</dict>
+	</dict>
+	<key>Nap_monthly_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>In %@, %@ %#@tense@ %#@count@ for %#@time@.</string>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has napped</string>
+			<key>other</key>
+			<string>napped</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string>once</string>
+			<key>other</key>
+			<string>%d times</string>
+		</dict>
+		<key>time</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>zero times</string>
+			<key>one</key>
+			<string></string>
+			<key>other</key>
+			<string>%4@</string>
+		</dict>
+	</dict>
+	<key>BottleFeed_monthly_summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>In %@, %@ %#@tense@ %#@count@ totalling %#@amount@%@.</string>
+		<key>tense</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>has had</string>
+			<key>other</key>
+			<string>had</string>
+		</dict>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>bottle feeds</string>
+			<key>one</key>
+			<string>bottle feed</string>
+			<key>other</key>
+			<string>%d bottle feeds</string>
+		</dict>
+		<key>amount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d</string>
+			<key>one</key>
+			<string>%d</string>
+			<key>other</key>
+			<string>%d</string>
 		</dict>
 	</dict>
 	<key>BottleFeed_count</key>
@@ -307,8 +648,6 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>zero</key>
-			<string>%d hours</string>
 			<key>one</key>
 			<string>%d hour</string>
 			<key>other</key>

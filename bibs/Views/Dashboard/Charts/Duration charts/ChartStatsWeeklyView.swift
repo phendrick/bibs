@@ -22,9 +22,21 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
                 
                 VStack {
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 15) {
-                            Text("So far this week Baby has fed 38 times for a total of around 3 hours 48 minutes and 13 seconds. ")
+                        self.chartData.data.map { chartData in
+                            VStack(alignment: .leading, spacing: 15) {
+                                Text(
+                                    String.localizedStringWithFormat(
+                                        NSLocalizedString("\(String(describing: T.self))_weekly_summary", comment: "\(String(describing: T.self)) weekly summary"),
+                                        self.child.wrappedName,
+                                        1,
+                                        chartData.itemCount,
+                                        chartData.data.reduce(into: 0) {$0 += $1.value}.toFormattedString
+                                    )
+                                ).onTapGesture {
+                                    print(chartData, chartData.data.reduce(into: 0) {$0 += $1.value})
+                                }
                                 .font(.body)
+                            }
                         }
                         
                         Spacer()

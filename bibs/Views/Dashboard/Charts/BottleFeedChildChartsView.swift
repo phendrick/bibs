@@ -51,6 +51,12 @@ struct BottleFeedChildChartsView: View {
                             includeAllDatesInRange: true
                         )
                     )
+                    
+                    BottleFeedWeeklyChartView(
+                        dateRange: .week,
+                        predicates: [NSPredicate(format: "child = %@", child)],
+                        child: self.child
+                    ).frame(height: 240)
 
                     ChartStatsMonthlyView<BottleFeed>(
                         child: self.child,

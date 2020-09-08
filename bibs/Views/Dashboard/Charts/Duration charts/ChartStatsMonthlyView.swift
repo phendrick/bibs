@@ -140,9 +140,22 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                 }.frame(height: 220)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Monthly intro: \(self.chartData.data?.data.values.count ?? 0)").font(.caption)
-                    Text("Monthly summary: \(self.chartData.data?.data.keys.count ?? 0)").font(.caption).onTapGesture {
-                        self.chartData.objectWillChange.send()
+                    self.chartData.data.map { chartData in
+                        Text(
+                            String.localizedStringWithFormat(
+                                NSLocalizedString("\(String(describing: T.self))_monthly_summary", comment: "\(String(describing: T.self)) monthly summary"),
+                                self.month.getFormattedDate(format: "LLLL"),
+                                self.child.wrappedName,
+                                self.month.isThisMonth ? 0 : 1,
+                                chartData.itemCount,
+                                chartData.data.reduce(into: 0) {$0 += $1.value}.toFormattedString,
+                                "ml"
+                            )
+                        )
+                        .fixedSize(horizontal: false, vertical: true)
+                        .font(.body)
+                        .animation(nil)
+                        .minimumScaleFactor(0.75)
                     }
                 }
             }

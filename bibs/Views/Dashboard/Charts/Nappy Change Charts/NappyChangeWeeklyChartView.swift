@@ -13,6 +13,7 @@ struct NappyChangeWeeklyChartView: View {
     @Environment(\.managedObjectContext) var moc
     var child: Child
     var month = Date()
+    var enableNavigation: Bool = true
     
     enum CountStatesChartDateRange {
         case today
@@ -21,6 +22,24 @@ struct NappyChangeWeeklyChartView: View {
         case dateRange(ClosedRange<Date>)
         
         var range: ClosedRange<Date>? {
+            switch(self) {
+            case .today: return Date().beginningOfDay...Date()
+            case .week: return Date().beginningOfWeek...Date()
+            case .month: return Date().beginningOfMonth...Date()
+            case .dateRange(let dateRange): return dateRange
+            }
+        }
+        
+        var previous: ClosedRange<Date> {
+            switch(self) {
+            case .today: return Date().beginningOfDay...Date()
+            case .week: return Date().beginningOfWeek...Date()
+            case .month: return Date().beginningOfMonth...Date()
+            case .dateRange(let dateRange): return dateRange
+            }
+        }
+        
+        var next: ClosedRange<Date>? {
             switch(self) {
             case .today: return Date().beginningOfDay...Date()
             case .week: return Date().beginningOfWeek...Date()
@@ -90,7 +109,7 @@ struct NappyChangeWeeklyChartView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("This Week")
+            Text("Weekly Breakdown".localized)
             Divider().padding(.bottom, 5)
             
             GeometryReader { outerGeometry in
@@ -102,15 +121,15 @@ struct NappyChangeWeeklyChartView: View {
                                 BarChartBarView(
                                     width: 20,
                                     value: barValue(
-                                        value: CGFloat.random(in: 50...200),
-                                        maxValue: 200
+                                        value: CGFloat.random(in: 50...150),
+                                        maxValue: 150
                                     ),
-                                    chartSize: 200,
+                                    chartSize: 150,
                                     axis: .vertical,
                                     cornerRadius: 30,
                                     barValue: geometry.frame(in: .global).width
                                 ).overlay(
-                                    Text("\(Int.random(in: 2...10)) \(nappyType.description) nappies").font(.caption).frame(width: 300, alignment: .bottom)
+                                    Text("\(nappyType.description)").font(.caption).frame(width: 300, alignment: .bottom)
                                     .rotationEffect(Angle(degrees: -90))
                                         .offset(x: -20)
                                 )

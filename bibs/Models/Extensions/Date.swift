@@ -102,12 +102,51 @@ extension Date {
         return Calendar.current.date(byAdding: components, to: self.beginningOfDay)!
     }
     
+    var previousDay: Date {
+        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: self) else {
+            return self
+        }
+        
+        return date.beginningOfDay
+    }
+    
     var previousMonth: Date {
         guard let date = Calendar.current.date(byAdding: .month, value: -1, to: self) else {
             return self
         }
         
         return date.beginningOfMonth
+    }
+    
+    var previousWeek: Date {
+        guard let date = Calendar.current.date(byAdding: .weekdayOrdinal, value: -1, to: self.beginningOfWeek) else {
+            return self
+        }
+        
+        return date
+    }
+    
+    var endOfWeek: Date {
+        var components = DateComponents()
+        components.weekdayOrdinal = 1
+        
+        return Calendar.current.date(byAdding: components, to: self.beginningOfDay)!
+    }
+    
+    var tomorrow: Date {
+        guard let date = Calendar.current.date(byAdding: .day, value: 1, to: self) else {
+            return self
+        }
+        
+        return date.beginningOfDay
+    }
+    
+    var nextWeek: Date {
+        guard let date = Calendar.current.date(byAdding: .day, value: 7, to: self.beginningOfDay) else {
+            return self
+        }
+        
+        return date
     }
     
     var nextMonth: Date {
@@ -130,13 +169,16 @@ extension Date {
         }
         
         let delta = self.distance(to: date)
-        print("ADJUSTING BY \(value) - \(delta), \(self)")
         
         return self.advanced(by: delta)
     }
     
     var isToday: Bool {
         return self.beginningOfDay == Date().beginningOfDay
+    }
+    
+    var isThisMonth: Bool {
+        Calendar.current.component(.month, from: self) == Calendar.current.component(.month, from: Date())
     }
     
     var isYesterday: Bool {

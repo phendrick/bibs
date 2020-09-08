@@ -69,6 +69,7 @@ struct FeedSessionChildChartsView: View {
         .padding(.bottom, self.profile.trayHeight + 30)
         .background(child.theme.0)
         .navigationBarTitle("Charts")
+        .navigationBarColor(child.theme.0)
     }
 }
 

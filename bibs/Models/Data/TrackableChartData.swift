@@ -11,7 +11,7 @@ import CoreData
 import UIKit
     
 class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObject {
-    @Published var data: (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, average: Int32)?
+    @Published var data: (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, itemCount: Int, average: Int32)?
     
     var includeAllDatesInRange = true
     var child: Child
@@ -51,7 +51,7 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         return results ?? []
     }
     
-    func generateDataInRange() -> (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, average: Int32)? {
+    func generateDataInRange() -> (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, itemCount: Int, average: Int32)? {
         let items = self.fetchData()
         
         //let items: [T] = [] //self.allItems.filter { self.range.contains( $0.wrappedCreatedAt )}
@@ -79,7 +79,7 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         let min = data.values.min() ?? 0
         let max = data.values.max() ?? 0
         
-        return (data: data, counts: counts, min: min, max: max, average: 0)
+        return (data: data, counts: counts, min: min, max: max, itemCount: items.count, average: 0)
     }
     
     func regenerateData() {

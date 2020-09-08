@@ -99,7 +99,7 @@ struct NappyChangeDailyChartView: View {
                 ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {nappyType in
                     GeometryReader { geometry in
                         VStack(alignment: .leading) {
-                            Text("\(Int.random(in: 2...10)) \(nappyType.description) nappies")
+                            Text("\(nappyType.description) nappies")
                                 .font(.caption)
 
                             BarChartBarView(

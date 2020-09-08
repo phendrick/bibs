@@ -9,28 +9,43 @@
 import UIKit
 import SwiftUI
 
-extension UINavigationController {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-
-        let standard = UINavigationBarAppearance()
-
-        standard.backgroundColor = UIColor.systemBackground //When you scroll or you have title (small one)
-        standard.shadowColor = .clear
-        standard.shadowImage = nil
+struct NavigationBarModifier: ViewModifier {
         
-        let compact = UINavigationBarAppearance()
-        compact.backgroundColor = UIColor.systemBackground //compact-height
-        compact.shadowColor = .clear
-        compact.shadowImage = nil
+    var backgroundColor: UIColor?
+    
+    init( backgroundColor: UIColor?) {
+        self.backgroundColor = backgroundColor
+        let coloredAppearance = UINavigationBarAppearance()
+        coloredAppearance.configureWithTransparentBackground()
+        coloredAppearance.backgroundColor = .clear
+        coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        UINavigationBar.appearance().standardAppearance = coloredAppearance
+        UINavigationBar.appearance().compactAppearance = coloredAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+        UINavigationBar.appearance().tintColor = .white
 
-        let scrollEdge = UINavigationBarAppearance()
-        scrollEdge.backgroundColor = UIColor.systemBackground //When you have large title
-        scrollEdge.shadowColor = .clear
-        scrollEdge.shadowImage = nil
-
-        navigationBar.standardAppearance = standard
-        navigationBar.compactAppearance = compact
-        navigationBar.scrollEdgeAppearance = scrollEdge
+    }
+    
+    func body(content: Content) -> some View {
+        ZStack{
+            content
+            VStack {
+                GeometryReader { geometry in
+                    Color(self.backgroundColor ?? .clear)
+                        .frame(height: geometry.safeAreaInsets.top)
+                        .edgesIgnoringSafeArea(.top)
+                    Spacer()
+                }
+            }
+        }
     }
 }
+
+extension View {
+    func navigationBarColor(_ backgroundColor: UIColor?) -> some View {
+        self.modifier(NavigationBarModifier(backgroundColor: backgroundColor))
+    }
+}
+
