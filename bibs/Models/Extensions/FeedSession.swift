@@ -94,7 +94,7 @@ extension FeedSession: Identifiable, Trackable {
         var hsecs = calculatedElapsedTime.hseconds
         
         if includeRandomMsec && hsecs != 0 {
-            hsecs = calculatedElapsedTime.hseconds + (1...9).randomElement()!
+            hsecs = max(calculatedElapsedTime.hseconds + (1...8).randomElement()!, 9)
         }
         
         return String(format: ".%02i", hsecs)
@@ -152,11 +152,9 @@ extension FeedSession: Identifiable, Trackable {
     }
     
     func unsuspend() {
-        let pauseRunningTimersOnShutdown = UserDefaults.standard.bool(forKey: "pauseRunningTimersOnShutdown")
+        self.suspendedAt = nil
         
-        if pauseRunningTimersOnShutdown {
-            self.status = .paused
-        }else {
+        if self.status != .paused {
             self.resume()
         }
     }

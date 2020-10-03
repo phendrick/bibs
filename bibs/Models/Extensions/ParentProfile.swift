@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 extension ParentProfile {
     /// @UserDefaultSetting var autostartTimer: Bool = true
@@ -272,13 +273,20 @@ extension ParentProfile {
     }
     
     public var suspendedFeedSessions: [FeedSession] {
-        let activeFeedSessions = childrenArray.flatMap { (child) in
-            child.feedSessionsArray.filter { (feedSession) -> Bool in
-                feedSession.status == .suspended
-            }
+        guard let context = self.managedObjectContext else {
+            return []
         }
         
-        return activeFeedSessions
+        let suspendedSessionPredicate = NSPredicate(format: "state IN %@", [FeedSession.FeedSessionStatus.suspended.rawValue, FeedSession.FeedSessionStatus.paused.rawValue])
+        let feedSessionFetchRequest:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
+        feedSessionFetchRequest.predicate = suspendedSessionPredicate
+        
+        do {
+            let feedSessions = try context.fetch(feedSessionFetchRequest)
+            return feedSessions
+        }catch {
+            return []
+        }
     }
     
     /// when the application is closed or sent to the background, suspend any currently running timers
@@ -290,6 +298,7 @@ extension ParentProfile {
     
     public func suspendActiveFeedSessions(as suspensionType: SuspensionType) {
         guard let context = self.managedObjectContext else {
+            print("no context")
             fatalError()
         }
         
@@ -332,6 +341,8 @@ extension ParentProfile {
                 session.suspendedAt = nil
             }
             
+            session.child?.activeFeedSession = session
+            self.profileObserver?.activeFeedSessions.append(session)
             session.unsuspend()
             
             try? self.managedObjectContext?.save()

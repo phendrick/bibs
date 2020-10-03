@@ -20,12 +20,16 @@ struct ContentView: View {
             if viewSettings.initialView == .dashboard {
                 DashboardView(profile: profile)
                     .edgesIgnoringSafeArea(.all)
-                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
+                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { _ in
                         self.profile.parent.suspendActiveFeedSessions(as: .terminated)
                     })
-                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
-                        self.profile.parent.suspendActiveFeedSessions(as: .switched)
-                    }
+                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
+                        print("Terminating...")
+                        self.profile.parent.suspendActiveFeedSessions(as: .terminated)
+                    })
+//                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+//                        self.profile.parent.suspendActiveFeedSessions(as: .switched)
+//                    }
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                         self.profile.parent.resumeSuspendedFeedSessions()
 //                        if self.profile.parent.timerDriftWithinPermittedRange {
