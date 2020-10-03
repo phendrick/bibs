@@ -16,9 +16,10 @@ struct ContentView: View {
     @State var showingTimerAlert = false
     
     var body: some View {
-        VStack {
+        ZStack {
             if viewSettings.initialView == .dashboard {
                 DashboardView(profile: profile)
+                    .edgesIgnoringSafeArea(.all)
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { _ in
                         self.profile.parent.suspendActiveFeedSessions(as: .terminated)
                     })
@@ -32,7 +33,7 @@ struct ContentView: View {
 //                        }else {
 //                            self.showingTimerAlert = true
 //                        }
-                    }
+                }
                 
                 
 //                    .alert(isPresented: self.$showingTimerAlert) {
@@ -51,6 +52,9 @@ struct ContentView: View {
                 WelcomeView()
                     .transition(.opacity)
                     .zIndex(1)
+                    .onAppear {
+                        print("Showing WelcomeView")
+                    }
             }
         }
     }

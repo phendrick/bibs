@@ -28,3 +28,22 @@ extension UIDevice {
         UIScreen.main.bounds.size.height > 800
     }
 }
+
+//extension UINavigationController {
+//    override open func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//    let standard = UINavigationBarAppearance()
+//    standard.backgroundColor = UIColor.systemRed //When you scroll or you have title (small one)
+//
+//    let compact = UINavigationBarAppearance()
+//    compact.backgroundColor = UIColor.systemRed //compact-height
+//
+//    let scrollEdge = UINavigationBarAppearance()
+//    scrollEdge.backgroundColor = UIColor.systemRed //When you have large title
+//
+//    navigationBar.standardAppearance = standard
+//    navigationBar.compactAppearance = compact
+//    navigationBar.scrollEdgeAppearance = scrollEdge
+// }
+//}

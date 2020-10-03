@@ -14,62 +14,25 @@ struct NappyChangeDailyChartView: View {
     var child: Child
     var month = Date()
     
-    enum CountStatesChartDateRange {
-        case today
-        case week
-        case month
-        case dateRange(ClosedRange<Date>)
-        
-        var range: ClosedRange<Date>? {
-            switch(self) {
-            case .today: return Date().beginningOfDay...Date()
-            case .week: return Date().beginningOfWeek...Date()
-            case .month: return Date().beginningOfMonth...Date()
-            case .dateRange(let dateRange): return dateRange
-            }
-        }
-        
-        var predicate: NSPredicate {
-            var dates: ClosedRange<Date>
-            
-            switch(self) {
-                case .today:
-                    dates = Date().beginningOfDay...Date().endOfDay
-                case .week:
-                    dates = Date().beginningOfWeek.endOfDay...Date().beginningOfWeek.plusWeek.endOfDay
-                case .month:
-                    dates = Date().beginningOfMonth...Date().endOfMonth
-                case .dateRange(let dateRange):
-                    dates = dateRange
-            }
-            
-            return NSPredicate(
-                format: "createdAt >= %@ AND createdAt <= %@",
-                dates.lowerBound as NSDate, dates.upperBound as NSDate
-            )
-        }
-    }
-    
     var fetchRequest: FetchRequest<NappyChange>
     var results: FetchedResults<NappyChange> { fetchRequest.wrappedValue }
-    var dateRange: CountStatesChartDateRange = .today
+    @State var dateRange: CountStatesChartDateRange = .week
     
-    init(range: CountStatesChartDateRange, sortDescriptors: [NSSortDescriptor] = [], predicates: [NSPredicate] = [], child: Child) {
-        self.dateRange = range
+    init(dateRange: CountStatesChartDateRange, sortDescriptors: [NSSortDescriptor] = [], predicates: [NSPredicate] = [], child: Child) {
+        self.child = child
         
-        var allPredicates = [range.predicate]
+        var allPredicates = [dateRange.predicate]
         predicates.forEach { allPredicates.append($0) }
         
         let predicates = NSCompoundPredicate(
             andPredicateWithSubpredicates: allPredicates
         )
         
-        self.child = child
-        
         self.fetchRequest = FetchRequest<NappyChange>(entity: NappyChange.entity(), sortDescriptors: sortDescriptors, predicate: predicates)
+        self.dateRange = dateRange
     }
     
-    func groupedResults() -> (data: [NappyChange.StatusType : [NappyChange]], min: Int, max: Int) {
+    func groupedResults() -> (data: [NappyChange.NappyChangeType : [NappyChange]], min: Int, max: Int) {
         var grouped = Dictionary(grouping: results) { $0.status }
         
         NappyChange.NappyChangeType.allCases.forEach { caseType in
@@ -84,9 +47,15 @@ struct NappyChangeDailyChartView: View {
         return (data: grouped, min: min, max: max)
     }
     
-    let colors: [Color] = [
-        .red, .green, .orange, .pink, .yellow, .purple, .blue
-    ]
+    var getMaxValue: Double {
+        let max = (self.groupedResults().data.max {$0.value.count < $1.value.count}?.value.count ?? 0)
+        
+        return Double(max)
+    }
+    
+    func valueFor(type: NappyChange.NappyChangeType) -> CGFloat {
+        CGFloat(self.groupedResults().data[type]?.count ?? 0)
+    }
     
     var body: some View {
         HStack {
@@ -103,22 +72,23 @@ struct NappyChangeDailyChartView: View {
                                 .font(.caption)
 
                             BarChartBarView(
-                                width: 20,
+                                width: 28,
                                 value: barValue(
-                                    value: CGFloat.random(in: 50...200),
-                                    maxValue: 200
+                                    value: self.valueFor(type: nappyType),
+                                    maxValue: self.getMaxValue,
+                                    chartSize: geometry.frame(in: .local).size.width
                                 ),
-                                chartSize: geometry.frame(in: .global).width,
+                                chartSize: geometry.frame(in: .local).size.width,
                                 axis: .horizontal,
-                                cornerRadius: 30,
-                                barValue: geometry.frame(in: .global).width
+                                cornerRadius: 10
                             )
                         }
 
                         Spacer()
+                        
                     }.frame(height: 50, alignment: .leading)
                 }
-
+                
                 Spacer()
             }
         }
@@ -133,7 +103,7 @@ struct CountStatesChartView_Previews: PreviewProvider {
         let child = Child(context: context)
         
         return NappyChangeDailyChartView(
-            range: .month,
+            dateRange: .month,
             child: child
         ).previewLayout(.fixed(width: 300, height: 500))
     }

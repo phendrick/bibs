@@ -22,21 +22,25 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
                 
                 VStack {
                     HStack(alignment: .top) {
-                        self.chartData.data.map { chartData in
-                            VStack(alignment: .leading, spacing: 15) {
-                                Text(
-                                    String.localizedStringWithFormat(
-                                        NSLocalizedString("\(String(describing: T.self))_weekly_summary", comment: "\(String(describing: T.self)) weekly summary"),
-                                        self.child.wrappedName,
-                                        1,
-                                        chartData.itemCount,
-                                        chartData.data.reduce(into: 0) {$0 += $1.value}.toFormattedString
-                                    )
-                                ).onTapGesture {
-                                    print(chartData, chartData.data.reduce(into: 0) {$0 += $1.value})
+                        if (self.chartData.data?.itemCount ?? 0) > 0 {
+                            self.chartData.data.map { chartData in
+                                VStack(alignment: .leading, spacing: 15) {
+                                    Text(
+                                        String.localizedStringWithFormat(
+                                            NSLocalizedString("\(String(describing: T.self))_weekly_summary", comment: "\(String(describing: T.self)) weekly summary"),
+                                            self.child.wrappedName,
+                                            1,
+                                            chartData.itemCount,
+                                            chartData.data.reduce(into: 0) {$0 += $1.value}.toFormattedString
+                                        )
+                                    ).onTapGesture {
+                                        print(chartData, chartData.data.reduce(into: 0) {$0 += $1.value})
+                                    }
+                                    .font(.body)
                                 }
-                                .font(.body)
                             }
+                        }else {
+                            Text("No data available".localized)
                         }
                         
                         Spacer()

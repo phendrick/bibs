@@ -40,8 +40,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }else {
             if let parent = try? context.fetch(parentProfileFetchRequest).first {
                 profileObserver.parent = parent
+                parent.profileObserver = profileObserver
             }else {
-                profileObserver.parent = ParentProfile(context: context)
+                let parent = ParentProfile(context: context)
+                profileObserver.parent = parent
+                parent.profileObserver = profileObserver
             }
         }
         

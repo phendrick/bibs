@@ -45,7 +45,7 @@ struct NaptimeFormSheet: View {
                 Section(
                     header: Text("\(childName) napped from")
                 ) {
-                    DatePicker(selection: self.$from, displayedComponents: .hourAndMinute) {
+                    DatePicker(selection: self.$from, in: ...Date(), displayedComponents: .hourAndMinute) {
                         Text("Time")
                     }
                 }
@@ -53,7 +53,7 @@ struct NaptimeFormSheet: View {
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
                             VStack(spacing: 0) {
-                                Text("Hours").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("Hours").foregroundColor(Color(UIColor.label))
                                 
                                 Picker(selection: self.$hours, label: Text("Test")) {
                                     Text("00").tag(0)
@@ -68,7 +68,7 @@ struct NaptimeFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Minutes").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("Minutes").foregroundColor(Color(UIColor.label))
                                 
                                 Picker("test", selection: self.$minutes) {
                                     ForEach(0..<60) {idx in
@@ -81,7 +81,7 @@ struct NaptimeFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Seconds").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("Seconds").foregroundColor(Color(UIColor.label))
                                 
                                 Picker("test", selection: self.$seconds) {
                                     ForEach(0..<60) {idx in
@@ -95,14 +95,6 @@ struct NaptimeFormSheet: View {
                         }
                     }.frame(height: 240).padding(.top, 20)
                 }
-            }.onAppear {
-//                let elapstedTime = self.feed.calculatedElapsedTime
-//
-//                self.adjustedHours   = String(elapstedTime.hours)
-//                self.adjustedMinutes = String(elapstedTime.minutes)
-//                self.adjustedSeconds = String(elapstedTime.seconds)
-//
-//                self.breastSide      = self.feed.breastSide
             }
             
             VStack {
@@ -125,7 +117,7 @@ struct NaptimeFormSheet: View {
                     }catch {
                         debugPrint("Error saving")
                     }
-                }
+                }.font(.headline)
             }
             .frame(maxWidth: .infinity)
             .frame(height: UIScreen.main.bounds.height/8)
@@ -133,6 +125,7 @@ struct NaptimeFormSheet: View {
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))
+        .font(.caption)
     }
 }
 

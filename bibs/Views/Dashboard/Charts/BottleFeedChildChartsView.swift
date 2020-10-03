@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BottleFeedChildChartsView: View {
-    @ObservedObject var child: Child
+    var child: Child
     @ObservedObject var profile: ProfileObserver
     
     func getLastTwoDaysDateRange() -> ClosedRange<Date> {
@@ -30,19 +30,33 @@ struct BottleFeedChildChartsView: View {
         return earliest.beginningOfDay...latest.endOfDay
     }
     
+    @ViewBuilder var editButtonView: some View {
+        NavigationLink(
+            destination: BottleFeedsDataView(
+                child: self.child,
+                profile: self.profile
+            ).environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        ) {
+            Text("View Data".localized)
+        }
+    }
+    
     var body: some View {
-        VStack {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 0) {
-                    ChartStatsTodayView<BottleFeed>(
-                        child: self.child,
-                        chartData: TrackableChartData<BottleFeed>(
-                            child: child,
-                            range: self.getLastTwoDaysDateRange(),
-                            includeAllDatesInRange: false
-                        )
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                ChartStatsTodayView<BottleFeed>(
+                    child: self.child,
+                    chartData: TrackableChartData<BottleFeed>(
+                        child: child,
+                        range: self.getLastTwoDaysDateRange(),
+                        includeAllDatesInRange: false
                     )
+                )
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
 
+                VStack {
                     ChartStatsWeeklyView<BottleFeed>(
                         child: self.child,
                         chartData: TrackableChartData<BottleFeed>(
@@ -56,22 +70,30 @@ struct BottleFeedChildChartsView: View {
                         dateRange: .week,
                         predicates: [NSPredicate(format: "child = %@", child)],
                         child: self.child
-                    ).frame(height: 240)
-
-                    ChartStatsMonthlyView<BottleFeed>(
-                        child: self.child,
-                        chartData: TrackableChartData<BottleFeed>(
-                            child: self.child,
-                            range: Date().beginningOfMonth...Date().endOfMonth,
-                            includeAllDatesInRange: true
-                        )
                     )
+                    .frame(height: 260)
+                    .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
                 }
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
+                
+                ChartStatsMonthlyView<BottleFeed>(
+                    child: self.child,
+                    chartData: TrackableChartData<BottleFeed>(
+                        child: self.child,
+                        range: Date().beginningOfMonth...Date().endOfMonth,
+                        includeAllDatesInRange: true
+                    )
+                )
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
             }
+            
         }
-        .padding(.bottom, self.profile.trayHeight + 30)
-        .background(child.theme.0)
-        .navigationBarTitle("Charts")
+        .navigationBarTitle("Bottle Feeds".localized)
+        .navigationBarItems(trailing: editButtonView)
     }
 }
 

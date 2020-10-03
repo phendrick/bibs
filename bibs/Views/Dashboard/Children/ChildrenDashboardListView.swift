@@ -17,36 +17,23 @@ struct ChildrenDashboardListView: View {
                 ForEach(profile.parent.activeChildrenArray, id: \.self) {child in
                     HStack {
                         NavigationLink(destination: ChildDataTypeListView(child: child, profile: self.profile)) {
-                            VStack(alignment: .leading) {
-                                Text("test")
+                            HStack {
+                                Text(child.wrappedName).foregroundColor(Color.white)
+                                Spacer()
+                                Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.5))
                             }
                         }
-//                        NavigationLink(destination: DatapointsListView(child: child, profile: self.profile)) {
-//                            VStack(alignment: .leading) {
-//                                Text("\(child.wrappedName)")
-//                                    .font(.callout)
-//                                    .padding(.bottom, 5)
-//                                    .foregroundColor(.white)
-//                                    .animation(nil)
-//                            }
-//
-//                            Spacer()
-//
-//                            Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
-//                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .animation(.easeInOut)
                     .padding(10)
-                    .background(child.theme.0)
+                    .background(Color(child.theme.0))
                     .onTapGesture {
                         self.profile.parent.activeChild = child
                         self.profile.objectWillChange.send()
                     }
                 }
             }
-            .cornerRadius(15)
-            .navigationBarTitle("Overview".localized)
         }
     }
 }

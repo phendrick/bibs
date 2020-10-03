@@ -32,14 +32,6 @@ struct WelcomeView: View {
                 Button("Next") {
                     self.showAddAboutYouView = true
                 }.padding()
-                
-                VStack {
-                    HStack {
-                        Text("If you're co-feeding you can add another profile later.")
-                            .font(.custom("OpenSans-Regular", size: 14))
-                            .multilineTextAlignment(.center)
-                    }
-                }
             }
         }
     }

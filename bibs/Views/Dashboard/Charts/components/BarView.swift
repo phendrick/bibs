@@ -17,6 +17,10 @@ struct BarChartBarView: View {
     var cornerRadius: CGFloat = 5
     
     @State var barValue: CGFloat = 0
+    var showLabel: Bool = false
+    var label: String?
+    
+    var labelColor: Color = .gray
     
     var barWidth: CGFloat {
         self.axis == .vertical ? self.width : self.barValue
@@ -34,6 +38,22 @@ struct BarChartBarView: View {
         self.axis == .vertical ? self.chartSize : self.width
     }
     
+    var labelOffset: CGSize {
+        if self.axis == .vertical {
+            return CGSize(width: 0, height: 20)
+        }else {
+            return CGSize(width: 5, height: 0)
+        }
+    }
+    
+    var valueLabel: String {
+        self.label ?? "\(self.value)"
+    }
+    
+    var valueLabelColor: Color {
+        self.axis == .vertical ? .white : self.labelColor
+    }
+    
     var body: some View {
         ZStack(alignment: self.axis == .vertical ? .bottom : .leading) {
             Rectangle()
@@ -48,6 +68,12 @@ struct BarChartBarView: View {
                 .frame(width: barWidth, height: barHeight)
                 .opacity(1)
                 .cornerRadius(self.cornerRadius)
+                //.overlay(self.labelView())
+            
+            if self.showLabel {
+                Text(self.valueLabel).font(.footnote).foregroundColor(valueLabelColor).fixedSize().offset(labelOffset)
+            }
+            
         }.onAppear {
             self.barValue = self.value
         }

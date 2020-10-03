@@ -32,7 +32,7 @@ struct DashboardDataView<T: NSManagedObject, Header: View, Content: View>: View 
         @ViewBuilder headerView: @escaping([T]) -> Header,
         @ViewBuilder content: @escaping(T, Int) -> Content
     ) {
-        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: .spring())
+        fetchRequest = FetchRequest<T>(entity: T.entity(), sortDescriptors: sortDescriptors, predicate: predicate, animation: nil)
         self.profile = profile
         self.headerView = headerView
         self.content = content
@@ -40,29 +40,30 @@ struct DashboardDataView<T: NSManagedObject, Header: View, Content: View>: View 
     }
     
     func removeRows(at offsets: IndexSet) {
-        for index in offsets {
-            let row = results[index]
-            self.moc.delete(row)
+        Dispatch.background {
+            for index in offsets {
+                let row = results[index]
+                self.moc.delete(row)
+            }
+            
+            Dispatch.main {
+                try? self.moc.save()
+                self.profile.objectWillChange.send()
+            }
         }
-        
-        //self.moc.refreshAllObjects()
-        try? self.moc.save()
-        self.profile.objectWillChange.send()
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            self.headerView(Array(fetchRequest.wrappedValue)).padding().font(.caption)
+            self.headerView(Array(results)).padding().font(.caption)
             
             List {
-                ForEach(fetchRequest.wrappedValue.indices, id: \.self) { index in
+                ForEach(results.indices, id: \.self) { index in
                     DashboardDataRowView(index: index) {
-                        self.content(self.fetchRequest.wrappedValue[index], index)
+                        self.content(self.results[index], index)
                     }
                 }
                 .onDelete(perform: removeRows)
-                
-                Text("").padding(.bottom, self.profile.trayHeight)
             }
         }
     }

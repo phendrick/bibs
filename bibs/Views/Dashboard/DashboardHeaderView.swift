@@ -19,8 +19,7 @@ struct DashboardHeaderView: View {
         ZStack {
             HStack(alignment: .center) {
                 VStack(alignment: .leading, spacing: 10) {
-//                    Text(dashboardGreeting(for: self.profile.parent)).font(.largeTitle)
-                    Text(dashboardSubtitle(for: self.profile.parent)).font(.body)
+                    Text(dashboardSubtitle(for: self.profile.parent)).font(.title)
                 }
                 
                 Spacer()

@@ -37,9 +37,9 @@ struct ParentEmotionListView: View {
                                     .font(.caption).foregroundColor(Color(UIColor.label).opacity(0.75))
                             }
                         }
+                        .frame(maxWidth: .infinity)
                         .padding(.bottom, 45)
                     }
-                    .padding(.bottom, self.profile.trayHeight)
                 }
             }
         }

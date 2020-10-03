@@ -9,9 +9,7 @@
 import SwiftUI
 
 struct DashboardFeedTimerView: View {
-    @ObservedObject var feedSession: FeedSession
-    var color: Color
-    
+    @ObservedObject var child: Child
     @Binding var layout: ActiveFeedsTrayView.ExpandedState
     var cofeeding: Bool
     
@@ -32,10 +30,15 @@ struct DashboardFeedTimerView: View {
     }
     
     var breastSideLabel: String {
+        guard let feedSession = self.child.activeFeedSession else {
+            return ""
+        }
+        
         if self.layout == .expanded  {
-            return self.feedSession.currentBreastSide.description.0
+            return feedSession.currentBreastSide.description.0
         }else {
-            return (self.cofeeding) ? self.feedSession.currentBreastSide.description.1 : self.feedSession.currentBreastSide.description.0
+            //return (self.cofeeding) ? feedSession.currentBreastSide.description.1 : feedSession.currentBreastSide.description.0
+            return feedSession.currentBreastSide.description.1
         }
     }
     
@@ -52,113 +55,96 @@ struct DashboardFeedTimerView: View {
     }
     
     var showBreastSideLabel: Bool {
-        return self.layout == .expanded || (!self.cofeeding)
+        guard self.child.hasActiveFeedSession else {
+            return false
+        }
+        
+        return true
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .bottom) {
-                VStack(alignment: .leading, spacing: 10) {
-                    // timer header - name and actions
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("\(self.feedSession.child?.wrappedName ?? "")")
-                            .font(.system(size: timerFontSize * 0.65))
-                            .layoutPriority(10)
-                            .animation(nil)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            guard self.feedSession.status == .paused else {
-                                return
-                            }
-                            
-                            self.feedSession.complete()
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.white)
-                                .frame(width: 40, alignment: .topTrailing)
-                        }
-                        .opacity(self.feedSession.status == .paused ? 1 : 0.25)
-                    }
-                    .frame(maxWidth: .infinity)
+        VStack(alignment: .leading, spacing: 10) {
+            // timer header - name and actions
+            HStack(alignment: .firstTextBaseline) {
+                Text("\(self.child.wrappedName)")
+                    .font(.custom("RobotoMono-Regular", size: timerFontSize*0.5))
+                    .layoutPriority(10)
+                    .animation(nil)
+                    .minimumScaleFactor(0.95)
+                
+                Spacer()
+                
+                if self.child.hasActiveFeedSession {
+                    Spacer()
                     
-                    // timer footer - time and details
-                    HStack(alignment: .lastTextBaseline) {
-                        HStack(alignment: .lastTextBaseline, spacing: 0) {
-                            Text("\(feedSession.formattedElapsedTime(include_hsec: false))")
-                                .font(.custom("RobotoMono-Regular", size: timerFontSize*0.80))
-                                .layoutPriority(10)
-                                .minimumScaleFactor(0.75)
-                            Text("\(feedSession.formattedElapsedTimeHsecs())")
-                                .font(.custom("RobotoMono-Regular", size: timerFontSize*0.6))
-                                .opacity(0.5)
+                    Button(action: {
+                        guard self.child.activeFeedSession?.status == .paused else {
+                            return
                         }
 
-                        Spacer()
+                        self.child.completeActiveFeedSession()
+                        self.child.parent?.profileObserver?.objectWillChange.send()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.white)
+                            .frame(width: 40, alignment: .topTrailing)
+                    }
+                    .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
+                }
+            }
+            .frame(maxWidth: .infinity)
+        
+            // timer footer - time and details
+            HStack(alignment: .lastTextBaseline) {
+                HStack(alignment: .lastTextBaseline, spacing: 0) {
+                    Text("\(child.activeFeedSession?.formattedElapsedTime(include_hsec: false) ?? "00:00:00")")
+                        .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.6))
+                    Text("\(child.activeFeedSession?.formattedElapsedTimeHsecs() ?? ".00")")
+                        .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.5))
+                        .opacity(0.5)
+                }
+                .layoutPriority(100)
+                .opacity(child.hasActiveFeedSession ? 1 : 0.5)
 
-                        if self.showBreastSideLabel {
-                            Text(breastSideLabel)
+                Spacer()
+                
+                if self.showBreastSideLabel {
+                    HStack {
+                        Text(breastSideLabel)
                             .onTapGesture {
                                 guard !self.cofeeding else {
                                     return
                                 }
 
-                                self.feedSession.switchSide()
+                                self.child.activeFeedSession?.switchSide()
                             }
-                            .padding([.leading, .trailing], 10).padding([.top, .bottom], 5)
-                            .overlay(Capsule().stroke(Color.white, lineWidth: 1))
-                            .font(.subheadline)
-                            .animation(nil)
-                        }
+                            .font(.system(size: timerFontSize * 0.5))
                     }
-                    // timer footer
                 }
-            }
+            } // timer footer
         }
         .animation(nil)
-        .padding()
+        .padding(self.layout == .minimised ? 5 : 15)
         .frame(maxWidth: .infinity)
-        .background(self.feedSession.child?.theme.0)
+        .background(Color(self.child.theme.0))
         .foregroundColor(.white)
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.05), radius: 0, x: 0, y: 10)
         .onTapGesture {
-            if self.feedSession.status == .paused {
+            guard let feedSession = self.child.activeFeedSession else {
+                try? self.child.startNewFeedSession()
+                return
+            }
+            
+            if feedSession.status == .paused {
                 withAnimation {
-                    self.feedSession.resume()
+                    feedSession.resume()
                 }
-            }else if self.feedSession.status == .running {
+            }else if feedSession.status == .running {
                 withAnimation {
-                    self.feedSession.pause()
+                    feedSession.pause()
                 }
             }
-        }
-    }
-}
-
-struct DashboardFeedTimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let session = FeedSession(context: context)
-        let feed = Feed(context: context)
-        feed.duration = 23423
-        session.addToFeeds(feed)
-        
-        return Group {
-            DashboardFeedTimerView(
-                feedSession: session,
-                color: .green,
-                layout: .constant(ActiveFeedsTrayView.ExpandedState.minimised),
-                cofeeding: true
-            ).previewLayout(.fixed(width: 160, height: 280))
-
-            DashboardFeedTimerView(
-                feedSession: session,
-                color: .green,
-                layout: .constant(ActiveFeedsTrayView.ExpandedState.expanded),
-                cofeeding: false
-            ).previewLayout(.fixed(width: 420, height: 280))
         }
     }
 }

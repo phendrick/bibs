@@ -25,8 +25,15 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
         return self.chartData.data?.data.keys.sorted().last ?? Date()
     }
     
-    var earliestDate: Date {
-        self.chartData.data?.data.keys.sorted().first ?? Date()
+    var earliestDate: Date? {
+        let date = self.chartData.data?.data.keys.sorted().first
+        
+        
+        if let d = date, d.beginningOfDay == latestDate.beginningOfDay {
+            return nil
+        }
+        
+        return date
     }
     
     func labelForDate(date: Date) -> String {
@@ -73,26 +80,6 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
         let ls = NSLocalizedString("\(String(describing: T.self))_count", comment: "pluralised count")
         return String.localizedStringWithFormat(ls, count)
     }
-
-    func dailyOverviewSummary() -> String {
-        guard let chartData = self.chartData.data else {
-            return ""
-        }
-        
-        let earliestData = self.dataForPreviousDate
-        let latestData   = self.dataForLatestDate
-        
-        let earliestDate = self.earliestDate
-        let latestDate   = self.latestDate
-        
-        let feedDurationTime = chartData.counts.latest.duration
-        
-        let latestFeedToday = latestDate.isToday ? 1 : 2
-        let feedCountToday  = latestDate.isToday ? 1 : 2
-        let feedDuration = "for around \(feedDurationTime.formattedHoursAndMinutes)"
-        
-        return ""
-    }
     
     var maxChartValue: Double {
         return Double( max( self.dataForLatestDate.counts.previous.count, self.dataForPreviousDate.counts.latest.count) )
@@ -100,10 +87,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Today".localized).font(.headline).onTapGesture {
-                self.dailyOverviewSummary()
-            }
-            
+            Text("Today".localized).font(.headline)
             Divider()
             
             VStack(alignment: .leading, spacing: 40) {
@@ -127,7 +111,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
 
                                 Text(self.labelForDate(date: self.latestDate))
                                     .padding(5)
-                                    .foregroundColor(self.child.theme.0)
+                                    .foregroundColor(Color(self.child.theme.0))
                                     .font(.caption)
                             }.frame(width: geometry.frame(in: .global).size.width)
                         }
@@ -135,50 +119,56 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
                 }
                 .frame(maxWidth: .infinity)
                 
-                VStack(alignment: .leading) {
-                    Text(self.dailyOverviewCountLabel(count: self.dataForPreviousDate.counts.previous.count)).foregroundColor(.white).font(.headline)
-                    
-                    GeometryReader { geometry in
-                        self.chartData.data.map { chartData in
-                            ZStack(alignment: .leading) {
-                                BarChartBarView(
-                                    width: 40,
-                                    value:  barValue(
-                                                value: CGFloat(self.dataForPreviousDate.counts.previous.count),
-                                                maxValue: self.maxChartValue,
-                                                chartSize: geometry.frame(in: .local).size.width
-                                            ),
-                                    chartSize: geometry.frame(in: .local).size.width,
-                                    axis: .horizontal
-                                ).cornerRadius(5)
+                if earliestDate != nil {
+                    earliestDate.map { date in
+                        VStack(alignment: .leading) {
+                            Text(self.dailyOverviewCountLabel(count: self.dataForPreviousDate.counts.previous.count)).foregroundColor(.white).font(.headline)
+                            
+                            GeometryReader { geometry in
+                                self.chartData.data.map { chartData in
+                                    ZStack(alignment: .leading) {
+                                        BarChartBarView(
+                                            width: 40,
+                                            value:  barValue(
+                                                        value: CGFloat(self.dataForPreviousDate.counts.previous.count),
+                                                        maxValue: self.maxChartValue,
+                                                        chartSize: geometry.frame(in: .local).size.width
+                                                    ),
+                                            chartSize: geometry.frame(in: .local).size.width,
+                                            axis: .horizontal
+                                        ).cornerRadius(5)
 
-                                Text(self.labelForDate(date: self.earliestDate))
-                                    .padding(5)
-                                    .foregroundColor(self.child.theme.0)
-                                    .font(.caption)
-                                
-                            }.frame(width: geometry.frame(in: .global).size.width)
+                                        Text(self.labelForDate(date: date))
+                                            .padding(5)
+                                            .foregroundColor(Color(self.child.theme.0))
+                                            .font(.caption)
+                                        
+                                    }.frame(width: geometry.frame(in: .global).size.width)
+                                }
+                            }
                         }
+                        .frame(maxWidth: .infinity)
                     }
                 }
-                .frame(maxWidth: .infinity)
                 
                 Spacer()
                 
                 //today
-                Text(
-                    String.localizedStringWithFormat(
-                        NSLocalizedString("\(String(describing: T.self))_summary", comment: "\(String(describing: T.self)) summary"),
-                        0,
-                        self.child.wrappedName,
-                        0,
-                        self.dataForLatestDate.counts.latest.count,
-                        self.dataForLatestDate.counts.latest.duration.toFormattedString
+                if self.dataForLatestDate.counts.latest.count > 0 {
+                    Text(
+                        String.localizedStringWithFormat(
+                            NSLocalizedString("\(String(describing: T.self))_summary", comment: "\(String(describing: T.self)) summary"),
+                            0,
+                            self.child.wrappedName,
+                            0,
+                            self.dataForLatestDate.counts.latest.count,
+                            self.dataForLatestDate.counts.latest.duration.toFormattedString
+                        )
                     )
-                ).onTapGesture {
-                    print(self.dataForLatestDate.counts)
+                    .offset(y: -20)
+                }else {
+                    Text("No data available".localized)
                 }
-                .offset(y: -20)
             }
         }
         .padding()

@@ -43,7 +43,6 @@ struct AvatarImageView: View {
                     color, lineWidth: lineWidth
                 )
             )
-            .frame(width: UIScreen.main.bounds.width/5, height: imageSize)
     }
 }
 

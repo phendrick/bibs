@@ -29,10 +29,10 @@ struct ExpressedMilkDataView: View {
     
     @ViewBuilder func headerView(results: [ExpressedBottle]) -> some View {
         guard results.count > 0 else {
-            return ""
+            return Text("")
         }
         
-        return "\(results.count) \("bottle".pluralize(count: results.count))"
+        return Text("\(results.count) \("bottle".pluralize(count: results.count))")
     }
     
     @ViewBuilder func headerView(results: [Snack]) -> some View {

@@ -31,7 +31,7 @@ struct ChildrenFormList: View {
                 }
                 .animation(.easeInOut)
                 .padding(10)
-                .background(child.theme.0)
+                .background(Color(child.theme.0))
                 .onTapGesture {
                     self.profile.parent.activeChild = child
                     self.profile.objectWillChange.send()

@@ -95,11 +95,17 @@ extension Date {
     }
     
     var endOfMonth: Date {
+        let componentsForMonth: DateComponents = Calendar.current.dateComponents([.year, .month], from: self)
+        
+        guard let date = Calendar.current.date(from: componentsForMonth) else {
+            return Date()
+        }
+        
         var components = DateComponents()
         components.month = 1
         components.second = -1
         
-        return Calendar.current.date(byAdding: components, to: self.beginningOfDay)!
+        return Calendar.current.date(byAdding: components, to: date)!
     }
     
     var previousDay: Date {

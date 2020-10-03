@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct NappyChangeChildChartsView: View {
-    @ObservedObject var child: Child
+    var child: Child
     @ObservedObject var profile: ProfileObserver
     
     func getLastTwoDaysDateRange() -> ClosedRange<Date> {
@@ -30,27 +30,45 @@ struct NappyChangeChildChartsView: View {
         return earliest.beginningOfDay...latest.endOfDay
     }
     
+    @ViewBuilder var editButtonView: some View {
+        NavigationLink(
+            destination: NappyChangesDataView(
+                child: self.child,
+                profile: self.profile
+            ).environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        ) {
+            Text("View Data".localized)
+        }
+    }
+    
     var body: some View {
-        VStack {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 0) {
-                    NappyChangeDailyChartView(
-                        range: .today,
-                        predicates: [NSPredicate(format: "child = %@", child)],
-                        child: self.child
-                    )
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                NappyChangeDailyChartView(
+                    dateRange: .today,
+                    predicates: [NSPredicate(format: "child = %@", child)],
+                    child: self.child
+                )
+                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
 
-                    NappyChangeWeeklyChartView(
-                        range: .week,
-                        predicates: [NSPredicate(format: "child = %@", child)],
-                        child: self.child
-                    )
-                }
+                NappyChangeWeeklyChartView(
+                    range: .week,
+                    predicates: [NSPredicate(format: "child = %@", child)],
+                    child: self.child
+                )
+                .environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
+                
+                Spacer()
             }
         }
-        .padding(.bottom, self.profile.trayHeight + 30)
-        .background(child.theme.0)
-        .navigationBarTitle("Charts")
+        .navigationBarTitle("Nappy Changes".localized)
+        .navigationBarItems(trailing: editButtonView)
     }
 }
 

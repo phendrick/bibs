@@ -10,10 +10,10 @@ import SwiftUI
 import CoreData
 
 struct BottleFeedWeeklyChartView: View {
-    @Environment(\.managedObjectContext) var moc
     var child: Child
     var fetchRequest: FetchRequest<BottleFeed>
     var results: FetchedResults<BottleFeed> { fetchRequest.wrappedValue }
+    
     @State var dateRange: CountStatesChartDateRange = .week
     
     init(dateRange: CountStatesChartDateRange, sortDescriptors: [NSSortDescriptor] = [], predicates: [NSPredicate] = [], child: Child) {
@@ -25,6 +25,7 @@ struct BottleFeedWeeklyChartView: View {
         let predicates = NSCompoundPredicate(
             andPredicateWithSubpredicates: allPredicates
         )
+        
         self.fetchRequest = FetchRequest<BottleFeed>(entity: BottleFeed.entity(), sortDescriptors: sortDescriptors, predicate: predicates)
         self.dateRange = dateRange
     }
@@ -44,18 +45,26 @@ struct BottleFeedWeeklyChartView: View {
         return (data: grouped, min: min, max: max)
     }
     
+    var getMaxValue: Double {
+        let max = (self.groupedResults().data.max {$0.value.count < $1.value.count}?.value.count ?? 0)
+        
+        return Double(max)
+    }
+    
+    func valueFor(type: BottleFeed.BottleFeedType) -> CGFloat {
+        CGFloat(self.groupedResults().data[type]?.count ?? 0)
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Weekly Breakdown".localized)
-//                Button("Previous") {
-//                }
             }
             
             Divider().padding(.bottom, 5)
             
             GeometryReader { outerGeometry in
-                HStack(spacing: 10) {
+                HStack(alignment: .bottom, spacing: 10) {
                     ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {bottleType in
                         GeometryReader { geometry in
                             Spacer()
@@ -63,13 +72,15 @@ struct BottleFeedWeeklyChartView: View {
                                 BarChartBarView(
                                     width: 20,
                                     value: barValue(
-                                        value: CGFloat.random(in: 50...150),
-                                        maxValue: 150
+                                        value: self.valueFor(type: bottleType),
+                                        maxValue: self.getMaxValue,
+                                        chartSize: 150
                                     ),
                                     chartSize: 150,
                                     axis: .vertical,
-                                    cornerRadius: 30,
-                                    barValue: geometry.frame(in: .global).width
+                                    cornerRadius: 20,
+                                    showLabel: true,
+                                    label: "\(Int(self.valueFor(type: bottleType)))"
                                 ).overlay(
                                     Text("\(bottleType.description)").font(.caption).frame(width: 300, alignment: .bottom)
                                     .rotationEffect(Angle(degrees: -90))

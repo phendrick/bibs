@@ -11,7 +11,7 @@ import CoreData
 import SwiftUI
 import UIKit
 
-public typealias Theme = (Color, Color)
+public typealias Theme = (UIColor, UIColor)
 
 protocol ChartDataDelegate {
 }
@@ -20,41 +20,72 @@ extension Child: ChartDataDelegate {
 }
 
 extension Child: Identifiable {
+    var hasActiveFeedSession: Bool {
+        self.activeFeedSession != nil
+    }
+    
     static var Themes: [Int: Theme] {
         [
             0: (
-                background: Color(UIColor(named: "HighlightBlue") ?? UIColor.blue),
-                foreground: Color(UIColor(named: "HighlightBlueText") ?? UIColor.white)
+                background: UIColor(named: "HighlightGreen") ?? UIColor.blue,
+                foreground: UIColor(named: "HighlightGreenText") ?? UIColor.white
             ),
             1: (
-                background: Color(UIColor(named: "HighlightGreen") ?? UIColor.green),
-                foreground: Color(UIColor(named: "HighlightGreenText") ?? UIColor.white)
+                background: UIColor(named: "HighlightBlue") ?? UIColor.green,
+                foreground: UIColor(named: "HighlightBlueText") ?? UIColor.white
             ),
             2: (
-                background: Color(UIColor(named: "HighlightPink") ?? UIColor.systemPink),
-                foreground: Color(UIColor(named: "HighlightPinkText") ?? UIColor.white)
+                background: UIColor(named: "HighlightPink") ?? UIColor.systemPink,
+                foreground: UIColor(named: "HighlightPinkText") ?? UIColor.white
             ),
             3: (
-                background: Color(UIColor(named: "HighlightRed") ?? UIColor.red),
-                foreground: Color(UIColor(named: "HighlightRedText") ?? UIColor.white)
+                background: UIColor(named: "HighlightRed") ?? UIColor.red,
+                foreground: UIColor(named: "HighlightRedText") ?? UIColor.white
             ),
             4: (
-                background: Color(UIColor(named: "HighlightYellow") ?? UIColor.yellow),
-                foreground: Color(UIColor(named: "HighlightYellowText") ?? UIColor.white
-            ))
+                background: UIColor(named: "HighlightYellow") ?? UIColor.yellow,
+                foreground: UIColor(named: "HighlightYellowText") ?? UIColor.white
+            )
         ]
     }
     
     public var theme: Theme {
         Child.Themes[Int(self.colorScheme)]
             ??
-            (Color(UIColor(named: "HighlightYellow") ?? UIColor.yellow), Color(UIColor(named: "HighlightYellowText") ?? UIColor.white))
+            (UIColor(named: "HighlightYellow") ?? UIColor.yellow, UIColor(named: "HighlightYellowText") ?? UIColor.white)
     }
     
-    public enum ChildStatuses: Int16, Hashable {
+    public enum ChildStatuses: Int16, Hashable, CaseIterable {
         case current
-        case weaned
+        case weaning
+        case weaningOnly
         case archived
+        
+        var description: String {
+            switch(self) {
+            case .current:
+                return "Breastfeeding"
+            case .weaning:
+                return "Breastfeeding & Weaning"
+            case .weaningOnly:
+                return "Weaning only"
+            case .archived:
+                return "Archived"
+            }
+        }
+        
+        var editDescription: String {
+            switch(self) {
+            case .current:
+                return "Breastfeeding"
+            case .weaning:
+                return "Breastfeeding & Weaning"
+            case .weaningOnly:
+                return "Weaning only"
+            case .archived:
+                return "Archive"
+            }
+        }
     }
     
     public var status: ChildStatuses {
@@ -164,7 +195,6 @@ extension Child: Identifiable {
         
         var side: Feed.BreastSide = .left
         
-        print("Getting current session")
         if let currentSession = parent?.currentFeedSessions.filter({$0.child != self}).first {
             side = currentSession.currentBreastSide == side ? side.switched : side
         }
@@ -172,6 +202,8 @@ extension Child: Identifiable {
         let session = self.buildNewFeedSession(side: side)
         
         self.activeFeedSession = session
+        
+        self.parent?.profileObserver?.addToActiveFeedSessions(session: session)
         
         do {
             /// if the user has set their autostartTimers setting to true, `resume` it immediately
@@ -181,9 +213,19 @@ extension Child: Identifiable {
             
             try context.save()
             self.objectWillChange.send()
+            self.parent?.profileObserver?.objectWillChange.send()
         }catch {
             print("Error: \(error)")
         }
+    }
+    
+    func completeActiveFeedSession() {
+        guard let activeSession = self.activeFeedSession else {
+            return
+        }
+        
+        parent?.profileObserver?.removeFromActiveFeedSessions(session: activeSession)
+        activeSession.complete()
     }
     
     public var bottleFeedsArray: [BottleFeed] {

@@ -79,8 +79,10 @@
 			<string>d</string>
 			<key>zero</key>
 			<string>None today</string>
+			<key>one</key>
+			<string>1 today</string>
 			<key>other</key>
-			<string>%d today</string>
+			<string>%d</string>
 		</dict>
 	</dict>
 	<key>%ld and %ld nappies today</key>
@@ -185,6 +187,42 @@
 			<string>%d feed</string>
 			<key>other</key>
 			<string>%d feeds</string>
+		</dict>
+	</dict>
+	<key>%ld nappy changes</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@changes@</string>
+		<key>changes</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d nappy changes</string>
+			<key>one</key>
+			<string>%d nappy change</string>
+			<key>other</key>
+			<string>%d nappy changes</string>
+		</dict>
+	</dict>
+	<key>%ld naps</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@naps@</string>
+		<key>naps</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d naps</string>
+			<key>one</key>
+			<string>%d nap</string>
+			<key>other</key>
+			<string>%d nappy changes</string>
 		</dict>
 	</dict>
 	<key>FeedSession_count</key>

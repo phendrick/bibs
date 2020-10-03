@@ -50,7 +50,7 @@ struct NappyChangeFormSheet: View {
                     VStack(alignment: .leading) {
                         HStack(alignment: .lastTextBaseline) {
                             Text("\(self.nappyChangePoopColor.details.0)")
-                                .font(Font.subheadline.weight(.bold))
+                                .font(Font.caption.weight(.bold))
                             Text("\(self.nappyChangePoopColor.details.1)")
                                 .font(.caption)
                         }
@@ -132,6 +132,7 @@ struct NappyChangeFormSheet: View {
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))
+        .font(.headline)
     }
 }
 

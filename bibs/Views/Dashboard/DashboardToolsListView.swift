@@ -11,7 +11,6 @@ import SwiftUI
 struct DashboardToolsListView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
-    @State var containerOffset: CGSize = CGSize(width: -25, height: 0)
     
     // action sheet states
     @State var nappyChangeFormVisible = false
@@ -34,7 +33,7 @@ struct DashboardToolsListView: View {
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Stored Milk".localized)
-                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -48,7 +47,7 @@ struct DashboardToolsListView: View {
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Bottle Feed".localized)
-                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -62,7 +61,7 @@ struct DashboardToolsListView: View {
                     VStack(alignment: .center) {
                         Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Breastfeed".localized)
-                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -75,7 +74,7 @@ struct DashboardToolsListView: View {
                     
                     VStack(alignment: .center) {
                         Image("nappy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nappy Change".localized).font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                        Text("Nappy Change".localized).font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -89,7 +88,7 @@ struct DashboardToolsListView: View {
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Weaning".localized)
-                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -103,7 +102,7 @@ struct DashboardToolsListView: View {
                     VStack(alignment: .center) {
                         Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
                         Text("Nap Time".localized)
-                            .font(.footnote).multilineTextAlignment(.center).layoutPriority(2)
+                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
                     }
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
@@ -114,21 +113,14 @@ struct DashboardToolsListView: View {
                             .environmentObject(self.profile)
                     }
                 }
-                .animation(nil)
                 .frame(maxWidth: .infinity)
                 .padding([.leading, .trailing], 15)
                 
                 Spacer()
             }
-            .animation(nil)
             .frame(maxWidth: .infinity, alignment: .top)
-            .offset(containerOffset)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .onAppear {
-            self.containerOffset = .zero
-        }
-        .animation(.interactiveSpring(response: 0.5, dampingFraction: 0.5, blendDuration: 1))
     }
 }
 

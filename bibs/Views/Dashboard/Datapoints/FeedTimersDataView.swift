@@ -74,17 +74,6 @@ struct FeedTimersDataView: View {
                 .padding()
                 .font(.callout)
             }
-            
-            VStack {
-                HStack {
-                    ForEach(results, id: \.self) {result in
-                        Capsule()
-                            .overlay(Capsule().stroke().foregroundColor(.green))
-                            .frame(width: 14, height: Array(repeating: 3, count: 40).randomElement()!)
-                            .foregroundColor(Color.orange)
-                    }
-                }
-            }
         }
     }
     
@@ -123,17 +112,15 @@ struct FeedTimersDataView: View {
                 headerView: headerView
             ) {(result: FeedSession, count: Int) in
                 NavigationLink(destination: EditFeedSessionView(profile: self.profile, feedSession: result)) {
-                    VStack(alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading) {
                         HStack {
                             Text("\(result.formattedElapsedTime(include_hsec: false))")
                         }
                         
                         Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                    }.padding([.top, .bottom])
+                    }
                 }
             }
-            
-            Spacer()
         }
         .sheet(isPresented: $dateOptionsSheetVisible) {
             VStack {
@@ -164,7 +151,7 @@ struct FeedTimersDataView: View {
                 self.dateFilter = .date
             }
         }
-        .navigationBarTitle(Text("Feed Timers"), displayMode: .large)
+        .navigationBarTitle(Text("Breastfeeds".localized), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }
 }

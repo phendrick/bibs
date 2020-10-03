@@ -27,7 +27,7 @@ extension Duration {
     
     var toFormattedString: String {
         let (hours, minutes, seconds) = self.toHoursMinutesSeconds
-        print(hours, minutes, seconds)
+        
         var output = ""
         var join = ""
         

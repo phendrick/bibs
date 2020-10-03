@@ -109,7 +109,8 @@ extension FeedSession: Identifiable, Trackable {
             }
             
             feed.duration += 10
-            self.objectWillChange.send()
+            
+            self.child?.objectWillChange.send()
         }
     }
     
@@ -172,7 +173,11 @@ extension FeedSession: Identifiable, Trackable {
         
         RunLoop.main.add(timer, forMode: .common)
         
-        self.child?.parent?.profileObserver?.objectWillChange.send()
+//        self.child?.parent?.profileObserver?.objectWillChange.send()
+        
+        self.child?.parent?.activeFeedSessions.forEach {
+            $0.child?.objectWillChange.send()
+        }
         
         do {
             try context.save()
@@ -188,7 +193,7 @@ extension FeedSession: Identifiable, Trackable {
         self.status = .complete
         self.child?.activeFeedSession = nil
         
-        self.child?.parent?.profileObserver?.objectWillChange.send()
+        self.child?.objectWillChange.send()
         
         do {
             try context.save()

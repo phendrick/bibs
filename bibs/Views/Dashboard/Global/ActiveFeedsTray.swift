@@ -49,40 +49,27 @@ struct ActiveFeedsTrayView: View {
         case down
     }
     
-    @ViewBuilder func childActionsList() -> some View {
-        HStack(spacing: 10) {
-            ForEach(self.profile.parent.childrenWithoutCurrentFeedSessions) { child in
-                VStack {
-                    AvatarImageView(
-                        image: Image("baby"),
-                        color: child.theme.0,
-                        lineWidth: 6,
-                        layout: self.layout
-                    )
-                }.onTapGesture {
-                    try? child.startNewFeedSession()
-                }
-            }
-        }
-        .frame(height: 100)
-    }
-    
     @ViewBuilder func feedTimersList() -> some View {
         if self.layout == .expanded {
             VStack(spacing: 20) {
                 FeedSessionsList(
-                    sessions: self.profile.parent.currentFeedSessions,
-                    layout: self.$layout
+                    children: self.profile.parent.breastfeedingChildrenArray,
+                    layout: self.$layout,
+                    profile: self.profile
                 )
                 .frame(maxWidth: .infinity)
+                .padding(.bottom, 20)
             }
             .frame(maxWidth: .infinity)
         }else {
-            HStack(spacing: 10) {
-                FeedSessionsList(
-                    sessions: self.profile.parent.currentFeedSessions,
-                    layout: self.$layout
-                )
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .center, spacing: 10) {
+                    FeedSessionsList(
+                        children: self.profile.parent.breastfeedingChildrenArray,
+                        layout: self.$layout,
+                        profile: self.profile
+                    )
+                }.padding(10)
             }
         }
     }
@@ -111,30 +98,22 @@ struct ActiveFeedsTrayView: View {
 
                 if self.useVerticalLayout {
                     VStack(spacing: 10) {
-                        if showActions {
-                            self.childActionsList()
-                        }
-
                         feedTimersList()
                     }
                     .frame(maxWidth: .infinity)
                 }else {
                     HStack(alignment: .top, spacing: 10) {
                         feedTimersList()
-
-                        if showActions {
-                            self.childActionsList()
-                        }
                     }
                 }
             }
-            .padding(10)
             .frame(maxWidth: .infinity)
-            .background(Color(UIColor.systemBackground).opacity(0.75))
+            .background(Color(UIColor.systemGray6).opacity(0.85))
         }
         .animation(.easeInOut)
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
+        .frame(alignment: .bottom)
         .gesture(
             DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onChanged {translation in
@@ -158,8 +137,6 @@ struct ActiveFeedsTrayView: View {
                 }else {
                     self.layout = self.layout.previous ?? self.layout
                 }
-                
-                print("Drag ended - set offset height")
             }
         )
     }
@@ -173,21 +150,53 @@ struct ActiveFeedsTrayView_Previews: PreviewProvider {
 }
 
 struct FeedSessionsList: View {
-    var sessions: [FeedSession]
+    var children: [Child]
     @Binding var layout: ActiveFeedsTrayView.ExpandedState
+    @ObservedObject var profile: ProfileObserver
+    
+    func cardWidth(child: Child) -> CGFloat {
+        guard self.layout != ActiveFeedsTrayView.ExpandedState.expanded else {
+            return UIScreen.main.bounds.size.width * 0.9
+        }
+        
+        let padding = 10 + (5 * (children.count - 1))
+        var width = (UIScreen.main.bounds.size.width - CGFloat(padding * 2)) / CGFloat(children.count)
+        
+        if children.count > 2 {
+            width = UIScreen.main.bounds.size.width / 2.5
+        }
+        
+        var minWidth: CGFloat = 100
+        
+        if let _ = child.activeFeedSession {
+            minWidth = UIScreen.main.bounds.size.width * 0.6
+        }
+        
+        if children.count > 3 {
+            return max(width, minWidth)
+        }else {
+            return width
+        }
+    }
+    
+    func cardHeight(child: Child) -> CGFloat {
+        if child.hasActiveFeedSession {
+            return 140
+        }else {
+            return 80
+        }
+    }
     
     var body: some View {
-        ForEach(self.sessions, id: \.self) {session in
+        ForEach(self.children, id: \.self) {child in
             DashboardFeedTimerView(
-                feedSession: session,
-                color: Color.green,
+                child: child,
                 layout: self.$layout,
-                cofeeding: self.sessions.count>1
+                cofeeding: self.profile.activeFeedSessions.count>1
             )
-            .frame(minHeight: 70)
-            .frame(maxHeight: self.layout == .expanded ? 140 : 100)
             .frame(maxWidth: .infinity)
-            .padding(.bottom, 20)
+            .frame(width: cardWidth(child: child))
+            .frame(alignment: .bottom)
         }
     }
 }

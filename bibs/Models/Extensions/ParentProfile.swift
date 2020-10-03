@@ -72,7 +72,7 @@ extension ParentProfile {
         }
     }
     
-    public var todaysFeedsOverview: (Int, String) {
+    public var todaysFeedsOverview: (Int?, String, Date?) {
         let date = Date()
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
@@ -98,10 +98,12 @@ extension ParentProfile {
             overview = "None today".localized
         }
         
-        return (feeds.count, overview)
+        let count: Int? = feeds.count > 0 ? feeds.count : nil
+        
+        return (count, overview, feeds.last?.wrappedCreatedAt)
     }
     
-    public var todaysNappiesOverview: (String, Int, Int) {
+    public var todaysNappiesOverview: (Int?, Int, Int, Date?) {
         let date = Date()
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
@@ -115,18 +117,20 @@ extension ParentProfile {
             child.nappyChangesWithinRange(dateDange: dateRange)
         }
         
+        let count: Int? = nappies.count > 0 ? nappies.count : nil
+        
         if nappies.count > 0 {
             let wet = nappies.filter {$0.status == .wet}
             let dirty = nappies.filter {$0.status == .dirty}
             let both = nappies.filter {$0.status == .both}
             
-            return ("\(nappies.count)", wet.count+both.count, dirty.count+both.count)
+            return (count, wet.count+both.count, dirty.count+both.count, nappies.last?.wrappedCreatedAt)
         }else {
-            return ("None today".localized, 0, 0)
+            return (count, 0, 0, nil)
         }
     }
     
-    public var todaysNapsOverview: (Int, String) {
+    public var todaysNapsOverview: (Int?, String?, Date?) {
         let date = Date()
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
@@ -144,15 +148,15 @@ extension ParentProfile {
             result += session.duration
         })
         
-        var overview = ""
+        var overview: String? 
         
         if duration > 0 {
             overview = duration.formattedHoursAndMinutes
-        }else {
-            overview = "None today"
         }
         
-        return (naps.count, overview)
+        let count = naps.count > 0 ? naps.count : nil
+        
+        return (count, overview, naps.last?.wrappedCreatedAt)
     }
     
     public var childrenArray: [Child] {
@@ -160,8 +164,24 @@ extension ParentProfile {
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
     
+    public var breastfeedingChildrenArray: [Child] {
+        var set = children as? Set<Child> ?? []
+        
+        // since we can only have 2 children feeding at any one time, if the number of feed sessions is 2
+        // just return the children associated with those sessions
+        guard let profile = self.profileObserver, profile.activeFeedSessions.count < 2 else {
+            return self.profileObserver!.activeFeedSessions.map {$0.child!}
+        }
+        
+        set = set.filter {
+            [Child.ChildStatuses.current, Child.ChildStatuses.weaning].contains($0.status)
+        }
+        
+        return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
+    }
+    
     public var activeChildrenArray: [Child] {
-        childrenArray.filter {$0.status == .current}
+        childrenArray.filter {$0.status != .archived}
     }
     
     public var expressedBottlesArray: [ExpressedBottle] {

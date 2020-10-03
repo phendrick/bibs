@@ -58,20 +58,19 @@ struct DevelopmentDataActionsView: View {
             }
             
             Button("Clear Data") {
-                guard let child = self.profile.parent.childrenArray.first else {
-                    print("no child to add data to")
-                    return
+                self.profile.parent.childrenArray.forEach {
+                    $0.bottleFeedsArray.forEach { self.moc.delete($0) }
+                    $0.nappyChangesArray.forEach { self.moc.delete($0) }
+                    $0.feedSessionsArray.forEach { self.moc.delete($0) }
+                    $0.napsArray.forEach { self.moc.delete($0) }
                 }
-                
-                child.bottleFeedsArray.forEach { self.moc.delete($0) }
-                child.nappyChangesArray.forEach { self.moc.delete($0) }
-                child.feedSessionsArray.forEach { self.moc.delete($0) }
                 
                 try? self.moc.save()
             }
             
-            Button("Profile") {
-                self.profile.objectWillChange.send()
+            Button("Remove Children") {
+                self.profile.parent.childrenArray.forEach {self.moc.delete($0)}
+                try? self.moc.save()
             }
             
             Button("Add timer") {

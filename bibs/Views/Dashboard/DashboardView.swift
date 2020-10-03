@@ -32,31 +32,36 @@ struct DashboardView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            NavigationView {
-                ScrollView {
-                    VStack(spacing: 20) {
-                        DashboardHeaderView().padding()
-                        
-                        NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
-                            DashboardHeaderOverviewView(profile: profile).padding()
-                        }.foregroundColor(Color(UIColor.label))
-                        
-                        DevelopmentDataActionsView(profile: self.profile)
-                        
-                        DashboardToolsListView().padding([.top, .bottom])
+            GeometryReader { geometry in
+                NavigationView {
+                    ScrollView(showsIndicators: false) {
+                        VStack {
+                            DashboardHeaderView()
+                                .padding()
+                                .offset(y: -10)
+                            
+                            NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
+                                DashboardHeaderOverviewView(profile: self.profile).padding()
+                            }.foregroundColor(Color(UIColor.label))
+                            
+                            DashboardToolsListView().padding([.top, .bottom])
+                                .offset(y: -50)
+                        }
+                        .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
                     }
-                    .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
-                    .offset(y: -20)
-                }
+                }.padding([.top, .bottom], geometry.safeAreaInsets.top)
             }
+            .padding(.bottom, self.profile.trayHeight)
             
             Spacer()
             
-            ActiveFeedsTrayView(profile: self.profile)
+            if self.profile.parent.breastfeedingChildrenArray.count > 0 {
+                ActiveFeedsTrayView(profile: self.profile)
+                    .clipped()
+                    .shadow(color: Color.gray.opacity(0.25), radius: 0, x: 0, y: -10)
+            }
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
-        .edgesIgnoringSafeArea(.all)
-        .padding(.top, 2)
     }
 }
 

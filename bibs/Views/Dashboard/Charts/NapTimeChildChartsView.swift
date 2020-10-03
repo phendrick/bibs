@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct NapTimeChildChartsView: View {
-    @ObservedObject var child: Child
+    var child: Child
     @ObservedObject var profile: ProfileObserver
     
     func getLastTwoDaysDateRange() -> ClosedRange<Date> {
@@ -30,42 +30,59 @@ struct NapTimeChildChartsView: View {
         return earliest.beginningOfDay...latest.endOfDay
     }
     
+    @ViewBuilder var editButtonView: some View {
+        NavigationLink(
+            destination: NaptimesDataView(
+                child: self.child,
+                profile: self.profile
+            ).environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+        ) {
+            Text("View Data".localized)
+        }
+    }
+    
     var body: some View {
-        VStack {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 0) {
-                    ChartStatsTodayView<Nap>(
-                        child: self.child,
-                        chartData: TrackableChartData<Nap>(
-                            child: child,
-                            range: self.getLastTwoDaysDateRange(),
-                            includeAllDatesInRange: false
-                        )
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                ChartStatsTodayView<Nap>(
+                    child: self.child,
+                    chartData: TrackableChartData<Nap>(
+                        child: child,
+                        range: self.getLastTwoDaysDateRange(),
+                        includeAllDatesInRange: false
                     )
+                )
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
 
-                    ChartStatsWeeklyView<Nap>(
+                ChartStatsWeeklyView<Nap>(
+                    child: self.child,
+                    chartData: TrackableChartData<Nap>(
                         child: self.child,
-                        chartData: TrackableChartData<Nap>(
-                            child: self.child,
-                            range: Date().lastSevenDays...Date().endOfDay,
-                            includeAllDatesInRange: true
-                        )
+                        range: Date().lastSevenDays...Date().endOfDay,
+                        includeAllDatesInRange: true
                     )
+                )
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
 
-                    ChartStatsMonthlyView<Nap>(
+                ChartStatsMonthlyView<Nap>(
+                    child: self.child,
+                    chartData: TrackableChartData<Nap>(
                         child: self.child,
-                        chartData: TrackableChartData<Nap>(
-                            child: self.child,
-                            range: Date().beginningOfMonth...Date().endOfMonth,
-                            includeAllDatesInRange: true
-                        )
+                        range: Date().beginningOfMonth...Date().endOfMonth,
+                        includeAllDatesInRange: true
                     )
-                }
+                )
+                .background(Color(child.theme.0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .padding()
             }
         }
-        .padding(.bottom, self.profile.trayHeight + 30)
-        .background(child.theme.0)
-        .navigationBarTitle("Charts")
+        .navigationBarTitle("Nap Times")
+        .navigationBarItems(trailing: editButtonView)
     }
 }
 

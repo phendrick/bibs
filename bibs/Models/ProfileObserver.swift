@@ -14,12 +14,35 @@ final class ProfileObserver: ObservableObject {
     
     static let shared = ProfileObserver()
     
+    var activeFeedSessions: [FeedSession] = []
+    
+    
+    func addToActiveFeedSessions(session: FeedSession) {
+        guard self.activeFeedSessions.firstIndex(of: session) == nil else {
+            return
+        }
+        
+        activeFeedSessions.append(session)
+    }
+    
+    func removeFromActiveFeedSessions(session: FeedSession) {
+        guard let index = self.activeFeedSessions.firstIndex(of: session) else {
+            return
+        }
+        
+        activeFeedSessions.remove(at: index)
+    }
+    
     private init() {}
     
     var trayHeight: CGFloat {
-        let baseHeight: CGFloat = 140
+        guard self.parent.breastfeedingChildrenArray.count > 0  else {
+            return 0
+        }
         
-        return self.parent.currentFeedSessions.count > 0 ? baseHeight + 30 : baseHeight
+        let baseHeight: CGFloat = 100
+        
+        return baseHeight
     }
     
     var multipleWaiting: Bool {

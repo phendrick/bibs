@@ -13,61 +13,6 @@ struct NappyChangeWeeklyChartView: View {
     @Environment(\.managedObjectContext) var moc
     var child: Child
     var month = Date()
-    var enableNavigation: Bool = true
-    
-    enum CountStatesChartDateRange {
-        case today
-        case week
-        case month
-        case dateRange(ClosedRange<Date>)
-        
-        var range: ClosedRange<Date>? {
-            switch(self) {
-            case .today: return Date().beginningOfDay...Date()
-            case .week: return Date().beginningOfWeek...Date()
-            case .month: return Date().beginningOfMonth...Date()
-            case .dateRange(let dateRange): return dateRange
-            }
-        }
-        
-        var previous: ClosedRange<Date> {
-            switch(self) {
-            case .today: return Date().beginningOfDay...Date()
-            case .week: return Date().beginningOfWeek...Date()
-            case .month: return Date().beginningOfMonth...Date()
-            case .dateRange(let dateRange): return dateRange
-            }
-        }
-        
-        var next: ClosedRange<Date>? {
-            switch(self) {
-            case .today: return Date().beginningOfDay...Date()
-            case .week: return Date().beginningOfWeek...Date()
-            case .month: return Date().beginningOfMonth...Date()
-            case .dateRange(let dateRange): return dateRange
-            }
-        }
-        
-        var predicate: NSPredicate {
-            var dates: ClosedRange<Date>
-            
-            switch(self) {
-                case .today:
-                    dates = Date().beginningOfDay...Date().endOfDay
-                case .week:
-                    dates = Date().beginningOfWeek.endOfDay...Date().beginningOfWeek.plusWeek.endOfDay
-                case .month:
-                    dates = Date().beginningOfMonth...Date().endOfMonth
-                case .dateRange(let dateRange):
-                    dates = dateRange
-            }
-            
-            return NSPredicate(
-                format: "createdAt >= %@ AND createdAt <= %@",
-                dates.lowerBound as NSDate, dates.upperBound as NSDate
-            )
-        }
-    }
     
     var fetchRequest: FetchRequest<NappyChange>
     var results: FetchedResults<NappyChange> { fetchRequest.wrappedValue }
@@ -88,7 +33,7 @@ struct NappyChangeWeeklyChartView: View {
         self.fetchRequest = FetchRequest<NappyChange>(entity: NappyChange.entity(), sortDescriptors: sortDescriptors, predicate: predicates)
     }
     
-    func groupedResults() -> (data: [NappyChange.StatusType : [NappyChange]], min: Int, max: Int) {
+    func groupedResults() -> (data: [NappyChange.NappyChangeType : [NappyChange]], min: Int, max: Int) {
         var grouped = Dictionary(grouping: results) { $0.status }
         
         NappyChange.NappyChangeType.allCases.forEach { caseType in
@@ -103,9 +48,15 @@ struct NappyChangeWeeklyChartView: View {
         return (data: grouped, min: min, max: max)
     }
     
-    let colors: [Color] = [
-        .red, .green, .orange, .pink, .yellow, .purple, .blue
-    ]
+    var getMaxValue: Double {
+        let max = (self.groupedResults().data.max {$0.value.count < $1.value.count}?.value.count ?? 0)
+        
+        return Double(max)
+    }
+    
+    func valueFor(type: NappyChange.NappyChangeType) -> CGFloat {
+        CGFloat(self.groupedResults().data[type]?.count ?? 0)
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -113,7 +64,7 @@ struct NappyChangeWeeklyChartView: View {
             Divider().padding(.bottom, 5)
             
             GeometryReader { outerGeometry in
-                HStack(spacing: 10) {
+                HStack(alignment: .bottom, spacing: 10) {
                     ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {nappyType in
                         GeometryReader { geometry in
                             Spacer()
@@ -121,13 +72,15 @@ struct NappyChangeWeeklyChartView: View {
                                 BarChartBarView(
                                     width: 20,
                                     value: barValue(
-                                        value: CGFloat.random(in: 50...150),
-                                        maxValue: 150
+                                        value: self.valueFor(type: nappyType),
+                                        maxValue: self.getMaxValue,
+                                        chartSize: 150
                                     ),
                                     chartSize: 150,
                                     axis: .vertical,
-                                    cornerRadius: 30,
-                                    barValue: geometry.frame(in: .global).width
+                                    cornerRadius: 10,
+                                    showLabel: true,
+                                    label: "\(Int(self.valueFor(type: nappyType)))"
                                 ).overlay(
                                     Text("\(nappyType.description)").font(.caption).frame(width: 300, alignment: .bottom)
                                     .rotationEffect(Angle(degrees: -90))
@@ -141,6 +94,7 @@ struct NappyChangeWeeklyChartView: View {
                     }
                 }
             }
+            .frame(height: 180)
         }
         .padding()
         .foregroundColor(Color.white)

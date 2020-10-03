@@ -12,6 +12,7 @@ struct AddChildView: View {
     @EnvironmentObject var profile: ProfileObserver
     @EnvironmentObject var viewSettings: ViewSettings
     @Environment(\.managedObjectContext) var context
+    @Environment(\.presentationMode) var presentationMode
     
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
@@ -23,6 +24,8 @@ struct AddChildView: View {
     @State var colorScheme: Int = 0
     
     @State var showDatePicker: Bool = false
+    
+    var addingChild: Bool = false
     
     var body: some View {
         return VStack {
@@ -36,11 +39,11 @@ struct AddChildView: View {
                                 .resizable()
                                 .clipShape(Circle())
                                 .shadow(radius: 5)
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 160, height: 160)
                                 .overlay(
                                     Circle().stroke(
-                                        Child.Themes[self.colorScheme]!.0, lineWidth: 10
+                                        Color(Child.Themes[self.colorScheme]!.0), lineWidth: 10
                                     )
                                 )
                                 .animation(.linear)
@@ -52,7 +55,7 @@ struct AddChildView: View {
                                     .overlay(VStack {
                                         ZStack {
                                             Circle().stroke(
-                                                Child.Themes[self.colorScheme]!.0, lineWidth: 10
+                                                Color(Child.Themes[self.colorScheme]!.0), lineWidth: 10
                                             )
                                             Image(systemName: "camera")
                                                 .font(.system(size: 40))
@@ -78,24 +81,20 @@ struct AddChildView: View {
                 }
                 
                 Section(header: Text("Due date")) {
-                    Toggle(isOn: self.$isBorn) {
-                        Text("They're here!")
-                    }
-                    
-                    DatePicker(selection: self.$dueDate) {
+                    DatePicker(selection: self.$dueDate, displayedComponents: .date) {
                         Text(self.isBorn ? "Date of birth" : "Due date")
                     }
                 }
                 
                 
-                Section(header: Text("Choose a colour scheme")) {
+                Section(header: Text("Choose a theme")) {
                     HStack(spacing: 20) {
                         Spacer()
                         
                         ForEach(Child.Themes.keys.sorted(), id: \.self) {index in
                             Rectangle()
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(Child.Themes[index]?.0)
+                                .foregroundColor(Color(Child.Themes[index]?.0 ?? UIColor.systemFill))
                                 .clipShape(Circle())
                                 .onTapGesture {
                                     self.colorScheme = index
@@ -107,28 +106,49 @@ struct AddChildView: View {
                 }
             }
             .navigationBarTitle("Welcome, baby")
-            .navigationBarItems(trailing: Button(action: save) {
-                Text("Done")
+            .navigationBarItems(trailing: HStack {
+                Button("Done") {
+                    self.save(newChild: true)
+                }.disabled(self.name.count == 0)
             })
         }
     }
     
-    func save() {
-        let child: Child = self.profile.parent.activeChild ?? self.profile.parent.buildChildObject()
+    func save(newChild: Bool = false) {
+        var child: Child
+        
+        if newChild || self.profile.parent.activeChild == nil {
+            child = self.profile.parent.buildChildObject()
+            self.profile.parent.addToChildren(child)
+        }else {
+            child = self.profile.parent.activeChild!
+        }
         
         child.wrappedName = self.name
         child.wrappedDueDate = self.dueDate
-        child.image = self.inputImage?.pngData()
         child.colorScheme = Int16(self.colorScheme)
         
-        self.profile.parent.addToChildren(child)
+        if var inputImage = self.inputImage {
+            if inputImage.size.width > 400 || inputImage.size.height > 400 {
+                inputImage = inputImage.resize(newSize: CGSize(width: 400, height: 400))
+            }
+
+            child.image = inputImage.pngData()
+        }
         
         do {
             try self.context.save()
+            self.profile.objectWillChange.send()
             self.profile.parent.setActiveChild(child: child)
             
-            self.viewSettings.initialView = .dashboard
+            if addingChild {
+                self.presentationMode.wrappedValue.dismiss()
+            }else {
+                print("Setting initial view to .dashboard")
+                self.viewSettings.initialView = .dashboard
+            }
         }catch {
+            print("Error")
             debugPrint(error)
         }
     }

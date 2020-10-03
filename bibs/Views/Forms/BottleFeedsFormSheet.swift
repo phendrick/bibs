@@ -57,53 +57,56 @@ struct BottleFeedsFormSheet: View {
                 
                 
                 Section(
-                    header: Text("Which was")
+                    header: Text("Bottle Feed Type")
                 ){
-                    Picker(selection: self.$pickerFeedSource, label: Text("")) {
-                        ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {feedType in
-                            Text("\(feedType.description)").tag(feedType.rawValue)
-                        }
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .animation(nil)
-                }
-            }
-            
-            if self.pickerFeedSource == .expressedMilk {
-                Section {
-                    List {
-                        ForEach(self.expressedBottles, id: \.self) {bottle in
-                            HStack(alignment: .center) {
-                                VStack(alignment: .leading, spacing: 15) {
-                                    HStack {
-                                        if bottle.status.emoji != "" {
-                                            Text("\(bottle.status.emoji)")
-                                        }
-                                        
-                                        Text("\(bottle.convertedAmount)").fontWeight(.bold)
-                                    }
-                                    
-                                    Text("\(bottle.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                                }.padding([.top, .bottom], 2)
-
-                                Spacer()
-                                
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(Color(UIColor.systemGreen) )
-                                    .opacity(self.selectedExpressedBottles.contains(bottle) ? 1 : 0.2)
-                            }.onTapGesture {
-                                if self.selectedExpressedBottles.contains(bottle) {
-                                    self.selectedExpressedBottles.removeAll { (currentBottle) -> Bool in
-                                        currentBottle == bottle
-                                    }
-                                }else {
-                                    self.selectedExpressedBottles.append(bottle)
-                                }
+                    VStack {
+                        Picker(selection: self.$pickerFeedSource, label: Text("")) {
+                            ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {feedType in
+                                Text("\(feedType.description)").tag(feedType.rawValue)
                             }
                         }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .animation(nil)
+                    
+                        
+                        if self.pickerFeedSource == .expressedMilk {
+                            Section {
+                                List {
+                                    ForEach(self.expressedBottles, id: \.self) {bottle in
+                                        HStack(alignment: .center) {
+                                            VStack(alignment: .leading, spacing: 15) {
+                                                HStack {
+                                                    if bottle.status.emoji != "" {
+                                                        Text("\(bottle.status.emoji)")
+                                                    }
+                                                    
+                                                    Text("\(bottle.convertedAmount)").fontWeight(.bold)
+                                                }
+                                                
+                                                Text("\(bottle.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+                                            }.padding([.top, .bottom], 2)
+
+                                            Spacer()
+                                            
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .foregroundColor(Color(UIColor.systemGreen) )
+                                                .opacity(self.selectedExpressedBottles.contains(bottle) ? 1 : 0.2)
+                                        }.onTapGesture {
+                                            if self.selectedExpressedBottles.contains(bottle) {
+                                                self.selectedExpressedBottles.removeAll { (currentBottle) -> Bool in
+                                                    currentBottle == bottle
+                                                }
+                                            }else {
+                                                self.selectedExpressedBottles.append(bottle)
+                                            }
+                                        }
+                                    }
+                                }
+                                .cornerRadius(10)
+                                .frame(maxHeight: 200)
+                            }.padding([.top, .bottom], 15)
+                        }
                     }
-                    .cornerRadius(10).padding()
-                    .frame(maxHeight: 200)
                 }
             }
 
@@ -132,7 +135,7 @@ struct BottleFeedsFormSheet: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: UIScreen.main.bounds.height/8)
-            .background(Color(UIColor.systemBackground))
+//            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

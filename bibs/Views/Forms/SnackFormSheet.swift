@@ -45,7 +45,7 @@ struct SnackFormSheet: View {
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading) {
                                     Text("\(snack.description)").font(.headline).padding(.bottom, 10)
-                                    Text("\(snack.details)").font(.subheadline)
+                                    Text("\(snack.details)").font(.caption)
                                 }
                                 Spacer()
                                 
@@ -89,6 +89,7 @@ struct SnackFormSheet: View {
                     self.snackFormVisible = false
                     self.profile.objectWillChange.send()
                 }
+                .font(.headline)
             }
             .frame(maxWidth: .infinity)
             .frame(height: UIScreen.main.bounds.height/8)
@@ -96,6 +97,7 @@ struct SnackFormSheet: View {
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))
+        .font(.caption)
     }
 }
 

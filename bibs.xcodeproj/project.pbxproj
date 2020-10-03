@@ -27,6 +27,7 @@
 		DA224EB424DFF6BD006FCFC3 /* EditNapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA224EB324DFF6BD006FCFC3 /* EditNapView.swift */; };
 		DA224EB624DFF946006FCFC3 /* EditNappyChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA224EB524DFF946006FCFC3 /* EditNappyChangeView.swift */; };
 		DA224EB824E000BA006FCFC3 /* EditSnackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA224EB724E000BA006FCFC3 /* EditSnackView.swift */; };
+		DA252E45250CE5D50063301E /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA252E44250CE5D40063301E /* PlaygroundView.swift */; };
 		DA2B0FD624C8E64D00209638 /* DispatchQueue+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B0FD524C8E64D00209638 /* DispatchQueue+background.swift */; };
 		DA2B0FD824C8FAC100209638 /* Image+async.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B0FD724C8FAC100209638 /* Image+async.swift */; };
 		DA2D2A522498055C00E9D811 /* Trackable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2D2A512498055C00E9D811 /* Trackable.swift */; };
@@ -34,7 +35,6 @@
 		DA3A7CC824F5C61D00E0946A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA3A7CC724F5C61D00E0946A /* Localizable.strings */; };
 		DA43F41624BA5547002FE487 /* EditFeedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */; };
 		DA458F0624AA0FB00096F411 /* UINavigationController+color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */; };
-		DA49B44C24DB5272001C282A /* DatapointsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B44B24DB5272001C282A /* DatapointsListView.swift */; };
 		DA49B45024DB622E001C282A /* WeaningDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B44F24DB622E001C282A /* WeaningDataView.swift */; };
 		DA49B45224DB624F001C282A /* NaptimesDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49B45124DB624F001C282A /* NaptimesDataView.swift */; };
 		DA4DEA2A24D4B0B600ADC1EA /* Int32+timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */; };
@@ -182,6 +182,7 @@
 		DA224EB324DFF6BD006FCFC3 /* EditNapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNapView.swift; sourceTree = "<group>"; };
 		DA224EB524DFF946006FCFC3 /* EditNappyChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNappyChangeView.swift; sourceTree = "<group>"; };
 		DA224EB724E000BA006FCFC3 /* EditSnackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSnackView.swift; sourceTree = "<group>"; };
+		DA252E44250CE5D40063301E /* PlaygroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundView.swift; sourceTree = "<group>"; };
 		DA2B0FD524C8E64D00209638 /* DispatchQueue+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+background.swift"; sourceTree = "<group>"; };
 		DA2B0FD724C8FAC100209638 /* Image+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+async.swift"; sourceTree = "<group>"; };
 		DA2D2A512498055C00E9D811 /* Trackable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trackable.swift; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		DA3A7CC724F5C61D00E0946A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DA43F41524BA5547002FE487 /* EditFeedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedTimeView.swift; sourceTree = "<group>"; };
 		DA458F0524AA0FB00096F411 /* UINavigationController+color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+color.swift"; sourceTree = "<group>"; };
-		DA49B44B24DB5272001C282A /* DatapointsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatapointsListView.swift; path = bibs/Views/Dashboard/Datapoints/DatapointsListView.swift; sourceTree = SOURCE_ROOT; };
 		DA49B44F24DB622E001C282A /* WeaningDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaningDataView.swift; sourceTree = "<group>"; };
 		DA49B45124DB624F001C282A /* NaptimesDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaptimesDataView.swift; sourceTree = "<group>"; };
 		DA4DEA2924D4B0B600ADC1EA /* Int32+timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int32+timers.swift"; sourceTree = "<group>"; };
@@ -246,7 +246,6 @@
 		DAB3EF14248AEFBD00667F19 /* String+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+helpers.swift"; sourceTree = "<group>"; };
 		DAB56B8E247A733300C80E1E /* ProfileObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileObserver.swift; sourceTree = "<group>"; };
 		DAB56B93247AD4B500C80E1E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DABE2EB924F9D00700EA6E5D /* TrackableChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableChartData.swift; sourceTree = "<group>"; };
 		DABE2EBB24F9D20700EA6E5D /* BottleFeedChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedChartData.swift; sourceTree = "<group>"; };
 		DABE2EBD24F9D20A00EA6E5D /* NappyChangeChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeChartData.swift; sourceTree = "<group>"; };
@@ -441,7 +440,6 @@
 		DA7523742488F0E400D4E89D /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				DABB27CE2488F0BA00EE9083 /* FeedSession+CoreDataProperties.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -451,7 +449,6 @@
 			children = (
 				DA43F41424BA553C002FE487 /* Datapoint Editing */,
 				DAE1A7D124B92FFB00FFA96E /* BottleFeedsDataView.swift */,
-				DA49B44B24DB5272001C282A /* DatapointsListView.swift */,
 				DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */,
 				DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */,
 				DAE1A7CF24B92E7B00FFA96E /* FeedTimersDataView.swift */,
@@ -677,6 +674,7 @@
 				DADD78F72478609600791F61 /* AppDelegate.swift */,
 				DADD78F92478609600791F61 /* SceneDelegate.swift */,
 				DADD78FE2478609600791F61 /* ContentView.swift */,
+				DA252E44250CE5D40063301E /* PlaygroundView.swift */,
 				DADD79002478609700791F61 /* Assets.xcassets */,
 				DAEF517124B640A3006CD447 /* Colors.xcassets */,
 				DADD79052478609700791F61 /* LaunchScreen.storyboard */,
@@ -834,7 +832,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Paul Hendrick";
 				TargetAttributes = {
 					DADD78F32478609600791F61 = {
@@ -1003,9 +1001,9 @@
 				DAAF7B3B24D210C70019C4C4 /* FoodDiaryEntry+CoreDataProperties.swift in Sources */,
 				DA8307B624A7417500454F14 /* FeedSession+CoreDataClass.swift in Sources */,
 				DAE245B524A5DE3D00018C3F /* AboutYouView.swift in Sources */,
+				DA252E45250CE5D50063301E /* PlaygroundView.swift in Sources */,
 				DA2B0FD824C8FAC100209638 /* Image+async.swift in Sources */,
 				DA08834024CCF550003B7020 /* Snack+CoreDataClass.swift in Sources */,
-				DA49B44C24DB5272001C282A /* DatapointsListView.swift in Sources */,
 				DA49B45224DB624F001C282A /* NaptimesDataView.swift in Sources */,
 				DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */,
 				DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */,
@@ -1115,6 +1113,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1176,6 +1175,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1220,7 +1220,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tablo.dev.bibs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1240,7 +1240,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tablo.dev.bibs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

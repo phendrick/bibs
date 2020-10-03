@@ -15,6 +15,7 @@ struct ParentDashboardDataListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("About you").font(.caption)
+            
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     NavigationLink(destination: ParentEmotionListView(profile: self.profile).environment(\.managedObjectContext, self.moc)) {
@@ -23,16 +24,14 @@ struct ParentDashboardDataListView: View {
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))
-                                .animation(nil)
                         }
                         
                         Spacer()
                         
-                        Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
+                        Image(systemName: "chevron.right").foregroundColor(Color.gray.opacity(0.5))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .animation(.easeInOut)
                 .padding(10)
                 .background(Color(UIColor.systemFill))
                 
@@ -43,16 +42,14 @@ struct ParentDashboardDataListView: View {
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))
-                                .animation(nil)
                         }
                         
                         Spacer()
                         
-                        Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
+                        Image(systemName: "chevron.right").foregroundColor(Color.gray.opacity(0.5))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .animation(.easeInOut)
                 .padding(10)
                 .background(Color(UIColor.tertiarySystemFill))
                 
@@ -63,21 +60,18 @@ struct ParentDashboardDataListView: View {
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))
-                                .animation(nil)
                         }
                         
                         Spacer()
                         
-                        Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.75))
+                        Image(systemName: "chevron.right").foregroundColor(Color.gray.opacity(0.5))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .animation(.easeInOut)
                 .padding(10)
                 .background(Color(UIColor.systemFill))
             }
             .cornerRadius(15)
-            .navigationBarTitle("Overview".localized)
         }
     }
 }

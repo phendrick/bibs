@@ -26,7 +26,7 @@ struct AboutYouView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("Edit your details"),
+                    header: Text("Your details"),
                     footer: HStack(alignment: .top) {
                         Text("Just call me")
                         HStack {
@@ -56,7 +56,7 @@ struct AboutYouView: View {
         .navigationBarTitle("About you")
         .navigationBarItems(trailing: Button(action: save) {
             Text("Next")
-        })
+        }.disabled(self.name.count == 0))
     }
     
     func save() {

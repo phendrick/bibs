@@ -29,11 +29,10 @@ struct ManualFeedTimerEntryFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Add a feed").font(.headline)
+            Text("Add a feed".localized).font(.headline)
             
             Text("If you've forgotten to start a timer, you can add a feed time here")
-                .padding()
-                .font(.subheadline).foregroundColor(Color(UIColor.secondaryLabel))
+                .padding().foregroundColor(Color(UIColor.secondaryLabel))
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -45,7 +44,7 @@ struct ManualFeedTimerEntryFormSheet: View {
                 Section(
                     header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby") fed from")
                 ) {
-                    DatePicker(selection: self.$from) {
+                    DatePicker(selection: self.$from, in: ...Date()) {
                         Text("Time")
                     }
                 }
@@ -56,7 +55,7 @@ struct ManualFeedTimerEntryFormSheet: View {
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
                             VStack(spacing: 0) {
-                                Text("Hours").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("Hours").foregroundColor(Color(UIColor.label))
                                 
                                 Picker(selection: self.$adjustedHours, label: Text("Test")) {
                                     Text("00").tag(0)
@@ -71,7 +70,7 @@ struct ManualFeedTimerEntryFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Minutes").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("Minutes").foregroundColor(Color(UIColor.label))
                                 
                                 Picker("test", selection: self.$adjustedMinutes) {
                                     ForEach(0..<60) {idx in
@@ -84,7 +83,7 @@ struct ManualFeedTimerEntryFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Seconds").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("Seconds").foregroundColor(Color(UIColor.label))
                                 
                                 Picker("test", selection: self.$adjustedSeconds) {
                                     ForEach(0..<60) {idx in
@@ -98,14 +97,6 @@ struct ManualFeedTimerEntryFormSheet: View {
                         }
                     }.frame(height: 240).padding(.top, 20)
                 }
-            }.onAppear {
-//                let elapstedTime = self.feed.calculatedElapsedTime
-//
-//                self.adjustedHours   = String(elapstedTime.hours)
-//                self.adjustedMinutes = String(elapstedTime.minutes)
-//                self.adjustedSeconds = String(elapstedTime.seconds)
-//
-//                self.breastSide      = self.feed.breastSide
             }
             
             VStack {
@@ -139,7 +130,7 @@ struct ManualFeedTimerEntryFormSheet: View {
                     }catch {
                         debugPrint("Error saving")
                     }
-                }
+                }.font(.headline)
             }
             .frame(maxWidth: .infinity)
             .frame(height: UIScreen.main.bounds.height/8)
