@@ -125,7 +125,6 @@ struct NaptimeFormSheet: View {
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))
-        .font(.caption)
     }
 }
 

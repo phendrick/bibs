@@ -99,7 +99,7 @@ struct DashboardFeedTimerView: View {
                 HStack(alignment: .lastTextBaseline, spacing: 0) {
                     Text("\(child.activeFeedSession?.formattedElapsedTime(include_hsec: false) ?? "00:00:00")")
                         .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.6))
-                    Text("\(child.activeFeedSession?.formattedElapsedTimeHsecs() ?? ".00")")
+                    Text("\(child.activeFeedSession?.formattedElapsedTimeHsecs(includeRandomMsec: true) ?? ".00")")
                         .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.5))
                         .opacity(0.5)
                 }

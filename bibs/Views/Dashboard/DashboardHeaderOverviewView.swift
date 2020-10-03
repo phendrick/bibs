@@ -43,7 +43,7 @@ struct DashboardHeaderOverviewItem: View {
                 
                 HStack {
                     if count != nil {
-                        Text(value!).font(.headline)
+                        Text(value!).font(.headline).foregroundColor(Color(UIColor.label))
                     }
                     
                     Spacer()
@@ -78,6 +78,9 @@ struct DashboardHeaderOverviewView: View {
             HStack {
                 Text("Today so far".localized).font(.headline)
                 Spacer()
+                
+                Text("Manage Data & Profiles".localized)
+                    .foregroundColor(.gray).font(.subheadline)
             }
             
             DashboardHeaderOverviewItem(
@@ -99,64 +102,10 @@ struct DashboardHeaderOverviewView: View {
                 count: profile.parent.todaysNapsOverview.0,
                 date: profile.parent.todaysNapsOverview.2
             )
-            
-            Text("Manage Data")
-                .foregroundColor(.gray).font(.subheadline)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .offset(y: -30)
     }
-    
-//    var bodys: some View {
-//        VStack(alignment: .leading) {
-//            HStack {
-//                Text("Today".localized).font(.headline)
-//
-//                Spacer()
-//                Text("Children and Data".localized)
-//                    .font(.footnote)
-//                    .foregroundColor(Color(UIColor.secondaryLabel))
-//            }.padding([.leading, .top, .trailing]).padding(.bottom, 5)
-//
-//            Divider().opacity(0.5).offset(y: -10).padding([.leading, .trailing])
-//
-//            HStack(alignment: .top) {
-//                VStack(alignment: .leading) {
-//                    Text("Feeds".localized)
-//                        .font(.subheadline).padding(.bottom, 10)
-//
-//                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld tracked %@ today", comment: "todays feed counter"), "feed", profile.parent.todaysFeedsOverview.0 ?? 0))
-//                        .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-//                }
-//                .frame(minWidth: 0, maxWidth: .infinity)
-//
-//                Divider().frame(height: 50)
-//                Spacer()
-//
-//                VStack(alignment: .leading) {
-//                    Text("Nappies".localized)
-//                        .font(.subheadline).padding(.bottom, 10)
-//
-//                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld and %ld nappies today", comment: "todays feed counter"), profile.parent.todaysNappiesOverview.1, 2, profile.parent.todaysNappiesOverview.2)).font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-//                }.frame(minWidth: 0, maxWidth: .infinity)
-//
-//                Divider().frame(height: 50)
-//                Spacer()
-//
-//                VStack(alignment: .leading) {
-//                    Text("Naps".localized)
-//                        .font(.subheadline).padding(.bottom, 10)
-//
-//                    Text(String.localizedStringWithFormat(NSLocalizedString("%ld tracked %@ today", comment: "todays feed counter"), "feed", profile.parent.todaysNapsOverview.0))
-//                        .font(.footnote).foregroundColor(Color(UIColor.secondaryLabel))
-//                }.frame(minWidth: 0, maxWidth: .infinity)
-//            }
-//        }
-//        .padding(.bottom, 10)
-//        .frame(maxWidth: .infinity)
-//        .background(Color(UIColor.secondarySystemBackground))
-//        .cornerRadius(10)
-//    }
 }
 
 struct DashboardHeaderOverviewView_Previews: PreviewProvider {

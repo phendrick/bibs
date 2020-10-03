@@ -114,22 +114,18 @@ struct BottleFeedsDataView: View {
             Spacer()
         }
         .sheet(isPresented: $dateOptionsSheetVisible) {
-            VStack {
-                Form {
-                    Section(header: Text("Date from")) {
-                        DatePicker(selection: self.$dateFilterStartDate, displayedComponents: .date) {
-                            Text("")
-                        }.labelsHidden()
-                    }
-                    
-                    Section(header: Text("Date to")) {
-                        DatePicker(selection: self.$dateFilterEndDate, displayedComponents: .date) {
-                            Text("")
-                        }.labelsHidden()
-                    }
+            VStack(spacing: 50) {
+                Section(header: Text("Date from")) {
+                    DatePicker(selection: self.$dateFilterStartDate, in: ...Date(), displayedComponents: .date) {
+                        Text("")
+                    }.labelsHidden()
                 }
                 
-                Spacer()
+                Section(header: Text("Date to")) {
+                    DatePicker(selection: self.$dateFilterEndDate, in: ...Date(), displayedComponents: .date) {
+                        Text("")
+                    }.labelsHidden()
+                }
                 
                 Button("Done") {
                     self.dateOptionsSheetVisible = false

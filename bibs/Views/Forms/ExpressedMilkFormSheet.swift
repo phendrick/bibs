@@ -84,8 +84,8 @@ struct ExpressedMilkFormSheet: View {
                 }
             }
             .frame(maxWidth: .infinity)
-           .frame(height: UIScreen.main.bounds.height/8)
-           .background(Color(UIColor.systemBackground))
+            .frame(height: UIScreen.main.bounds.height/8)
+            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

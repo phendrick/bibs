@@ -40,7 +40,7 @@ final class ProfileObserver: ObservableObject {
             return 0
         }
         
-        let baseHeight: CGFloat = 100
+        let baseHeight: CGFloat = 140
         
         return baseHeight
     }

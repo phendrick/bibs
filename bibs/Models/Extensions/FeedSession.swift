@@ -90,8 +90,14 @@ extension FeedSession: Identifiable, Trackable {
         return time
     }
     
-    func formattedElapsedTimeHsecs() -> String {
-        return String(format: ".%02i", calculatedElapsedTime.hseconds)
+    func formattedElapsedTimeHsecs(includeRandomMsec: Bool = false) -> String {
+        var hsecs = calculatedElapsedTime.hseconds
+        
+        if includeRandomMsec && hsecs != 0 {
+            hsecs = calculatedElapsedTime.hseconds + (1...9).randomElement()!
+        }
+        
+        return String(format: ".%02i", hsecs)
     }
     
     /// a basic timer implementation.

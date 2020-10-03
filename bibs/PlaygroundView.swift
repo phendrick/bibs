@@ -78,6 +78,9 @@ struct PlaygroundView: View {
     
     @State var layout: TimerLayout = .compact
     
+    @State var dateFilterStartDate: Date = Date()
+    @State var dateFilterEndDate: Date = Date()
+    
     let babies: [ChildObject] = [
 //        ChildObject(name: "Milo", color: .red, feeding: true),
         ChildObject(name: "Tabitha", color: .green, feeding: true),
@@ -85,28 +88,46 @@ struct PlaygroundView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 15) {
-            Spacer()
-            
-            HStack {
-                Rectangle().frame(width: 80, height: 5).foregroundColor(Color.gray.opacity(0.5)).cornerRadius(10).onTapGesture {
-                    print("Switching layout")
-                    self.layout = self.layout == .compact ? .full : .compact
-                }
+//        VStack(spacing: 15) {
+//            Spacer()
+//
+//            HStack {
+//                Rectangle().frame(width: 80, height: 5).foregroundColor(Color.gray.opacity(0.5)).cornerRadius(10).onTapGesture {
+//                    print("Switching layout")
+//                    self.layout = self.layout == .compact ? .full : .compact
+//                }
+//            }
+//
+//            HStack(spacing: 0) {
+//                ForEach(babies, id: \.self) { baby in
+//                    ChildTimerView(baby: baby, timerLayout: self.$layout, feedCount: .constant(2))
+//                }
+//            }
+//            .frame(maxWidth: .infinity)
+//        }
+//        .edgesIgnoringSafeArea(.bottom)
+//        .frame(alignment: .bottom)
+//        .background(Color.white)
+//        .font(.caption)
+//        .padding(.top)
+        
+        VStack(spacing: 50) {
+            Section(header: Text("Date from")) {
+                DatePicker(selection: self.$dateFilterStartDate, displayedComponents: .date) {
+                    Text("")
+                }.labelsHidden()
             }
             
-            HStack(spacing: 0) {
-                ForEach(babies, id: \.self) { baby in
-                    ChildTimerView(baby: baby, timerLayout: self.$layout, feedCount: .constant(2))
-                }
+            Section(header: Text("Date to")) {
+                DatePicker(selection: self.$dateFilterEndDate, displayedComponents: .date) {
+                    Text("")
+                }.labelsHidden()
             }
-            .frame(maxWidth: .infinity)
+            
+            Button("Done") {
+            }
+            
         }
-        .edgesIgnoringSafeArea(.bottom)
-        .frame(alignment: .bottom)
-        .background(Color.white)
-        .font(.caption)
-        .padding(.top)
     }
 }
 

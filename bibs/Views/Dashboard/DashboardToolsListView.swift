@@ -8,6 +8,25 @@
 
 import SwiftUI
 
+struct DashboardToolsListItem: View {
+    var icon: String
+    var label: String
+    
+    var iconSize: CGFloat {
+        UIDevice.current.hasLargeScreen ? 100 : 80
+    }
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            Image(icon).resizable().frame(width: self.iconSize, height: self.iconSize)
+            
+            Text(label.localized)
+                .font(.callout).multilineTextAlignment(.center).layoutPriority(2)
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
 struct DashboardToolsListView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
@@ -22,96 +41,67 @@ struct DashboardToolsListView: View {
     
     @State var foodDiaryFormVisible = false
     
-    var iconSize: CGFloat {
-        UIDevice.current.hasLargeScreen ? 100 : 80
-    }
-    
     var body: some View {
         VStack(alignment: .leading) {
+            Text("Add more".localized).font(.headline)
+                .padding([.leading, .trailing])
+                .offset(y: 5)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 15) {
-                    VStack(alignment: .center) {
-                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Stored Milk".localized)
-                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.expressedMilkFormVisible = true
-                    }.sheet(isPresented: self.$expressedMilkFormVisible) {
-                        ExpressedMilkFormSheet(expressedMilkFormVisible: self.$expressedMilkFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
+                    DashboardToolsListItem(icon: "bottle", label: "Stored Milk".localized)
+                        .onTapGesture {
+                            self.expressedMilkFormVisible = true
+                        }.sheet(isPresented: self.$expressedMilkFormVisible) {
+                            ExpressedMilkFormSheet(expressedMilkFormVisible: self.$expressedMilkFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
                     
-                    VStack(alignment: .center) {
-                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Bottle Feed".localized)
-                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.bottleFeedFormVisible = true
-                    }.sheet(isPresented: self.$bottleFeedFormVisible) {
-                        BottleFeedsFormSheet(bottleFeedFormVisible: self.$bottleFeedFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
+                    DashboardToolsListItem(icon: "bottle", label: "Bottle Feed".localized)
+                        .onTapGesture {
+                            self.bottleFeedFormVisible = true
+                        }.sheet(isPresented: self.$bottleFeedFormVisible) {
+                            BottleFeedsFormSheet(bottleFeedFormVisible: self.$bottleFeedFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
                     
-                    VStack(alignment: .center) {
-                        Image("bottle").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Breastfeed".localized)
-                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.manualFeedTimerFormVisible = true
-                    }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
-                        ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
+                    DashboardToolsListItem(icon: "bottle", label: "Breastfeed".localized)
+                        .onTapGesture {
+                            self.manualFeedTimerFormVisible = true
+                        }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
+                            ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
+                        
+                    DashboardToolsListItem(icon: "nappy", label: "Nappies".localized)
+                        .onTapGesture {
+                            self.nappyChangeFormVisible = true
+                        }.sheet(isPresented: self.$nappyChangeFormVisible) {
+                            NappyChangeFormSheet(nappyChangeFormVisible: self.$nappyChangeFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
                     
-                    VStack(alignment: .center) {
-                        Image("nappy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nappy Change".localized).font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.nappyChangeFormVisible = true
-                    }.sheet(isPresented: self.$nappyChangeFormVisible) {
-                        NappyChangeFormSheet(nappyChangeFormVisible: self.$nappyChangeFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
-                    
-                    VStack(alignment: .center) {
-                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Weaning".localized)
-                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.snackFormVisible = true
-                    }.sheet(isPresented: self.$snackFormVisible) {
-                        SnackFormSheet(snackFormVisible: self.$snackFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
-                    
-                    VStack(alignment: .center) {
-                        Image("mummy").resizable().frame(width: self.iconSize, height: self.iconSize)
-                        Text("Nap Time".localized)
-                            .font(.subheadline).multilineTextAlignment(.center).layoutPriority(2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        self.naptimeFormVisible = true
-                    }.sheet(isPresented: self.$naptimeFormVisible) {
-                        NaptimeFormSheet(naptimeFormVisible: self.$naptimeFormVisible)
-                            .environment(\.managedObjectContext, self.moc)
-                            .environmentObject(self.profile)
-                    }
+                    DashboardToolsListItem(icon: "mummy", label: "Weaning".localized)
+                        .onTapGesture {
+                            self.snackFormVisible = true
+                        }.sheet(isPresented: self.$snackFormVisible) {
+                            SnackFormSheet(snackFormVisible: self.$snackFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
+                        
+                    DashboardToolsListItem(icon: "mummy", label: "Nap Time".localized)
+                        .onTapGesture {
+                            self.naptimeFormVisible = true
+                        }.sheet(isPresented: self.$naptimeFormVisible) {
+                            NaptimeFormSheet(naptimeFormVisible: self.$naptimeFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
                 }
                 .frame(maxWidth: .infinity)
                 .padding([.leading, .trailing], 15)

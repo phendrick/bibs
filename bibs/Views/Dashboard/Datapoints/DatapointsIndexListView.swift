@@ -28,6 +28,24 @@ struct DatapointsIndexListView: View {
             
             DevelopmentDataActionsView(profile: self.profile)
             
+            Divider()
+            
+            if self.profile.parent.childrenArray.filter{$0.status == .archived}.count > 0 {
+                VStack {
+                    Text("Archived profiles".localized).font(.headline)
+                    
+                    List(self.profile.parent.childrenArray.filter{$0.status == .archived}, id: \.self) { child in
+                        NavigationLink(destination: ChildEditView(child: child)) {
+                            HStack {
+                                Text(child.wrappedName).foregroundColor(Color.white)
+                                Spacer()
+                                Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.5))
+                            }
+                        }
+                    }
+                }
+            }
+            
             NavigationLink(destination: ChildEditView(child: profile.parent.buildChildObject()), isActive: self.$showAddChildView) {
                 EmptyView()
             }
@@ -37,6 +55,7 @@ struct DatapointsIndexListView: View {
             Button("Add Child".localized) {
                 self.showAddChildView.toggle()
             }
+            Image(systemName: "person.circle").foregroundColor(Color(UIColor.systemBlue))
         })
     }
 }

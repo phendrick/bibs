@@ -107,6 +107,7 @@ struct ActiveFeedsTrayView: View {
                     }
                 }
             }
+            .padding(.bottom, 40)
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
@@ -114,6 +115,7 @@ struct ActiveFeedsTrayView: View {
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .frame(alignment: .bottom)
+        .offset(y: 20)
         .gesture(
             DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onChanged {translation in
