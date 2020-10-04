@@ -142,3 +142,39 @@
 "If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!" = "If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!";
 "New baby profile" = "New baby profile";
 "Update Profile" = "Update Profile";
+
+// insights
+"naps" = "Naps";
+"feeds" = "Feeds";
+"bottle_feeds" = "Bottle Feeds";
+
+"late_night_bottles" = "Bottle feeding can be a lot of work. Keep going, it'll get easier.";
+"over_napping" = "Over napping";
+"over_napping_detail" = "Napping too much through the day can lead to some long nights.";
+
+"under_napping" = "Under napping";
+"under_napping_details" = "When over-tired, a baby can fight sleep like a prize fighter!";
+
+"cluster_feeding" = "Cluster feeding";
+"cluster_feeding_details" = "Lots of smaller feeds, bunched together can be exhausing for you.";
+
+"late_nights" = "Late nights";
+"late_nights_details" = "Lots of activity late at night will leave you and baby tired.";
+
+"long_feeds" = "Long feeds";
+"long_feeds_details" = "Long feeds can be exhausting for you.";
+
+"ideal_nap_amount" = "Good napping!";
+"ideal_nap_amount_details" = "You're hitting the the sweet spot for naps here.";
+
+"ideal_nap_duration" = "Good nap time!";
+"ideal_nap_duration_details" = "Very good. Napping too long can lead to long nights with a wide awake baby.";
+
+"ideal_feeding_time" = "Well fed";
+"ideal_feeding_time_details" = "Breastfeed times are looking good!";
+
+"ideal_late_nights" = "Late night feeds";
+"ideal_late_nights_details" = "Not too many late nights here. A good nights sleep can make you feel invincible!";
+
+"ideal_late_night_bottles" = "Late night bottles";
+"ideal_late_night_bottles_details" = "Bottle feeding can be a lot of work. You've had some good nights here. ";

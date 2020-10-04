@@ -204,4 +204,8 @@ extension Date {
         
         return yesterdaysDate > self.beginningOfDay
     }
+    
+    var earlyMorning: Bool {
+        (0...5).contains(Calendar.current.component(.hour, from: self))
+    }
 }

@@ -23,6 +23,15 @@ struct DevelopmentDataActionsView: View {
                 print("Starting at date \(startDate)")
                 
                 repeat {
+                    for i in 2...Int.random(in: 3...5) {
+                        let emotion = Emotion(context: self.moc)
+                        emotion.createdAt = Date()
+                        emotion.note = "the note for emotion \(i)"
+                        emotion.status = Emotion.EmotionType.allCases.randomElement()!
+                        
+                        self.profile.parent.addToEmotions(emotion)
+                    }
+                    
                     for _ in 5...Int.random(in: 10...15) {
                         let feedSession = FeedSession(context: self.moc)
                         let feed = Feed(context: self.moc)

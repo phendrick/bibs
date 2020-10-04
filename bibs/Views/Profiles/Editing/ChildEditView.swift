@@ -121,7 +121,6 @@ struct ChildEditView: View {
                 }
             }
         }
-//        .navigationBarTitle("\(child.wrappedName)")
         .navigationBarItems(trailing: Button(action: save) {
             Text("Done")
         }.disabled(self.name.count == 0))

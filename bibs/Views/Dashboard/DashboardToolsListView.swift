@@ -21,7 +21,9 @@ struct DashboardToolsListItem: View {
             Image(icon).resizable().frame(width: self.iconSize, height: self.iconSize)
             
             Text(label.localized)
-                .font(.callout).multilineTextAlignment(.center).layoutPriority(2)
+                .font(.caption)
+                .multilineTextAlignment(.center)
+                .layoutPriority(2)
         }
         .frame(maxWidth: .infinity)
     }
@@ -43,7 +45,7 @@ struct DashboardToolsListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Add more".localized).font(.headline)
+            Text("Add data".localized).font(.headline)
                 .padding([.leading, .trailing])
                 .offset(y: 5)
             

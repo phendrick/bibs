@@ -79,7 +79,7 @@ struct DashboardHeaderOverviewView: View {
                 Text("Today so far".localized).font(.headline)
                 Spacer()
                 
-                Text("Manage Data & Profiles".localized)
+                Text("View Data & Profiles".localized)
                     .foregroundColor(.gray).font(.subheadline)
             }
             

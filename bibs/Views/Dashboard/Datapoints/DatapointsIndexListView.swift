@@ -28,22 +28,27 @@ struct DatapointsIndexListView: View {
             
             DevelopmentDataActionsView(profile: self.profile)
             
-            Divider()
-            
             if self.profile.parent.childrenArray.filter{$0.status == .archived}.count > 0 {
+                Divider()
+                
                 VStack {
-                    Text("Archived profiles".localized).font(.headline)
+                    Text("Archived Children".localized).font(.headline)
                     
-                    List(self.profile.parent.childrenArray.filter{$0.status == .archived}, id: \.self) { child in
-                        NavigationLink(destination: ChildEditView(child: child)) {
+                    VStack {
+                        ForEach(Array(self.profile.parent.childrenArray.filter{$0.status == .archived}), id: \.self) { child in
                             HStack {
-                                Text(child.wrappedName).foregroundColor(Color.white)
+                                Text(child.wrappedName).foregroundColor(Color(UIColor.label).opacity(0.75))
                                 Spacer()
                                 Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.5))
                             }
                         }
                     }
+                    .padding(5).padding([.leading, .trailing], 5)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }
+                .padding()
+                .padding(.top, 25)
             }
             
             NavigationLink(destination: ChildEditView(child: profile.parent.buildChildObject()), isActive: self.$showAddChildView) {
