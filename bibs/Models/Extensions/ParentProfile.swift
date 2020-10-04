@@ -342,7 +342,11 @@ extension ParentProfile {
             }
             
             session.child?.activeFeedSession = session
-            self.profileObserver?.activeFeedSessions.append(session)
+            
+            if self.profileObserver?.activeFeedSessions.firstIndex(of: session) == nil {
+                self.profileObserver?.activeFeedSessions.append(session)
+            }
+            
             session.unsuspend()
             
             try? self.managedObjectContext?.save()

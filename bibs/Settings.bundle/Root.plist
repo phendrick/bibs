@@ -20,7 +20,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Pause timer when switching breast side</string>
+			<string>Pause when switching breast side</string>
 			<key>Key</key>
 			<string>pauseTimerWhenSwitching</string>
 			<key>DefaultValue</key>
@@ -28,19 +28,9 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Data for &quot;this week&quot; shows last 7 days</string>
-			<key>Key</key>
-			<string>wedwedwedw</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Pause timers when closing the app</string>
+			<string>Pause when closing the app</string>
 			<key>Key</key>
 			<string>pauseRunningTimersOnShutdown</string>
 			<key>DefaultValue</key>
@@ -60,7 +50,7 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Data for &quot;this week&quot; shows last 7 days</string>
+			<string>This week shows last 7 days</string>
 			<key>Key</key>
 			<string>weeklyDataSevenDays</string>
 			<key>DefaultValue</key>

@@ -93,8 +93,8 @@ extension FeedSession: Identifiable, Trackable {
     func formattedElapsedTimeHsecs(includeRandomMsec: Bool = false) -> String {
         var hsecs = calculatedElapsedTime.hseconds
         
-        if includeRandomMsec && hsecs != 0 {
-            hsecs = max(calculatedElapsedTime.hseconds + (1...8).randomElement()!, 9)
+        if includeRandomMsec && hsecs != 0 && status == .running {
+            hsecs = (10...99).randomElement()!
         }
         
         return String(format: ".%02i", hsecs)

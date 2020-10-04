@@ -205,6 +205,7 @@ extension Child: Identifiable {
         
         self.parent?.profileObserver?.addToActiveFeedSessions(session: session)
         
+        print("Starting new feed session", UserDefaults.standard.bool(forKey: "autostartTimers"))
         do {
             /// if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
