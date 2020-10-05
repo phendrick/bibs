@@ -27,46 +27,6 @@ extension Child {
         }
     }
     
-    /// fetch all entities within two given dates
-//    func trackableEntitiesBetween(start dateFrom: Date, end dateTo: Date) -> [Trackable] {
-//        guard dateFrom < dateTo else {
-//            return []
-//        }
-//
-//        guard let context = self.managedObjectContext else {
-//            return []
-//        }
-//
-//        var calendar = Calendar.current
-//        calendar.timeZone = NSTimeZone.local
-//
-//        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", dateFrom as NSDate)
-//        let dateToPredicate   = NSPredicate(format: "createdAt < %@",  dateTo   as NSDate)
-//
-//        let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate])
-//
-//        let feedSessionFetchRequest:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
-//        feedSessionFetchRequest.predicate = datePredicate
-//
-//        let nappyChangeFetchRequest:NSFetchRequest<NappyChange> = NappyChange.fetchRequest()
-//        nappyChangeFetchRequest.predicate = datePredicate
-//
-//        let napFetchRequest:NSFetchRequest<Nap> = Nap.fetchRequest()
-//        napFetchRequest.predicate = datePredicate
-//
-//        do {
-//            let feedSessions = try context.fetch(feedSessionFetchRequest)
-//            let nappyChangeFetchRequest = try context.fetch(nappyChangeFetchRequest)
-//            let napFetchRequest = try context.fetch(napFetchRequest)
-//
-//            let allEntities = [feedSessions]
-//
-//            return allEntities.flatMap {$0}
-//        }catch {
-//            return []
-//        }
-//    }
-    
     /// get 'todays' overview of activity
     func completedFeedsWithinRange(dateDange: Range<Date>) -> [FeedSession] {
         return self.feedSessionsArray.filter {
@@ -111,18 +71,4 @@ extension Child {
         
         return (max: max, sessions: sessions)
     }
-    
-//    func yesterdaysFeedSessionsData() -> (Duration, Duration, [FeedSession]) {
-//        let dateRange = Date().dayAgo.beginningOfDay..<Date().beginningOfDay
-//
-//        let sessions:[FeedSession] = self.completedFeedsWithinRange(dateDange: dateRange)
-//        let durations: [Duration] = sessions.map {session in
-//            session.duration
-//        }.reversed()
-//
-//        let min = durations.min() ?? 0
-//        let max = durations.max() ?? 0
-//
-//        return (min: min, max: max, sessions: sessions)
-//    }
 }

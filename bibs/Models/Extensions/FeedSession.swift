@@ -40,10 +40,6 @@ extension FeedSession: Identifiable, Trackable {
         case noCurrentFeed
     }
     
-    var isActiveFeedSession: Bool {
-        status == .running || status == .paused
-    }
-    
     var currentFeed: Feed? {
         return feedsArray.last
     }

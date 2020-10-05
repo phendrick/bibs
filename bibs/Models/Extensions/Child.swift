@@ -132,12 +132,6 @@ extension Child: Identifiable {
         }
     }
     
-    public var latestFeedSessionsArray: [FeedSession] {
-        let feedSessions = feedSessionsArray
-        
-        return feedSessions
-    }
-    
     public var completedFeedSessionsArray: [FeedSession] {
         let feedSessions = feedSessionsArray.filter {$0.status == .complete}
         

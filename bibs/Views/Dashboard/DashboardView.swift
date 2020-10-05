@@ -17,18 +17,8 @@ struct DashboardView: View {
     
     @State var expanded: Bool = true
     @State var cofeeding: Bool = false
-    @State var timersListVisible: Bool = false
     
     var count: CGFloat = 2
-    
-    func widthFromGeometry(geometry: GeometryProxy) -> CGFloat {
-        let multipler:CGFloat = count > 1 ? 0.9 : 1.0
-        return geometry.frame(in: .global).width * multipler
-    }
-    
-    var showChildList: Bool {
-        self.profile.parent.activeChildrenArray.count > 1
-    }
     
     var body: some View {
         ZStack(alignment: .bottom) {

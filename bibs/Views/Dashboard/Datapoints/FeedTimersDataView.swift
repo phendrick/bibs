@@ -47,12 +47,6 @@ struct FeedTimersDataView: View {
         return "\(results.count) \("feed".pluralize(count: results.count)) totalling \(time.0) hour \(time.1) minutes and \(time.2) seconds."
     }
     
-    func chartDataFrom(results: [FeedSession]) -> [Double] {
-        return results.map {
-            Double(Int($0.duration) / 100)
-        }
-    }
-    
     @ViewBuilder func headerView(results: [FeedSession]) -> some View {
         VStack(alignment: .leading) {
             Text("\(statsForResults(results: results))")

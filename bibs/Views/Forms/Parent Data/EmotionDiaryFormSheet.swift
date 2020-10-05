@@ -39,24 +39,18 @@ struct EmotionDiaryFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("Add a little note about how you're feeling")
+                    header: Text("note_about_emotion")
                 ) {
                     TextField(self.emotionNote, text: self.$emotionNote)
                 }
             }
             
             if self.selectedEmotionType == .down || self.selectedEmotionType == .sad {
-                Text("Remember, if you're down it's totally normal. Maybe reach out to someone or join some online communities to share your thoughts ❤️ ").font(.caption).padding()
+                Text("negative_emotion_footer").font(.caption).padding()
             }
         }
     }
 }
-
-//struct EmotionDiaryFormSheet_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EmotionDiaryFormSheet(emotionDiaryFormVisible: .constant(true), emotionNote: .constant(""), )
-//    }
-//}
 
 struct TextView: UIViewRepresentable {
     

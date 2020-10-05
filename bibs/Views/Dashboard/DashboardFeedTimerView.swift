@@ -21,14 +21,6 @@ struct DashboardFeedTimerView: View {
         }
     }
     
-    var brestSideLabelFontSize: CGFloat {
-        if self.layout == .expanded {
-            return 30
-        }else {
-            return self.cofeeding ? 26 : 28
-        }
-    }
-    
     var breastSideLabel: String {
         guard let feedSession = self.child.activeFeedSession else {
             return ""
@@ -40,18 +32,6 @@ struct DashboardFeedTimerView: View {
             //return (self.cofeeding) ? feedSession.currentBreastSide.description.1 : feedSession.currentBreastSide.description.0
             return feedSession.currentBreastSide.description.1
         }
-    }
-    
-    var breastSideLabelPadding: CGFloat {
-        if self.layout == .minimised && self.cofeeding {
-            return 10
-        }else {
-            return 0
-        }
-    }
-    
-    var includeHsec: Bool {
-        self.layout != .minimised || !self.cofeeding
     }
     
     var showBreastSideLabel: Bool {

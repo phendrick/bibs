@@ -14,9 +14,7 @@ import SwiftUI
 struct ActiveFeedsTrayView: View {
     @ObservedObject var profile: ProfileObserver
     @State var layout: ExpandedState = .minimised
-    @State var dragOffset: CGPoint = .zero
     @State var dragDirection: DragDirection = .up
-    @State var isDragging = false
     
     enum ExpandedState: CaseIterable {
         case minimised
@@ -76,12 +74,6 @@ struct ActiveFeedsTrayView: View {
     
     var useVerticalLayout: Bool {
         return self.layout == .expanded
-    }
-    
-    var showActions: Bool {
-        let childrenNotFeeding = self.profile.parent.childrenWithoutCurrentFeedSessions.count > 0
-        
-        return childrenNotFeeding && self.profile.parent.currentFeedSessions.count < 2
     }
     
     var body: some View {
@@ -178,14 +170,6 @@ struct FeedSessionsList: View {
             return max(width, minWidth)
         }else {
             return width
-        }
-    }
-    
-    func cardHeight(child: Child) -> CGFloat {
-        if child.hasActiveFeedSession {
-            return 140
-        }else {
-            return 80
         }
     }
     

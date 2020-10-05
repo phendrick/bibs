@@ -41,8 +41,6 @@ struct DashboardToolsListView: View {
     @State var expressedMilkFormVisible = false
     @State var manualFeedTimerFormVisible = false
     
-    @State var foodDiaryFormVisible = false
-    
     var body: some View {
         VStack(alignment: .leading) {
             Text("add_data".localized).font(.headline)

@@ -13,7 +13,7 @@ struct ContentView: View {
     @EnvironmentObject var profile: ProfileObserver
     @EnvironmentObject var viewSettings: ViewSettings
     
-    @State var showingTimerAlert = false
+//    @State var showingTimerAlert = false
     
     var body: some View {
         ZStack {

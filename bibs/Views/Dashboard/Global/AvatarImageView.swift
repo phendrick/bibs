@@ -14,23 +14,6 @@ struct AvatarImageView: View {
     var lineWidth: CGFloat = 10
     var layout: ActiveFeedsTrayView.ExpandedState = .minimised
     
-    let imageBaseHeight = UIScreen.main.bounds.size.height / 12
-    
-    var imageSize: CGFloat {
-        if self.layout == .expanded {
-            return imageBaseHeight * 1.5
-        }else {
-            return imageBaseHeight
-        }
-    }
-    
-    var avatarHeight: CGFloat {
-        switch(self.layout) {
-        case .expanded: return UIScreen.main.bounds.height/8
-        case .minimised: return UIScreen.main.bounds.height/12
-        }
-    }
-    
     var body: some View {
         image
             .resizable()

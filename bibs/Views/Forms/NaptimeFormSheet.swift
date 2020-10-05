@@ -19,10 +19,6 @@ struct NaptimeFormSheet: View {
     @State var minutes:Int = 0
     @State var seconds:Int = 0
     
-    var childName: String {
-        self.profile.parent.activeChild?.wrappedName ?? ""
-    }
-    
     var body: some View {
         VStack {
             HStack {

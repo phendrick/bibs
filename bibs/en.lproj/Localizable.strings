@@ -216,6 +216,10 @@
 "new_baby_profile" = "New baby profile";
 "update_profile" = "Update Profile";
 
+// detailed notes
+"note_about_emotion" = "Add a little note about how you're feeling";
+"negative_emotion_footer" = "Remember, if you're down it's totally normal. Maybe reach out to someone or join some online communities to share your thoughts ❤️";
+
 // insights
 "insights" = "Insights";
 "naps" = "Naps";

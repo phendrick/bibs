@@ -95,8 +95,6 @@ struct ParentEmotionListView: View {
     @Environment(\.managedObjectContext) var context
     @ObservedObject var profile: ProfileObserver
     
-    var centerPoint:CGFloat = UIScreen.main.bounds.size.height
-    
     func removeRows(at offsets: IndexSet) {
         for index in offsets {
             let row = self.profile.parent.emotionsArray[index]

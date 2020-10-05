@@ -8,31 +8,6 @@
 
 import SwiftUI
 
-struct ChildDatatypeCardView: View {
-    var title: String
-    var subtitle: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                Text(title)
-                    .font(.subheadline)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .resizable()
-                    .frame(width: 5, height: 10)
-                    .foregroundColor(.secondary)
-            }
-            .frame(alignment: .top)
-        }
-        .padding()
-        .foregroundColor(.primary)
-        .padding()
-    }
-}
-
 struct ChildDataTypeListView: View {
     @ObservedObject var child: Child
     @ObservedObject var profile: ProfileObserver
