@@ -26,7 +26,9 @@ struct DatapointsIndexListView: View {
             
             Spacer()
             
-            DevelopmentDataActionsView(profile: self.profile)
+            #if DEBUG
+                DevelopmentDataActionsView(profile: self.profile)
+            #endif
             
             if self.profile.parent.childrenArray.filter{$0.status == .archived}.count > 0 {
                 Divider()

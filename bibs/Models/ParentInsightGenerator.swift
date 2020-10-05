@@ -101,11 +101,12 @@ struct EmotionInsightsGenerator {
     
     func negativeInsightsForFeeds(feeds: [FeedSession]) -> [String]? {
         let details = getTimeDetails(items: feeds)
-        let tenMinutes = 60000
+        let tenMinutes = 60 * 10 * 100 // ten minutes in miliseconds
         
         var reports: [String] = []
         
-        if details.count >= 20 && details.average < tenMinutes {
+        print("Average: ", details.average.toHoursMinutesSeconds)
+        if details.count >= 20 && details.average <= tenMinutes {
             reports.append("cluster_feeding")
         }
         

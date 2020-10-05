@@ -222,7 +222,7 @@
 			<key>one</key>
 			<string>%d nap</string>
 			<key>other</key>
-			<string>%d nappy changes</string>
+			<string>%d naps</string>
 		</dict>
 	</dict>
 	<key>FeedSession_count</key>

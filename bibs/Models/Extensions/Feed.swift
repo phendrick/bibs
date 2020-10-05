@@ -25,8 +25,8 @@ extension Feed: Identifiable, Timeable {
         
         var description: (String, String, String) {
             switch(self) {
-                case .left: return (full: "Left side", label: "L", short: "Left")
-                case .right: return (full: "Right side", label: "R", short: "Right")
+                case .left: return (full: "Left side", label: "Left", short: "Left")
+                case .right: return (full: "Right side", label: "Right", short: "Right")
             }
         }
         

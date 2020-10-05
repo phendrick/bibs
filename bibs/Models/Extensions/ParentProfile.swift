@@ -515,7 +515,7 @@ extension ParentProfile {
     public var emotionsArray: [Emotion] {
         let set = emotions as? Set<Emotion> ?? []
         
-        return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
+        return set.sorted {$0.wrappedCreatedAt > $1.wrappedCreatedAt}
     }
     
     public var latestEmotionType: Emotion.EmotionType {

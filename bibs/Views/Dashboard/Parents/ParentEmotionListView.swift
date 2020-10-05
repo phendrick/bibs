@@ -18,6 +18,10 @@ struct ParentEmotionInsightsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text(emotion.status.emoji).font(.title)
+                Text(emotion.wrappedCreatedAt.getFormattedDate())
+            }
             if report != nil {
                 ForEach(Array(report!.keys), id: \.self) {key in
                     VStack(alignment: .leading, spacing: 10) {

@@ -150,7 +150,7 @@
 
 "late_night_bottles" = "Bottle feeding can be a lot of work. Keep going, it'll get easier.";
 "over_napping" = "Over napping";
-"over_napping_detail" = "Napping too much through the day can lead to some long nights.";
+"over_napping_details" = "Napping too much through the day can lead to some long nights.";
 
 "under_napping" = "Under napping";
 "under_napping_details" = "When over-tired, a baby can fight sleep like a prize fighter!";
