@@ -146,6 +146,7 @@
 "weaning_only" = "Weaning only";
 "archived" = "Archived";
 "archive" = "Archive";
+"archived_children" = "Archived Profiles";
 
 "amount" = "Amount";
 "light" = "Light";

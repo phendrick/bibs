@@ -115,19 +115,19 @@ struct BottleFeedsDataView: View {
         }
         .sheet(isPresented: $dateOptionsSheetVisible) {
             VStack(spacing: 50) {
-                Section(header: Text("Date from")) {
+                Section(header: Text("date_from".localized)) {
                     DatePicker(selection: self.$dateFilterStartDate, in: ...Date(), displayedComponents: .date) {
                         Text("")
                     }.labelsHidden()
                 }
                 
-                Section(header: Text("Date to")) {
+                Section(header: Text("date_to".localized)) {
                     DatePicker(selection: self.$dateFilterEndDate, in: ...Date(), displayedComponents: .date) {
                         Text("")
                     }.labelsHidden()
                 }
                 
-                Button("Done") {
+                Button("done".localized) {
                     self.dateOptionsSheetVisible = false
                 }
             }
@@ -138,7 +138,7 @@ struct BottleFeedsDataView: View {
                 self.dateFilter = .date
             }
         }
-        .navigationBarTitle(Text("Bottle Feeds"), displayMode: .large)
+        .navigationBarTitle(Text("bottle_feeds".localized), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }
 }

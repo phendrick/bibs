@@ -34,7 +34,7 @@ struct DatapointsIndexListView: View {
                 Divider()
                 
                 VStack {
-                    Text("Archived Children".localized).font(.headline)
+                    Text("archived_children".localized).font(.headline)
                     
                     VStack {
                         ForEach(Array(self.profile.parent.childrenArray.filter{$0.status == .archived}), id: \.self) { child in
