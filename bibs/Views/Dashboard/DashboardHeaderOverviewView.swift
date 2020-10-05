@@ -23,7 +23,7 @@ struct DashboardHeaderOverviewItem: View {
                         
                         Spacer()
                         if count == nil {
-                            Text("No data available".localized)
+                            Text("No data today".localized)
                                 .foregroundColor(Color(UIColor.quaternaryLabel))
                                 .font(.caption)
                         }

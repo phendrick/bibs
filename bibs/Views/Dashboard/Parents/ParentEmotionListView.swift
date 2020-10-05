@@ -9,180 +9,6 @@
 import SwiftUI
 import CoreData
 
-typealias InsightReport = [String: [String]]
-struct EmotionInsightsGenerator {
-    var emotion: Emotion
-    var context: NSManagedObjectContext
-    
-    func generate() -> [String: [String]]? {
-        let twoDays: Double = 3600*24*2
-        
-        let fromDate = emotion.wrappedCreatedAt.beginningOfDay.advanced(by: -twoDays)
-        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", fromDate as NSDate)
-        let dateToPredicate   = NSPredicate(format: "createdAt < %@",  emotion.wrappedCreatedAt as NSDate)
-        
-        let predicates = [dateFromPredicate, dateToPredicate]
-        
-        let datePredicate = NSCompoundPredicate(
-            andPredicateWithSubpredicates: predicates
-        )
-        
-        let napsFetchRequest: NSFetchRequest<Nap> = Nap.fetchRequest()
-        let feedsFetchRequest: NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
-        let bottlesFetchRequest: NSFetchRequest<BottleFeed> = BottleFeed.fetchRequest()
-        
-        napsFetchRequest.predicate = datePredicate
-        feedsFetchRequest.predicate = datePredicate
-        bottlesFetchRequest.predicate = datePredicate
-        
-        var results: [String: [String]] = [:]
-        
-        let naps    = try? self.context.fetch(napsFetchRequest)
-        let feeds   = try? self.context.fetch(feedsFetchRequest)
-        let bottles = try? self.context.fetch(bottlesFetchRequest)
-        
-        print("\n\n\n")
-        print(naps?.count, feeds?.count, bottles?.count)
-        print("\n\n\n")
-        
-        if emotion.status.rawValue < 4 {
-            if let report = negativeInsightsForNaps(naps: naps ?? []) {
-                results["naps"] = report
-            }
-            
-            if let report = negativeInsightsForFeeds(feeds: feeds ?? []) {
-                results["feeds"] = report
-            }
-            
-            if let report = negativeInsightsForBottles(bottles: bottles ?? []) {
-                results["bottle_feeds"] = report
-            }
-        }else {
-            if let report = positiveInsightsForNaps(naps: naps ?? []) {
-                results["naps"] = report
-            }
-            
-            if let report = positiveInsightsForFeeds(feeds: feeds ?? []) {
-                results["feeds"] = report
-            }
-
-            if let report = positiveInsightsForBottles(bottles: bottles ?? []) {
-                results["bottle_feeds"] = report
-            }
-        }
-        
-        return results.values.count > 0 ? results : nil
-    }
-    
-    func getTimeDetails<T: Trackable>(items: [T]) -> (count: Int, total: Duration, average: Duration) {
-        guard items.count > 0 else {
-            return (count: 0, total: 0, average: 0)
-        }
-        let duration = items.reduce(into: 0) { total, item in
-            total += item.trackableUnit
-        }
-        
-        let average = duration / Int32(items.count)
-        
-        return (count: items.count, total: duration, average: average)
-    }
-    
-    func negativeInsightsForNaps(naps: [Nap]) -> [String]? {
-        let details = getTimeDetails(items: naps)
-        
-        var reports: [String] = []
-        
-        if details.total > 8 {
-            reports.append("over_napping")
-        }
-        
-        if details.total < 4 {
-            reports.append("under_napping")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-    
-    func negativeInsightsForFeeds(feeds: [FeedSession]) -> [String]? {
-        let details = getTimeDetails(items: feeds)
-        let tenMinutes = 60000
-        
-        var reports: [String] = []
-        
-        if details.count >= 20 && details.average < tenMinutes {
-            reports.append("cluster_feeding")
-        }
-        
-        let earlyMorningFeeds = feeds.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        if earlyMorningFeeds > 4 {
-            reports.append("late_nights")
-        }
-        
-        if details.average > tenMinutes * 4 {
-            reports.append("long_feeds")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-    
-    func negativeInsightsForBottles(bottles: [BottleFeed]) -> [String]? {
-        var reports: [String] = []
-        
-        let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        if earlyMorningFeeds > 4 {
-            reports.append("late_night_bottles")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-    
-    func positiveInsightsForNaps(naps: [Nap]) -> [String]? {
-        let details = getTimeDetails(items: naps)
-        let tenMinutes: Double = 60000
-        
-        var reports: [String] = []
-        
-        if (4...8).contains(details.count) {
-            reports.append("ideal_nap_amount")
-        }
-        
-        if ((tenMinutes * 1.5)...(tenMinutes * 5)).contains(Double(details.average)) {
-            reports.append("ideal_nap_duration")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-    
-    func positiveInsightsForFeeds(feeds: [FeedSession]) -> [String]? {
-        let details = getTimeDetails(items: feeds)
-        let tenMinutes: Double = 60000
-        
-        var reports: [String] = []
-        
-        if ((tenMinutes * 1.5)...(tenMinutes * 5)).contains(Double(details.average)) {
-            reports.append("ideal_feeding_time")
-        }
-        
-        let earlyMorningFeeds = feeds.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        if (1..<4).contains(earlyMorningFeeds) {
-            reports.append("ideal_late_nights")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-    
-    func positiveInsightsForBottles(bottles: [BottleFeed]) -> [String]? {
-        var reports: [String] = []
-        
-        let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        if (1..<4).contains(earlyMorningFeeds) {
-            reports.append("ideal_late_night_bottles")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-}
-
 struct ParentEmotionInsightsView: View {
     @Environment(\.managedObjectContext) var moc
     @State var generatingReport: Bool = false
@@ -229,16 +55,31 @@ struct ParentEmotionInsightsView: View {
             }
             
             Spacer()
+            
+            if report != nil {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Text("Remember").font(.headline)
+                        Image(systemName: "lightbulb")
+                    }
+                    
+                    Text("The insights that we generate can only be used as a reference for the data surrounding the time when you recorded this emotion. They shouldn't be depended on in place of medical advice. ").font(.caption)
+                    
+                    HStack {
+                        Text("If you have any concerns about you or your baby, please consult your ") + Text("doctor".localized) + Text(".")
+                    }.font(.caption)
+                }
+            }
         }
         .padding()
-        .navigationBarTitle("Insights")
+        .navigationBarTitle("Insights".localized)
         .onAppear {
             let reportGenerator = EmotionInsightsGenerator(emotion: emotion, context: self.moc)
             self.generatingReport = true
             
             Dispatch.background {
                 let report = reportGenerator.generate()
-                print(report)
+                
                 Dispatch.main {
                     self.generatingReport = false
                     self.report = report
