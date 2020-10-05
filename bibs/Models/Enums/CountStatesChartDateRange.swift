@@ -58,7 +58,7 @@ enum CountStatesChartDateRange {
             case .today:
                 dates = Date().beginningOfDay...Date().endOfDay
             case .week:
-                dates = Date().beginningOfWeek.endOfDay...Date().beginningOfWeek.plusWeek.endOfDay
+                dates = Date().beginningOfWeek.beginningOfDay...Date().beginningOfWeek.plusWeek.endOfDay
             case .month:
                 dates = Date().beginningOfMonth...Date().endOfMonth
             case .dateRange(let dateRange):
