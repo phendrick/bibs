@@ -1,0 +1,250 @@
+/* 
+  Localizable.strings
+  bibs
+
+  Created by Paul Hendrick on 25/08/2020.
+  Copyright © 2020 Paul Hendrick. All rights reserved.
+*/
+
+// translations with arguments are really strformat's with a NSLocalizedString parameter. ie.
+// String(format: NSLocalizedString(translation_name, comment: ""), name)
+
+// onboarding
+"ready_to_start" = "Ready to get started?";
+"next" = "Next";
+"just_call_me" = "Just call me";
+
+// welcomes
+"welcome_baby" = "Welcome, baby";
+"morning_greeting" = "Morning, %@";
+"hi_greeting" = "Hi, %@";
+"evening_greeting" = "Evening, %@";
+"late_greeting" = "Evening, %@";
+
+// greetings
+"how_are_you" = "How are you?";
+"how_are_you_today" = "How are you today?";
+"had_a_good_day" = "Had a good day?";
+"keep_going" = "Keep going!";
+"youre_amazing" = "You're amazing!";
+
+// dashboard
+"today" = "Today";
+"this_week" = "This week";
+"this_month" = "This month";
+"last_7_days" = "Last 7 days";
+"this_year" = "This Year";
+"everything" = "Everything";
+"date" = "Date";
+"yesterday" = "Yesterday";
+"view_all_data" = "View all data";
+"feeds" = "Feeds";
+"nappies" = "Nappies";
+"naps" = "Naps";
+"overview" = "Overview";
+"today_so_far" = "Today so far";
+"view_chart_data" = "View Data";
+"view_data" = "View data & Profiles";
+"no_data" = "No data available";
+"latest_at" = "Latest at";
+"add_data" = "Add data";
+"add_child" = "Add Child";
+"edit_child" = "Edit %@";
+"childs_data" = "%@'s data";
+"weekly_breakdown" = "Weekly Breakdown";
+
+// tools & forms
+"stored_milk" = "Stored Milk";
+"bottle_feed" = "Bottle Feed";
+"breastfeed" = "Breastfeed";
+"nappy_change" = "Diaper Change";
+"nappy_changes" = "Diaper Changes";
+"weaning" = "Weaning";
+"nap_time" = "Nap Time";
+"nap_times" = "Nap Times";
+"food_diary" = "Food Diary";
+"emotions" = "Emotions";
+"emotion" = "Emotion";
+
+"breastfeeds" = "Breastfeeds";
+"bottle_feeds" = "Bottle Feeds";
+"nap_times" = "Nap Times";
+"snacks_and_weaning" = "Snacks & Weaning";
+
+// forms
+"ive_expressed" = "I've expressed";
+"refridgerated" = "Refridgerated";
+"refridgerated_details" = "Details about Refridgerated milk";
+"room_temperature" = "Room Temperature";
+"room_temperature_details" = "Details about Room Temperature milk";
+"frozen" = "Frozen";
+"frozen_details" = "Details about Frozen milk";
+"thawed" = "Thawed";
+"thawed_details" = "Details about Thawed milk";
+"donated" = "Donated";
+"donated_details" = "Details about Donated milk";
+"disposed" = "Disposed";
+"disposed_details" = "Details about Disposed milk";
+
+"add_a_feed" = "Add a feed";
+"add_a_note" = "Add a note";
+"name" = "Name";
+"date_of_birth" = "Date of birth";
+"due_date" = "Due Date";
+"choose_a_theme" = "Choose a theme";
+"is_currently" = "Is currently";
+"done" = "Done";
+"date_from" = "Date From";
+"date_to" = "Date To";
+
+"about_you" = "About You";
+"about_your_baby" = "About your baby";
+"how_are_you" = "How are you?";
+"your_food_diary" = "Your food diary";
+
+"which_was" = "Which was";
+"expressed_milk" = "Expressed Milk";
+"donor_milk" = "Donor Milk";
+"formula_milk" = "Formula Milk";
+
+"forgotten_to_set_a_timer" = "Forgotten to set a timer? Just add one here";
+"forgotten_to_set_a_timer_intro" = "If you've forgotten to set a timer, you can add one here.";
+"fed_from" = "Fed from";
+"time" = "Time";
+"from" = "From";
+
+"wet" = "Wet";
+"dirty" = "Soiled";
+"wet_and_dirty" = "Wet & Soiled";
+"dry" = "Dry";
+
+"black" = "Black";
+"black_details" = "Normal in newborns.";
+"green" = "Green";
+"green_details" = "Can be caused by medication or allergies.";
+"brown" = "Brown";
+"brown_details" = "Normal";
+"yellow" = "Yellow";
+"yellow_details" = "Normal in breastfed babies";
+"white" = "White";
+"white_details" = "Seek medical advice!";
+"red" = "Red";
+"red_details" = "Seek medical advice!";
+
+"light" = "Light";
+"heavy" = "Heavy";
+"regular" = "Regular";
+
+"seek_medical_advice" = "Seek medical advice";
+"totally_normal_in_newborns" = "Totally normal in newborns";
+"can_be_caused_by_medication" = "Can be caused by medication or allergies";
+"normal" = "Normal";
+"normal_when_breastfeeding" = "Normal when breastfeeding";
+
+"breastfeeding" = "Breastfeeding";
+"breastfeeding_and_weaning" = "Breastfeeding & Weaning";
+"weaning_only" = "Weaning only";
+"archived" = "Archived";
+"archive" = "Archive";
+
+"amount" = "Amount";
+"light" = "Light";
+"regular" = "Regular";
+"heavy" = "Heavy";
+"had" = "had";
+
+"happy" = "Happy";
+"enthusiastic" = "Enthusiastic";
+"excited" = "Excited";
+"loved" = "Loved";
+"tired" = "Tired";
+"sad" = "Sad";
+"down" = "Down";
+
+"food_type" = "Food type";
+"vegetables" = "Vegetables";
+"fruit" = "Fruit";
+"starchy_foods" = "Starchy foods";
+"proteins" = "Proteins";
+"dairy" = "Dairy";
+
+// foods
+"weaning_type" = "Snack type";
+"weaning_vegetables" = "Carrots, broccoli, pease, avocado, cauliflower";
+"weaning_fruit" = "Kiwi, strawberries, melon, mango, apples";
+"weaning_starchy_foods" = "Pasta, potatoes, quinoa, bread, oats, chapatti";
+"weaning_proteins" = "Beans, lentils, chicken, beef, lamb, chickpeas";
+"weaning_dairy" = "Eggs, yoghurt, milk";
+"weaning_note_hint" = "Add a note eg. \"Carrot sticks\"";
+
+// data
+"none_today" = "None today";
+"none" = "None";
+
+// string appends
+"baby_had" = "%@ had";
+"baby_fed_from" = "%@ fed from";
+"babys_nappy_was" = "%@ nappy was";
+"baby_napped_from" = "%@ napped from";
+"bottle_feed_type" = "Bottle Feed Type";
+
+//
+"time" = "Time";
+"for" = "For";
+"save" = "Save";
+
+//
+"hours" = "Hours";
+"minutes" = "Minutes";
+"seconds" = "Seconds";
+
+// settings
+"edit_your_details" = "Edit your details";
+"your_name" = "Your name";
+"timer_options" = "Timer options";
+"automatically_start_new_timers" = "Auto start new timers";
+"pause_timers_when_switching_breasts" = "Pause timers when switching breasts";
+"dates" = "Dates";
+"weekly_data_starts_on_Monday" = "Weekly data starts on Monday";
+"pause_timers_when_closing" = "Pause timers when closing";
+"update_your_baby_profiles" = "Update your baby profiles";
+"cofeeding_hint" = "If you're co-feeding, you can add a second profile and easily switch between them, and even set up co-feeding sessions!";
+"new_baby_profile" = "New baby profile";
+"update_profile" = "Update Profile";
+
+// insights
+"insights" = "Insights";
+"naps" = "Naps";
+"feeds" = "Feeds";
+"bottle_feeds" = "Bottle Feeds";
+
+"late_night_bottles" = "Bottle feeding can be a lot of work. Keep going, it'll get easier.";
+"over_napping" = "Over napping";
+"over_napping_details" = "Napping too much through the day can lead to some long nights.";
+
+"under_napping" = "Under napping";
+"under_napping_details" = "When over-tired, a baby can fight sleep like a prize fighter!";
+
+"cluster_feeding" = "Cluster feeding";
+"cluster_feeding_details" = "Lots of smaller feeds, bunched together can be exhausing for you.";
+
+"late_nights" = "Late nights";
+"late_nights_details" = "Lots of activity late at night will leave you and baby tired.";
+
+"long_feeds" = "Long feeds";
+"long_feeds_details" = "Long feeds can be exhausting for you.";
+
+"ideal_nap_amount" = "Good napping!";
+"ideal_nap_amount_details" = "You're hitting the the sweet spot for naps here.";
+
+"ideal_nap_duration" = "Good nap time!";
+"ideal_nap_duration_details" = "Very good. Napping too long can lead to long nights with a wide awake baby.";
+
+"ideal_feeding_time" = "Well fed";
+"ideal_feeding_time_details" = "Breastfeed times are looking good!";
+
+"ideal_late_nights" = "Late night feeds";
+"ideal_late_nights_details" = "Not too many late nights here. A good nights sleep can make you feel invincible!";
+
+"ideal_late_night_bottles" = "Late night bottles";
+"ideal_late_night_bottles_details" = "Bottle feeding can be a lot of work. You've had some good nights here.";
