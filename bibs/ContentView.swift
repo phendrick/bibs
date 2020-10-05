@@ -32,9 +32,6 @@ struct ContentView: View {
 //                    }
                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                         self.profile.parent.resumeSuspendedFeedSessions()
-                        print("\n\n\n\nStarting up: ")
-                        print(UserDefaults.standard.bool(forKey: "autostartTimers"))
-                        print("\n\n\n\n")
 //                        if self.profile.parent.timerDriftWithinPermittedRange {
 //                            self.profile.parent.resumeSuspendedFeedSessions()
 //                        }else {

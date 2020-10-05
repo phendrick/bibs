@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import CoreData
+import Foundation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -50,6 +51,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         profileObserver.parent.resumeSuspendedFeedSessions()
         
+        // load settings
+        configureSettingsBundle()
+        
         // View settings to determine which view to show on start up (dashboard or onboarding process)
         let viewSettings = ViewSettings(initialView: initialView)
         
@@ -59,6 +63,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(profileObserver)
             .environmentObject(viewSettings)
             .environment(\.managedObjectContext, context)
+            
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -67,6 +72,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+    
+    func configureSettingsBundle() {
+        let userDefaults = UserDefaults.standard
+        
+        guard let settingsBundle = Bundle.main.url(forResource: "Settings", withExtension:"bundle") else {
+            print("Settings.bundle not found")
+            return;
+        }
+        
+        guard let settings = NSDictionary(contentsOf: settingsBundle.appendingPathComponent("Root.plist")) else {
+            print("Root.plist not found in settings bundle")
+            return
+        }
+        
+        guard let preferences = settings.object(forKey: "PreferenceSpecifiers") as? [[String: AnyObject]] else {
+            print("Root.plist has invalid format")
+            return
+        }
+        
+        var defaultsToRegister = [String: AnyObject]()
+        
+        for var pref in preferences {
+            if let key = pref["Key"] as? String, let val = pref["DefaultValue"] {
+                defaultsToRegister[key] = val
+            }
+        }
+        userDefaults.register(defaults: defaultsToRegister)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

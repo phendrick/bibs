@@ -45,7 +45,6 @@
 		DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154424A2A8FD00442543 /* DashboardDataView.swift */; };
 		DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */; };
 		DA635B1B2482698D009BA4FF /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1A2482698D009BA4FF /* Child.swift */; };
-		DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */; };
 		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
 		DA7F8A7424CB05E800840AF1 /* UIDevice+screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F8A7324CB05E800840AF1 /* UIDevice+screen.swift */; };
 		DA8283CD24C4FD8800E82E45 /* EditFeedSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */; };
@@ -58,9 +57,6 @@
 		DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */; };
 		DA842085252B12A500ED5105 /* ParentInsightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA842084252B12A500ED5105 /* ParentInsightGenerator.swift */; };
 		DA84208B252B519800ED5105 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA84208D252B519800ED5105 /* Localizable.strings */; };
-		DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */; };
-		DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */; };
-		DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */; };
 		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
 		DA88ECAC250119BB00DF01E2 /* DashboardToolCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA88ECAB250119BB00DF01E2 /* DashboardToolCardsView.swift */; };
 		DA88ECAE250119D400DF01E2 /* DashboardToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */; };
@@ -68,7 +64,6 @@
 		DA918F8724A6380D006DFF99 /* CustomUIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */; };
 		DA92439824DE0AAE00339810 /* DatapointsIndexListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */; };
 		DAA0490424B53449007D290D /* ActiveFeedsTray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA0490324B53449007D290D /* ActiveFeedsTray.swift */; };
-		DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAA34DB92488549D00CF9028 /* OpenSans.ttf */; };
 		DAA5BBA824FEE27100ED234D /* FeedSessionChildChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5BBA524FEE1FE00ED234D /* FeedSessionChildChartsView.swift */; };
 		DAA5BBA924FEE27100ED234D /* ChartStatsTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5BBA624FEE1FE00ED234D /* ChartStatsTodayView.swift */; };
 		DAA5BBAA24FEE27100ED234D /* ChartStatsWeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5BBA424FEE1FE00ED234D /* ChartStatsWeeklyView.swift */; };
@@ -140,7 +135,6 @@
 		DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF7518A24B7D78A00C83F33 /* BottleFeed.swift */; };
 		DAFE32362479D7470009B737 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32352479D7470009B737 /* WelcomeView.swift */; };
 		DAFE32382479D7680009B737 /* AddChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32372479D7680009B737 /* AddChildView.swift */; };
-		DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE32392479D77A0009B737 /* AddChildConfirmationView.swift */; };
 		DAFE323D2479D8890009B737 /* ViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE323C2479D8890009B737 /* ViewSettings.swift */; };
 /* End PBXBuildFile section */
 
@@ -200,7 +194,6 @@
 		DA51154424A2A8FD00442543 /* DashboardDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataView.swift; sourceTree = "<group>"; };
 		DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		DA635B1A2482698D009BA4FF /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
-		DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
 		DA7F8A7324CB05E800840AF1 /* UIDevice+screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+screen.swift"; sourceTree = "<group>"; };
 		DA8283CC24C4FD8800E82E45 /* EditFeedSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFeedSessionView.swift; sourceTree = "<group>"; };
@@ -215,9 +208,6 @@
 		DA842091252B51C100ED5105 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA8420B3252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA8420B4252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
-		DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
-		DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
 		DA88ECAB250119BB00DF01E2 /* DashboardToolCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolCardsView.swift; sourceTree = "<group>"; };
 		DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolView.swift; sourceTree = "<group>"; };
@@ -225,7 +215,6 @@
 		DA918F8624A6380D006DFF99 /* CustomUIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIScrollViewDelegate.swift; sourceTree = "<group>"; };
 		DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatapointsIndexListView.swift; sourceTree = "<group>"; };
 		DAA0490324B53449007D290D /* ActiveFeedsTray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveFeedsTray.swift; sourceTree = "<group>"; };
-		DAA34DB92488549D00CF9028 /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenSans.ttf; sourceTree = "<group>"; };
 		DAA5BBA424FEE1FE00ED234D /* ChartStatsWeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStatsWeeklyView.swift; sourceTree = "<group>"; };
 		DAA5BBA524FEE1FE00ED234D /* FeedSessionChildChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSessionChildChartsView.swift; sourceTree = "<group>"; };
 		DAA5BBA624FEE1FE00ED234D /* ChartStatsTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartStatsTodayView.swift; sourceTree = "<group>"; };
@@ -304,7 +293,6 @@
 		DAF7518A24B7D78A00C83F33 /* BottleFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeed.swift; sourceTree = "<group>"; };
 		DAFE32352479D7470009B737 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		DAFE32372479D7680009B737 /* AddChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildView.swift; sourceTree = "<group>"; };
-		DAFE32392479D77A0009B737 /* AddChildConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildConfirmationView.swift; sourceTree = "<group>"; };
 		DAFE323C2479D8890009B737 /* ViewSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -499,11 +487,6 @@
 			isa = PBXGroup;
 			children = (
 				DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */,
-				DA6A40FC24996F0F0076FB65 /* OpenSans-SemiBold.ttf */,
-				DAA34DB92488549D00CF9028 /* OpenSans.ttf */,
-				DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */,
-				DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */,
-				DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */,
 				DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */,
 			);
 			path = Fonts;
@@ -750,7 +733,6 @@
 				DAFE32352479D7470009B737 /* WelcomeView.swift */,
 				DAE245B424A5DE3D00018C3F /* AboutYouView.swift */,
 				DAFE32372479D7680009B737 /* AddChildView.swift */,
-				DAFE32392479D77A0009B737 /* AddChildConfirmationView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -878,18 +860,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA053CD824F5CD2B00A1D825 /* Localizable.stringsdict in Resources */,
-				DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */,
 				DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */,
-				DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */,
 				DADD79042478609700791F61 /* Preview Assets.xcassets in Resources */,
 				DAD4A0412529339100E84EB0 /* Settings.bundle in Resources */,
 				DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */,
-				DAA34DBA2488549D00CF9028 /* OpenSans.ttf in Resources */,
 				DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */,
 				DA84208B252B519800ED5105 /* Localizable.strings in Resources */,
-				DA86DEA924AA7BC500107ED3 /* Merriweather-Bold.ttf in Resources */,
 				DADD79012478609700791F61 /* Assets.xcassets in Resources */,
-				DA6A40FD24996F0F0076FB65 /* OpenSans-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,7 +924,6 @@
 				DABE2EC424F9D54A00EA6E5D /* chartHelpers.swift in Sources */,
 				DA08835024CE4AEA003B7020 /* ManualFeedTimerEntryFormSheet.swift in Sources */,
 				DA88ECAE250119D400DF01E2 /* DashboardToolView.swift in Sources */,
-				DAFE323A2479D77A0009B737 /* AddChildConfirmationView.swift in Sources */,
 				DA08834124CCF550003B7020 /* Snack+CoreDataProperties.swift in Sources */,
 				DAF1FA2824A40DE10051CA6B /* NappyChange.swift in Sources */,
 				DADBBD5724DF4B3E0082F820 /* ParentDashboardDataListView.swift in Sources */,
