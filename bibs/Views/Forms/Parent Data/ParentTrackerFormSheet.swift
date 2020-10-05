@@ -23,23 +23,11 @@ struct ParentTrackerFormSheet: View {
     
     var body: some View {
         VStack {
-            Picker(selection: self.$form, label: Text("OK")) {
-                Text("How are you?").tag(0)
-                Text("Your food diary").tag(1)
-            }
-            .labelsHidden()
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            if self.form == 0 {
-                EmotionDiaryFormSheet(emotionNote: self.$emotionNote, selectedEmotionType: $selectedEmotionType)
-            }else {
-                FoodDiaryFormSheet(foodDiaryNote: self.$foodDiaryNote, selectedFoodType: $selectedFoodType)
-            }
-            
-            Spacer()
-            
-            VStack {
+            HStack {
+                Spacer()
+                Text("nap_time".localized)
+                Spacer()
+                
                 Button("Save \(self.form == 0 ? "Emotion" : "Food diary")") {
                     if self.form == 0 {
                         guard let emotionType = self.selectedEmotionType else {
@@ -74,9 +62,27 @@ struct ParentTrackerFormSheet: View {
                     }
                 }
             }
+            .font(.headline)
+            .padding()
+            .frame(height: 60)
             .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
             .background(Color(UIColor.systemBackground))
+            .clipped()
+            .shadow(color: .gray, radius: 1, x: 0, y: 0)
+            
+            Picker(selection: self.$form, label: Text("OK")) {
+                Text("How are you?").tag(0)
+                Text("Your food diary").tag(1)
+            }
+            .labelsHidden()
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            
+            if self.form == 0 {
+                EmotionDiaryFormSheet(emotionNote: self.$emotionNote, selectedEmotionType: $selectedEmotionType)
+            }else {
+                FoodDiaryFormSheet(foodDiaryNote: self.$foodDiaryNote, selectedFoodType: $selectedFoodType)
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

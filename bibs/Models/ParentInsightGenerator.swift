@@ -92,7 +92,7 @@ struct EmotionInsightsGenerator {
             reports.append("over_napping")
         }
         
-        if details.total < 4 {
+        if (1..<5).contains(details.total) {
             reports.append("under_napping")
         }
         
@@ -105,12 +105,12 @@ struct EmotionInsightsGenerator {
         
         var reports: [String] = []
         
-        print("Average: ", details.average.toHoursMinutesSeconds)
         if details.count >= 20 && details.average <= tenMinutes {
             reports.append("cluster_feeding")
         }
         
         let earlyMorningFeeds = feeds.filter {$0.wrappedCreatedAt.earlyMorning}.count
+        
         if earlyMorningFeeds > 4 {
             reports.append("late_nights")
         }
@@ -126,6 +126,7 @@ struct EmotionInsightsGenerator {
         var reports: [String] = []
         
         let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
+        
         if earlyMorningFeeds > 4 {
             reports.append("late_night_bottles")
         }
@@ -172,6 +173,7 @@ struct EmotionInsightsGenerator {
         var reports: [String] = []
         
         let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
+        
         if (1..<4).contains(earlyMorningFeeds) {
             reports.append("ideal_late_night_bottles")
         }

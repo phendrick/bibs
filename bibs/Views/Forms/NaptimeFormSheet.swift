@@ -27,13 +27,37 @@ struct NaptimeFormSheet: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: {
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
+                Text("nap_time".localized)
+                Spacer()
+                
+                Button("save".localized) {
+                    guard let child = self.profile.parent.activeChild else {
+                        debugPrint("No activeChild")
+                        return
+                    }
+                    
+                    let naptime = Nap(context: self.moc)
+                    naptime.nappedAt = self.from
+                    naptime.createdAt = Date()
+                    let _ = naptime.setDurationFromValues(hours: self.hours, minutes: self.minutes, seconds: self.seconds)
+                    child.addToNaps(naptime)
+                     
+                    do {
+                        try self.moc.save()
+                        self.profile.objectWillChange.send()
+                        self.naptimeFormVisible = false
+                    }catch {
+                        debugPrint("Error saving")
+                    }
+                }
             }
-            
-            Text("nap_time".localized).font(.headline)
+            .font(.headline)
+            .padding()
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .clipped()
+            .shadow(color: .gray, radius: 1, x: 0, y: 0)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -52,6 +76,8 @@ struct NaptimeFormSheet: View {
                 Section {
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
+                            Spacer()
+                            
                             VStack(spacing: 0) {
                                 Text("hours".localized).foregroundColor(Color(UIColor.label))
                                 
@@ -92,36 +118,12 @@ struct NaptimeFormSheet: View {
                                 .frame(width: 100).labelsHidden()
                                 .clipped()
                             }
+                            
+                            Spacer()
                         }
                     }.frame(height: 240).padding(.top, 20)
                 }
             }
-            
-            VStack {
-                Button("save".localized) {
-                    guard let child = self.profile.parent.activeChild else {
-                        debugPrint("No activeChild")
-                        return
-                    }
-                    
-                    let naptime = Nap(context: self.moc)
-                    naptime.nappedAt = self.from
-                    naptime.createdAt = Date()
-                    let _ = naptime.setDurationFromValues(hours: self.hours, minutes: self.minutes, seconds: self.seconds)
-                    child.addToNaps(naptime)
-                     
-                    do {
-                        try self.moc.save()
-                        self.profile.objectWillChange.send()
-                        self.naptimeFormVisible = false
-                    }catch {
-                        debugPrint("Error saving")
-                    }
-                }.font(.headline)
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
-            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

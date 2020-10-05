@@ -20,7 +20,7 @@ struct ParentDashboardDataListView: View {
                 HStack {
                     NavigationLink(destination: ParentEmotionListView(profile: self.profile).environment(\.managedObjectContext, self.moc)) {
                         VStack(alignment: .leading) {
-                            Text("emotions".localized)
+                            Text("emotions_and_insights".localized)
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))

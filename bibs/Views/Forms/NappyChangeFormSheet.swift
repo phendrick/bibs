@@ -21,14 +21,37 @@ struct NappyChangeFormSheet: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: {
-                    self.nappyChangeFormVisible = false
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
+                Text("nappy_change".localized)
+                Spacer()
+                
+                Button("save".localized) {
+                    guard let child = self.profile.parent.activeChild else {
+                        debugPrint("No activeChild")
+                        return
+                    }
+                    
+                    let nappyChange = NappyChange(context: self.moc)
+                    nappyChange.state = Int16(self.nappyType)
+                    nappyChange.amount = Int16(self.nappyChangeAmountType)
+                    nappyChange.poopColor = self.nappyChangePoopColor
+                    nappyChange.createdAt = Date()
+                    child.addToNappyChanges(nappyChange)
+
+                    do {
+                        try self.moc.save()
+                        self.profile.objectWillChange.send()
+                        self.nappyChangeFormVisible = false
+                    }catch {
+                    }
+                }
             }
-            
-            Text("nappy_change".localized).font(.headline)
+            .font(.headline)
+            .padding()
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .clipped()
+            .shadow(color: .gray, radius: 1, x: 0, y: 0)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -40,11 +63,12 @@ struct NappyChangeFormSheet: View {
                 Section(
                     //header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby") nappy was")
                 ) {
-                    Picker(selection: self.$nappyType, label: Text("K")) {
+                    Picker(selection: self.$nappyType, label: Text("Select a nappy type")) {
                         ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {type in
                             Text("\(type.description)").tag(type.rawValue)
                         }
                     }
+                    .font(.caption)
                     .pickerStyle(SegmentedPickerStyle())
 
                     VStack(alignment: .leading) {
@@ -101,34 +125,6 @@ struct NappyChangeFormSheet: View {
                     
                 }.animation(.spring())
             }
-            
-            Spacer()
-            
-            VStack {
-                Button("save".localized) {
-                    guard let child = self.profile.parent.activeChild else {
-                        debugPrint("No activeChild")
-                        return
-                    }
-                    
-                    let nappyChange = NappyChange(context: self.moc)
-                    nappyChange.state = Int16(self.nappyType)
-                    nappyChange.amount = Int16(self.nappyChangeAmountType)
-                    nappyChange.poopColor = self.nappyChangePoopColor
-                    nappyChange.createdAt = Date()
-                    child.addToNappyChanges(nappyChange)
-
-                    do {
-                        try self.moc.save()
-                        self.profile.objectWillChange.send()
-                        self.nappyChangeFormVisible = false
-                    }catch {
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
-            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

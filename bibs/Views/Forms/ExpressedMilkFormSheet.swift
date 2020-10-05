@@ -21,14 +21,31 @@ struct ExpressedMilkFormSheet: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: {
-                    self.expressedMilkFormVisible = false
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
+                Text("stored_milk".localized)
+                Spacer()
+                
+                Button("save".localized) {
+                    let storedMilk = ExpressedBottle(context: self.moc)
+                    storedMilk.status = self.expressedMilkStorage
+                    storedMilk.amount = Int16(self.expressedAmount)
+                    storedMilk.createdAt = Date()
+                    
+                    do {
+                        try self.moc.save()
+                        
+                        self.profile.objectWillChange.send()
+                        self.expressedMilkFormVisible = false
+                    }catch {
+                    }
+                }
             }
-            
-            Text("stored_milk".localized).font(.headline)
+            .font(.headline)
+            .padding()
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .clipped()
+            .shadow(color: .gray, radius: 1, x: 0, y: 0)
             
             Form {
                 Section(
@@ -62,30 +79,6 @@ struct ExpressedMilkFormSheet: View {
                     }
                 }
             }
-            
-            Spacer()
-            
-            VStack {
-                Button(action: {
-                    let storedMilk = ExpressedBottle(context: self.moc)
-                    storedMilk.status = self.expressedMilkStorage
-                    storedMilk.amount = Int16(self.expressedAmount)
-                    storedMilk.createdAt = Date()
-                    
-                    do {
-                        try self.moc.save()
-                        
-                        self.profile.objectWillChange.send()
-                        self.expressedMilkFormVisible = false
-                    }catch {
-                    }
-                }) {
-                    Text("save".localized)
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
-            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

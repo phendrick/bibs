@@ -23,13 +23,48 @@ struct ManualFeedTimerEntryFormSheet: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: {
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
+                Text("add_a_feed".localized)
+                Spacer()
+                
+                Button("save".localized) {
+                    guard let child = self.profile.parent.activeChild else {
+                        debugPrint("No activeChild")
+                        return
+                    }
+                    
+                    let feedSession = FeedSession(context: self.moc)
+                    let feed = Feed(context: self.moc)
+                    feed.breastSide = .left
+                    feed.createdAt = self.from
+                    
+                    feedSession.addToFeeds(feed)
+                    feedSession.createdAt = Date()
+                    feedSession.status = .complete
+                    
+                    let _ = feed.setDurationFromValues(
+                        hours: self.adjustedHours,
+                        minutes: self.adjustedMinutes,
+                        seconds: self.adjustedSeconds
+                    )
+                    
+                    child.addToFeedSessions(feedSession)
+                    
+                    do {
+                        try self.moc.save()
+                        self.profile.objectWillChange.send()
+                        self.feedTimerFormVisible = false
+                    }catch {
+                        debugPrint("Error saving")
+                    }
+                }
             }
-            
-            Text("add_a_feed".localized).font(.headline)
+            .font(.headline)
+            .padding()
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .clipped()
+            .shadow(color: .gray, radius: 1, x: 0, y: 0)
             
             Text("forgotten_to_set_a_timer_intro".localized)
                 .padding().foregroundColor(Color(UIColor.secondaryLabel))
@@ -54,6 +89,8 @@ struct ManualFeedTimerEntryFormSheet: View {
                 ){
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
+                            Spacer()
+                            
                             VStack(spacing: 0) {
                                 Text("hours".localized).foregroundColor(Color(UIColor.label))
                                 
@@ -94,47 +131,12 @@ struct ManualFeedTimerEntryFormSheet: View {
                                 .frame(width: 100).labelsHidden()
                                 .clipped()
                             }
+                            
+                            Spacer()
                         }
                     }.frame(height: 240).padding(.top, 20)
                 }
             }
-            
-            VStack {
-                Button("save".localized) {
-                    guard let child = self.profile.parent.activeChild else {
-                        debugPrint("No activeChild")
-                        return
-                    }
-                    
-                    let feedSession = FeedSession(context: self.moc)
-                    let feed = Feed(context: self.moc)
-                    feed.breastSide = .left
-                    feed.createdAt = self.from
-                    
-                    feedSession.addToFeeds(feed)
-                    feedSession.createdAt = Date()
-                    feedSession.status = .complete
-                    
-                    let _ = feed.setDurationFromValues(
-                        hours: self.adjustedHours,
-                        minutes: self.adjustedMinutes,
-                        seconds: self.adjustedSeconds
-                    )
-                    
-                    child.addToFeedSessions(feedSession)
-                    
-                    do {
-                        try self.moc.save()
-                        self.profile.objectWillChange.send()
-                        self.feedTimerFormVisible = false
-                    }catch {
-                        debugPrint("Error saving")
-                    }
-                }.font(.headline)
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
-            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

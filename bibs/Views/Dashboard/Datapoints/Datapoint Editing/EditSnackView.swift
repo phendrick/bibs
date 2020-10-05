@@ -48,7 +48,7 @@ struct EditSnackView: View {
                 }
                 
                 Section(
-                    header: Text("Add a note eg. \"Carrot sticks\"")
+                    header: Text("weaning_note_hint".localized)
                 ) {
                     TextField(self.note, text: self.$note)
                 }

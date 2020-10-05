@@ -32,14 +32,34 @@ struct BottleFeedsFormSheet: View {
         VStack {
             HStack {
                 Spacer()
-                Button(action: {
-                    self.bottleFeedFormVisible = false
-                }) {
-                    Image(systemName: "xmark.circle.fill").foregroundColor(.gray)
-                }.padding([.top, .trailing], 15)
+                Text("bottle_feed".localized)
+                Spacer()
+                
+                Button("save".localized) {
+                    let bottleFeed = BottleFeed(context: self.moc)
+                    bottleFeed.amount = Int16(self.feedAmount)
+                    bottleFeed.createdAt = Date()
+                    bottleFeed.status = self.pickerFeedSource
+                    self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
+                    
+                    self.profile.parent.reduceExpressedBottles(self.selectedExpressedBottles, by: Int16(self.feedAmount))
+                    
+                    do {
+                        try self.moc.save()
+                        self.profile.objectWillChange.send()
+                        self.bottleFeedFormVisible = false
+                        self.selectedExpressedBottles = []
+                    }catch {
+                    }
+                }
             }
-            
-            Text("Bottle Feed").font(.headline)
+            .font(.headline)
+            .padding()
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .clipped()
+            .shadow(color: .gray, radius: 1, x: 0, y: 0)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -109,33 +129,6 @@ struct BottleFeedsFormSheet: View {
                     }
                 }
             }
-
-            Spacer()
-            
-            VStack {
-                Button(action: {
-                    let bottleFeed = BottleFeed(context: self.moc)
-                    bottleFeed.amount = Int16(self.feedAmount)
-                    bottleFeed.createdAt = Date()
-                    bottleFeed.status = self.pickerFeedSource
-                    self.profile.parent.activeChild?.addToBottleFeeds(bottleFeed)
-                    
-                    self.profile.parent.reduceExpressedBottles(self.selectedExpressedBottles, by: Int16(self.feedAmount))
-                    
-                    do {
-                        try self.moc.save()
-                        self.profile.objectWillChange.send()
-                        self.bottleFeedFormVisible = false
-                        self.selectedExpressedBottles = []
-                    }catch {
-                    }
-                }) {
-                    Text("save".localized)
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: UIScreen.main.bounds.height/8)
-//            .background(Color(UIColor.systemBackground))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

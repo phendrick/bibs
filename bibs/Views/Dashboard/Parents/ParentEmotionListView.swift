@@ -19,25 +19,21 @@ struct ParentEmotionInsightsView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 20) {
-                HStack {
-                    Text(emotion.status.emoji).font(.title)
-                    Text(emotion.wrappedCreatedAt.getFormattedDate())
-                }
                 if report != nil {
+                    HStack {
+                        Text(emotion.status.emoji).font(.title)
+                        Text(emotion.wrappedCreatedAt.getFormattedDate())
+                    }
+                    
                     ForEach(Array(report!.keys), id: \.self) {key in
                         VStack(alignment: .leading, spacing: 20) {
-                            VStack(spacing: 20) {
+                            VStack(spacing: 10) {
 
                                 HStack {
                                     HStack {
                                         Text("\(key)".localized).font(.headline).foregroundColor(.orange)
                                         Spacer()
                                     }
-                                    
-    //                                Text("Something")
-    //                                    .font(.caption)
-    //                                    .fontWeight(.bold)
-    //                                    .foregroundColor(Color(UIColor.tertiaryLabel))
                                 }
                             }
 
@@ -48,13 +44,13 @@ struct ParentEmotionInsightsView: View {
                                 }.fixedSize(horizontal: false, vertical: true)
                             }
                         }
-                        .padding().padding([.leading, .trailing], 5)
+                        .padding(10).padding([.leading, .trailing], 5)
                         .background(Color(UIColor.secondarySystemBackground))
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                     }
                 }else {
-                    HStack {
-                        Text("Sorry!").font(.title)
+                    VStack(spacing: 10) {
+                        Text("Sorry!").font(.headline)
                         Text("No insights available").font(.caption)
                     }
                 }

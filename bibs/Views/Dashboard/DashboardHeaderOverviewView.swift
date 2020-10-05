@@ -35,7 +35,7 @@ struct DashboardHeaderOverviewItem: View {
                         Text("latest_at".localized)
                             .font(.caption).fontWeight(.bold)
                             .foregroundColor(Color(UIColor.tertiaryLabel)) +
-                        Text(date!.getFormattedDate(format: "h:mm a"))
+                        Text(date!.getFormattedDate(format: " h:mm a"))
                             .font(.caption)
                             .foregroundColor(Color(UIColor.quaternaryLabel))
                     }
