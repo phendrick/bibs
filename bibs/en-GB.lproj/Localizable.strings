@@ -69,7 +69,6 @@
 "breastfeeds" = "Breastfeeds";
 "bottle_feeds" = "Bottle Feeds";
 "nap_times" = "Nap Times";
-"nappy_changes" = "Nappy Changes";
 "snacks_and_weaning" = "Snacks & Weaning";
 
 // forms
@@ -160,7 +159,7 @@
 "loved" = "Loved";
 "tired" = "Tired";
 "sad" = "Sad";
-"down" = "Down";
+"down" = "Feeling Down";
 
 "food_type" = "Food type";
 "vegetables" = "Vegetables";
@@ -233,7 +232,7 @@
 "late_nights_details" = "Lots of activity late at night will leave you and baby tired.";
 
 "long_feeds" = "Long feeds";
-"long_feeds_details" = "Long feeds can be exhausting for you. Keep your calorie intake up and track it using the food diary.";
+"long_feeds_details" = "Long feeds can be exhausting for you.";
 
 "ideal_nap_amount" = "Good napping!";
 "ideal_nap_amount_details" = "You're hitting the the sweet spot for naps here.";

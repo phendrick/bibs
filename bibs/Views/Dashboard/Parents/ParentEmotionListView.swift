@@ -48,7 +48,7 @@ struct ParentEmotionInsightsView: View {
                                 }.fixedSize(horizontal: false, vertical: true)
                             }
                         }
-                        .padding(5).padding([.leading, .trailing], 5)
+                        .padding().padding([.leading, .trailing], 5)
                         .background(Color(UIColor.secondarySystemBackground))
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))
                     }

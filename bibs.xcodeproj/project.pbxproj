@@ -111,7 +111,6 @@
 		DADD78FF2478609600791F61 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD78FE2478609600791F61 /* ContentView.swift */; };
 		DADD79012478609700791F61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADD79002478609700791F61 /* Assets.xcassets */; };
 		DADD79042478609700791F61 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADD79032478609700791F61 /* Preview Assets.xcassets */; };
-		DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DADD79052478609700791F61 /* LaunchScreen.storyboard */; };
 		DADD79122478609700791F61 /* bibsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD79112478609700791F61 /* bibsTests.swift */; };
 		DADD791D2478609700791F61 /* bibsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD791C2478609700791F61 /* bibsUITests.swift */; };
 		DAE1A7CC24B9200C00FFA96E /* ExpressedMilkDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1A7CB24B9200C00FFA96E /* ExpressedMilkDataView.swift */; };
@@ -213,10 +212,9 @@
 		DA8307AC24A7417500454F14 /* FeedSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FeedSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Feed+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA842084252B12A500ED5105 /* ParentInsightGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentInsightGenerator.swift; sourceTree = "<group>"; };
-		DA842089252B514900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		DA84208A252B514900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
-		DA84208C252B519800ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA842091252B51C100ED5105 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA8420B3252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DA8420B4252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		DA86DEA424AA7B6D00107ED3 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		DA86DEA624AA7BC500107ED3 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		DA86DEA724AA7BC500107ED3 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 		DADD78FE2478609600791F61 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DADD79002478609700791F61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DADD79032478609700791F61 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DADD79062478609700791F61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DADD79082478609700791F61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DADD790D2478609700791F61 /* bibsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bibsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADD79112478609700791F61 /* bibsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bibsTests.swift; sourceTree = "<group>"; };
@@ -681,7 +678,6 @@
 				DA252E44250CE5D40063301E /* PlaygroundView.swift */,
 				DADD79002478609700791F61 /* Assets.xcassets */,
 				DAEF517124B640A3006CD447 /* Colors.xcassets */,
-				DADD79052478609700791F61 /* LaunchScreen.storyboard */,
 				DADD79082478609700791F61 /* Info.plist */,
 				DADD78FB2478609600791F61 /* bibs.xcdatamodeld */,
 				DADD79022478609700791F61 /* Preview Content */,
@@ -860,7 +856,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"en-GB",
 			);
 			mainGroup = DADD78EB2478609600791F61;
@@ -883,7 +878,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA053CD824F5CD2B00A1D825 /* Localizable.stringsdict in Resources */,
-				DADD79072478609700791F61 /* LaunchScreen.storyboard in Resources */,
 				DA86DEA524AA7B6D00107ED3 /* OpenSans-Bold.ttf in Resources */,
 				DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */,
 				DA86DEA824AA7BC500107ED3 /* Merriweather-Regular.ttf in Resources */,
@@ -1079,7 +1073,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DA053CD924F5CD2B00A1D825 /* en */,
-				DA84208A252B514900ED5105 /* en-GB */,
+				DA8420B4252B83E900ED5105 /* en-GB */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -1087,19 +1081,10 @@
 		DA84208D252B519800ED5105 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DA84208C252B519800ED5105 /* en-GB */,
 				DA842091252B51C100ED5105 /* en */,
+				DA8420B3252B83E900ED5105 /* en-GB */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		DADD79052478609700791F61 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DADD79062478609700791F61 /* Base */,
-				DA842089252B514900ED5105 /* en-GB */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1216,6 +1201,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
