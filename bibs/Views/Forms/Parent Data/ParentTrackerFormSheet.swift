@@ -28,7 +28,7 @@ struct ParentTrackerFormSheet: View {
                 Text("nap_time".localized)
                 Spacer()
                 
-                Button("Save \(self.form == 0 ? "Emotion" : "Food diary")") {
+                Button("Save \(self.form == 0 ? "emotion".localized : "food_diary".localized)") {
                     if self.form == 0 {
                         guard let emotionType = self.selectedEmotionType else {
                             return

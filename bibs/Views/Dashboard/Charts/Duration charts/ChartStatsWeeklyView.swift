@@ -16,7 +16,7 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text("This week".localized).font(.headline)
+                Text("this_week".localized).font(.headline)
                 
                 Divider()
                 

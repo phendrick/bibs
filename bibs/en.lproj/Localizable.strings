@@ -52,6 +52,7 @@
 "edit_child" = "Edit %@";
 "childs_data" = "%@'s data";
 "weekly_breakdown" = "Weekly Breakdown";
+"childs_nappy_was" = "%@'s diaper was";
 
 // tools & forms
 "stored_milk" = "Stored Milk";
@@ -71,6 +72,7 @@
 "bottle_feeds" = "Bottle Feeds";
 "nap_times" = "Nap Times";
 "snacks_and_weaning" = "Snacks & Weaning";
+"snack_type" = "Snack Type[!!!]";
 
 // forms
 "ive_expressed" = "I've expressed";

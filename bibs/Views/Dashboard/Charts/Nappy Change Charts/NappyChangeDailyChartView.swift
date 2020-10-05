@@ -60,7 +60,7 @@ struct NappyChangeDailyChartView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Today")
+                Text("today".localized)
 
                 Divider()
                     .padding(.bottom, 5)

@@ -23,9 +23,9 @@ struct EditNappyChangeView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby")'s nappy was")
+                    header: Text(String(format: "childs_nappy_was", self.profile.parent.activeChild?.wrappedName ?? "Baby"))
                 ) {
-                    Picker(selection: self.$nappyType, label: Text("K")) {
+                    Picker(selection: self.$nappyType, label: Text("Choose a nappy change type")) {
                         ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {type in
                             Text("\(type.description)").tag(type.rawValue)
                         }
@@ -42,7 +42,6 @@ struct EditNappyChangeView: View {
                         .animation(nil)
                         
                         HStack(alignment: .center) {
-                            Spacer()
                             ForEach(NappyChange.NappyChangePoopColor.allCases, id: \.self) {poopColor in
                                 VStack {
                                     EmptyView()
@@ -62,8 +61,8 @@ struct EditNappyChangeView: View {
                                     self.nappyChangePoopColor = poopColor
                                 }
                             }
-                            Spacer()
-                        }.padding()
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                     .padding(.top, 15)
                     .opacity(
@@ -75,7 +74,7 @@ struct EditNappyChangeView: View {
                 }.animation(.spring())
                 
                 Section(
-                    header: Text("Amount")
+                    header: Text("amount".localized)
                 ) {
                     Picker(selection: self.$nappyChangeAmountType, label: Text("")) {
                         ForEach(NappyChange.NappyChangeAmountType.allCases, id: \.self) {nappy in

@@ -96,11 +96,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>No wet diapers</string>
+			<string>No wet nappies</string>
 			<key>one</key>
-			<string>%d wet diaper</string>
+			<string>%d wet nappy</string>
 			<key>other</key>
-			<string>%d wet diapers</string>
+			<string>%d wet nappies</string>
 		</dict>
 		<key>join</key>
 		<dict>
@@ -120,11 +120,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>no dirty diapers</string>
+			<string>no dirty nappies</string>
 			<key>one</key>
-			<string>%d dirty diaper</string>
+			<string>%d dirty nappy</string>
 			<key>other</key>
-			<string>%d dirty diapers</string>
+			<string>%d dirty nappies</string>
 		</dict>
 	</dict>
 	<key>%ld hours %ld minutes %ld secs</key>
@@ -200,11 +200,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>%d diaper changes</string>
+			<string>%d nappy changes</string>
 			<key>one</key>
-			<string>%d diaper change</string>
+			<string>%d nappy change</string>
 			<key>other</key>
-			<string>%d diaper changes</string>
+			<string>%d nappy changes</string>
 		</dict>
 	</dict>
 	<key>%ld naps</key>
@@ -669,11 +669,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>%d diaper changes</string>
+			<string>%d nappy changes</string>
 			<key>one</key>
-			<string>%d diaper change</string>
+			<string>%d nappy change</string>
 			<key>other</key>
-			<string>%d diaper changes</string>
+			<string>%d nappy changes</string>
 		</dict>
 	</dict>
 	<key>%ld hours</key>

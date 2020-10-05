@@ -519,7 +519,7 @@ extension ParentProfile {
     }
     
     public var latestEmotionType: Emotion.EmotionType {
-        return emotionsArray.last?.status ?? Emotion.EmotionType.happy
+        return emotionsArray.first?.status ?? Emotion.EmotionType.happy
     }
     
 }

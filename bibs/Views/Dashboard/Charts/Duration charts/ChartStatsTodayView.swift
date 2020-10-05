@@ -38,9 +38,9 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     
     func labelForDate(date: Date) -> String {
         if date.isToday {
-            return NSLocalizedString("Today", comment: "")
+            return "today".localized
         }else if date.isYesterday {
-            return NSLocalizedString("Yesterday", comment: "")
+            return "yesterday"
         }else {
             return date.getFormattedDate(format: "EEEE, MMMM d")
         }
@@ -87,7 +87,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Today".localized).font(.headline)
+            Text("today".localized).font(.headline)
             Divider()
             
             VStack(alignment: .leading, spacing: 40) {

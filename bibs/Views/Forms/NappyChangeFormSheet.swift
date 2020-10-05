@@ -81,7 +81,6 @@ struct NappyChangeFormSheet: View {
                         .animation(nil)
                         
                         HStack(alignment: .center) {
-                            Spacer()
                             ForEach(NappyChange.NappyChangePoopColor.allCases, id: \.self) {poopColor in
                                 VStack {
                                     EmptyView()
@@ -101,8 +100,8 @@ struct NappyChangeFormSheet: View {
                                     self.nappyChangePoopColor = poopColor
                                 }
                             }
-                            
-                        }.padding()
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                     .padding(.top, 15)
                     .opacity(
