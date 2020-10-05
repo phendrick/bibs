@@ -233,12 +233,12 @@
 "late_nights_details" = "Lots of activity late at night will leave you and baby tired.";
 
 "long_feeds" = "Long feeds";
-"long_feeds_details" = "Long feeds can be exhausting for you.";
+"long_feeds_details" = "Long feeds can be exhausting for you. Keep your calorie intake up and track it using the food diary.";
 
 "ideal_nap_amount" = "Good napping!";
 "ideal_nap_amount_details" = "You're hitting the the sweet spot for naps here.";
 
-"ideal_nap_duration" = "Good nap time!";
+"ideal_nap_duration" = "Good nap times!";
 "ideal_nap_duration_details" = "Very good. Napping too long can lead to long nights with a wide awake baby.";
 
 "ideal_feeding_time" = "Well fed";

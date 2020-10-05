@@ -209,7 +209,10 @@ extension Child: Identifiable {
         do {
             /// if the user has set their autostartTimers setting to true, `resume` it immediately
             if UserDefaults.standard.bool(forKey: "autostartTimers") {
+                print("autostartTimers true")
                 session.resume()
+            }else {
+                print("Not auto-starting timer")
             }
             
             try context.save()
