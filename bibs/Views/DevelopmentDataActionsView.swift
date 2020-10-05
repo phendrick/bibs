@@ -74,7 +74,7 @@ struct DevelopmentDataActionsView: View {
                     $0.napsArray.forEach { self.moc.delete($0) }
                 }
                 
-                self.profile.parent.emotionsArray.map { self.moc.delete($0) }
+                self.profile.parent.emotionsArray.forEach { self.moc.delete($0) }
                 
                 try? self.moc.save()
             }
