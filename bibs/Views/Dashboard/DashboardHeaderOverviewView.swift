@@ -23,7 +23,7 @@ struct DashboardHeaderOverviewItem: View {
                         
                         Spacer()
                         if count == nil {
-                            Text("No data today".localized)
+                            Text("no_data".localized)
                                 .foregroundColor(Color(UIColor.quaternaryLabel))
                                 .font(.caption)
                         }
@@ -32,7 +32,7 @@ struct DashboardHeaderOverviewItem: View {
                     Spacer()
                     
                     if date != nil {
-                        Text("Latest at ".localized)
+                        Text("latest_at".localized)
                             .font(.caption).fontWeight(.bold)
                             .foregroundColor(Color(UIColor.tertiaryLabel)) +
                         Text(date!.getFormattedDate(format: "h:mm a"))
@@ -76,28 +76,28 @@ struct DashboardHeaderOverviewView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("Today so far".localized).font(.headline)
+                Text("today_so_far".localized).font(.headline)
                 Spacer()
                 
-                Text("View Data & Profiles".localized)
+                Text("view_data".localized)
                     .foregroundColor(.gray).font(.subheadline)
             }
             
             DashboardHeaderOverviewItem(
-                title: "Feeds".localized,
+                title: "feeds".localized,
                 value: feedsValue,
                 count: profile.parent.todaysFeedsOverview.0, date: profile.parent.todaysFeedsOverview.2
             )
             
             DashboardHeaderOverviewItem(
-                title: "Nappy Changes".localized,
+                title: "nappy_changes".localized,
                 value: nappyChangesValue,
                 count: profile.parent.todaysNappiesOverview.0,
                 date: profile.parent.todaysNappiesOverview.3
             )
             
             DashboardHeaderOverviewItem(
-                title: "Nap Times".localized,
+                title: "nap_times".localized,
                 value: napsValue,
                 count: profile.parent.todaysNapsOverview.0,
                 date: profile.parent.todaysNapsOverview.2

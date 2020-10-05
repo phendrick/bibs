@@ -19,23 +19,23 @@ extension ExpressedBottle: Identifiable, Trackable {
         
         var description: String {
             switch(self) {
-                case .refridgerated: return "Refridgerated"
-                case .fresh: return "Room temperature"
-                case .frozen: return "Frozen"
-                case .thawed: return "Thawed"
-                case .disposed: return "Disposed of"
-                case .donated: return "Donated"
+                case .refridgerated: return "refridgerated".localized
+                case .fresh: return "room_temperature".localized
+                case .frozen: return "frozen".localized
+                case .thawed: return "thawed".localized
+                case .disposed: return "disposed".localized
+                case .donated: return "donated".localized
             }
         }
         
         var details: String {
             switch(self) {
-                case .refridgerated: return "Refridgerated milk will last for"
-                case .fresh: return "Make sure to dispose if..."
-                case .frozen: return "You can keep milk in the freezer for"
-                case .thawed: return "You can keep thawed milk for"
-                case .disposed: return "Safely dispose of. Or consider donating"
-                case .donated: return "❤️"
+                case .refridgerated: return "refridgerated_details".localized
+                case .fresh: return "room_temperature_details".localized
+                case .frozen: return "frozen_details".localized
+                case .thawed: return "thawed_details".localized
+                case .disposed: return "disposed_details".localized
+                case .donated: return "❤️".localized
             }
         }
         
@@ -81,11 +81,11 @@ extension ExpressedBottle: Identifiable, Trackable {
     }
     
     public var title: String {
-        "Expressed Bottle"
+        "expressed_bottle".localized
     }
     
     public var details: String {
-        "bottle feed details"
+        "bottle_feed_details".localized
     }
     
     public var trackableUnit: Int32 {

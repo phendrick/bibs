@@ -92,7 +92,7 @@ struct EditNappyChangeView: View {
             self.nappyChangeAmountType = Int(self.nappyChange.amount)
             self.nappyChangePoopColor = self.nappyChange.poopColor
         })
-        .navigationBarItems(trailing: Button("Save") {
+        .navigationBarItems(trailing: Button("save".localized) {
             self.nappyChange.state = Int16(self.nappyType)
             self.nappyChange.amount = Int16(self.nappyChangeAmountType)
             self.nappyChange.poopColor = self.nappyChangePoopColor

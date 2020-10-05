@@ -37,7 +37,7 @@ struct NappyChangeChildChartsView: View {
                 profile: self.profile
             ).environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         ) {
-            Text("View Data".localized)
+            Text("view_chart_data".localized)
         }
     }
     
@@ -67,7 +67,7 @@ struct NappyChangeChildChartsView: View {
                 Spacer()
             }
         }
-        .navigationBarTitle("Nappy Changes".localized)
+        .navigationBarTitle("nappy_changes".localized)
         .navigationBarItems(trailing: editButtonView)
     }
 }

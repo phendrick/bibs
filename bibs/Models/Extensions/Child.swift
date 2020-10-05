@@ -64,26 +64,26 @@ extension Child: Identifiable {
         var description: String {
             switch(self) {
             case .current:
-                return "Breastfeeding"
+                return "breastfeeding".localized
             case .weaning:
-                return "Breastfeeding & Weaning"
+                return "breastfeeding_and_Weaning".localized
             case .weaningOnly:
-                return "Weaning only"
+                return "weaning_only".localized
             case .archived:
-                return "Archived"
+                return "archived".localized
             }
         }
         
         var editDescription: String {
             switch(self) {
             case .current:
-                return "Breastfeeding"
+                return "breastfeeding".localized
             case .weaning:
-                return "Breastfeeding & Weaning"
+                return "breastfeeding_and_Weaning".localized
             case .weaningOnly:
-                return "Weaning only"
+                return "weaning_only".localized
             case .archived:
-                return "Archive"
+                return "archive".localized
             }
         }
     }

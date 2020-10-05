@@ -96,7 +96,7 @@ struct EditFeedTimeView: View {
                     fatalError("Couldn't save")
                 }
             }) {
-                Text("Save")
+                Text("save".localized)
             }
         )
     }

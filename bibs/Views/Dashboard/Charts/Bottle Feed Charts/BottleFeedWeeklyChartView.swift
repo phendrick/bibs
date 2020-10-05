@@ -58,7 +58,7 @@ struct BottleFeedWeeklyChartView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Weekly Breakdown".localized)
+                Text("weekly_breakdown".localized)
             }
             
             Divider().padding(.bottom, 5)

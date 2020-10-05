@@ -28,7 +28,7 @@ struct NappyChangeFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Nappy Change").font(.headline)
+            Text("nappy_change".localized).font(.headline)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -38,7 +38,7 @@ struct NappyChangeFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby")'s nappy was")
+                    //header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby") nappy was")
                 ) {
                     Picker(selection: self.$nappyType, label: Text("K")) {
                         ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {type in
@@ -105,7 +105,7 @@ struct NappyChangeFormSheet: View {
             Spacer()
             
             VStack {
-                Button("Save") {
+                Button("save".localized) {
                     guard let child = self.profile.parent.activeChild else {
                         debugPrint("No activeChild")
                         return

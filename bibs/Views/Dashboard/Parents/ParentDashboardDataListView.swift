@@ -14,13 +14,13 @@ struct ParentDashboardDataListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("About you").font(.caption)
+            Text("about_you".localized).font(.caption)
             
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     NavigationLink(destination: ParentEmotionListView(profile: self.profile).environment(\.managedObjectContext, self.moc)) {
                         VStack(alignment: .leading) {
-                            Text("Emotions")
+                            Text("emotions".localized)
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))
@@ -38,7 +38,7 @@ struct ParentDashboardDataListView: View {
                 HStack {
                     NavigationLink(destination: ParentFoodDiaryListView(profile: self.profile).environment(\.managedObjectContext, self.moc)) {
                         VStack(alignment: .leading) {
-                            Text("Food Diary")
+                            Text("food_diary".localized)
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))
@@ -56,7 +56,7 @@ struct ParentDashboardDataListView: View {
                 HStack {
                     NavigationLink(destination: ExpressedMilkDataView(profile: self.profile).environment(\.managedObjectContext, self.moc)) {
                         VStack(alignment: .leading) {
-                            Text("Stored Milk")
+                            Text("stored_milk".localized)
                                 .font(.callout)
                                 .padding(.bottom, 5)
                                 .foregroundColor(Color(UIColor.label).opacity(0.75))

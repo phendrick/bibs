@@ -33,7 +33,7 @@ struct NaptimeFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text(NSLocalizedString("Nap time", comment: "")).font(.headline)
+            Text("nap_time".localized).font(.headline)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -43,19 +43,19 @@ struct NaptimeFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("\(childName) napped from")
+                    header: Text("from".localized)
                 ) {
                     DatePicker(selection: self.$from, in: ...Date(), displayedComponents: .hourAndMinute) {
-                        Text("Time")
+                        Text("time".localized)
                     }
                 }
                 Section {
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
                             VStack(spacing: 0) {
-                                Text("Hours").foregroundColor(Color(UIColor.label))
+                                Text("hours".localized).foregroundColor(Color(UIColor.label))
                                 
-                                Picker(selection: self.$hours, label: Text("Test")) {
+                                Picker(selection: self.$hours, label: Text("Pick the hours")) {
                                     Text("00").tag(0)
                                     Text("01").tag(1)
                                     Text("02").tag(2)
@@ -68,9 +68,9 @@ struct NaptimeFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Minutes").foregroundColor(Color(UIColor.label))
+                                Text("minutes".localized).foregroundColor(Color(UIColor.label))
                                 
-                                Picker("test", selection: self.$minutes) {
+                                Picker("Pick the minutes", selection: self.$minutes) {
                                     ForEach(0..<60) {idx in
                                         Text(String(format: "%02i", idx)).tag(idx)
                                     }
@@ -81,9 +81,9 @@ struct NaptimeFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Seconds").foregroundColor(Color(UIColor.label))
+                                Text("seconds".localized).foregroundColor(Color(UIColor.label))
                                 
-                                Picker("test", selection: self.$seconds) {
+                                Picker("Pick the seconds", selection: self.$seconds) {
                                     ForEach(0..<60) {idx in
                                         Text(String(format: "%02i", idx)).tag(idx)
                                     }
@@ -98,7 +98,7 @@ struct NaptimeFormSheet: View {
             }
             
             VStack {
-                Button("Save") {
+                Button("save".localized) {
                     guard let child = self.profile.parent.activeChild else {
                         debugPrint("No activeChild")
                         return

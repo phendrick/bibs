@@ -37,7 +37,7 @@ struct BottleFeedChildChartsView: View {
                 profile: self.profile
             ).environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         ) {
-            Text("View Data".localized)
+            Text("view_chart_data".localized)
         }
     }
     
@@ -92,7 +92,7 @@ struct BottleFeedChildChartsView: View {
             }
             
         }
-        .navigationBarTitle("Bottle Feeds".localized)
+        .navigationBarTitle("bottle_feeds".localized)
         .navigationBarItems(trailing: editButtonView)
     }
 }

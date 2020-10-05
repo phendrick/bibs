@@ -28,11 +28,11 @@ struct ExpressedMilkFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Stored Milk").font(.headline)
+            Text("stored_milk".localized).font(.headline)
             
             Form {
                 Section(
-                    header: Text("I've expressed ")
+                    header: Text("ive_expressed".localized)
                 ) {
                     Stepper("\(self.expressedAmount)ml", value: self.$expressedAmount, in: 0...2000).padding()
                 }
@@ -80,7 +80,7 @@ struct ExpressedMilkFormSheet: View {
                     }catch {
                     }
                 }) {
-                    Text("Save")
+                    Text("save".localized)
                 }
             }
             .frame(maxWidth: .infinity)

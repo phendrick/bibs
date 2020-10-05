@@ -28,7 +28,7 @@ struct SnackFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Weaning").font(.headline)
+            Text("weaning".localized).font(.headline)
             
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
@@ -38,7 +38,7 @@ struct SnackFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("Snack type")
+                    header: Text("weaning_type")
                 ) {
                     List {
                         ForEach(Snack.SnackType.allCases, id: \.self) {snack in
@@ -64,7 +64,7 @@ struct SnackFormSheet: View {
                 }
                 
                 Section(
-                    header: Text("Add a note eg. \"Carrot sticks\"")
+                    header: Text("weaning_note_hint".localized)
                 ) {
                     TextField(self.note, text: self.$note)
                 }
@@ -73,7 +73,7 @@ struct SnackFormSheet: View {
             Spacer()
             
             VStack {
-                Button("Save") {
+                Button("save".localized) {
                     guard let child = self.profile.parent.activeChild else {
                         debugPrint("No activeChild")
                         return

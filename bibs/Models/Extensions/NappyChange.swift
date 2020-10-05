@@ -19,15 +19,15 @@ extension NappyChange: Identifiable, Trackable {
         
         public var description: String {
             switch self {
-                case .wet: return "Wet"
-                case .dirty: return "Dirty"
-                case .both: return "Wet & Dirty"
-                case .dry: return "Dry"
+                case .wet: return "wet".localized
+                case .dirty: return "dirty".localized
+                case .both: return "wet_and_dirty".localized
+                case .dry: return "dry".localized
             }
         }
         
         public var emoji: String {
-            return "ok"
+            return ""
         }
         
         public func hash(into hasher: inout Hasher) {
@@ -42,9 +42,9 @@ extension NappyChange: Identifiable, Trackable {
         
         var description: String {
             switch self {
-                case .light: return "Light"
-                case .normal: return "Regular"
-                case .heavy: return "Heavy"
+                case .light: return "light".localized
+                case .normal: return "regular".localized
+                case .heavy: return "heavy".localized
             }
         }
     }
@@ -70,12 +70,12 @@ extension NappyChange: Identifiable, Trackable {
         
         var details: (String, String, Int?) {
             switch self {
-            case .black:  return (name: "Black", description: "Normal in newborns", daysWarning: 14)
-            case .green:  return (name: "Green", description: "Can be caused medication or allergies", daysWarning: nil)
-            case .brown:  return (name: "Brown", description: "Normal", daysWarning: nil)
-            case .yellow: return (name: "Yellow", description: "Normal in breastfed babies", daysWarning: nil)
-            case .white:  return (name: "White", description: "Seek medical advice", daysWarning: 0)
-            case .red:    return (name: "Red", description: "Seek medical advice", daysWarning: 0)
+            case .black:  return (name: "black".localized,  description: "black_details".localized,  daysWarning: 14)
+            case .green:  return (name: "green".localized,  description: "green_details".localized,  daysWarning: nil)
+            case .brown:  return (name: "brown".localized,  description: "brown_details".localized,  daysWarning: nil)
+            case .yellow: return (name: "yellow".localized, description: "yellow_details".localized, daysWarning: nil)
+            case .white:  return (name: "white".localized,  description: "white_details".localized,  daysWarning: 0)
+            case .red:    return (name: "red".localized,    description: "red_details".localized,    daysWarning: 0)
             }
         }
     }

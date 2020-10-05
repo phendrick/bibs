@@ -76,18 +76,18 @@ struct AddChildView: View {
                     EmptyView()
                 }
                 
-                Section(header: Text("About your baby")) {
-                    TextField("Name", text: self.$name)
+                Section(header: Text("about_your_baby".localized)) {
+                    TextField("name".localized, text: self.$name)
                 }
                 
-                Section(header: Text("Due date")) {
+                Section(header: Text("due_date".localized)) {
                     DatePicker(selection: self.$dueDate, displayedComponents: .date) {
-                        Text(self.isBorn ? "Date of birth" : "Due date")
+                        Text(self.isBorn ? "date_of_birth".localized : "due_date".localized)
                     }
                 }
                 
                 
-                Section(header: Text("Choose a theme")) {
+                Section(header: Text("choose_a_theme".localized)) {
                     HStack(spacing: 20) {
                         Spacer()
                         
@@ -105,9 +105,9 @@ struct AddChildView: View {
                     }.offset(x: -15)
                 }
             }
-            .navigationBarTitle("Welcome, baby")
+            .navigationBarTitle("welcome_baby".localized)
             .navigationBarItems(trailing: HStack {
-                Button("Done") {
+                Button("done".localized) {
                     self.save(newChild: true)
                 }.disabled(self.name.count == 0)
             })

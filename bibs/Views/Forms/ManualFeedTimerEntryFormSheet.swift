@@ -29,9 +29,9 @@ struct ManualFeedTimerEntryFormSheet: View {
                 }.padding([.top, .trailing], 15)
             }
             
-            Text("Add a feed".localized).font(.headline)
+            Text("add_a_feed".localized).font(.headline)
             
-            Text("If you've forgotten to start a timer, you can add a feed time here")
+            Text("forgotten_to_set_a_timer_intro".localized)
                 .padding().foregroundColor(Color(UIColor.secondaryLabel))
             
             if profile.parent.activeChildrenArray.count > 1 {
@@ -42,22 +42,22 @@ struct ManualFeedTimerEntryFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby") fed from")
+                    header: Text("time")
                 ) {
                     DatePicker(selection: self.$from, in: ...Date()) {
-                        Text("Time")
+                        Text("time")
                     }
                 }
                 
                 Section(
-                    header: Text("For")
+                    header: Text("for")
                 ){
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
                             VStack(spacing: 0) {
-                                Text("Hours").foregroundColor(Color(UIColor.label))
+                                Text("hours".localized).foregroundColor(Color(UIColor.label))
                                 
-                                Picker(selection: self.$adjustedHours, label: Text("Test")) {
+                                Picker(selection: self.$adjustedHours, label: Text("Pick the hour")) {
                                     Text("00").tag(0)
                                     Text("01").tag(1)
                                     Text("02").tag(2)
@@ -70,9 +70,9 @@ struct ManualFeedTimerEntryFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Minutes").foregroundColor(Color(UIColor.label))
+                                Text("minutes".localized).foregroundColor(Color(UIColor.label))
                                 
-                                Picker("test", selection: self.$adjustedMinutes) {
+                                Picker("Pick the minutes", selection: self.$adjustedMinutes) {
                                     ForEach(0..<60) {idx in
                                         Text(String(format: "%02i", idx)).tag(idx)
                                     }
@@ -83,9 +83,9 @@ struct ManualFeedTimerEntryFormSheet: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Seconds").foregroundColor(Color(UIColor.label))
+                                Text("seconds".localized).foregroundColor(Color(UIColor.label))
                                 
-                                Picker("test", selection: self.$adjustedSeconds) {
+                                Picker("Pick the seconds", selection: self.$adjustedSeconds) {
                                     ForEach(0..<60) {idx in
                                         Text(String(format: "%02i", idx)).tag(idx)
                                     }
@@ -100,7 +100,7 @@ struct ManualFeedTimerEntryFormSheet: View {
             }
             
             VStack {
-                Button("Save") {
+                Button("save".localized) {
                     guard let child = self.profile.parent.activeChild else {
                         debugPrint("No activeChild")
                         return

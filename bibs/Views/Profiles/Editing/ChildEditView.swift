@@ -74,17 +74,17 @@ struct ChildEditView: View {
                 EmptyView()
             }
             
-            Section(header: Text("About your baby")) {
-                TextField("Name", text: $name)
+            Section(header: Text("about_your_baby".localized)) {
+                TextField("name".localized, text: $name)
             }
             
-            Section(header: Text("Due date")) {
+            Section(header: Text("due_date".localized)) {
                 DatePicker(selection: self.$dueDate, displayedComponents: .date) {
-                    Text(self.isBorn ? "Date of birth" : "Due date")
+                    Text(self.isBorn ? "date_of_birth".localized : "due_date".localized)
                 }
             }
             
-            Section(header: Text("Choose a theme")) {
+            Section(header: Text("choose_a_theme".localized)) {
                 HStack(spacing: 20) {
                     Spacer()
 
@@ -102,7 +102,7 @@ struct ChildEditView: View {
                 }
             }
             
-            Section(header: Text("Is currently")) {
+            Section(header: Text("is_currently".localized)) {
                 List {
                     ForEach(Child.ChildStatuses.allCases, id: \.self) { status in
                         HStack {
@@ -122,7 +122,7 @@ struct ChildEditView: View {
             }
         }
         .navigationBarItems(trailing: Button(action: save) {
-            Text("Done")
+            Text("done".localized)
         }.disabled(self.name.count == 0))
         .onAppear {
             self.name = self.child.wrappedName

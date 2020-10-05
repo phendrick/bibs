@@ -24,13 +24,13 @@ extension Emotion {
         
         var description: String {
             switch(self) {
-            case .happy: return "Happy"
-            case .tired: return "Tired"
-            case .down: return "A bit down"
-            case .sad: return "Sad"
-            case .excited: return "Excited"
-            case .enthusiastic: return "Enthusiastic"
-            case .loved: return "Loved"
+            case .happy: return "happy".localized
+            case .tired: return "tired".localized
+            case .down: return "down".localized
+            case .sad: return "sad".localized
+            case .excited: return "excited".localized
+            case .enthusiastic: return "enthusiastic".localized
+            case .loved: return "loved".localized
             }
         }
         

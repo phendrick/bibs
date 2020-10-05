@@ -20,9 +20,9 @@ extension BottleFeed: Identifiable, Trackable {
         
         var description: String {
             switch(self) {
-                case .expressedMilk: return "Expressed Milk"
-                case .donorMilk: return "Donor milk"
-                case .formula: return "Formula"
+                case .expressedMilk: return "expressed_milk".localized
+                case .donorMilk: return "donor_milk".localized
+                case .formula: return "formula_milk".localized
             }
         }
     }
@@ -38,11 +38,11 @@ extension BottleFeed: Identifiable, Trackable {
     }
     
     public var title: String {
-        "Bottle Feed"
+        "bottle_feed"
     }
     
     public var details: String {
-        "bottle feed details"
+        "bottle_feed_details"
     }
     
     public var trackableUnit: Int32 {

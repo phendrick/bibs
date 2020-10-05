@@ -16,10 +16,10 @@ enum DataViewDateFilter: CaseIterable {
     
     var description: String {
         switch(self) {
-        case .today: return "Today"
-        case .week: return "This Week"
-        case .month: return "This Month"
-        case .date: return "Date"
+        case .today: return "today".localized
+        case .week:  return "this_week".localized
+        case .month: return "this_month".localized
+        case .date:  return "date".localized
         }
     }
 }
@@ -149,7 +149,7 @@ struct FeedTimersDataView: View {
                 self.dateFilter = .date
             }
         }
-        .navigationBarTitle(Text("Breastfeeds".localized), displayMode: .large)
+        .navigationBarTitle(Text("breastfeeds".localized), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }
 }

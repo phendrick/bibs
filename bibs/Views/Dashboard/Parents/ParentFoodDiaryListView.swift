@@ -103,13 +103,13 @@ struct ParentFoodDiaryListView: View {
         .sheet(isPresented: $dateOptionsSheetVisible) {
             VStack {
                 Form {
-                    Section(header: Text("Date from")) {
+                    Section(header: Text("date_from".localized)) {
                         DatePicker(selection: self.$dateFilterStartDate, displayedComponents: .date) {
                             Text("")
                         }.labelsHidden()
                     }
                     
-                    Section(header: Text("Date to")) {
+                    Section(header: Text("date_to".localized)) {
                         DatePicker(selection: self.$dateFilterEndDate, displayedComponents: .date) {
                             Text("")
                         }.labelsHidden()
@@ -118,7 +118,7 @@ struct ParentFoodDiaryListView: View {
                 
                 Spacer()
                 
-                Button("Done") {
+                Button("done".localized) {
                     self.dateOptionsSheetVisible = false
                 }
             }
@@ -129,7 +129,7 @@ struct ParentFoodDiaryListView: View {
                 self.dateFilter = .date
             }
         }
-        .navigationBarTitle("Food Diary")
+        .navigationBarTitle("food_diary".localized)
     }
 }
 

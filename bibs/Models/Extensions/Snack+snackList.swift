@@ -18,21 +18,21 @@ extension Snack {
         
         var description: String {
             switch(self) {
-            case .vegetables: return "Vegetables"
-            case .fruit: return "Fruit"
-            case .roots: return "Starchy foods"
-            case .protein: return "Proteins"
-            case .dairy: return "Dairy"
+            case .vegetables: return "vegetables".localized
+            case .fruit: return "fruit".localized
+            case .roots: return "starchy_foods".localized
+            case .protein: return "proteins".localized
+            case .dairy: return "dairy".localized
             }
         }
         
         var details: String {
             switch(self) {
-            case .vegetables: return "Carrots, broccoli, peas, avocado, cauliflower"
-            case .fruit: return "Kiki, strawberries, melon, mango, apples"
-            case .roots: return "Pasta, potatoes, quinoa, bread, oats, chapatti"
-            case .protein: return "Beans, lentils, chicken, beef, lamb, chickpeas"
-            case .dairy: return "Eggs, yoghurt, milk"
+            case .vegetables: return "weaning_vegetables".localized
+            case .fruit: return "weaning_fruit".localized
+            case .roots: return "weaning_starchy_foods".localized
+            case .protein: return "weaning_proteins".localized
+            case .dairy: return "weaning_dairy".localized
             }
         }
     }

@@ -57,9 +57,9 @@ struct DatapointsIndexListView: View {
                 EmptyView()
             }
         }
-        .navigationBarTitle("Overview".localized)
+        .navigationBarTitle("overview".localized)
         .navigationBarItems(trailing: HStack {
-            Button("Add Child".localized) {
+            Button("add_child".localized) {
                 self.showAddChildView.toggle()
             }
             Image(systemName: "person.circle").foregroundColor(Color(UIColor.systemBlue))

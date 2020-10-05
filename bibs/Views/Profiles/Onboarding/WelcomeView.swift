@@ -20,7 +20,7 @@ struct WelcomeView: View {
                         .foregroundColor(.red)
                 }
 
-                Text("Ready to get started?")
+                Text("ready_to_start".localized)
                     .padding(.bottom, 15)
 
                 NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
@@ -29,7 +29,7 @@ struct WelcomeView: View {
                 
                 Spacer()
                 
-                Button("Next") {
+                Button("next".localized) {
                     self.showAddAboutYouView = true
                 }.padding()
             }

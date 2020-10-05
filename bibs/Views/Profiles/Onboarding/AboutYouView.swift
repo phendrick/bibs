@@ -26,9 +26,9 @@ struct AboutYouView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("Your details"),
+                    header: Text("your_name".localized),
                     footer: HStack(alignment: .top) {
-                        Text("Just call me")
+                        Text("just_call_me".localized)
                         HStack {
                             ForEach(nameTranslations, id: \.self) {name in
                                 Button(action: {
@@ -40,7 +40,7 @@ struct AboutYouView: View {
                         }
                     }
                 ) {
-                    TextField("Your name", text: self.$name)
+                    TextField("your_name", text: self.$name)
                 }
             }
             
@@ -53,9 +53,9 @@ struct AboutYouView: View {
         .onAppear(perform: {
             self.name = self.profile.parent.wrappedName
         })
-        .navigationBarTitle("About you")
+        .navigationBarTitle("about_you".localized)
         .navigationBarItems(trailing: Button(action: save) {
-            Text("Next")
+            Text("next".localized)
         }.disabled(self.name.count == 0))
     }
     

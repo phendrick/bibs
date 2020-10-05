@@ -22,9 +22,7 @@ struct EditBottleFeedView: View {
     var body: some View {
         VStack {
             Form {
-                Section(
-                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Child") had \(self.feedAmount)ml of \(bottleFeed.status.description)")
-                ) {
+                Section {
                     Stepper("\(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                         .padding()
                         .font(.custom("RobotoMono-Regular", size: 20))
@@ -35,7 +33,7 @@ struct EditBottleFeedView: View {
         .onAppear(perform: {
             self.feedAmount = Int(self.bottleFeed.amount)
         })
-        .navigationBarItems(trailing: Button("Save") {
+        .navigationBarItems(trailing: Button("save".localized) {
             self.bottleFeed.amount = Int16(self.feedAmount)
             
             do {

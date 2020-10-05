@@ -84,7 +84,7 @@ struct FeedSessionChildChartsView: View {
                 .padding()
             }
         }
-        .navigationBarTitle("Breastfeeds".localized)
+        .navigationBarTitle("breastfeeds".localized)
         .navigationBarItems(trailing: editButtonView)
     }
 }

@@ -84,7 +84,7 @@ struct EditNapView: View {
             self.minutes = self.nap.duration.toHoursMinutesSeconds.1
             self.seconds = self.nap.duration.toHoursMinutesSeconds.2
         })
-        .navigationBarItems(trailing: Button("Save") {
+        .navigationBarItems(trailing: Button("save".localized) {
             self.nap.nappedAt = self.from
             let _ = self.nap.setDurationFromValues(hours: self.hours, minutes: self.minutes, seconds: self.seconds)
             

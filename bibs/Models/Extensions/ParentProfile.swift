@@ -465,13 +465,13 @@ extension ParentProfile {
         
         var description: String {
             switch(self) {
-            case .today: return "Today"
-            case .week: return "This week"
-            case .weekFromMonday: return "This week"
-            case .weekFrom(_): return "Last 7 days"
-            case .month: return "This month"
-            case .year: return "This year"
-            case .all: return "Everything"
+            case .today: return "today".localized
+            case .week: return "this_week".localized
+            case .weekFromMonday: return "this_week".localized
+            case .weekFrom(_): return "last_7_days".localized
+            case .month: return "this_month".localized
+            case .year: return "this_year".localized
+            case .all: return "everything".localized
             }
         }
         

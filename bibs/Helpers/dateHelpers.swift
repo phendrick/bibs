@@ -16,13 +16,13 @@ func dashboardGreeting(for parent: ParentProfile) -> String {
     
     switch(timeOfDayType) {
     case .morning:
-        greeting = "Morning"
+        greeting = "morning_greeting"
     case .afternoon:
-        greeting = "Hi"
+        greeting = "hi_greeting"
     case .evening:
-        greeting = "Evening"
+        greeting = "evening_greeting"
     case .lateNight:
-        greeting = "Evening"
+        greeting = "late_greeting"
     }
     
     
@@ -34,7 +34,7 @@ func dashboardSubtitle(for parent: ParentProfile) -> String {
     //let latestEmotion = parent.latestEmotionType
     
     let lateNightGreetingPrefixes: [String] = [
-        "Keep going", "You're amazing"
+        "keep_going", "youre_amazing"
     ]
     
     var lateNightgreeting: String {
@@ -47,9 +47,9 @@ func dashboardSubtitle(for parent: ParentProfile) -> String {
     case .lateNight:
         greeting = lateNightgreeting
     case .evening:
-        greeting = "Had a good day?"
+        greeting = "had_a_good_day"
     default:
-        greeting = "How are you today?"
+        greeting = "how_are_you_today"
     }
     
     return greeting.localized

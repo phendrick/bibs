@@ -43,23 +43,23 @@ struct ChildDataTypeListView: View {
         VStack {
             List {
                 NavigationLink(destination: FeedSessionChildChartsView(child: child, profile: self.profile)) {
-                    Text("Breastfeeds".localized)
+                    Text("breastfeeds".localized)
                 }
                 
                 NavigationLink(destination: BottleFeedChildChartsView(child: child, profile: self.profile)) {
-                    Text("Bottle Feeds".localized)
+                    Text("bottle_feeds".localized)
                 }
                 
                 NavigationLink(destination: NapTimeChildChartsView(child: child, profile: self.profile)) {
-                    Text("Nap Times".localized)
+                    Text("nap_times".localized)
                 }
                 
                 NavigationLink(destination: NappyChangeChildChartsView(child: child, profile: self.profile)) {
-                    Text("Nappy Changes".localized)
+                    Text("nappy_changes".localized)
                 }
                 
                 NavigationLink(destination: WeaningDataView(child: child, profile: self.profile) ) {
-                    Text("Snacks & Weaning".localized)
+                    Text("snacks_and_weaning".localized)
                 }
             }
             
@@ -67,9 +67,9 @@ struct ChildDataTypeListView: View {
                 EmptyView()
             }
         }
-        .navigationBarTitle("\(self.child.wrappedName)'s Data")
+        .navigationBarTitle(String(format: "childs_data".localized, self.child.wrappedName))
         .navigationBarItems(trailing: HStack {
-            Button("Edit \(self.child.wrappedName)") {
+            Button(String(format: "edit_child".localized, self.child.wrappedName)) {
                 self.showChildEditView.toggle()
             }
         })

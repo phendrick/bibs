@@ -58,7 +58,7 @@ struct EditSnackView: View {
             self.snackType = self.snack.snackType
             self.note = self.snack.note ?? ""
         }
-        .navigationBarItems(trailing: Button("Save") {
+        .navigationBarItems(trailing: Button("save".localized) {
             self.snack.snackType = self.snackType
             self.snack.note = self.note
             

@@ -65,7 +65,7 @@ struct ExpressedMilkDataView: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Stored Milk"), displayMode: .large)
+        .navigationBarTitle(Text("stored_milk".localized), displayMode: .large)
         .navigationBarItems(trailing: EditButton())
     }
 }

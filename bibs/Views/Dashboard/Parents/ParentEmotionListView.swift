@@ -76,7 +76,7 @@ struct ParentEmotionInsightsView: View {
             }
         }
         .padding()
-        .navigationBarTitle("Insights".localized)
+        .navigationBarTitle("insights".localized)
         .onAppear {
             let reportGenerator = EmotionInsightsGenerator(emotion: emotion, context: self.moc)
             self.generatingReport = true
@@ -119,7 +119,7 @@ struct ParentEmotionListView: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Emotions"))
+        .navigationBarTitle(Text("emotions".localized))
     }
 }
 

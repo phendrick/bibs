@@ -14,28 +14,11 @@ struct DashboardToolCardsView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     DashboardToolView(
-                        cardTitle: "Stored Milk",
+                        cardTitle: "stored_milk".localized,
                         image: "bottle"
                     )
                         .cornerRadius(5)
                         .frame(width: 160, height: 200)
-                        //.overlay(Text("\(-Double(geometry.frame(in: .global).midX - outerGeometry.size.width ))"))
-                    
-//                    DashboardToolView(cardTitle: "Stored Milk")
-//                        .cornerRadius(5)
-//                        .frame(width: 160, height: 200)
-//
-//                    DashboardToolView(cardTitle: "Stored Milk")
-//                        .cornerRadius(5)
-//                        .frame(width: 160, height: 200)
-//
-//                    DashboardToolView(cardTitle: "Stored Milk")
-//                        .cornerRadius(5)
-//                        .frame(width: 160, height: 200)
-//
-//                    DashboardToolView(cardTitle: "Stored Milk")
-//                        .cornerRadius(5)
-//                        .frame(width: 160, height: 200)
                 }
                 .padding()
             }
