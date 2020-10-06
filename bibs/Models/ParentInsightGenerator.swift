@@ -122,29 +122,17 @@ struct EmotionInsightsGenerator {
         return reports.count > 0 ? reports : nil
     }
     
-    func negativeInsightsForBottles(bottles: [BottleFeed]) -> [String]? {
-        var reports: [String] = []
-        
-        let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        
-        if earlyMorningFeeds > 4 {
-            reports.append("late_night_bottles")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
-    
     func positiveInsightsForNaps(naps: [Nap]) -> [String]? {
         let details = getTimeDetails(items: naps)
         let tenMinutes: Double = 60000
         
         var reports: [String] = []
         
-        if (4...8).contains(details.count) {
+        if (3...8).contains(details.count) {
             reports.append("ideal_nap_amount")
         }
         
-        if ((tenMinutes * 1.5)...(tenMinutes * 5)).contains(Double(details.average)) {
+        if ((tenMinutes * 1.5)...(tenMinutes * 6)).contains(Double(details.average)) {
             reports.append("ideal_nap_duration")
         }
         
@@ -157,13 +145,25 @@ struct EmotionInsightsGenerator {
         
         var reports: [String] = []
         
-        if ((tenMinutes * 1.5)...(tenMinutes * 5)).contains(Double(details.average)) {
+        if ((tenMinutes)...(tenMinutes * 50)).contains(Double(details.average)) {
             reports.append("ideal_feeding_time")
         }
         
         let earlyMorningFeeds = feeds.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        if (1..<4).contains(earlyMorningFeeds) {
+        if (1..<6).contains(earlyMorningFeeds) {
             reports.append("ideal_late_nights")
+        }
+        
+        return reports.count > 0 ? reports : nil
+    }
+    
+    func negativeInsightsForBottles(bottles: [BottleFeed]) -> [String]? {
+        var reports: [String] = []
+        
+        let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
+        
+        if earlyMorningFeeds > 4 {
+            reports.append("late_night_bottles")
         }
         
         return reports.count > 0 ? reports : nil

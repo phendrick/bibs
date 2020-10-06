@@ -36,44 +36,6 @@ struct ChildEditView: View {
     
     var body: some View {
         Form {
-            Section(header: HStack(alignment: .center) {
-                Spacer()
-                
-                if image != nil {
-                    AvatarImageView(image: image, color: Color(getTheme.0), lineWidth: 10, layout: .expanded)
-                        .animation(.linear)
-                        .frame(width: 200, height: 200)
-                }else {
-                    VStack {
-                        Circle()
-                            .opacity(0.2)
-                            .foregroundColor(Color(child.theme.0))
-                            .frame(width: 200, height: 200)
-                            .overlay(VStack {
-                                ZStack {
-                                    Circle()
-                                        .stroke(
-                                            Color(Child.Themes[self.colorScheme]!.0), lineWidth: 6
-                                        )
-                                        .foregroundColor(.black)
-                                    Image(systemName: "camera")
-                                        .font(.system(size: 40))
-                                }
-                            })
-                            .animation(.linear)
-                    }
-                }
-                Spacer()
-            }
-            .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$inputImage)
-            }
-            .onTapGesture {
-                self.showingImagePicker.toggle()
-            }) {
-                EmptyView()
-            }
-            
             Section(header: Text("about_your_baby".localized)) {
                 TextField("name".localized, text: $name)
             }

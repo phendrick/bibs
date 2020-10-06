@@ -30,52 +30,6 @@ struct AddChildView: View {
     var body: some View {
         return VStack {
             Form {
-                Section(header:
-                    HStack {
-                        Spacer()
-                        
-                        if image != nil {
-                            image?
-                                .resizable()
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                                .scaledToFill()
-                                .frame(width: 160, height: 160)
-                                .overlay(
-                                    Circle().stroke(
-                                        Color(Child.Themes[self.colorScheme]!.0), lineWidth: 10
-                                    )
-                                )
-                                .animation(.linear)
-                        }else {
-                            VStack {
-                                Circle()
-                                    .foregroundColor(Color.white)
-                                    .frame(width: 160, height: 160)
-                                    .overlay(VStack {
-                                        ZStack {
-                                            Circle().stroke(
-                                                Color(Child.Themes[self.colorScheme]!.0), lineWidth: 10
-                                            )
-                                            Image(systemName: "camera")
-                                                .font(.system(size: 40))
-                                        }
-                                    })
-                            }
-                        }
-                        
-                        Spacer()
-                    }.padding(.top, 25)
-                    .sheet(isPresented: self.$showingImagePicker, onDismiss: loadImage) {
-                        ImagePicker(image: self.$inputImage)
-                    }
-                    .onTapGesture {
-                        self.showingImagePicker.toggle()
-                    }
-                ) {
-                    EmptyView()
-                }
-                
                 Section(header: Text("about_your_baby".localized)) {
                     TextField("name".localized, text: self.$name)
                 }
