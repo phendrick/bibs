@@ -66,7 +66,7 @@ extension Child: Identifiable {
             case .current:
                 return "breastfeeding".localized
             case .weaning:
-                return "breastfeeding_and_Weaning".localized
+                return "breastfeeding_and_weaning".localized
             case .weaningOnly:
                 return "weaning_only".localized
             case .archived:
@@ -79,7 +79,7 @@ extension Child: Identifiable {
             case .current:
                 return "breastfeeding".localized
             case .weaning:
-                return "breastfeeding_and_Weaning".localized
+                return "breastfeeding_and_weaning".localized
             case .weaningOnly:
                 return "weaning_only".localized
             case .archived:
