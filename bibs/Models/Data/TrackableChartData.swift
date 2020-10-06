@@ -9,9 +9,18 @@
 import Foundation
 import CoreData
 import UIKit
+
+typealias chartDataStructure = (
+    data: [Date: Int32],
+    counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)),
+    min: Int32,
+    max: Int32,
+    itemCount: Int,
+    average: Int32
+)
     
 class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObject {
-    @Published var data: (data: [Date: Int32], counts: (previous: (count: Int, duration: Int32), latest: (count: Int, duration: Int32)), min: Int32, max: Int32, itemCount: Int, average: Int32)?
+    @Published var data: chartDataStructure?
     
     var includeAllDatesInRange = true
     var child: Child

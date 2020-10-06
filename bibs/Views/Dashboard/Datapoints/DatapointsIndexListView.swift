@@ -38,10 +38,12 @@ struct DatapointsIndexListView: View {
                     
                     VStack {
                         ForEach(Array(self.profile.parent.childrenArray.filter{$0.status == .archived}), id: \.self) { child in
-                            HStack {
-                                Text(child.wrappedName).foregroundColor(Color(UIColor.label).opacity(0.75))
-                                Spacer()
-                                Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.5))
+                            NavigationLink(destination: ChildDataTypeListView(child: child, profile: self.profile)) {
+                                HStack {
+                                    Text(child.wrappedName).foregroundColor(Color(UIColor.label).opacity(0.75))
+                                    Spacer()
+                                    Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.5))
+                                }
                             }
                         }
                     }
