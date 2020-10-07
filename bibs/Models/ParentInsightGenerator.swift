@@ -13,12 +13,10 @@ typealias InsightReport = [String: [String]]
 struct EmotionInsightsGenerator {
     var emotion: Emotion
     var context: NSManagedObjectContext
+    var insightsDateRange: ClosedRange<Date> = (Date().advanced(by: -(3600*24*3))...Date())
     
     func generate() -> [String: [String]]? {
-        let twoDays: Double = 3600*24*2
-        
-        let fromDate = emotion.wrappedCreatedAt.beginningOfDay.advanced(by: -twoDays)
-        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", fromDate as NSDate)
+        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", self.insightsDateRange.lowerBound as NSDate)
         let dateToPredicate   = NSPredicate(format: "createdAt < %@",  emotion.wrappedCreatedAt as NSDate)
         
         let predicates = [dateFromPredicate, dateToPredicate]
@@ -96,6 +94,10 @@ struct EmotionInsightsGenerator {
             reports.append("under_napping")
         }
         
+        if(naps.count > 0 && naps.filter {$0.wrappedCreatedAt.earlyEvening}.count > 0) {
+            reports.append("bad_nap_times")
+        }
+        
         return reports.count > 0 ? reports : nil
     }
     
@@ -134,6 +136,10 @@ struct EmotionInsightsGenerator {
         
         if ((tenMinutes * 1.5)...(tenMinutes * 6)).contains(Double(details.average)) {
             reports.append("ideal_nap_duration")
+        }
+        
+        if(naps.filter {$0.wrappedCreatedAt.earlyEvening}.count == 0) {
+            reports.append("ideal_nap_times")
         }
         
         return reports.count > 0 ? reports : nil

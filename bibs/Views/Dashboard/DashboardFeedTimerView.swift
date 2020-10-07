@@ -117,13 +117,9 @@ struct DashboardFeedTimerView: View {
             }
             
             if feedSession.status == .paused {
-                withAnimation {
-                    feedSession.resume()
-                }
+                feedSession.resume()
             }else if feedSession.status == .running {
-                withAnimation {
-                    feedSession.pause()
-                }
+                feedSession.pause()
             }
         }
     }

@@ -30,6 +30,7 @@
 
 // dashboard
 "today" = "Today";
+"most_recent" = "Most Recent";
 "this_week" = "This week";
 "this_month" = "This month";
 "last_7_days" = "Last 7 days";
@@ -233,6 +234,9 @@
 "under_napping" = "Under napping";
 "under_napping_details" = "When over-tired, a baby can still fight sleep like a prize fighter!";
 
+"bad_nap_times" = "Late naps";
+"bad_nap_times_details" = "Napping too late in the day can lead to some late bedtimes and less time for yourself.";
+
 "cluster_feeding" = "Cluster feeding";
 "cluster_feeding_details" = "Lots of smaller feeds, bunched together can be exhausing for you. Watch your calorie intake and try to rest.";
 
@@ -244,6 +248,9 @@
 
 "ideal_nap_amount" = "Good napping!";
 "ideal_nap_amount_details" = "You're hitting the the sweet spot for naps. Well done!";
+
+"ideal_nap_times" = "Nap times";
+"ideal_nap_times_details" = "No napping too late in the day. Very good!";
 
 "ideal_nap_duration" = "Good nap times!";
 "ideal_nap_duration_details" = "Very good. Napping too long can lead to long nights with a wide awake baby.";

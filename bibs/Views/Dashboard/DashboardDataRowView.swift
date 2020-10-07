@@ -21,13 +21,6 @@ struct DashboardDataRowView<Content: View>: View {
     
     var body: some View {
         self.content
-//        .offset(x: 0, y: self.offset)
-//        .opacity(offset == 0 ? 1 : 0)
-//        .onAppear {
-//            withAnimation(Animation.spring(response: 0.5, dampingFraction: 0.85, blendDuration: 0.91).delay(0.05 * Double(self.index))) {
-//                self.offset = 0
-//            }
-//        }
     }
 }
 

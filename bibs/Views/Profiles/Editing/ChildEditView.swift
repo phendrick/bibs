@@ -25,6 +25,7 @@ struct ChildEditView: View {
     @State var isBorn: Bool = true
     @State var dueDate: Date = Date()
     @State var colorScheme: Int = 0
+    @State var childStatus: Child.ChildStatuses = .current
     
     var getTheme: Theme {
         guard let theme = Child.Themes[self.colorScheme] else {
@@ -75,9 +76,9 @@ struct ChildEditView: View {
                             
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(Color(UIColor.systemGreen))
-                                .opacity(self.child.status == status ? 1 : 0.2)
+                                .opacity(self.childStatus == status ? 1 : 0.2)
                         }.onTapGesture {
-                            self.child.status = status
+                            self.childStatus = status
                         }
                     }
                 }
@@ -92,7 +93,7 @@ struct ChildEditView: View {
             if let _ = self.child.image {
                 self.image = Image(uiImage: self.child.wrappedImage)
             }
-            
+            self.childStatus = self.child.status
             self.isBorn = self.child.isBorn
             self.colorScheme = Int(self.child.colorScheme)
             self.dueDate = self.child.dueDate ?? Date()
@@ -105,6 +106,7 @@ struct ChildEditView: View {
             self.profile.parent.addToChildren(child)
         }
 
+        self.child.status = self.childStatus
         self.child.wrappedName = self.name
         self.child.colorScheme = Int16(self.colorScheme)
         self.child.isBorn = self.isBorn

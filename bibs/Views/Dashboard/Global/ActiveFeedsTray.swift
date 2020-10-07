@@ -103,7 +103,7 @@ struct ActiveFeedsTrayView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
-        //.animation(.easeInOut)
+        .animation(.easeOut)
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .frame(alignment: .bottom)
@@ -157,7 +157,7 @@ struct FeedSessionsList: View {
         var width = (UIScreen.main.bounds.size.width - CGFloat(padding * 2)) / CGFloat(children.count)
         
         if children.count > 2 {
-            width = UIScreen.main.bounds.size.width / 2.5
+            width = UIScreen.main.bounds.size.width / 2.4
         }
         
         var minWidth: CGFloat = 100

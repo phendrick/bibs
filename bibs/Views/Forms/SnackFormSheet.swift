@@ -52,7 +52,6 @@ struct SnackFormSheet: View {
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
                     .padding()
-                    .animation(nil)
             }
             
             Form {
@@ -74,9 +73,7 @@ struct SnackFormSheet: View {
                             }
                             .padding(5).tag(snack)
                             .onTapGesture {
-                                withAnimation { 
-                                    self.selectedSnackType = snack
-                                }
+                                self.selectedSnackType = snack
                             }
                         }
                     }

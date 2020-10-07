@@ -34,26 +34,6 @@
 			<key>Key</key>
 			<string>pauseRunningTimersOnShutdown</string>
 			<key>DefaultValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Fetching data</string>
-			<key>Key</key>
-			<string>fetchingDataOptions</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>This week shows last 7 days</string>
-			<key>Key</key>
-			<string>weeklyDataSevenDays</string>
-			<key>DefaultValue</key>
 			<false/>
 		</dict>
 	</array>

@@ -171,7 +171,7 @@ extension ParentProfile {
         // since we can only have 2 children feeding at any one time, if the number of feed sessions is 2
         // just return the children associated with those sessions
         guard let profile = self.profileObserver, profile.activeFeedSessions.count < 2 else {
-            return self.profileObserver!.activeFeedSessions.map {$0.child!}
+            return self.profileObserver!.activeFeedSessions.filter{$0.child != nil}.map {$0.child!}
         }
         
         set = set.filter {

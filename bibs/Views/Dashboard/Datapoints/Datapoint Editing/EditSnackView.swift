@@ -39,9 +39,7 @@ struct EditSnackView: View {
                             }
                             .padding(5).tag(snack)
                             .onTapGesture {
-                                withAnimation {
-                                    self.snackType = snack
-                                }
+                                self.snackType = snack
                             }
                         }
                     }

@@ -87,7 +87,11 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("today".localized).font(.headline)
+            if latestDate.isToday {
+                Text("today".localized).font(.headline)
+            }else {
+                Text("most_recent".localized).font(.headline)
+            }
             Divider()
             
             VStack(alignment: .leading, spacing: 40) {

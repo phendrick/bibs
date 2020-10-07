@@ -27,9 +27,7 @@ struct EmotionDiaryFormSheet: View {
                         }
                         .opacity(self.selectedEmotionType == emotion ? 1 : 0.5)
                         .onTapGesture {
-                            withAnimation {
-                                self.selectedEmotionType = emotion
-                            }
+                            self.selectedEmotionType = emotion
                         }
                     }
                 }

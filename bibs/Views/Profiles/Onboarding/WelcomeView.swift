@@ -30,15 +30,20 @@ struct WelcomeView: View {
                 Spacer()
                 
                 Button("next".localized) {
-                    self.showAddAboutYouView = true
                 }.padding()
+                
+                Image("bibs")
             }
+        }.onTapGesture {
+            self.showAddAboutYouView = true
         }
     }
 }
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        Group {
+            WelcomeView()
+        }
     }
 }

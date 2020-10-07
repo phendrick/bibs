@@ -71,9 +71,7 @@ struct ExpressedMilkFormSheet: View {
                             }
                             .padding(5).tag(storage)
                             .onTapGesture {
-                                withAnimation {
-                                    self.expressedMilkStorage = storage
-                                }
+                                self.expressedMilkStorage = storage
                             }
                         }
                     }

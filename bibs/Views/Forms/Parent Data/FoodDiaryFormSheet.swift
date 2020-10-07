@@ -52,9 +52,7 @@ struct FoodDiaryFormSheet: View {
                             }
                             .padding(5).tag(snack)
                             .onTapGesture {
-                                withAnimation {
-                                    self.selectedFoodType = snack
-                                }
+                                self.selectedFoodType = snack
                             }
                         }
                     }

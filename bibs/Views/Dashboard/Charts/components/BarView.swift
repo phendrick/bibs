@@ -68,7 +68,7 @@ struct BarChartBarView: View {
                 .frame(width: barWidth, height: barHeight)
                 .opacity(1)
                 .cornerRadius(self.cornerRadius)
-                //.overlay(self.labelView())
+                .animation(.easeOut(duration: Double( self.value / self.chartSize )))
             
             if self.showLabel {
                 Text(self.valueLabel).font(.footnote).foregroundColor(valueLabelColor).fixedSize().offset(labelOffset)
@@ -80,6 +80,5 @@ struct BarChartBarView: View {
         .onTapGesture {
             print(self.backgroundHeight, self.barValue)
         }
-        .animation(.easeOut(duration: Double( self.value / self.chartSize )))
     }
 }
