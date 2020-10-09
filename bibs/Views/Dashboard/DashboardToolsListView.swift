@@ -9,23 +9,31 @@
 import SwiftUI
 
 struct DashboardToolsListItem: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var icon: String
     var label: String
     
     var iconSize: CGFloat {
-        UIDevice.current.hasLargeScreen ? 100 : 80
+        UIDevice.current.hasLargeScreen ? 80 : 54
+    }
+    
+    var iconName: String {
+        self.colorScheme == .dark ? "\(icon)_darkmode" : icon
     }
     
     var body: some View {
         VStack(alignment: .center) {
-            Image(icon).resizable().frame(width: self.iconSize, height: self.iconSize)
+            Image(iconName)
+                .resizable()
+                .frame(width: self.iconSize, height: self.iconSize)
             
             Text(label.localized)
                 .font(.caption)
                 .multilineTextAlignment(.center)
-                .layoutPriority(2)
         }
         .frame(maxWidth: .infinity)
+        .fixedSize()
     }
 }
 
@@ -41,6 +49,10 @@ struct DashboardToolsListView: View {
     @State var expressedMilkFormVisible = false
     @State var manualFeedTimerFormVisible = false
     
+    var toolSpacing: CGFloat {
+        UIDevice.current.hasLargeScreen ? 35 : 22
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("add_data".localized).font(.headline)
@@ -48,8 +60,8 @@ struct DashboardToolsListView: View {
                 .offset(y: 5)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 15) {
-                    DashboardToolsListItem(icon: "bottle", label: "stored_milk".localized)
+                HStack(alignment: .top, spacing: toolSpacing) {
+                    DashboardToolsListItem(icon: "fridge", label: "stored_milk".localized)
                         .onTapGesture {
                             self.expressedMilkFormVisible = true
                         }.sheet(isPresented: self.$expressedMilkFormVisible) {
@@ -67,7 +79,7 @@ struct DashboardToolsListView: View {
                                 .environmentObject(self.profile)
                         }
                     
-                    DashboardToolsListItem(icon: "bottle", label: "breastfeed".localized)
+                    DashboardToolsListItem(icon: "baby", label: "breastfeed".localized)
                         .onTapGesture {
                             self.manualFeedTimerFormVisible = true
                         }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
@@ -85,7 +97,7 @@ struct DashboardToolsListView: View {
                                 .environmentObject(self.profile)
                         }
                     
-                    DashboardToolsListItem(icon: "mummy", label: "weaning".localized)
+                    DashboardToolsListItem(icon: "weaning", label: "weaning".localized)
                         .onTapGesture {
                             self.snackFormVisible = true
                         }.sheet(isPresented: self.$snackFormVisible) {
@@ -94,7 +106,7 @@ struct DashboardToolsListView: View {
                                 .environmentObject(self.profile)
                         }
                         
-                    DashboardToolsListItem(icon: "mummy", label: "nap_time".localized)
+                    DashboardToolsListItem(icon: "nap", label: "nap_time".localized)
                         .onTapGesture {
                             self.naptimeFormVisible = true
                         }.sheet(isPresented: self.$naptimeFormVisible) {

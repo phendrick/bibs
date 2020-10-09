@@ -26,9 +26,9 @@ struct DatapointsIndexListView: View {
             
             Spacer()
             
-//            #if DEBUG
-//                DevelopmentDataActionsView(profile: self.profile)
-//            #endif
+            #if DEBUG
+                DevelopmentDataActionsView(profile: self.profile)
+            #endif
             
             if self.profile.parent.childrenArray.filter{$0.status == .archived}.count > 0 {
                 Divider()
@@ -55,7 +55,7 @@ struct DatapointsIndexListView: View {
                 .padding(.top, 25)
             }
             
-            NavigationLink(destination: ChildEditView(child: profile.parent.buildChildObject()), isActive: self.$showAddChildView) {
+            NavigationLink(destination: AddChildView(), isActive: self.$showAddChildView) {
                 EmptyView()
             }
         }

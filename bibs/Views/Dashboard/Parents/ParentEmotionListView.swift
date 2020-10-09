@@ -60,18 +60,21 @@ struct ParentEmotionInsightsView: View {
                 if report != nil {
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("Remember").font(.headline)
+                            Text("remember").font(.headline)
                             Image(systemName: "lightbulb")
                         }
                         
-                        Text("The insights that we generate can only be used as a reference for the data surrounding the time when you recorded this emotion. They shouldn't be relied upon in place of medical advice.").font(.caption)
+                        Text("insights_disclaimer".localized).font(.caption)
                         
                         HStack {
-                            Text("If you have any concerns about you or your baby, please consult your ") + Text("doctor".localized) + Text(".")
+                            Text(String(format: "insights_disclaimer_footer".localized, "doctor")) + Text(".")
+//                            Text(String(format: "insights_disclaimer_footer", "doctor".localized))
+                            //Text("insights_disclaimer_footer") + Text(" ") + Text("doctor".localized) + Text(".")
                         }.font(.caption)
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
             .padding()
             .navigationBarTitle("insights".localized)
             .onAppear {
@@ -87,7 +90,7 @@ struct ParentEmotionInsightsView: View {
                     }
                 }
             }
-        }
+        }.frame(maxWidth: .infinity)
     }
 }
 

@@ -212,4 +212,8 @@ extension Date {
     var earlyEvening: Bool {
         (16...18).contains(Calendar.current.component(.hour, from: self))
     }
+    
+    var duringTheDay: Bool {
+        (8...16).contains(Calendar.current.component(.hour, from: self))
+    }
 }

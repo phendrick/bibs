@@ -61,7 +61,7 @@ struct FeedSessionChildChartsView: View {
                     child: self.child,
                     chartData: TrackableChartData<FeedSession>(
                         child: self.child,
-                        range: Date().lastSevenDays...Date().endOfDay,
+                        range: Date().beginningOfWeek.beginningOfDay...Date().beginningOfWeek.plusWeek,
                         includeAllDatesInRange: true,
                         predicates: [NSPredicate(format: "state IN %@", [FeedSession.FeedSessionStatus.complete.rawValue])]
                     )

@@ -53,7 +53,7 @@ struct ChildEditView: View {
 
                     ForEach(Child.Themes.keys.sorted(), id: \.self) {index in
                         Rectangle()
-                            .frame(width: 30, height: 30)
+                            .frame(width: self.colorScheme == index ? 40 : 30, height: self.colorScheme == index ? 40 : 30)
                             .foregroundColor(Color(Child.Themes[index]?.0 ?? UIColor.systemFill))
                             .clipShape(Circle())
                             .onTapGesture {
@@ -62,7 +62,7 @@ struct ChildEditView: View {
                     }
 
                     Spacer()
-                }
+                }.animation(.spring())
             }
             
             Section(header: Text("is_currently".localized)) {

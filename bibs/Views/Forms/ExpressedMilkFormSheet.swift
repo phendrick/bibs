@@ -60,7 +60,7 @@ struct ExpressedMilkFormSheet: View {
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading) {
                                     Text("\(storage.description)").font(.headline).padding(.bottom, 10)
-                                    Text("\(storage.details)").font(.subheadline)
+//                                    Text("\(storage.details)").font(.subheadline)
                                 }
                                 
                                 Spacer()

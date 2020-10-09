@@ -110,12 +110,14 @@ struct EmotionInsightsGenerator {
         if details.count >= 20 && details.average <= tenMinutes {
             reports.append("cluster_feeding")
         }
+        reports.append("cluster_feeding")
         
         let earlyMorningFeeds = feeds.filter {$0.wrappedCreatedAt.earlyMorning}.count
         
         if earlyMorningFeeds > 4 {
             reports.append("late_nights")
         }
+        reports.append("late_nights")
         
         if details.average > tenMinutes * 4 {
             reports.append("long_feeds")
@@ -138,7 +140,7 @@ struct EmotionInsightsGenerator {
             reports.append("ideal_nap_duration")
         }
         
-        if(naps.filter {$0.wrappedCreatedAt.earlyEvening}.count == 0) {
+        if(naps.allSatisfy {$0.wrappedCreatedAt.duringTheDay}) {
             reports.append("ideal_nap_times")
         }
         

@@ -53,7 +53,6 @@
 		DA842085252B12A500ED5105 /* ParentInsightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA842084252B12A500ED5105 /* ParentInsightGenerator.swift */; };
 		DA84208B252B519800ED5105 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA84208D252B519800ED5105 /* Localizable.strings */; };
 		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
-		DA88ECAC250119BB00DF01E2 /* DashboardToolCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA88ECAB250119BB00DF01E2 /* DashboardToolCardsView.swift */; };
 		DA88ECAE250119D400DF01E2 /* DashboardToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */; };
 		DA8C169D25004F6900FA559F /* NappyChangeDailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */; };
 		DA92439824DE0AAE00339810 /* DatapointsIndexListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */; };
@@ -196,7 +195,6 @@
 		DA8420B3252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA8420B4252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
-		DA88ECAB250119BB00DF01E2 /* DashboardToolCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolCardsView.swift; sourceTree = "<group>"; };
 		DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolView.swift; sourceTree = "<group>"; };
 		DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeDailyChartView.swift; sourceTree = "<group>"; };
 		DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatapointsIndexListView.swift; sourceTree = "<group>"; };
@@ -380,7 +378,6 @@
 				DA5DB18E24A5304700DE2E01 /* Dashboard */,
 				DA08834624CE1524003B7020 /* Forms */,
 				DAAAFD5F24AC7FB70064B263 /* Profiles */,
-				DA88ECAB250119BB00DF01E2 /* DashboardToolCardsView.swift */,
 				DA15EA4325018DC500F5DB57 /* DevelopmentDataActionsView.swift */,
 				DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */,
 			);
@@ -954,7 +951,6 @@
 				DAF7518B24B7D78A00C83F33 /* BottleFeed.swift in Sources */,
 				DAD7E7C724DDF18400BF5283 /* ParentTrackerFormSheet.swift in Sources */,
 				DAEBBF4B24CB7C790065B232 /* DashboardHeaderOverviewView.swift in Sources */,
-				DA88ECAC250119BB00DF01E2 /* DashboardToolCardsView.swift in Sources */,
 				DAA5BBB124FEE5DE00ED234D /* NappyChangeChildChartsView.swift in Sources */,
 				DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */,
 				DADBE69B24B1CFEF00B1E3B1 /* dateHelpers.swift in Sources */,

@@ -52,6 +52,7 @@ struct DashboardHeaderOverviewItem: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.top, .bottom], 10)
         }
+        .animation(.linear)
         .padding(5).padding([.leading, .trailing], 5)
         .background(Color(UIColor.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 10, style: /*@START_MENU_TOKEN@*/.continuous/*@END_MENU_TOKEN@*/))

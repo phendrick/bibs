@@ -79,7 +79,7 @@ struct FeedTimersDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth
