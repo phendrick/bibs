@@ -28,7 +28,7 @@ struct DashboardView: View {
             GeometryReader { geometry in
                 NavigationView {
                     ScrollView(showsIndicators: false) {
-                        VStack(spacing: 30) {
+                        VStack(spacing: 25) {
                             NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                                 DashboardHeaderOverviewView(profile: self.profile).padding()
                             }.foregroundColor(Color(UIColor.label))

@@ -82,17 +82,17 @@
 // forms
 "ive_expressed" = "I've expressed";
 "refridgerated" = "Refridgerated";
-"refridgerated_details" = "Details about Refridgerated milk";
+"refridgerated_details" = "8 days";
 "room_temperature" = "Room Temperature";
-"room_temperature_details" = "Details about Room Temperature milk";
+"room_temperature_details" = "Use within 6 hours";
 "frozen" = "Frozen";
-"frozen_details" = "Details about Frozen milk";
+"frozen_details" = "Use within 6 months when properly stored";
 "thawed" = "Thawed";
-"thawed_details" = "Details about Thawed milk";
+"thawed_details" = "Use within 6 hours";
 "donated" = "Donated";
-"donated_details" = "Details about Donated milk";
+"donated_details" = "Use right away";
 "disposed" = "Disposed";
-"disposed_details" = "Details about Disposed milk";
+"disposed_details" = "Consider donating or using in a baby bath";
 
 "add_a_feed" = "Add a feed";
 "add_a_note" = "Add a note";

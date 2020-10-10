@@ -17,7 +17,7 @@ struct DashboardFeedTimerView: View {
         if self.layout == .expanded {
             return 38
         }else {
-            return self.cofeeding ? 26 : 28
+            return self.cofeeding ? 28 : 32
         }
     }
     
@@ -55,21 +55,18 @@ struct DashboardFeedTimerView: View {
                 Spacer()
                 
                 if self.child.hasActiveFeedSession {
-                    Spacer()
-                    
-                    Button(action: {
-                        guard self.child.activeFeedSession?.status == .paused else {
-                            return
-                        }
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.white)
+                        .frame(width: 40, alignment: .topTrailing)
+                        .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
+                        .onTapGesture {
+                            guard self.child.activeFeedSession?.status == .paused else {
+                                return
+                            }
 
-                        self.child.completeActiveFeedSession()
-                        self.child.parent?.profileObserver?.objectWillChange.send()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
-                            .frame(width: 40, alignment: .topTrailing)
-                    }
-                    .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
+                            self.child.completeActiveFeedSession()
+                            self.child.parent?.profileObserver?.objectWillChange.send()
+                        }
                 }
             }
             .frame(maxWidth: .infinity)
@@ -100,6 +97,7 @@ struct DashboardFeedTimerView: View {
                             }
                             .font(.system(size: timerFontSize * 0.5))
                             .opacity(self.cofeeding ? 0.25 : 1)
+                            .padding(.trailing, 2)
                     }
                 }
             } // timer footer

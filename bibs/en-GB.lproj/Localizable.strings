@@ -82,17 +82,17 @@
 // forms
 "ive_expressed" = "I've expressed";
 "refridgerated" = "Refridgerated";
-"refridgerated_details" = "Details about Refridgerated milk";
+"refridgerated_details" = "8 days";
 "room_temperature" = "Room Temperature";
-"room_temperature_details" = "Details about Room Temperature milk";
+"room_temperature_details" = "Use within 6 hours";
 "frozen" = "Frozen";
-"frozen_details" = "Details about Frozen milk";
+"frozen_details" = "Use within 6 months when properly stored";
 "thawed" = "Thawed";
-"thawed_details" = "Details about Thawed milk";
+"thawed_details" = "Use within 6 hours";
 "donated" = "Donated";
-"donated_details" = "Details about Donated milk";
+"donated_details" = "Use right away";
 "disposed" = "Disposed";
-"disposed_details" = "Details about Disposed milk";
+"disposed_details" = "Consider donating or using in a baby bath";
 
 "add_a_feed" = "Add a feed";
 "add_a_note" = "Add a note";
@@ -247,10 +247,10 @@
 "cluster_feeding_details" = "Lots of smaller feeds, bunched together can be exhausing for you. Watch your calorie intake and try to rest.";
 
 "late_nights" = "Late nights";
-"late_nights_details" = "Lots of activity late at night will leave you and baby tired.";
+"late_nights_details" = "Lots of activity late at night will leave you tired.";
 
 "long_feeds" = "Long feeds";
-"long_feeds_details" = "Long feeds can be exhausting for you. They get easier...";
+"long_feeds_details" = "Long feeds can be exhausting for you. You're amazing!";
 
 "ideal_nap_amount" = "Good napping!";
 "ideal_nap_amount_details" = "You're hitting the the sweet spot for naps. Well done!";
@@ -259,13 +259,13 @@
 "ideal_nap_times_details" = "No napping too late in the day. Very good!";
 
 "ideal_nap_duration" = "Good nap length";
-"ideal_nap_duration_details" = "Very good. Napping too long can lead to long nights with a wide awake baby.";
+"ideal_nap_duration_details" = "Excellent. Napping too long can lead to long nights with a wide awake baby.";
 
 "ideal_feeding_time" = "Well fed";
 "ideal_feeding_time_details" = "Breastfeed times are looking good, well done!";
 
 "ideal_late_nights" = "Late night feeds";
-"ideal_late_nights_details" = "Some late nights around this time. A good night's sleep can make you feel invincible!";
+"ideal_late_nights_details" = "A good night's sleep can make you feel great!";
 
 "ideal_late_night_bottles" = "Late night bottles";
 "ideal_late_night_bottles_details" = "Bottle feeding can be a lot of work. You've had some good nights here.";

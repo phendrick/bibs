@@ -60,9 +60,9 @@ struct EmotionInsightsGenerator {
                 results["feeds"] = report
             }
 
-            if let report = positiveInsightsForBottles(bottles: bottles ?? []) {
-                results["bottle_feeds"] = report
-            }
+//            if let report = positiveInsightsForBottles(bottles: bottles ?? []) {
+//                results["bottle_feeds"] = report
+//            }
         }
         
         return results.values.count > 0 ? results : nil
@@ -177,15 +177,15 @@ struct EmotionInsightsGenerator {
         return reports.count > 0 ? reports : nil
     }
     
-    func positiveInsightsForBottles(bottles: [BottleFeed]) -> [String]? {
-        var reports: [String] = []
-        
-        let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
-        
-        if (1..<4).contains(earlyMorningFeeds) {
-            reports.append("ideal_late_night_bottles")
-        }
-        
-        return reports.count > 0 ? reports : nil
-    }
+//    func positiveInsightsForBottles(bottles: [BottleFeed]) -> [String]? {
+//        var reports: [String] = []
+//
+//        let earlyMorningFeeds = bottles.filter {$0.wrappedCreatedAt.earlyMorning}.count
+//
+//        if (1..<4).contains(earlyMorningFeeds) {
+//            reports.append("ideal_late_night_bottles")
+//        }
+//
+//        return reports.count > 0 ? reports : nil
+//    }
 }
