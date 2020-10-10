@@ -19,35 +19,16 @@ struct NappyChangesDataView: View {
     @State var dateFilterEndDate: Date = Date().endOfMonth
     @State var dateOptionsSheetVisible: Bool = false
     
-    func statsForResults(results: [NappyChange]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        return "\(results.count) \("nappy change".pluralize(count: results.count))"
-    }
-    
     @ViewBuilder func headerView(results: [NappyChange]) -> some View {
         VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
+//            Picker(selection: self.$nappyChangeType, label: Text("")) {
+//                ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {nappy in
+//                    Text("\(nappy.description)").tag(nappy.rawValue)
+//                }
+//            }
+//            .labelsHidden()
             
-            Divider()
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
-                    ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
-                        Button(filter.description) {
-                            if filter != .date {
-                                self.dateFilter = filter
-                            }
-                            
-                            self.dateOptionsSheetVisible = filter == .date
-                        }
-                    }
-                }
-                .padding()
-                .font(.callout)
-            }
+            DataViewDateFilterView(dateFilter: self.$dateFilter, dateOptionsSheetVisible: self.$dateOptionsSheetVisible)
         }
     }
     
@@ -59,7 +40,7 @@ struct NappyChangesDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth
@@ -70,21 +51,15 @@ struct NappyChangesDataView: View {
         }
         
         return NSPredicate(
-            format: "%K IN %@ AND child = %@ AND createdAt >= %@ AND createdAt <= %@", "state",
-            [self.nappyChangeType.rawValue], child, startDate as NSDate, endDate as NSDate
+            format: "child = %@ AND createdAt >= %@ AND createdAt <= %@",
+//            "state",
+//            [self.nappyChangeType.rawValue],
+            child, startDate as NSDate, endDate as NSDate
         )
     }
     
     var body: some View {
         VStack {
-            Picker(selection: self.$nappyChangeType, label: Text("")) {
-                ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {nappy in
-                    Text("\(nappy.description)").tag(nappy.rawValue)
-                }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
             DashboardDataView(
                 profile: self.profile,
                 predicate: filterPredicate(),
@@ -113,8 +88,6 @@ struct NappyChangesDataView: View {
                     }
                 }
             }
-            
-            Spacer()
         }
         .sheet(isPresented: $dateOptionsSheetVisible) {
             VStack(spacing: 50) {

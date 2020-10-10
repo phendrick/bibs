@@ -25,7 +25,7 @@ struct DashboardHeaderOverviewItem: View {
                         if count == nil {
                             Text("no_data".localized)
                                 .foregroundColor(Color(UIColor.quaternaryLabel))
-                                .font(.caption)
+                                .font(.callout)
                         }
                     }
                     
@@ -33,10 +33,10 @@ struct DashboardHeaderOverviewItem: View {
                     
                     if date != nil {
                         Text("latest_at".localized)
-                            .font(.caption).fontWeight(.bold)
+                            .font(.callout).fontWeight(.bold)
                             .foregroundColor(Color(UIColor.tertiaryLabel)) +
                         Text(date!.getFormattedDate(format: " h:mm a"))
-                            .font(.caption)
+                            .font(.callout)
                             .foregroundColor(Color(UIColor.quaternaryLabel))
                     }
                 }

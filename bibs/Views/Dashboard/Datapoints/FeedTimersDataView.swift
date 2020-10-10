@@ -34,41 +34,8 @@ struct FeedTimersDataView: View {
     @State var dateFilterEndDate: Date = Date().endOfMonth
     @State var dateOptionsSheetVisible: Bool = false
     
-    func statsForResults(results: [FeedSession]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        let duration = results.reduce(into: 0) { (result, session) in
-            result += session.duration
-        }
-        
-        let time = duration.toHoursMinutesSeconds
-        return "\(results.count) \("feed".pluralize(count: results.count)) totalling \(time.0) hour \(time.1) minutes and \(time.2) seconds."
-    }
-    
     @ViewBuilder func headerView(results: [FeedSession]) -> some View {
-        VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
-            
-            Divider()
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
-                    ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
-                        Button(filter.description) {
-                            if filter != .date {
-                                self.dateFilter = filter
-                            }
-                            
-                            self.dateOptionsSheetVisible = filter == .date
-                        }
-                    }
-                }
-                .padding()
-                .font(.callout)
-            }
-        }
+        DataViewDateFilterView(dateFilter: self.$dateFilter, dateOptionsSheetVisible: self.$dateOptionsSheetVisible)
     }
     
     func filterPredicate() -> NSPredicate {

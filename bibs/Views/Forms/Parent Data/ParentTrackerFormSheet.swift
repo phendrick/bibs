@@ -25,10 +25,10 @@ struct ParentTrackerFormSheet: View {
         VStack {
             HStack {
                 Spacer()
-                Text("nap_time".localized)
+                Text("about_you".localized)
                 Spacer()
                 
-                Button("Save \(self.form == 0 ? "emotion".localized : "food_diary".localized)") {
+                Button("\("save".localized) \(self.form == 0 ? "emotion".localized : "food_diary".localized)") {
                     if self.form == 0 {
                         guard let emotionType = self.selectedEmotionType else {
                             return
@@ -62,6 +62,7 @@ struct ParentTrackerFormSheet: View {
                     }
                 }
             }
+            .animation(.linear)
             .font(.headline)
             .padding()
             .frame(height: 60)
@@ -71,8 +72,8 @@ struct ParentTrackerFormSheet: View {
             .shadow(color: .gray, radius: 1, x: 0, y: 0)
             
             Picker(selection: self.$form, label: Text("OK")) {
-                Text("How are you?").tag(0)
-                Text("Your food diary").tag(1)
+                Text("how_are_you".localized).tag(0)
+                Text("your_food_diary".localized).tag(1)
             }
             .labelsHidden()
             .pickerStyle(SegmentedPickerStyle())
@@ -84,6 +85,7 @@ struct ParentTrackerFormSheet: View {
                 FoodDiaryFormSheet(foodDiaryNote: self.$foodDiaryNote, selectedFoodType: $selectedFoodType)
             }
         }
+        .animation(.linear)
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))
     }

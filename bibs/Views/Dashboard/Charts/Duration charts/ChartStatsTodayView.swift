@@ -40,7 +40,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
         if date.isToday {
             return "today".localized
         }else if date.isYesterday {
-            return "yesterday"
+            return "yesterday".localized
         }else {
             return date.getFormattedDate(format: "EEEE, MMMM d")
         }

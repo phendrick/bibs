@@ -22,13 +22,11 @@ struct EditFeedTimeView: View {
     
     var body: some View {
         Form {
-            Section(
-                header: Text("Amend the hours, minutes and seconds for this feed")
-            ){
+            Section {
                 HStack(alignment: .lastTextBaseline) {
                     VStack {
-                        Text("Hours").font(.subheadline)
-                        TextField("Total Time \(self.feed.formattedElapsedTime())", text: self.$adjustedHours)
+                        Text("hours".localized).font(.subheadline)
+                        TextField("\(self.feed.formattedElapsedTime())", text: self.$adjustedHours)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
@@ -36,8 +34,8 @@ struct EditFeedTimeView: View {
                     Text(":")
                     
                     VStack {
-                        Text("Minutes").font(.subheadline)
-                        TextField("Total Time \(self.feed.formattedElapsedTime())", text: self.$adjustedMinutes)
+                        Text("minutes".localized).font(.subheadline)
+                        TextField("\(self.feed.formattedElapsedTime())", text: self.$adjustedMinutes)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
@@ -45,23 +43,21 @@ struct EditFeedTimeView: View {
                     Text(":")
                     
                     VStack {
-                        Text("Seconds").font(.subheadline)
-                        TextField("Total Time \(self.feed.formattedElapsedTime())", text: self.$adjustedSeconds)
+                        Text("seconds".localized).font(.subheadline)
+                        TextField("\(self.feed.formattedElapsedTime())", text: self.$adjustedSeconds)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                 }
             }
             
-            Section(
-                header: Text("Which side did \(self.feed.feedSession?.child?.wrappedName ?? "") feed from"),
-                footer: Text("If you change this, all of the feeds in this session will be switched for you")
-            ) {
-                Picker(selection: self.$breastSide, label: Text("Side")) {
+            Section {
+                Picker(selection: self.$breastSide, label: Text("")) {
                     ForEach(Feed.BreastSide.allCases, id: \.self) {side in
                         Text("\(side.description.0)").tag(side.rawValue)
                     }
-                }.pickerStyle(SegmentedPickerStyle())
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
         }.onAppear {
             let elapstedTime = self.feed.calculatedElapsedTime

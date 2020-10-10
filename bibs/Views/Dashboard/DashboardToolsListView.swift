@@ -78,21 +78,21 @@ struct DashboardToolsListView: View {
                                 .environment(\.managedObjectContext, self.moc)
                                 .environmentObject(self.profile)
                         }
-                    
-                    DashboardToolsListItem(icon: "baby", label: "breastfeed".localized)
-                        .onTapGesture {
-                            self.manualFeedTimerFormVisible = true
-                        }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
-                            ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
-                                .environment(\.managedObjectContext, self.moc)
-                                .environmentObject(self.profile)
-                        }
                         
                     DashboardToolsListItem(icon: "nappy", label: "nappies".localized)
                         .onTapGesture {
                             self.nappyChangeFormVisible = true
                         }.sheet(isPresented: self.$nappyChangeFormVisible) {
                             NappyChangeFormSheet(nappyChangeFormVisible: self.$nappyChangeFormVisible)
+                                .environment(\.managedObjectContext, self.moc)
+                                .environmentObject(self.profile)
+                        }
+                    
+                    DashboardToolsListItem(icon: "baby", label: "breastfeed".localized)
+                        .onTapGesture {
+                            self.manualFeedTimerFormVisible = true
+                        }.sheet(isPresented: self.$manualFeedTimerFormVisible) {
+                            ManualFeedTimerEntryFormSheet(feedTimerFormVisible: self.$manualFeedTimerFormVisible)
                                 .environment(\.managedObjectContext, self.moc)
                                 .environmentObject(self.profile)
                         }

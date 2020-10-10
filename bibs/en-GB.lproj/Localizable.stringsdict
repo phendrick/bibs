@@ -243,6 +243,24 @@
 			<string>%d feeds</string>
 		</dict>
 	</dict>
+	<key>Snack_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@snacks@</string>
+		<key>snacks</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d snacks</string>
+			<key>one</key>
+			<string>%d snack</string>
+			<key>other</key>
+			<string>%d snacks</string>
+		</dict>
+	</dict>
 	<key>FeedSession_summary</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

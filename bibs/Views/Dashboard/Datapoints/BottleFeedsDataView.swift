@@ -20,40 +20,19 @@ struct BottleFeedsDataView: View {
     
     @State var bottleFeedType: BottleFeed.BottleFeedType = .expressedMilk
     
-    func statsForResults(results: [BottleFeed]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        let amount = results.reduce(into: 0) { (total, result) in
-            total += result.amount
-        }
-        
-        return "\(results.count) \("bottle".pluralize(count: results.count)) totalling \(amount)mls"
-    }
-    
     @ViewBuilder func headerView(results: [BottleFeed]) -> some View {
         VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
-            
-            Divider()
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 25) {
-                    ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
-                        Button(filter.description) {
-                            if filter != .date {
-                                self.dateFilter = filter
-                            }
-                            
-                            self.dateOptionsSheetVisible = filter == .date
-                        }
-                    }
-                }
-                .padding()
-                .font(.callout)
+            DataViewDateFilterView(dateFilter: self.$dateFilter, dateOptionsSheetVisible: self.$dateOptionsSheetVisible)
+        }
+    }
+    
+    @ViewBuilder func filterView() -> some View {
+        Picker(selection: self.$bottleFeedType, label: Text("")) {
+            ForEach(BottleFeed.BottleFeedType.allCases, id: \.self) {storage in
+                Text("\(storage.description)").tag(storage.rawValue)
             }
         }
+        .labelsHidden()
     }
     
     func filterPredicate() -> NSPredicate {
@@ -64,7 +43,7 @@ struct BottleFeedsDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth
@@ -75,8 +54,10 @@ struct BottleFeedsDataView: View {
         }
         
         return NSPredicate(
-            format: "%K IN %@ AND child = %@ AND createdAt >= %@ AND createdAt <= %@", "state",
-            [self.bottleFeedType.rawValue], child, startDate as NSDate, endDate as NSDate
+            format: "%K IN %@ AND child = %@ AND createdAt >= %@ AND createdAt <= %@",
+            "state",
+            [self.bottleFeedType.rawValue],
+            child, startDate as NSDate, endDate as NSDate
         )
     }
     
@@ -87,8 +68,7 @@ struct BottleFeedsDataView: View {
                     Text("\(storage.description)").tag(storage.rawValue)
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
+            .labelsHidden()
             
             DashboardDataView(
                 profile: self.profile,
@@ -110,8 +90,6 @@ struct BottleFeedsDataView: View {
                     }
                 }
             }
-            
-            Spacer()
         }
         .sheet(isPresented: $dateOptionsSheetVisible) {
             VStack(spacing: 50) {

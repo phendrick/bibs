@@ -8,6 +8,28 @@
 
 import SwiftUI
 
+struct DataViewDateFilterView: View {
+    @Binding var dateFilter: DataViewDateFilter
+    @Binding var dateOptionsSheetVisible: Bool
+    
+    var body: some View {
+        HStack(spacing: 15) {
+            ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
+                Button(filter.description) {
+                    if filter != .date {
+                        self.dateFilter = filter
+                    }
+                    
+                    self.dateOptionsSheetVisible = filter == .date
+                }
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .font(.callout)
+    }
+}
+
 struct DatapointsIndexListView: View {
     @ObservedObject var profile: ProfileObserver
     @State var showAddChildView: Bool = false

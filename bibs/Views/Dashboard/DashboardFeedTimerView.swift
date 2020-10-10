@@ -15,7 +15,7 @@ struct DashboardFeedTimerView: View {
     
     var timerFontSize: CGFloat {
         if self.layout == .expanded {
-            return 30
+            return 38
         }else {
             return self.cofeeding ? 26 : 28
         }

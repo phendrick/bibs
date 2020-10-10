@@ -16,25 +16,27 @@ struct ChildDataTypeListView: View {
 
     var body: some View {
         VStack {
-            List {
-                NavigationLink(destination: FeedSessionChildChartsView(child: child, profile: self.profile)) {
-                    Text("breastfeeds".localized)
-                }
-                
-                NavigationLink(destination: BottleFeedChildChartsView(child: child, profile: self.profile)) {
-                    Text("bottle_feeds".localized)
-                }
-                
-                NavigationLink(destination: NapTimeChildChartsView(child: child, profile: self.profile)) {
-                    Text("nap_times".localized)
-                }
-                
-                NavigationLink(destination: NappyChangeChildChartsView(child: child, profile: self.profile)) {
-                    Text("nappy_changes".localized)
-                }
-                
-                NavigationLink(destination: WeaningDataView(child: child, profile: self.profile) ) {
-                    Text("snacks_and_weaning".localized)
+            Form {
+                List {
+                    NavigationLink(destination: FeedSessionChildChartsView(child: child, profile: self.profile)) {
+                        Text("breastfeeds".localized)
+                    }
+                    
+                    NavigationLink(destination: BottleFeedChildChartsView(child: child, profile: self.profile)) {
+                        Text("bottle_feeds".localized)
+                    }
+                    
+                    NavigationLink(destination: NapTimeChildChartsView(child: child, profile: self.profile)) {
+                        Text("nap_times".localized)
+                    }
+                    
+                    NavigationLink(destination: NappyChangeChildChartsView(child: child, profile: self.profile)) {
+                        Text("nappy_changes".localized)
+                    }
+                    
+                    NavigationLink(destination: WeaningDataView(child: child, profile: self.profile) ) {
+                        Text("snacks_and_weaning".localized)
+                    }
                 }
             }
             

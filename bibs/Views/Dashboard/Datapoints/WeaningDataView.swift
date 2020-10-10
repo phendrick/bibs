@@ -19,20 +19,8 @@ struct WeaningDataView: View {
     @State var dateFilterEndDate: Date = Date().endOfMonth
     @State var dateOptionsSheetVisible: Bool = false
     
-    func statsForResults(results: [Snack]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        return "\(results.count) \("snack".pluralize(count: results.count))"
-    }
-    
     @ViewBuilder func headerView(results: [Snack]) -> some View {
         VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
-            
-            Divider()
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 25) {
                     ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
@@ -59,7 +47,7 @@ struct WeaningDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth
@@ -70,22 +58,13 @@ struct WeaningDataView: View {
         }
         
         return NSPredicate(
-            format: "%K IN %@ AND child = %@ AND createdAt >= %@ AND createdAt <= %@", "state",
-            [self.snackType.rawValue], child, startDate as NSDate, endDate as NSDate
+            format: "child = %@ AND createdAt >= %@ AND createdAt <= %@",
+            child, startDate as NSDate, endDate as NSDate
         )
     }
     
     var body: some View {
         VStack {
-            Picker(selection: self.$snackType, label: Text("")) {
-                ForEach(Snack.SnackType.allCases, id: \.self) {snack in
-                    Text("\(snack.description)").tag(snack.rawValue)
-                }
-            }
-            .padding()
-            
-            Spacer()
-            
             DashboardDataView(
                 profile: self.profile,
                 predicate: filterPredicate(),
@@ -105,8 +84,6 @@ struct WeaningDataView: View {
                     }.padding([.top, .bottom])
                 }
             }
-            
-            Spacer()
         }
         .sheet(isPresented: $dateOptionsSheetVisible) {
             VStack(spacing: 50) {

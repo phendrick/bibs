@@ -74,6 +74,10 @@
 "nap_times" = "Nap Times";
 "snacks_and_weaning" = "Snacks & Weaning";
 "snack_type" = "Snack Type";
+"left_side" = "Left Side";
+"l_side" = "Left";
+"right_side" = "Right Side";
+"r_side" = "Right";
 
 // forms
 "ive_expressed" = "I've expressed";
@@ -157,6 +161,7 @@
 "regular" = "Regular";
 "heavy" = "Heavy";
 "had" = "had";
+"ive_had" = "I've had";
 
 "happy" = "Happy";
 "enthusiastic" = "Enthusiastic";
