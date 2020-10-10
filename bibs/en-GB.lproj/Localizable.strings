@@ -256,7 +256,7 @@
 "ideal_nap_amount_details" = "You're hitting the the sweet spot for naps. Well done!";
 
 "ideal_nap_times" = "Nap times";
-"ideal_nap_times_details" = "No napping too late in the day. Very good!";
+"ideal_nap_times_details" = "No napping too late in the day.";
 
 "ideal_nap_duration" = "Good nap length";
 "ideal_nap_duration_details" = "Excellent. Napping too long can lead to long nights with a wide awake baby.";
@@ -270,7 +270,7 @@
 "ideal_late_night_bottles" = "Late night bottles";
 "ideal_late_night_bottles_details" = "Bottle feeding can be a lot of work. You've had some good nights here.";
 
-"insights_disclaimer" = "The insights that we generate can only be used as a reference for the data surrounding the time when you recorded this emotion. They shouldn't be relied upon in place of medical advice.";
+"insights_disclaimer" = "The insights that we generate can only be used as a reference for the data around the time when you recorded this emotion. They shouldn't be relied upon in place of medical advice.";
 "insights_disclaimer_footer" = "If you have any concerns about you or your baby's health, please consult your %@";
 
 "doctor" = "doctor";
