@@ -18,6 +18,9 @@ struct DashboardView: View {
     @State var expanded: Bool = true
     @State var cofeeding: Bool = false
     
+    @State var parentTrackerFormVisible: Bool = false
+    @State var selectedEmotionType: Emotion.EmotionType?
+    
     var count: CGFloat = 2
     
     var body: some View {
@@ -25,23 +28,30 @@ struct DashboardView: View {
             GeometryReader { geometry in
                 NavigationView {
                     ScrollView(showsIndicators: false) {
-                        VStack {
-                            DashboardHeaderView()
-                                .padding()
-                                .offset(y: -10)
-                            
+                        VStack(spacing: 30) {
                             NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                                 DashboardHeaderOverviewView(profile: self.profile).padding()
                             }.foregroundColor(Color(UIColor.label))
                             
                             DashboardToolsListView().padding([.top, .bottom])
-                                .offset(y: -50)
                         }
-                        .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
                     }
+                    .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
+                    .navigationBarItems(trailing: HStack {
+                        Button("❤️") {self.parentTrackerFormVisible = true}
+                    })
                 }.padding([.top, .bottom], geometry.safeAreaInsets.top)
             }
             .padding(.bottom, self.profile.trayHeight)
+            .sheet(isPresented: self.$parentTrackerFormVisible) {
+                ParentTrackerFormSheet(
+                    profile: self.profile,
+                    parentTrackerFormVisible: self.$parentTrackerFormVisible,
+                    selectedEmotionType: self.profile.parent.latestEmotionType
+                )
+                .environment(\.managedObjectContext, self.moc)
+                .environmentObject(self.profile)
+            }
             
             Spacer()
             
@@ -52,6 +62,9 @@ struct DashboardView: View {
             }
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
+        .onAppear {
+            self.selectedEmotionType = self.profile.parent.latestEmotionType
+        }
     }
 }
 

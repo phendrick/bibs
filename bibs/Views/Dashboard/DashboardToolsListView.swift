@@ -57,7 +57,6 @@ struct DashboardToolsListView: View {
         VStack(alignment: .leading) {
             Text("add_data".localized).font(.headline)
                 .padding([.leading, .trailing])
-                .offset(y: 5)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: toolSpacing) {

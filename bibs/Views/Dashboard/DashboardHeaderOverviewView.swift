@@ -76,13 +76,13 @@ struct DashboardHeaderOverviewView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("today_so_far".localized).font(.headline)
+            HStack(alignment: .lastTextBaseline) {
+                Text("today_so_far".localized).font(.title)
                 Spacer()
                 
                 Text("view_data".localized)
                     .foregroundColor(.gray).font(.subheadline)
-            }
+            }.padding(.bottom)
             
             DashboardHeaderOverviewItem(
                 title: "feeds".localized,
@@ -105,7 +105,6 @@ struct DashboardHeaderOverviewView: View {
             )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .offset(y: -30)
     }
 }
 
