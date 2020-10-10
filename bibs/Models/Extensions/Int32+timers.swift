@@ -26,6 +26,10 @@ extension Duration {
     }
     
     var toFormattedString: String {
+        guard self > 0 else {
+            return String.localizedStringWithFormat("%ld hours %ld minutes %ld secs", 0, 0, 0)
+        }
+        
         let (hours, minutes, seconds) = self.toHoursMinutesSeconds
         
         var output = ""

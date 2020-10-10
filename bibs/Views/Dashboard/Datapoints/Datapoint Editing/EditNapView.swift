@@ -27,14 +27,14 @@ struct EditNapView: View {
                     header: Text("\(nap.child?.wrappedName ?? "") napped from")
                 ) {
                     DatePicker(selection: self.$from, displayedComponents: .hourAndMinute) {
-                        Text("Time")
+                        Text("time".localized)
                     }
                 }
                 Section {
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {
                             VStack(spacing: 0) {
-                                Text("Hours").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("hours".localized).font(.caption).foregroundColor(Color(UIColor.label))
                                 
                                 Picker(selection: self.$hours, label: Text("Test")) {
                                     Text("00").tag(0)
@@ -49,9 +49,9 @@ struct EditNapView: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Minutes").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("minutes".localized).font(.caption).foregroundColor(Color(UIColor.label))
                                 
-                                Picker("test", selection: self.$minutes) {
+                                Picker("", selection: self.$minutes) {
                                     ForEach(0..<60) {idx in
                                         Text(String(format: "%02i", idx)).tag(idx)
                                     }
@@ -62,9 +62,9 @@ struct EditNapView: View {
                             }
                             
                             VStack(spacing: 0) {
-                                Text("Seconds").font(.caption).foregroundColor(Color(UIColor.label))
+                                Text("seconds".localized).font(.caption).foregroundColor(Color(UIColor.label))
                                 
-                                Picker("test", selection: self.$seconds) {
+                                Picker("", selection: self.$seconds) {
                                     ForEach(0..<60) {idx in
                                         Text(String(format: "%02i", idx)).tag(idx)
                                     }

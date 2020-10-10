@@ -19,22 +19,22 @@ extension FoodDiaryEntry {
         
         var description: String {
             switch(self) {
-            case .vegetables: return "Vegetables"
-            case .fruit: return "Fruit"
-            case .roots: return "Starchy foods"
-            case .protein: return "Proteins"
-            case .dairy: return "Dairy"
-            case .sweets: return "Sweets"
+            case .vegetables: return "vegetables".localized
+            case .fruit: return "fruit".localized
+            case .roots: return "starchy_foods".localized
+            case .protein: return "proteins".localized
+            case .dairy: return "dairy".localized
+            case .sweets: return "sweets".localized
             }
         }
         var details: String {
             switch(self) {
-            case .vegetables: return "Carrots, broccoli, peas, avocado, cauliflower"
-            case .fruit: return "Kiki, strawberries, melon, mango, apples"
-            case .roots: return "Pasta, potatoes, quinoa, bread, oats, chapatti"
-            case .protein: return "Beans, lentils, chicken, beef, lamb, chickpeas"
-            case .dairy: return "Eggs, yoghurt, milk"
-            case .sweets: return "Dried fruits, fruit rolls, chocolate"
+            case .vegetables: return "weaning_vegetables"
+            case .fruit: return "weaning_fruit"
+            case .roots: return "weaning_starchy_foods"
+            case .protein: return "weaning_proteins"
+            case .dairy: return "weaning_dairy"
+            case .sweets: return "weaning_sweets"
             }
         }
         var emoji: String {

@@ -77,15 +77,15 @@ struct ManualFeedTimerEntryFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("time")
+                    header: Text("time".localized)
                 ) {
                     DatePicker(selection: self.$from, in: ...Date()) {
-                        Text("time")
+                        Text("time".localized)
                     }
                 }
                 
                 Section(
-                    header: Text("for")
+                    header: Text("for".localized)
                 ){
                     GeometryReader {geometry in
                         HStack(alignment: .top, spacing: 0) {

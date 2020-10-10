@@ -77,7 +77,7 @@ struct BottleFeedsFormSheet: View {
                 
                 
                 Section(
-                    header: Text("bottle_feed_type")
+                    header: Text("bottle_feed_type".localized)
                 ){
                     VStack {
                         Picker(selection: self.$pickerFeedSource, label: Text("")) {

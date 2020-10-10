@@ -22,7 +22,7 @@ struct EditExpressedMilkView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("I've expressed ")
+                    header: Text("ive_expressed".localized)
                 ) {
                     Stepper("\(self.expressedAmount)ml", value: self.$expressedAmount, in: 0...2000).padding()
                 }
@@ -33,7 +33,7 @@ struct EditExpressedMilkView: View {
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading) {
                                     Text("\(storage.description)").font(.headline).padding(.bottom, 10)
-//                                    Text("\(storage.details)").font(.subheadline)
+                                    Text("\(storage.details)").font(.subheadline)
                                 }
                                 
                                 Spacer()
@@ -54,7 +54,6 @@ struct EditExpressedMilkView: View {
                 self.expressedAmount = Int(self.expressedBottle.amount)
                 self.expressedMilkStorage = self.expressedBottle.status
             })
-            .navigationBarTitle("Edit Stored Milk")
             .navigationBarItems(
                 trailing: Button(action: {
                     self.expressedBottle.amount = Int16(self.expressedAmount)

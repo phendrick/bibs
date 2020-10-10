@@ -40,7 +40,7 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
                                 }
                             }
                         }else {
-                            Text("No data available".localized)
+                            Text("no_data".localized)
                         }
                         
                         Spacer()

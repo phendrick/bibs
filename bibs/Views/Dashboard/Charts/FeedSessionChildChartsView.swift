@@ -37,7 +37,7 @@ struct FeedSessionChildChartsView: View {
                 profile: self.profile
             ).environment(\.managedObjectContext, (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
         ) {
-            Text("View Data".localized)
+            Text("view_chart_data".localized)
         }
     }
     

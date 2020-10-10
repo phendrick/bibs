@@ -19,20 +19,8 @@ struct WeaningDataView: View {
     @State var dateFilterEndDate: Date = Date().endOfMonth
     @State var dateOptionsSheetVisible: Bool = false
     
-    func statsForResults(results: [Snack]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        return "\(results.count) \("snack".pluralize(count: results.count))"
-    }
-    
     @ViewBuilder func headerView(results: [Snack]) -> some View {
         VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
-            
-            Divider()
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 25) {
                     ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
@@ -59,7 +47,7 @@ struct WeaningDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth

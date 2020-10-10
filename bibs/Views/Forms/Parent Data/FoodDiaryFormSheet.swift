@@ -14,35 +14,16 @@ struct FoodDiaryFormSheet: View {
     
     var body: some View {
         VStack {
-//            VStack {
-//                ZStack(alignment: .topLeading) {
-//                    VStack(alignment: .leading, spacing: 0) {
-//                        Text("Look after yourself too!")
-//                            .padding([.leading, .top, .trailing])
-//                            .font(.headline)
-//                        Text("Something here about healthy eating and calorie counts keeping to keep your milk supply up, and ensuring that it's nutricious.")
-//                            .font(.caption).padding().padding(.trailing, 50)
-//
-//                        Text("Maybe include some links to online resources here. Or  just some suggestions for ideal foods.")
-//                        .font(.caption).padding().padding(.trailing, 50)
-//                    }
-//                }
-//            }
-//            .frame(maxWidth: .infinity)
-//            .background(Color(UIColor.secondarySystemGroupedBackground))
-//            .cornerRadius(15)
-//            .padding()
-//
             Form {
                 Section(
-                    header: Text("I've had")
+                    header: Text("ive_had".localized)
                 ) {
                     List {
                         ForEach(FoodDiaryEntry.FoodType.allCases, id: \.self) {snack in
                             HStack(alignment: .center) {
                                 VStack(alignment: .leading) {
-                                    Text("\(snack.description)").font(.headline).padding(.bottom, 10)
-                                    Text("\(snack.details)").font(.subheadline)
+                                    Text("\(snack.description)".localized).font(.headline).padding(.bottom, 10)
+                                    Text("\(snack.details)".localized).font(.subheadline)
                                 }
                                 Spacer()
                                 

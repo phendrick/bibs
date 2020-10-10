@@ -12,9 +12,6 @@ struct DashboardHeaderView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var profile: ProfileObserver
     
-    @State var parentTrackerFormVisible = false
-    @State var selectedEmotionType: Emotion.EmotionType?
-    
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
@@ -24,22 +21,8 @@ struct DashboardHeaderView: View {
                 
                 Spacer()
                 
-                Text("\(self.profile.parent.latestEmotionType.emoji)")
-                    .font(.system(size: 50))
-
-            }.onTapGesture {
-                self.parentTrackerFormVisible = true
-            }.sheet(isPresented: self.$parentTrackerFormVisible) {
-                ParentTrackerFormSheet(
-                    profile: self.profile,
-                    parentTrackerFormVisible: self.$parentTrackerFormVisible,
-                    selectedEmotionType: self.selectedEmotionType
-                )
-                .environment(\.managedObjectContext, self.moc)
-                .environmentObject(self.profile)
+                Text("\(self.profile.parent.latestEmotionType.emoji)").font(.system(size: 32))
             }
-        }.onAppear {
-            self.selectedEmotionType = self.profile.parent.latestEmotionType
         }
     }
 }

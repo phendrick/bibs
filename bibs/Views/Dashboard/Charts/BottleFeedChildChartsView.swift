@@ -61,7 +61,7 @@ struct BottleFeedChildChartsView: View {
                         child: self.child,
                         chartData: TrackableChartData<BottleFeed>(
                             child: self.child,
-                            range: Date().lastSevenDays...Date().endOfDay,
+                            range: Date().beginningOfWeek.beginningOfDay...Date().beginningOfWeek.plusWeek,
                             includeAllDatesInRange: true
                         )
                     )

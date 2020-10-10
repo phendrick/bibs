@@ -18,6 +18,9 @@ struct DashboardView: View {
     @State var expanded: Bool = true
     @State var cofeeding: Bool = false
     
+    @State var selectedEmotionType: Emotion.EmotionType?
+    @State var parentTrackerFormVisible = false
+    
     var count: CGFloat = 2
     
     var body: some View {
@@ -25,19 +28,32 @@ struct DashboardView: View {
             GeometryReader { geometry in
                 NavigationView {
                     ScrollView(showsIndicators: false) {
-                        VStack {
-                            DashboardHeaderView()
-                                .padding()
-                                .offset(y: -10)
+                        VStack(spacing: 20) {
+//                            DashboardHeaderView()
+//                                .padding()
+//                                .offset(y: -10)
                             
                             NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
                                 DashboardHeaderOverviewView(profile: self.profile).padding()
                             }.foregroundColor(Color(UIColor.label))
                             
                             DashboardToolsListView().padding([.top, .bottom])
-                                .offset(y: -50)
+//                                .offset(y: -40)
                         }
                         .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
+                        .navigationBarItems(trailing: HStack {
+                            Button("❤️") {
+                                self.parentTrackerFormVisible = true
+                            }
+                        }).sheet(isPresented: self.$parentTrackerFormVisible) {
+                            ParentTrackerFormSheet(
+                                profile: self.profile,
+                                parentTrackerFormVisible: self.$parentTrackerFormVisible,
+                                selectedEmotionType: self.selectedEmotionType
+                            )
+                            .environment(\.managedObjectContext, self.moc)
+                            .environmentObject(self.profile)
+                        }
                     }
                 }.padding([.top, .bottom], geometry.safeAreaInsets.top)
             }

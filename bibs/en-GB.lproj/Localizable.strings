@@ -76,6 +76,7 @@
 "snack_type" = "Snack Type";
 
 // forms
+"ive_had" = "I've had";
 "ive_expressed" = "I've expressed";
 "refridgerated" = "Refridgerated";
 "refridgerated_details" = "Details about Refridgerated milk";
@@ -172,6 +173,7 @@
 "starchy_foods" = "Starchy foods";
 "proteins" = "Proteins";
 "dairy" = "Dairy";
+"sweets" = "Sweet Stuff";
 
 // foods
 "weaning_type" = "Snack type";
@@ -181,6 +183,7 @@
 "weaning_proteins" = "Beans, lentils, chicken, beef, lamb, chickpeas";
 "weaning_dairy" = "Eggs, yoghurt, milk";
 "weaning_note_hint" = "Add a note eg. \"Carrot sticks\"";
+"weaning_sweets" = "Dried fruits, fruit rolls, chocolate";
 
 // data
 "none_today" = "None today";
@@ -202,6 +205,11 @@
 "hours" = "Hours";
 "minutes" = "Minutes";
 "seconds" = "Seconds";
+"side" = "Side";
+"left_side" = "Left Side";
+"right_side" = "Right Side";
+"l_side" = "Left";
+"r_side" = "Right";
 
 // settings
 "edit_your_details" = "Edit your details";
@@ -227,7 +235,8 @@
 "feeds" = "Feeds";
 "bottle_feeds" = "Bottle Feeds";
 
-"late_night_bottles" = "Bottle feeding can be a lot of work. Keep going, it'll get easier.";
+"late_night_bottles" = "Late night bottles";
+"late_night_bottles_details" = "Bottle feeding can be a lot of work. Keep going, it'll get easier.";
 "over_napping" = "Over napping";
 "over_napping_details" = "Napping too much through the day can lead to some long nights with a wide awake baby.";
 
@@ -269,3 +278,5 @@
 
 "doctor" = "doctor";
 "remember" = "Remember";
+"sorry" = "Sorry";
+"no_insights_found" = "No insights found - more data required.";

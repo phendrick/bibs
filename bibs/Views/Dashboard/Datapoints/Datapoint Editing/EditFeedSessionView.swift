@@ -28,7 +28,6 @@ struct EditFeedSessionView: View {
     var body: some View {
         Form {
             Section(
-                header: Text("Timers associated with this feed")
             ) {
                 List {
                     ForEach(feedSession.feedsArray) {feed in

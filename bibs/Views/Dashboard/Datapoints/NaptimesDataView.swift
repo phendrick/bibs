@@ -17,25 +17,8 @@ struct NaptimesDataView: View {
     @State var dateFilterEndDate: Date = Date().endOfMonth
     @State var dateOptionsSheetVisible: Bool = false
     
-    func statsForResults(results: [Nap]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        let duration = results.reduce(into: 0) { (result, nap) in
-            result += nap.duration
-        }
-        
-        let time = duration.toHoursMinutesSeconds
-        return "\(results.count) \("nap".pluralize(count: results.count)) totalling \(time.0) hour \(time.1) minutes and \(time.2) seconds."
-    }
-    
     @ViewBuilder func headerView(results: [Nap]) -> some View {
         VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
-            
-            Divider()
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 25) {
                     ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
@@ -62,7 +45,7 @@ struct NaptimesDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth
@@ -73,7 +56,7 @@ struct NaptimesDataView: View {
         }
         
         return NSPredicate(
-            format: "child = %@ AND createdAt >= %@ AND createdAt <= %@", "state",
+            format: "child = %@ AND createdAt >= %@ AND createdAt <= %@",
             child, startDate as NSDate, endDate as NSDate
         )
     }

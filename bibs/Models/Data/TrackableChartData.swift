@@ -34,6 +34,8 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         self.includeAllDatesInRange = includeAllDatesInRange
         self.moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        print(self.range)
+        
         self.regenerateData()
     }
     

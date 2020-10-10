@@ -10,14 +10,6 @@ extension String {
         return String(padded)
     }
     
-    func pluralize(count: Int) -> String {
-        guard count > 0 else {
-            return "\(self)s"
-        }
-        
-        return count < 2 ? self : "\(self)s"
-    }
-    
     var localized: String {
         NSLocalizedString(self, comment: "")
     }

@@ -20,24 +20,8 @@ struct BottleFeedsDataView: View {
     
     @State var bottleFeedType: BottleFeed.BottleFeedType = .expressedMilk
     
-    func statsForResults(results: [BottleFeed]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        let amount = results.reduce(into: 0) { (total, result) in
-            total += result.amount
-        }
-        
-        return "\(results.count) \("bottle".pluralize(count: results.count)) totalling \(amount)mls"
-    }
-    
     @ViewBuilder func headerView(results: [BottleFeed]) -> some View {
         VStack(alignment: .leading) {
-            Text("\(statsForResults(results: results))")
-            
-            Divider()
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 25) {
                     ForEach(DataViewDateFilter.allCases, id: \.self) {filter in
@@ -64,7 +48,7 @@ struct BottleFeedsDataView: View {
             startDate = Date().beginningOfDay
             endDate = Date().endOfDay
         }else if self.dateFilter == .week {
-            startDate = self.profile.parent.startOfWeekDay == 1 ? Date().beginningOfWeek : Date().beginningOfWeekMonday
+            startDate = Date().beginningOfWeek.beginningOfDay
             endDate = startDate.plusWeek
         }else if self.dateFilter == .month {
             startDate = Date().beginningOfMonth
@@ -103,7 +87,7 @@ struct BottleFeedsDataView: View {
                         VStack(alignment: .leading, spacing: 15) {
                             HStack {
                                 Text("\(result.amount)ml").fontWeight(.bold)  +
-                                Text(" at ") +
+                                Text(" ") +
                                 Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
                             }
                         }.padding([.top, .bottom])

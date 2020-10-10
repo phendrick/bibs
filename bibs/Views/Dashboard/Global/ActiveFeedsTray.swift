@@ -148,7 +148,7 @@ struct FeedSessionsList: View {
     @Binding var layout: ActiveFeedsTrayView.ExpandedState
     @ObservedObject var profile: ProfileObserver
     
-    func cardWidth(child: Child) -> CGFloat {
+    func cardWidth() -> CGFloat {
         guard self.layout != ActiveFeedsTrayView.ExpandedState.expanded else {
             return UIScreen.main.bounds.size.width * 0.9
         }
@@ -160,13 +160,13 @@ struct FeedSessionsList: View {
             width = UIScreen.main.bounds.size.width / 2.4
         }
         
-        var minWidth: CGFloat = 100
+        var minWidth: CGFloat = 120
         
-        if let _ = child.activeFeedSession {
-            minWidth = UIScreen.main.bounds.size.width * 0.6
-        }
+//        if let _ = child.activeFeedSession {
+//            minWidth = UIScreen.main.bounds.size.width * 0.6
+//        }
         
-        if children.count > 3 {
+        if children.count > 2 {
             return max(width, minWidth)
         }else {
             return width
@@ -181,7 +181,7 @@ struct FeedSessionsList: View {
                 cofeeding: self.profile.activeFeedSessions.count>1
             )
             .frame(maxWidth: .infinity)
-            .frame(width: cardWidth(child: child))
+            .frame(width: cardWidth())
             .frame(alignment: .bottom)
         }
     }

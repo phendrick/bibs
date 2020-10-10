@@ -37,6 +37,8 @@ struct DashboardDataView<T: NSManagedObject, Header: View, Content: View>: View 
         self.headerView = headerView
         self.content = content
         self.allowDelete = allowDelete
+        
+        print("Fetching...", predicate)
     }
     
     func removeRows(at offsets: IndexSet) {

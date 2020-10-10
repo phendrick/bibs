@@ -15,7 +15,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
     
     var previousDaysChartLabel: String {
         if chartData.range.lowerBound.isYesterday {
-            return NSLocalizedString("Yesterday", comment: "")
+            return "yesterday".localized
         }else {
             return chartData.range.lowerBound.getFormattedDate(format: "EEEE, MMMM d")
         }
@@ -40,7 +40,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
         if date.isToday {
             return "today".localized
         }else if date.isYesterday {
-            return "yesterday"
+            return "yesterday".localized
         }else {
             return date.getFormattedDate(format: "EEEE, MMMM d")
         }
@@ -171,7 +171,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
                     )
                     .offset(y: -20)
                 }else {
-                    Text("No data available".localized)
+                    Text("no_data".localized)
                 }
             }
         }

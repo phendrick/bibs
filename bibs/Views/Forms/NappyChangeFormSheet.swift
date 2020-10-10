@@ -113,7 +113,7 @@ struct NappyChangeFormSheet: View {
                 }.animation(.spring())
                 
                 Section(
-                    header: Text("Amount")
+                    header: Text("amount".localized)
                 ) {
                     Picker(selection: self.$nappyChangeAmountType, label: Text("")) {
                         ForEach(NappyChange.NappyChangeAmountType.allCases, id: \.self) {nappy in

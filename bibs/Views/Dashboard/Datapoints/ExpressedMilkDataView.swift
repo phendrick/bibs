@@ -19,30 +19,14 @@ struct ExpressedMilkDataView: View {
     @State var dateFilterEndDate: Date = Date().endOfMonth
     @State var dateOptionsSheetVisible: Bool = false
     
-    func statsForResults(results: [Snack]) -> String {
-        guard results.count > 0 else {
-            return ""
-        }
-        
-        return "\(results.count) \("snack".pluralize(count: results.count))"
-    }
-    
     @ViewBuilder func headerView(results: [ExpressedBottle]) -> some View {
-        if results.count > 0 {
-            Text("\(results.count) \("bottle".pluralize(count: results.count))")
-        }
-    }
-    
-    @ViewBuilder func headerView(results: [Snack]) -> some View {
-        Section {
-            Text("\(statsForResults(results: results))")
-        }
+        EmptyView()
     }
     
     var body: some View {
         VStack {
             Section {
-                Picker(selection: self.$expressedBottleStorageType, label: Text("Storage Type")) {
+                Picker(selection: self.$expressedBottleStorageType, label: Text("")) {
                     ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
                         Text("\(storage.description)").tag(storage.rawValue)
                     }

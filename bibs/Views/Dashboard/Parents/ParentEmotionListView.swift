@@ -39,8 +39,11 @@ struct ParentEmotionInsightsView: View {
 
                             ForEach(Array(report![key]!), id: \.self) {value in
                                 VStack(alignment: .leading, spacing: 10) {
-                                    Text("\(value)".localized).font(.headline)
+                                    Text(value.localized).font(.headline)
                                     Text("\(value)_details".localized).font(.subheadline)
+                                        .onTapGesture {
+                                            print(value)
+                                        }
                                 }.fixedSize(horizontal: false, vertical: true)
                             }
                         }
@@ -50,8 +53,8 @@ struct ParentEmotionInsightsView: View {
                     }
                 }else {
                     VStack(spacing: 10) {
-                        Text("Sorry!").font(.headline)
-                        Text("No insights available").font(.caption)
+                        Text("sorry".localized).font(.headline)
+                        Text("no_insights_found".localized).font(.subheadline)
                     }
                 }
                 
@@ -60,7 +63,7 @@ struct ParentEmotionInsightsView: View {
                 if report != nil {
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("remember").font(.headline)
+                            Text("remember".localized).font(.headline)
                             Image(systemName: "lightbulb")
                         }
                         
@@ -68,8 +71,6 @@ struct ParentEmotionInsightsView: View {
                         
                         HStack {
                             Text(String(format: "insights_disclaimer_footer".localized, "doctor")) + Text(".")
-//                            Text(String(format: "insights_disclaimer_footer", "doctor".localized))
-                            //Text("insights_disclaimer_footer") + Text(" ") + Text("doctor".localized) + Text(".")
                         }.font(.caption)
                     }
                 }

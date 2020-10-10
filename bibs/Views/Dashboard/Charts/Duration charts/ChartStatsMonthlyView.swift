@@ -74,7 +74,7 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                         Text("\(self.activeMonthName)")
                             .font(.subheadline)
                         
-                        Button("This month") {
+                        Button("this_month".localized) {
                             self.month = Date()
                             let dateRange = self.month.beginningOfMonth...self.month.endOfMonth
                             
@@ -159,7 +159,7 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                             .minimumScaleFactor(0.75)
                         }
                     }else {
-                        Text("No data available".localized)
+                        Text("no_data".localized)
                     }
                 }
             }
