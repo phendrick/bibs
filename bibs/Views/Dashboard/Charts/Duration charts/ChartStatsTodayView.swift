@@ -171,7 +171,7 @@ struct ChartStatsTodayView<T: Trackable>: View where T: NSManagedObject {
                     )
                     .offset(y: -20)
                 }else {
-                    Text("No data available".localized)
+                    Text("no_data".localized)
                 }
             }
         }

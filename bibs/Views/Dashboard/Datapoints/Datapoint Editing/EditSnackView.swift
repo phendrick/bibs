@@ -22,7 +22,7 @@ struct EditSnackView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("Snack type")
+                    header: Text("snack_type".localized)
                 ) {
                     List {
                         ForEach(Snack.SnackType.allCases, id: \.self) {snack in

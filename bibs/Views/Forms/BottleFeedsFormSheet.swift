@@ -68,7 +68,7 @@ struct BottleFeedsFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Child") ") + Text("had".localized)
+                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "") ") + Text("had".localized)
                 ) {
                     Stepper("\(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                         .padding()
@@ -77,7 +77,7 @@ struct BottleFeedsFormSheet: View {
                 
                 
                 Section(
-                    header: Text("bottle_feed_type")
+                    header: Text("bottle_feed_type".localized)
                 ){
                     VStack {
                         Picker(selection: self.$pickerFeedSource, label: Text("")) {

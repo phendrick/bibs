@@ -61,7 +61,6 @@ struct NappyChangeFormSheet: View {
             
             Form {
                 Section(
-                    //header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "Baby") nappy was")
                 ) {
                     Picker(selection: self.$nappyType, label: Text("Select a nappy type")) {
                         ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {type in
@@ -113,7 +112,7 @@ struct NappyChangeFormSheet: View {
                 }.animation(.spring())
                 
                 Section(
-                    header: Text("Amount")
+                    header: Text("amount".localized)
                 ) {
                     Picker(selection: self.$nappyChangeAmountType, label: Text("")) {
                         ForEach(NappyChange.NappyChangeAmountType.allCases, id: \.self) {nappy in

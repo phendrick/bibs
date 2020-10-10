@@ -37,14 +37,14 @@ struct EmotionDiaryFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("note_about_emotion")
+                    header: Text("note_about_emotion".localized)
                 ) {
                     TextField(self.emotionNote, text: self.$emotionNote)
                 }
             }
             
             if self.selectedEmotionType == .down || self.selectedEmotionType == .sad {
-                Text("negative_emotion_footer").font(.caption).padding()
+                Text("negative_emotion_footer".localized).font(.caption).padding()
             }
         }
     }

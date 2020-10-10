@@ -50,8 +50,7 @@ struct ParentEmotionInsightsView: View {
                     }
                 }else {
                     VStack(spacing: 10) {
-                        Text("Sorry!").font(.headline)
-                        Text("No insights available").font(.caption)
+                        Text("no_data".localized).font(.headline)
                     }
                 }
                 
@@ -60,7 +59,7 @@ struct ParentEmotionInsightsView: View {
                 if report != nil {
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("remember").font(.headline)
+                            Text("remember".localized).font(.headline)
                             Image(systemName: "lightbulb")
                         }
                         
@@ -68,8 +67,6 @@ struct ParentEmotionInsightsView: View {
                         
                         HStack {
                             Text(String(format: "insights_disclaimer_footer".localized, "doctor")) + Text(".")
-//                            Text(String(format: "insights_disclaimer_footer", "doctor".localized))
-                            //Text("insights_disclaimer_footer") + Text(" ") + Text("doctor".localized) + Text(".")
                         }.font(.caption)
                     }
                 }

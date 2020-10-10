@@ -159,7 +159,7 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                             .minimumScaleFactor(0.75)
                         }
                     }else {
-                        Text("No data available".localized)
+                        Text("no_data".localized)
                     }
                 }
             }

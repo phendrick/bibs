@@ -56,7 +56,7 @@ struct SnackFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("weaning_type")
+                    header: Text("weaning_type".localized)
                 ) {
                     List {
                         ForEach(Snack.SnackType.allCases, id: \.self) {snack in

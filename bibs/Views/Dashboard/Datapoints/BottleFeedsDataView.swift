@@ -83,7 +83,6 @@ struct BottleFeedsDataView: View {
                         VStack(alignment: .leading, spacing: 15) {
                             HStack {
                                 Text("\(result.amount)ml").fontWeight(.bold)  +
-                                Text(" at ") +
                                 Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
                             }
                         }.padding([.top, .bottom])
