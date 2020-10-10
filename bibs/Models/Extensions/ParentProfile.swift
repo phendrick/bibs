@@ -83,9 +83,7 @@ extension ParentProfile {
         
         let dateRange = dateFrom..<dateTo
         
-        let feeds = childrenArray.flatMap { child in
-            child.completedFeedsWithinRange(dateDange: dateRange)
-        }
+        let feeds = FeedSession.trackableItemsWithinRange(range: dateRange, context: self.managedObjectContext).filter{$0.status == .complete}
         
         let duration: Duration = feeds.reduce(into: 0, { (result, session) in
             result += session.duration
@@ -114,9 +112,7 @@ extension ParentProfile {
         
         let dateRange = dateFrom..<dateTo
         
-        let nappies = childrenArray.flatMap { child in
-            child.nappyChangesWithinRange(dateDange: dateRange)
-        }
+        let nappies = NappyChange.trackableItemsWithinRange(range: dateRange, context: self.managedObjectContext)
         
         let count: Int? = nappies.count > 0 ? nappies.count : nil
         
@@ -141,9 +137,7 @@ extension ParentProfile {
         
         let dateRange = dateFrom..<dateTo
         
-        let naps = childrenArray.flatMap { child in
-            child.napsWithinRange(dateDange: dateRange)
-        }
+        let naps = Nap.trackableItemsWithinRange(range: dateRange, context: self.managedObjectContext)
         
         let duration: Duration = naps.reduce(into: 0, { (result, session) in
             result += session.duration
@@ -182,7 +176,7 @@ extension ParentProfile {
     }
     
     public var activeChildrenArray: [Child] {
-        childrenArray.filter {$0.status != .archived}
+        return childrenArray.filter {$0.status != .archived}
     }
     
     public var expressedBottlesArray: [ExpressedBottle] {
@@ -402,7 +396,8 @@ extension ParentProfile {
     }
     
     public var expressedMilkGiven: Int {
-        self.childrenArray.compactMap { child in
+        print("expressedMilkGiven")
+        return self.childrenArray.compactMap { child in
             child.bottleFeedsArray.filter { (bottleFeed) -> Bool in
                 bottleFeed.status == .expressedMilk
             }.reduce(into: 0) { (total, bottleFeed) in
@@ -486,30 +481,6 @@ extension ParentProfile {
                 case .all: return ""
             }
         }
-    }
-    
-    public func trackedItems<T: Trackable>(type: TrackableItemScope = .activeChild, within dateRange: TrackableItemDateRange) -> [T] {
-//        let expressedBottles = self.expressedBottlesArray
-//        let nappies = self.activeChild?.nappyChangesArray ?? []
-//        let bottles = self.activeChild?.bottleFeedsArray ?? []
-        
-        var items: [T] = []
-        
-//        if let range = dateRange.range {
-//            items.append(contentsOf: expressedBottles.filter { range.contains($0.wrappedCreatedAt)} )
-//            items.append(contentsOf: nappies.filter { range.contains($0.wrappedCreatedAt)} )
-//            items.append(contentsOf: bottles.filter { range.contains($0.wrappedCreatedAt)} )
-//        }else {
-//            items.append(contentsOf: expressedBottles)
-//            items.append(contentsOf: nappies)
-//            items.append(contentsOf: bottles)
-//        }
-        
-        items.sort { (lhs, rhs) -> Bool in
-            lhs.wrappedCreatedAt < rhs.wrappedCreatedAt
-        }
-        
-        return items
     }
     
     public var emotionsArray: [Emotion] {

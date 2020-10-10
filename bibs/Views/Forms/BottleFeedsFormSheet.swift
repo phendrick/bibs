@@ -68,7 +68,7 @@ struct BottleFeedsFormSheet: View {
             
             Form {
                 Section(
-                    header: Text("\(self.profile.parent.activeChild?.wrappedName ?? "") ") + Text("had".localized)
+                    header: Text(String(format: "baby_had".localized, self.profile.parent.activeChild?.wrappedName ?? ""))
                 ) {
                     Stepper("\(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                         .padding()

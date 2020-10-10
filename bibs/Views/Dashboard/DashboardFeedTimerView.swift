@@ -99,6 +99,7 @@ struct DashboardFeedTimerView: View {
                                 self.child.activeFeedSession?.switchSide()
                             }
                             .font(.system(size: timerFontSize * 0.5))
+                            .opacity(self.cofeeding ? 0.25 : 1)
                     }
                 }
             } // timer footer

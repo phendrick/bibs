@@ -65,4 +65,22 @@ extension Nap: Identifiable, Timeable, Trackable {
         
         return calculatedElapsedTime
     }
+    
+    public static func trackableItemsWithinRange(range: Range<Date>, context: NSManagedObjectContext?) -> [Nap] {
+        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
+        let dateToPredicate   = NSPredicate(format: "createdAt =< %@",  range.upperBound as NSDate)
+
+        let datePredicate = NSCompoundPredicate(
+            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
+        )
+        
+        let request:NSFetchRequest<Nap> = Nap.fetchRequest()
+        request.predicate = datePredicate
+        
+        do {
+            return try context?.fetch(request) ?? []
+        }catch {
+            return []
+        }
+    }
 }

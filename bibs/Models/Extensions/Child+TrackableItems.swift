@@ -28,21 +28,23 @@ extension Child {
     }
     
     /// get 'todays' overview of activity
-    func completedFeedsWithinRange(dateDange: Range<Date>) -> [FeedSession] {
+    func completedFeedsWithinRange(dateRange: Range<Date>) -> [FeedSession] {
         return self.feedSessionsArray.filter {
-            $0.status == .complete && dateDange.contains($0.wrappedCreatedAt)
+            $0.status == .complete && dateRange.contains($0.wrappedCreatedAt)
         }
     }
     
-    func nappyChangesWithinRange(dateDange: Range<Date>) -> [NappyChange] {
+    func nappyChangesWithinRange(dateRange: Range<Date>) -> [NappyChange] {
         return self.nappyChangesArray.filter {
-            dateDange.contains($0.wrappedCreatedAt)
+            dateRange.contains($0.wrappedCreatedAt)
         }
     }
     
-    func napsWithinRange(dateDange: Range<Date>) -> [Nap] {
+    func napsWithinRange(dateRange: Range<Date>) -> [Nap] {
+        return []
+        
         return self.napsArray.filter {
-            dateDange.contains($0.wrappedCreatedAt)
+            dateRange.contains($0.wrappedCreatedAt)
         }
     }
     
@@ -63,7 +65,7 @@ extension Child {
     }
     
     func feedSessionsData(inRange: TrackableDataDateRange) -> (Duration, [Duration]) {
-        let sessions: [Duration] = self.completedFeedsWithinRange(dateDange: inRange.dateRange).map {session in
+        let sessions: [Duration] = self.completedFeedsWithinRange(dateRange: inRange.dateRange).map {session in
             session.duration
         }.reversed()
         

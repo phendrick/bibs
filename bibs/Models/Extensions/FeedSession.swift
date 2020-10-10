@@ -270,21 +270,21 @@ extension FeedSession: Identifiable, Trackable {
         Int32(self.duration)
     }
     
-//    public static func trackableItemsWithinRange(range: ClosedRange<Date>, context: NSManagedObjectContext) -> [FeedSession] {
-//        
-//        var calendar = Calendar.current
-//        calendar.timeZone = NSTimeZone.local
-//        
-//        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
-//        let dateToPredicate   = NSPredicate(format: "createdAt < %@",  range.upperBound as NSDate)
-//
-//        let datePredicate = NSCompoundPredicate(
-//            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
-//        )
-//        
-//        var request:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
-//        request.predicate = datePredicate
-//        
-//        return try context.fetch(request) ?? []
-//    }
+    public static func trackableItemsWithinRange(range: Range<Date>, context: NSManagedObjectContext?) -> [FeedSession] {
+        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
+        let dateToPredicate   = NSPredicate(format: "createdAt =< %@",  range.upperBound as NSDate)
+
+        let datePredicate = NSCompoundPredicate(
+            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
+        )
+        
+        let request:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
+        request.predicate = datePredicate
+        
+        do {
+            return try context?.fetch(request) ?? []
+        }catch {
+            return []
+        }
+    }
 }

@@ -125,4 +125,22 @@ extension NappyChange: Identifiable, Trackable {
     public var trackableUnit: Int32 {
         0
     }
+    
+    public static func trackableItemsWithinRange(range: Range<Date>, context: NSManagedObjectContext?) -> [NappyChange] {
+        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
+        let dateToPredicate   = NSPredicate(format: "createdAt =< %@",  range.upperBound as NSDate)
+
+        let datePredicate = NSCompoundPredicate(
+            andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
+        )
+        
+        let request:NSFetchRequest<NappyChange> = NappyChange.fetchRequest()
+        request.predicate = datePredicate
+        
+        do {
+            return try context?.fetch(request) ?? []
+        }catch {
+            return []
+        }
+    }
 }
