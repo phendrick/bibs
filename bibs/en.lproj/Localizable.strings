@@ -73,7 +73,11 @@
 "bottle_feeds" = "Bottle Feeds";
 "nap_times" = "Nap Times";
 "snacks_and_weaning" = "Snacks & Weaning";
-"snack_type" = "Snack Type[!!!]";
+"snack_type" = "Snack Type";
+"left_side" = "Left Side";
+"l_side" = "Left";
+"right_side" = "Right Side";
+"r_side" = "Right";
 
 // forms
 "ive_expressed" = "I've expressed";
@@ -100,6 +104,7 @@
 "done" = "Done";
 "date_from" = "Date From";
 "date_to" = "Date To";
+"type" = "Type";
 
 "about_you" = "About You";
 "about_your_baby" = "About your baby";
@@ -180,6 +185,7 @@
 "weaning_starchy_foods" = "Pasta, potatoes, quinoa, bread, oats, chapatti";
 "weaning_proteins" = "Beans, lentils, chicken, beef, lamb, chickpeas";
 "weaning_dairy" = "Eggs, yoghurt, milk";
+"weaning_sweets" = "Dried fruits, chocolate, cake";
 "weaning_note_hint" = "Add a note eg. \"Carrot sticks\"";
 
 // data

@@ -26,7 +26,7 @@ struct ExpressedMilkDataView: View {
     var body: some View {
         VStack {
             Form {
-                Picker(selection: self.$expressedBottleStorageType, label: Text("Storage Type")) {
+                Picker(selection: self.$expressedBottleStorageType, label: Text("type".localized)) {
                     ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
                         Text("\(storage.description)").tag(storage.rawValue)
                     }

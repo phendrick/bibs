@@ -261,6 +261,42 @@
 			<string>%d snacks</string>
 		</dict>
 	</dict>
+	<key>FoodDiaryEntry_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@snacks@</string>
+		<key>snacks</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d food diary entries</string>
+			<key>one</key>
+			<string>%d food diary entry</string>
+			<key>other</key>
+			<string>%d food diary entries</string>
+		</dict>
+	</dict>
+	<key>ExpressedBottle_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@bottles@</string>
+		<key>bottles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>%d bottles</string>
+			<key>one</key>
+			<string>%d bottle</string>
+			<key>other</key>
+			<string>%d bottles</string>
+		</dict>
+	</dict>
 	<key>FeedSession_summary</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

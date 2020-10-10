@@ -10,8 +10,8 @@
 // String(format: NSLocalizedString(translation_name, comment: ""), name)
 
 // onboarding
-"ready_to_start" = "Ready to get started?";
-"next" = "Next";
+"ready_to_start" = "";
+"next" = "";
 "just_call_me" = "Just call me";
 
 // welcomes
@@ -104,6 +104,7 @@
 "done" = "Done";
 "date_from" = "Date From";
 "date_to" = "Date To";
+"type" = "Type";
 
 "about_you" = "About You";
 "about_your_baby" = "About your baby";
@@ -184,6 +185,7 @@
 "weaning_starchy_foods" = "Pasta, potatoes, quinoa, bread, oats, chapatti";
 "weaning_proteins" = "Beans, lentils, chicken, beef, lamb, chickpeas";
 "weaning_dairy" = "Eggs, yoghurt, milk";
+"weaning_sweets" = "Dried fruits, chocolate, cake";
 "weaning_note_hint" = "Add a note eg. \"Carrot sticks\"";
 
 // data
