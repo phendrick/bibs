@@ -31,6 +31,7 @@ struct FoodDiaryFormSheet: View {
                                     .foregroundColor(Color(UIColor.systemGreen) )
                                     .opacity(self.selectedFoodType == snack ? 1 : 0.2)
                             }
+                            .animation(nil)
                             .padding(5).tag(snack)
                             .onTapGesture {
                                 self.selectedFoodType = snack

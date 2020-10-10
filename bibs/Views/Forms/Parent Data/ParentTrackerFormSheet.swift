@@ -60,8 +60,9 @@ struct ParentTrackerFormSheet: View {
                         self.parentTrackerFormVisible = false
                     }catch {
                     }
-                }
+                }.animation(nil)
             }
+            .animation(.linear)
             .font(.headline)
             .padding()
             .frame(height: 60)
@@ -84,6 +85,7 @@ struct ParentTrackerFormSheet: View {
                 FoodDiaryFormSheet(foodDiaryNote: self.$foodDiaryNote, selectedFoodType: $selectedFoodType)
             }
         }
+        .animation(.linear)
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))
         .onAppear {
