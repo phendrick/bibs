@@ -19,24 +19,25 @@ struct ActiveFeedsTrayView: View {
     enum ExpandedState: CaseIterable {
         case minimised
         case expanded
+        case single
         
         var previous: ExpandedState? {
             switch(self) {
-            case .minimised: return nil
+            case .single, .minimised: return nil
             case .expanded: return .minimised
             }
         }
         
         var next: ExpandedState? {
             switch(self) {
-            case .minimised: return .expanded
+            case .single, .minimised: return .expanded
             case .expanded: return nil
             }
         }
         
         var description: String {
             switch(self) {
-            case .minimised: return "minimised"
+            case .single, .minimised: return "minimised"
             case .expanded: return "expanded"
             }
         }
@@ -85,7 +86,8 @@ struct ActiveFeedsTrayView: View {
                         .foregroundColor(Color.gray.opacity(0.5))
                         .frame(width: 40, height: 6)
                         .padding(.top)
-                        .offset(y: -8)
+                        .offset(y: self.layout == .minimised ? 0 : -4)
+                        .fixedSize()
                 }
 
                 if self.useVerticalLayout {
@@ -103,7 +105,7 @@ struct ActiveFeedsTrayView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
-        .animation(.easeOut)
+        .animation(.easeInOut(duration: 0.1))
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .frame(alignment: .bottom)
@@ -111,6 +113,10 @@ struct ActiveFeedsTrayView: View {
         .gesture(
             DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onChanged {translation in
+                guard self.layout != .single else {
+                    return
+                }
+                
                 let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
                                    ? .up
                                    : .down
@@ -122,6 +128,10 @@ struct ActiveFeedsTrayView: View {
                 }
             }
             .onEnded { translation in
+                guard self.layout != .single else {
+                    return
+                }
+                
                 let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
                 ? .up
                 : .down

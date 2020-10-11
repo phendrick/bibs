@@ -123,6 +123,8 @@ struct ChildEditView: View {
             try self.context.save()
 
             self.profile.objectWillChange.send()
+            self.profile.parent.objectWillChange.send()
+            
             print("Saved \(self.presentationMode.wrappedValue)")
             self.presentationMode.wrappedValue.dismiss()
         }catch {

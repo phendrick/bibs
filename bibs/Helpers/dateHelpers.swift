@@ -31,7 +31,6 @@ func dashboardGreeting(for parent: ParentProfile) -> String {
 
 func dashboardSubtitle(for parent: ParentProfile) -> String {
     let timeOfDayType = Date().timeOfDayType()
-    //let latestEmotion = parent.latestEmotionType
     
     let lateNightGreetingPrefixes: [String] = [
         "keep_going", "youre_amazing"

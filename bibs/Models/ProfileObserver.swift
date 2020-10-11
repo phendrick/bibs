@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 final class ProfileObserver: ObservableObject {
+    private init() {}
+    
     @Published var parent: ParentProfile!
     
     static let shared = ProfileObserver()
@@ -32,8 +34,6 @@ final class ProfileObserver: ObservableObject {
         
         activeFeedSessions.remove(at: index)
     }
-    
-    private init() {}
     
     var trayHeight: CGFloat {
         guard self.parent.breastfeedingChildrenArray.count > 0  else {

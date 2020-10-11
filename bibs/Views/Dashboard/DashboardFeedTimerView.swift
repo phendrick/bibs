@@ -26,7 +26,7 @@ struct DashboardFeedTimerView: View {
             return ""
         }
         
-        if self.layout == .expanded  {
+        if self.layout == .expanded {
             return feedSession.currentBreastSide.description.0
         }else {
             //return (self.cofeeding) ? feedSession.currentBreastSide.description.1 : feedSession.currentBreastSide.description.0
@@ -61,6 +61,8 @@ struct DashboardFeedTimerView: View {
                         .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
                         .onTapGesture {
                             guard self.child.activeFeedSession?.status == .paused else {
+                                self.child.activeFeedSession?.pause()
+                                
                                 return
                             }
 
@@ -95,7 +97,7 @@ struct DashboardFeedTimerView: View {
 
                                 self.child.activeFeedSession?.switchSide()
                             }
-                            .font(.system(size: timerFontSize * 0.5))
+                            .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.4))
                             .opacity(self.cofeeding ? 0.25 : 1)
                             .padding(.trailing, 2)
                     }
