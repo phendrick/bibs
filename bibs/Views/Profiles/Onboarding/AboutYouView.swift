@@ -54,9 +54,12 @@ struct AboutYouView: View {
             self.name = self.profile.parent.wrappedName
         })
         .navigationBarTitle("about_you".localized)
-        .navigationBarItems(trailing: Button(action: save) {
-            Text("next".localized)
-        }.disabled(self.name.count == 0))
+        .navigationBarItems(trailing: HStack {
+            Button(action: save, label: {
+                Text("Next")
+            }).disabled(self.name.count == 0)
+        })
+        .navigationBarBackButtonHidden(true)
     }
     
     func save() {

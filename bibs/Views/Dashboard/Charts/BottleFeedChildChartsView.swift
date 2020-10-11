@@ -84,7 +84,8 @@ struct BottleFeedChildChartsView: View {
                         child: self.child,
                         range: Date().beginningOfMonth...Date().endOfMonth,
                         includeAllDatesInRange: true
-                    )
+                    ),
+                    useRawValueForChartData: true
                 )
                 .background(Color(child.theme.0))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))

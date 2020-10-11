@@ -77,7 +77,7 @@ struct DatapointsIndexListView: View {
                 .padding(.top, 25)
             }
             
-            NavigationLink(destination: AddChildView(), isActive: self.$showAddChildView) {
+            NavigationLink(destination: AddChildView(addingChild: true), isActive: self.$showAddChildView) {
                 EmptyView()
             }
         }

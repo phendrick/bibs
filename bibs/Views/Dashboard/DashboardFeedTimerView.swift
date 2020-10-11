@@ -97,7 +97,7 @@ struct DashboardFeedTimerView: View {
 
                                 self.child.activeFeedSession?.switchSide()
                             }
-                            .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.4))
+                            .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.3))
                             .opacity(self.cofeeding ? 0.25 : 1)
                             .padding(.trailing, 2)
                     }

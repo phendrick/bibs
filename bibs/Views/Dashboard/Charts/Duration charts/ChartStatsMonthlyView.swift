@@ -15,6 +15,8 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
     
     @State var month = Date()
     
+    var useRawValueForChartData: Bool = false
+    
     var showThisMonthButton: Bool {
         let activeComponents = Calendar.current.dateComponents([.year, .month], from: self.month.beginningOfMonth)
         let currentComponents = Calendar.current.dateComponents([.year, .month], from: Date())
@@ -64,6 +66,14 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
         let dateRange = self.month...self.month.endOfMonth
         self.chartData.range = dateRange
         self.chartData.regenerateData()
+    }
+    
+    func valueForData(data: [Date:Int32]) -> String {
+        if self.useRawValueForChartData {
+            return String(data.reduce(into: 0) {$0 += $1.value})
+        }else {
+            return data.reduce(into: 0) {$0 += $1.value}.toFormattedString
+        }
     }
     
     var body: some View {
@@ -149,7 +159,7 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                                     self.child.wrappedName,
                                     self.month.isThisMonth ? 0 : 1,
                                     chartData.itemCount,
-                                    chartData.data.reduce(into: 0) {$0 += $1.value}.toFormattedString,
+                                    valueForData(data: chartData.data),
                                     "ml"
                                 )
                             )

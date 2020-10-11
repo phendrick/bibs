@@ -173,10 +173,10 @@ struct FeedSessionsList: View {
         var minWidth: CGFloat = 100
         
         if let _ = child.activeFeedSession {
-            minWidth = UIScreen.main.bounds.size.width * 0.6
+            minWidth = UIScreen.main.bounds.size.width * 0.5
         }
         
-        if children.count > 3 {
+        if children.count > 2 {
             return max(width, minWidth)
         }else {
             return width

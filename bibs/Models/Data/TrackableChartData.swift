@@ -122,7 +122,7 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
                 nextDate = date
             }
         }while(nextDate < dateRange.upperBound)
-
+        
         return groupedValues
     }
 }

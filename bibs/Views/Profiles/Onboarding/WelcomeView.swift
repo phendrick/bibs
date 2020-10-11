@@ -16,12 +16,9 @@ struct WelcomeView: View {
             VStack {
                 ZStack(alignment: .bottomTrailing) {
                     Text("bibs.")
-                        .font(.custom("Pacifico-Regular", size: 150))
+                        .font(.custom("Pacifico-Regular", size: 120))
                         .foregroundColor(.red)
                 }
-
-                Text("ready_to_start".localized)
-                    .padding(.bottom, 15)
 
                 NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
                     EmptyView()
@@ -29,10 +26,14 @@ struct WelcomeView: View {
                 
                 Spacer()
                 
-                Button("next".localized) {
-                }.padding()
-                
                 Image("bibs")
+                    .resizable()
+                    .scaledToFit()
+                
+                Spacer()
+                
+                Button("Get Started".localized) {
+                }.padding()
             }
         }.onTapGesture {
             self.showAddAboutYouView = true
