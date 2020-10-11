@@ -26,7 +26,6 @@ struct AboutYouView: View {
         VStack {
             Form {
                 Section(
-                    header: Text("your_name".localized),
                     footer: HStack(alignment: .top) {
                         Text("just_call_me".localized)
                         HStack {
@@ -35,7 +34,7 @@ struct AboutYouView: View {
                                     self.name = name
                                 }) {
                                     Text(name)
-                                }
+                                }.foregroundColor(.orange)
                             }
                         }
                     }

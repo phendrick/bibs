@@ -49,6 +49,7 @@ struct DashboardHeaderOverviewItem: View {
                     Spacer()
                 }.foregroundColor(Color.black.opacity(0.75))
             }
+            .animation(nil)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding([.top, .bottom], 10)
         }
