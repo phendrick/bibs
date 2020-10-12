@@ -105,7 +105,7 @@ struct ActiveFeedsTrayView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
-        .animation(.easeInOut(duration: 0.1))
+        .animation(nil)
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .frame(alignment: .bottom)
