@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct ChildDataTypeListView: View {
-    @ObservedObject var child: Child
-    @ObservedObject var profile: ProfileObserver
+    var child: Child
+    var profile: ProfileObserver
     
     @State var showChildEditView: Bool = false
 
@@ -47,6 +47,7 @@ struct ChildDataTypeListView: View {
         .navigationBarTitle(String(format: "childs_data".localized, self.child.wrappedName))
         .navigationBarItems(trailing: HStack {
             Button(String(format: "edit_child".localized, self.child.wrappedName)) {
+                print("editing child")
                 self.showChildEditView.toggle()
             }
         })

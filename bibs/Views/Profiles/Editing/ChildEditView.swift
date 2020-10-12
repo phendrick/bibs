@@ -84,9 +84,14 @@ struct ChildEditView: View {
                 }
             }
         }
-        .navigationBarItems(trailing: Button(action: save) {
-            Text("done".localized)
-        }.disabled(self.name.count == 0))
+        .navigationBarItems(trailing:
+            HStack {
+                Button("done".localized) {
+                    save()
+                }
+                .disabled(self.name.count == 0)
+            }
+        )
         .onAppear {
             self.name = self.child.wrappedName
             
@@ -125,7 +130,6 @@ struct ChildEditView: View {
             self.profile.objectWillChange.send()
             self.profile.parent.objectWillChange.send()
             
-            print("Saved \(self.presentationMode.wrappedValue)")
             self.presentationMode.wrappedValue.dismiss()
         }catch {
             debugPrint(error)
