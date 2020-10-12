@@ -96,6 +96,9 @@ struct ParentEmotionListView: View {
     @Environment(\.managedObjectContext) var context
     @ObservedObject var profile: ProfileObserver
     
+    @State var parentTrackerFormVisible: Bool = false
+    @State var selectedEmotionType: Emotion.EmotionType?
+    
     func removeRows(at offsets: IndexSet) {
         for index in offsets {
             let row = self.profile.parent.emotionsArray[index]
@@ -132,6 +135,18 @@ struct ParentEmotionListView: View {
             }
         }
         .navigationBarTitle(Text("emotions".localized))
+        .navigationBarItems(trailing: HStack {
+            Button("❤️") {self.parentTrackerFormVisible = true}
+        })
+        .sheet(isPresented: self.$parentTrackerFormVisible) {
+            ParentTrackerFormSheet(
+                profile: self.profile,
+                parentTrackerFormVisible: self.$parentTrackerFormVisible,
+                selectedEmotionType: self.profile.parent.latestEmotionType
+            )
+            .environment(\.managedObjectContext, self.context)
+            .environmentObject(self.profile)
+        }
     }
 }
 
