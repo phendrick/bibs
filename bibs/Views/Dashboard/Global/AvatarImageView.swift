@@ -32,7 +32,7 @@ struct AvatarImageView: View {
 struct AvatarImageView_Previews: PreviewProvider {
     static var previews: some View {
         let image = Image("baby")
-        return AvatarImageView(image: image, color: .red)
+        return AvatarImageView(image: image, color: Color(UIColor(named: "HighlightRed") ?? UIColor.red))
             .previewLayout(.fixed(width: 400, height: 300))
         
     }

@@ -19,7 +19,7 @@ struct DashboardHeaderOverviewItem: View {
             VStack(spacing: 10) {
                 HStack {
                     HStack {
-                        Text(title).font(.headline).foregroundColor(.orange)
+                        Text(title).font(.headline).foregroundColor(Color(UIColor(named: "HighlightRed") ?? UIColor.red))
                         
                         Spacer()
                         if count == nil {

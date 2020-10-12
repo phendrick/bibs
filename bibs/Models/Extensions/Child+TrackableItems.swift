@@ -34,20 +34,6 @@ extension Child {
         }
     }
     
-    func nappyChangesWithinRange(dateRange: Range<Date>) -> [NappyChange] {
-        return self.nappyChangesArray.filter {
-            dateRange.contains($0.wrappedCreatedAt)
-        }
-    }
-    
-    func napsWithinRange(dateRange: Range<Date>) -> [Nap] {
-        return []
-        
-        return self.napsArray.filter {
-            dateRange.contains($0.wrappedCreatedAt)
-        }
-    }
-    
     enum TrackableDataDateRange {
         case today
         case yesterday

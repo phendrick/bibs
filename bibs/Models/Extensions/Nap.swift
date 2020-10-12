@@ -76,6 +76,7 @@ extension Nap: Identifiable, Timeable, Trackable {
         
         let request:NSFetchRequest<Nap> = Nap.fetchRequest()
         request.predicate = datePredicate
+        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
         
         do {
             return try context?.fetch(request) ?? []

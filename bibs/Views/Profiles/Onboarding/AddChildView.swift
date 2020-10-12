@@ -40,7 +40,6 @@ struct AddChildView: View {
                     }
                 }
                 
-                
                 Section(header: Text("choose_a_theme".localized)) {
                     HStack(spacing: 20) {
                         Spacer()

@@ -34,7 +34,7 @@ struct AboutYouView: View {
                                     self.name = name
                                 }) {
                                     Text(name)
-                                }.foregroundColor(.orange)
+                                }.foregroundColor(Color(UIColor(named: "HighlightRed") ?? UIColor.red))
                             }
                         }
                     }
@@ -54,9 +54,9 @@ struct AboutYouView: View {
         })
         .navigationBarTitle("about_you".localized)
         .navigationBarItems(trailing: HStack {
-            Button(action: save, label: {
-                Text("Next")
-            }).disabled(self.name.count == 0)
+            Button("next".localized) {
+                save()
+            }.disabled(self.name.count == 0)
         })
         .navigationBarBackButtonHidden(true)
     }

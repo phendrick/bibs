@@ -280,6 +280,7 @@ extension FeedSession: Identifiable, Trackable {
         
         let request:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
         request.predicate = datePredicate
+        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
         
         do {
             return try context?.fetch(request) ?? []

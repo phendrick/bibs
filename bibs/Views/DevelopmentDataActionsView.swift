@@ -27,6 +27,7 @@ struct DevelopmentDataActionsView: View {
                     }
                     
                     print("Starting at date \(startDate)")
+                    let endDate = Calendar.current.date(bySettingHour: 15, minute: 30, second: 0, of: Date())!
                     
                     repeat {
                         for i in 2...Int.random(in: 3...5) {
@@ -38,7 +39,12 @@ struct DevelopmentDataActionsView: View {
                             self.profile.parent.addToEmotions(emotion)
                         }
                         
-                        for _ in 5...Int.random(in: 10...15) {
+                        let nap = Nap(context: self.moc)
+                        nap.createdAt = startDate
+                        nap.nappedAt = startDate
+                        nap.setDurationFromValues(hours: 1, minutes: 15, seconds: 0)
+                        
+                        for _ in 3...Int.random(in: 6...8) {
                             let feedSession = FeedSession(context: self.moc)
                             let feed = Feed(context: self.moc)
                             feedSession.addToFeeds(feed)
@@ -66,7 +72,7 @@ struct DevelopmentDataActionsView: View {
                         }
                         
                         startDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
-                    }while(startDate.beginningOfDay < Date().endOfDay)
+                    }while(startDate.beginningOfDay < endDate)
                     
                     print("Done at date \(startDate)")
                     try? self.moc.save()
@@ -78,6 +84,7 @@ struct DevelopmentDataActionsView: View {
                         $0.nappyChangesArray.forEach { self.moc.delete($0) }
                         $0.feedSessionsArray.forEach { self.moc.delete($0) }
                         $0.napsArray.forEach { self.moc.delete($0) }
+                        print("removed associated data")
                     }
                     
                     self.profile.parent.emotionsArray.forEach { self.moc.delete($0) }

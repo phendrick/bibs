@@ -17,7 +17,7 @@ struct WelcomeView: View {
                 ZStack(alignment: .bottomTrailing) {
                     Text("bibs.")
                         .font(.custom("Pacifico-Regular", size: 120))
-                        .foregroundColor(.red)
+                        .foregroundColor(Color(UIColor(named: "HighlightRed") ?? UIColor.red))
                 }
 
                 NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
@@ -32,11 +32,10 @@ struct WelcomeView: View {
                 
                 Spacer()
                 
-                Button("Get Started".localized) {
+                Button("ready_to_start".localized) {
+                    self.showAddAboutYouView = true
                 }.padding()
             }
-        }.onTapGesture {
-            self.showAddAboutYouView = true
         }
     }
 }

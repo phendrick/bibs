@@ -136,6 +136,7 @@ extension NappyChange: Identifiable, Trackable {
         
         let request:NSFetchRequest<NappyChange> = NappyChange.fetchRequest()
         request.predicate = datePredicate
+        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
         
         do {
             return try context?.fetch(request) ?? []

@@ -31,7 +31,8 @@ struct ParentEmotionInsightsView: View {
 
                                 HStack {
                                     HStack {
-                                        Text("\(key)".localized).font(.headline).foregroundColor(.orange)
+                                        Text("\(key)".localized).font(.headline)
+                                            .foregroundColor(Color(UIColor(named: "HighlightRed") ?? UIColor.red))
                                         Spacer()
                                     }
                                 }

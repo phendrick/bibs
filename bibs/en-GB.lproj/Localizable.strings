@@ -82,7 +82,7 @@
 // forms
 "ive_expressed" = "I've expressed";
 "refridgerated" = "Refridgerated";
-"refridgerated_details" = "8 days";
+"refridgerated_details" = "Use within 8 days";
 "room_temperature" = "Room Temperature";
 "room_temperature_details" = "Use within 6 hours";
 "frozen" = "Frozen";
