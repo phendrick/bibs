@@ -40,7 +40,7 @@ final class ProfileObserver: ObservableObject {
             return 0
         }
         
-        var baseHeight: CGFloat = 120
+        var baseHeight: CGFloat = 128
         
         if UIDevice.current.hasLargeScreen {
             baseHeight = 140

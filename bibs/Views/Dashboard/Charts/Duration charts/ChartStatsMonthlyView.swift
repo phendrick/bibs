@@ -76,6 +76,17 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
         }
     }
     
+    func showLabel(date: Date) -> Bool {
+        let day = Calendar.current.component(.day, from: date)
+        let lastDay = Calendar.current.component(.day, from: date.endOfMonth)
+        
+        guard day == 1 || day == lastDay else {
+            return false
+        }
+        
+        return true
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
@@ -128,7 +139,7 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                             
                             ForEach(chartData.data.keys.sorted(), id: \.self) { date in
                                 BarChartBarView(
-                                    width: 6,
+                                    width: 5,
                                     value: barValue(
                                         value: CGFloat( (chartData.data[date] ?? 0 ) ),
                                         maxValue: Double( chartData.max ),
@@ -137,7 +148,9 @@ struct ChartStatsMonthlyView<T: Trackable>: View where T: NSManagedObject {
                                     chartSize: 180,
                                     color: .white,
                                     axis: .vertical,
-                                    cornerRadius: 5
+                                    cornerRadius: 5,
+                                    showLabel: showLabel(date: date),
+                                    label: String(Calendar.current.component(.day, from: date))
                                 )
                             }
                             

@@ -60,7 +60,7 @@ struct NapTimeChildChartsView: View {
                     child: self.child,
                     chartData: TrackableChartData<Nap>(
                         child: self.child,
-                        range: Date().lastSevenDays...Date().endOfDay,
+                        range: Date().beginningOfWeek...Date().beginningOfWeek.endOfWeek,
                         includeAllDatesInRange: true
                     )
                 )

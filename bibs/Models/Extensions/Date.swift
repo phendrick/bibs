@@ -216,4 +216,9 @@ extension Date {
     var duringTheDay: Bool {
         (8...16).contains(Calendar.current.component(.hour, from: self))
     }
+    
+    var dayOfWeek: String {
+        let formatter = DateFormatter()
+        return formatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: self) - 1]
+    }
 }

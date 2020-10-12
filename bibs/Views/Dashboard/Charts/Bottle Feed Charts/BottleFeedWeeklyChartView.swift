@@ -27,12 +27,12 @@ struct BottleFeedWeeklyChartView: View {
         )
         
         self.fetchRequest = FetchRequest<BottleFeed>(entity: BottleFeed.entity(), sortDescriptors: sortDescriptors, predicate: predicates)
+        
         self.dateRange = dateRange
     }
     
     func groupedResults() -> (data: [BottleFeed.BottleFeedType : [BottleFeed]], min: Int, max: Int) {
         var grouped = Dictionary(grouping: results) { $0.status }
-        print("Grouping results: ", results.count)
         
         BottleFeed.BottleFeedType.allCases.forEach { caseType in
             if grouped[caseType] == nil {

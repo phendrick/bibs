@@ -220,6 +220,7 @@ extension FeedSession: Identifiable, Trackable {
             fatalError()
         }
         
+        self.createdAt = Date()
         self.status = .complete
         self.timer.invalidate()
         

@@ -40,7 +40,7 @@ struct BarChartBarView: View {
     
     var labelOffset: CGSize {
         if self.axis == .vertical {
-            return CGSize(width: 0, height: 20)
+            return CGSize(width: 0, height: (backgroundHeight/2)+10)
         }else {
             return CGSize(width: 5, height: 0)
         }
@@ -52,6 +52,10 @@ struct BarChartBarView: View {
     
     var valueLabelColor: Color {
         self.axis == .vertical ? .white : self.labelColor
+    }
+    
+    @ViewBuilder func labelForChartValue(label: String) -> some View {
+        self.showLabel ? Text(label) : Text("")
     }
     
     var body: some View {
@@ -70,15 +74,23 @@ struct BarChartBarView: View {
                 .cornerRadius(self.cornerRadius)
                 .animation(.easeOut(duration: Double( self.value / self.chartSize )))
             
-            if self.showLabel {
-                Text(self.valueLabel).font(.footnote).foregroundColor(valueLabelColor).fixedSize().offset(labelOffset)
-            }
+//            if self.showLabel {
+//                Text(self.valueLabel)
+//                    .foregroundColor(valueLabelColor)
+//                    .offset(labelOffset)
+//                    .font(.custom("RobotoMono-Regular", size: 12))
+//            }
             
-        }.onAppear {
-            self.barValue = self.value
         }
-        .onTapGesture {
-            print(self.backgroundHeight, self.barValue)
+        .overlay(
+            labelForChartValue(label: self.valueLabel)
+                .offset(labelOffset)
+                .fixedSize()
+                .font(.custom("RobotoMono-Regular", size: 12))
+                .frame(alignment: .bottom)
+        )
+        .onAppear {
+            self.barValue = self.value
         }
     }
 }

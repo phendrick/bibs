@@ -54,6 +54,7 @@ class TrackableChartData<T: Trackable>: ObservableObject where T: NSManagedObjec
         )
         
         fetchRequest.predicate = datePredicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         let results = try? self.moc.fetch(fetchRequest)
         

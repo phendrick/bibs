@@ -33,9 +33,7 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
                                             chartData.itemCount,
                                             chartData.data.reduce(into: 0) {$0 += $1.value}.toFormattedString
                                         )
-                                    ).onTapGesture {
-                                        print(chartData, chartData.data.reduce(into: 0) {$0 += $1.value})
-                                    }
+                                    )
                                     .font(.body)
                                 }
                             }
@@ -58,7 +56,9 @@ struct ChartStatsWeeklyView<T: Trackable>: View where T: NSManagedObject {
                                             ),
                                             chartSize: 130,
                                             color: .white,
-                                            axis: .vertical
+                                            axis: .vertical,
+                                            showLabel: true,
+                                            label: String(date.dayOfWeek.first!)
                                         )
                                     }
                                 }
