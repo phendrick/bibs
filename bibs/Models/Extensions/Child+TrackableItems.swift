@@ -10,23 +10,6 @@ import Foundation
 import CoreData
 
 extension Child {
-    /// fetch all trackable entities (feeds, nappy changes etc)
-    func allTrackableEntities<T: Trackable>() -> [T] {
-        guard let context = self.managedObjectContext else {
-            return []
-        }
-
-        let feedSessionFetchRequest:NSFetchRequest<FeedSession> = FeedSession.fetchRequest()
-
-        do {
-            let feedSessions = try context.fetch(feedSessionFetchRequest)
-
-            return feedSessions as! [T]
-        }catch {
-            return []
-        }
-    }
-    
     /// get 'todays' overview of activity
     func completedFeedsWithinRange(dateRange: Range<Date>) -> [FeedSession] {
         return self.feedSessionsArray.filter {
@@ -48,15 +31,5 @@ extension Child {
                 case .month: return Date().beginningOfMonth..<Date().endOfMonth
             }
         }
-    }
-    
-    func feedSessionsData(inRange: TrackableDataDateRange) -> (Duration, [Duration]) {
-        let sessions: [Duration] = self.completedFeedsWithinRange(dateRange: inRange.dateRange).map {session in
-            session.duration
-        }.reversed()
-        
-        let max = sessions.max() ?? 0
-        
-        return (max: max, sessions: sessions)
     }
 }

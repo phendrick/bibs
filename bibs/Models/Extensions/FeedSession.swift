@@ -36,10 +36,6 @@ extension FeedSession: Identifiable, Trackable {
         }
     }
     
-    enum FeedSessionError: Error {
-        case noCurrentFeed
-    }
-    
     var currentFeed: Feed? {
         return feedsArray.last
     }

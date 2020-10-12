@@ -48,8 +48,4 @@ final class ProfileObserver: ObservableObject {
         
         return baseHeight
     }
-    
-    var multipleWaiting: Bool {
-        (self.parent.currentFeedSessions.count > 0 && self.parent.childrenWithoutCurrentFeedSessions.count > 1)
-    }
 }
