@@ -39,6 +39,7 @@
 		DA51154324A28AC400442543 /* DashboardDataRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154224A28AC400442543 /* DashboardDataRowView.swift */; };
 		DA51154524A2A8FD00442543 /* DashboardDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA51154424A2A8FD00442543 /* DashboardDataView.swift */; };
 		DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */; };
+		DA60221325345911009361BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA60221225345911009361BF /* LaunchScreen.storyboard */; };
 		DA635B1B2482698D009BA4FF /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA635B1A2482698D009BA4FF /* Child.swift */; };
 		DA707B5F24AE7622006D21D2 /* ChildEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA707B5E24AE7622006D21D2 /* ChildEditView.swift */; };
 		DA7F8A7424CB05E800840AF1 /* UIDevice+screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7F8A7324CB05E800840AF1 /* UIDevice+screen.swift */; };
@@ -179,6 +180,7 @@
 		DA51154224A28AC400442543 /* DashboardDataRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataRowView.swift; sourceTree = "<group>"; };
 		DA51154424A2A8FD00442543 /* DashboardDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardDataView.swift; sourceTree = "<group>"; };
 		DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
+		DA60221225345911009361BF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA635B1A2482698D009BA4FF /* Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		DA707B5E24AE7622006D21D2 /* ChildEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildEditView.swift; sourceTree = "<group>"; };
 		DA7F8A7324CB05E800840AF1 /* UIDevice+screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+screen.swift"; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				DADD78F92478609600791F61 /* SceneDelegate.swift */,
 				DADD78FE2478609600791F61 /* ContentView.swift */,
 				DADD79002478609700791F61 /* Assets.xcassets */,
+				DA60221225345911009361BF /* LaunchScreen.storyboard */,
 				DAEF517124B640A3006CD447 /* Colors.xcassets */,
 				DADD79082478609700791F61 /* Info.plist */,
 				DADD78FB2478609600791F61 /* bibs.xcdatamodeld */,
@@ -819,6 +822,7 @@
 				DA053CD824F5CD2B00A1D825 /* Localizable.stringsdict in Resources */,
 				DAEF517224B640A3006CD447 /* Colors.xcassets in Resources */,
 				DADD79042478609700791F61 /* Preview Assets.xcassets in Resources */,
+				DA60221325345911009361BF /* LaunchScreen.storyboard in Resources */,
 				DAD4A0412529339100E84EB0 /* Settings.bundle in Resources */,
 				DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */,
 				DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */,
