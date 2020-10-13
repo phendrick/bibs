@@ -19,23 +19,21 @@ struct WelcomeView: View {
                         .font(.custom("Pacifico-Regular", size: 100))
                         .foregroundColor(Color(UIColor(named: "HighlightRed") ?? UIColor.red))
                 }
-
-                NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
-                    EmptyView()
-                }
-                
-                Spacer()
                 
                 Image("bibs")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 200)
+                    .frame(maxHeight: 200).offset(y: -80)
+                
+                Spacer()
                 
                 Button("ready_to_start".localized) {
                     self.showAddAboutYouView = true
-                }.padding()
+                }.padding(.bottom, 25)
                 
-                Spacer()
+                NavigationLink(destination: AboutYouView(), isActive: self.$showAddAboutYouView) {
+                    EmptyView()
+                }
             }
         }
     }
