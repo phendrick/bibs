@@ -29,10 +29,6 @@ extension NappyChange: Identifiable, Trackable {
         public var emoji: String {
             return ""
         }
-        
-        public func hash(into hasher: inout Hasher) {
-            hasher.combine(self.rawValue)
-        }
     }
     
     public enum NappyChangeAmountType: Int, CaseIterable {

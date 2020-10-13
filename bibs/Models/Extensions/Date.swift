@@ -169,16 +169,6 @@ extension Date {
         return Calendar.current.date(from: components)!
     }
     
-    func advancedDate(component: Calendar.Component, by value: Int) -> Date {
-        guard let date = Calendar.current.date(byAdding: component, value: value, to: self) else {
-            return self
-        }
-        
-        let delta = self.distance(to: date)
-        
-        return self.advanced(by: delta)
-    }
-    
     var isToday: Bool {
         return self.beginningOfDay == Date().beginningOfDay
     }
@@ -195,14 +185,6 @@ extension Date {
         let yesterday = yesterdaysDate...yesterdaysDate.endOfDay
         
         return yesterday.contains(self)
-    }
-    
-    var isBeforeYesterday: Bool {
-        guard let yesterdaysDate = Calendar.current.date(byAdding: .day, value: -1, to: Date().beginningOfDay) else {
-            return false
-        }
-        
-        return yesterdaysDate > self.beginningOfDay
     }
     
     var earlyMorning: Bool {

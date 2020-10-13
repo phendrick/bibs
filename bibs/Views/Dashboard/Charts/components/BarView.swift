@@ -73,20 +73,13 @@ struct BarChartBarView: View {
                 .opacity(1)
                 .cornerRadius(self.cornerRadius)
                 .animation(.easeOut(duration: Double( self.value / self.chartSize )))
-            
-//            if self.showLabel {
-//                Text(self.valueLabel)
-//                    .foregroundColor(valueLabelColor)
-//                    .offset(labelOffset)
-//                    .font(.custom("RobotoMono-Regular", size: 12))
-//            }
-            
         }
         .overlay(
             labelForChartValue(label: self.valueLabel)
                 .offset(labelOffset)
                 .fixedSize()
                 .font(.custom("RobotoMono-Regular", size: 12))
+                .foregroundColor(valueLabelColor)
                 .frame(alignment: .bottom)
         )
         .onAppear {

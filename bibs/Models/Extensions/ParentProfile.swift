@@ -184,11 +184,6 @@ extension ParentProfile {
         return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
     }
     
-    public var foodDiaryEntriesArray: [FoodDiaryEntry] {
-        let set = foodDiaryEntries as? Set<FoodDiaryEntry> ?? []
-        return set.sorted {$0.wrappedCreatedAt < $1.wrappedCreatedAt}
-    }
-    
     func buildChildObject() -> Child {
         guard let context = self.managedObjectContext else {
             fatalError()
@@ -350,23 +345,6 @@ extension ParentProfile {
         }
     }
     
-    public func pauseActiveFeedSessions() {
-        guard let context = self.managedObjectContext else {
-            fatalError()
-        }
-        
-        for session in activeFeedSessions {
-            session.suspendedAt = Date()
-            session.pause()
-        }
-        
-        do {
-            try context.save()
-        }catch {
-            fatalError()
-        }
-    }
-    
     public var wrappedCreatedAt: Date {
         get {createdAt ?? Date()}
         set {createdAt = newValue}
@@ -387,12 +365,6 @@ extension ParentProfile {
     public var wrappedName: String {
         get {name ?? ""}
         set {name = newValue}
-    }
-    
-    public var expressedMilkAmount: Int {
-        self.expressedBottlesArray.reduce(into: 0) { (total, bottle) in
-            total += Int(bottle.amount)
-        }
     }
     
     public var expressedMilkGiven: Int {
@@ -431,58 +403,6 @@ extension ParentProfile {
         }
     }
     
-    public enum TrackableItemScope {
-        case activeChild
-        case parent
-        case allChildren
-    }
-    
-    public enum TrackableItemDateRange {
-        case today
-        case week
-        case weekFromMonday
-        case weekFrom(Date)
-        case month
-        case year
-        case all
-        
-        var range: ClosedRange<Date>? {
-            switch(self) {
-            case .today: return Date().beginningOfDay...Date()
-            case .week: return Date().beginningOfWeek...Date()
-            case .weekFromMonday: return Date().beginningOfWeekMonday...Date()
-            case .weekFrom(let startDate): return startDate...Date()
-            case .month: return Date().beginningOfMonth...Date()
-            case .year: return Date().beginningOfYear...Date()
-            case .all: return nil
-            }
-        }
-        
-        var description: String {
-            switch(self) {
-            case .today: return "today".localized
-            case .week: return "this_week".localized
-            case .weekFromMonday: return "this_week".localized
-            case .weekFrom(_): return "last_7_days".localized
-            case .month: return "this_month".localized
-            case .year: return "this_year".localized
-            case .all: return "everything".localized
-            }
-        }
-        
-        var detail: String {
-            switch(self) {
-                case .today: return "\(Date().beginningOfDay.getFormattedDate(format: "MMMM d YYYY"))"
-                case .week: return "\(Date().beginningOfWeek.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
-                case .weekFromMonday: return "\(Date().beginningOfWeek.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
-                case .weekFrom(let startDate): return "\(startDate.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
-                case .month: return "\(Date().beginningOfMonth.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
-                case .year: return "\(Date().beginningOfYear.getFormattedDate(format: "MMMM d")) - \(Date().getFormattedDate(format: "MMMM d YYYY"))"
-                case .all: return ""
-            }
-        }
-    }
-    
     public var emotionsArray: [Emotion] {
         let set = emotions as? Set<Emotion> ?? []
         
@@ -493,28 +413,4 @@ extension ParentProfile {
         return emotionsArray.first?.status ?? Emotion.EmotionType.happy
     }
     
-}
-
-//String(format:"%02i:%02i:%02i", calculatedElapsedTime.hours, calculatedElapsedTime.minutes, calculatedElapsedTime.seconds)
-let todayFormat = "Something\n todayFormat value"
-let todayAndYesterdayDayFormat = "Something\n todayAndYesterdayDayFormat value"
-let todayAndPreviousDayFormat = "Something\n todayAndPreviousDayFormat value\n\nNot yesterday tho"
-let todayPreviousDayFormat = "Something previousDayFormat\n value"
-let todayNoneFormat = "Something\n noneFormat value"
-
-enum ChartDataAvailability {
-    case today
-    case todayAndPreviousDay(Bool)
-    case previousDay
-    case none
-    
-    var outputFormat: String {
-        switch(self) {
-            case .today: return todayFormat
-            case .todayAndPreviousDay(true):  return todayAndYesterdayDayFormat
-            case .todayAndPreviousDay(false): return todayAndPreviousDayFormat
-            case .previousDay: return todayPreviousDayFormat
-            case .none: return todayNoneFormat
-        }
-    }
 }
