@@ -16,7 +16,7 @@ struct WelcomeView: View {
             VStack {
                 ZStack(alignment: .bottomTrailing) {
                     Text("bibs.")
-                        .font(.custom("Pacifico-Regular", size: 120))
+                        .font(.custom("Pacifico-Regular", size: 100))
                         .foregroundColor(Color(UIColor(named: "HighlightRed") ?? UIColor.red))
                 }
 
@@ -29,12 +29,13 @@ struct WelcomeView: View {
                 Image("bibs")
                     .resizable()
                     .scaledToFit()
-                
-                Spacer()
+                    .frame(maxHeight: 200)
                 
                 Button("ready_to_start".localized) {
                     self.showAddAboutYouView = true
                 }.padding()
+                
+                Spacer()
             }
         }
     }
