@@ -23,7 +23,8 @@ struct WelcomeView: View {
                 Image("bibs")
                     .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 200).offset(y: -80)
+                    .frame(maxHeight: 280)
+                    .offset(y: -120)
                 
                 Spacer()
                 
