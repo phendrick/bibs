@@ -10,8 +10,8 @@
 // String(format: NSLocalizedString(translation_name, comment: ""), name)
 
 // onboarding
-"ready_to_start" = "";
-"next" = "";
+"ready_to_start" = "Ready to get started?";
+"next" = "Next";
 "just_call_me" = "Just call me";
 
 // welcomes
