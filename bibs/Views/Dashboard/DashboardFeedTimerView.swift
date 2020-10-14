@@ -48,69 +48,60 @@ struct DashboardFeedTimerView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // timer header - name and actions
-            HStack(alignment: .firstTextBaseline) {
+        VStack {
+            HStack {
                 Text("\(self.child.wrappedName)")
-                    .font(.custom("RobotoMono-Regular", size: timerFontSize*0.5))
+                    .font(.custom("RobotoMono-Regular", size: 17))
                     .layoutPriority(10)
                     .animation(nil)
                     .minimumScaleFactor(0.95)
                 
                 Spacer()
                 
-                if self.child.hasActiveFeedSession {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.white)
-                        .frame(width: 40, alignment: .topTrailing)
-                        .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
-                        .onTapGesture {
-                            guard self.child.activeFeedSession?.status == .paused else {
-                                self.child.activeFeedSession?.pause()
-                                
-                                return
-                            }
-
-                            self.child.completeActiveFeedSession()
-                            self.child.parent?.profileObserver?.objectWillChange.send()
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.white)
+                    .frame(width: 40, alignment: .topTrailing)
+                    .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
+                    .onTapGesture {
+                        guard self.child.activeFeedSession?.status == .paused else {
+                            self.child.activeFeedSession?.pause()
+                            
+                            return
                         }
-                }
+
+                        self.child.completeActiveFeedSession()
+                        self.child.parent?.profileObserver?.objectWillChange.send()
+                    }
             }
             .frame(maxWidth: .infinity)
-        
-            // timer footer - time and details
+            
             HStack(alignment: .lastTextBaseline) {
                 HStack(alignment: .lastTextBaseline, spacing: 0) {
                     Text("\(child.activeFeedSession?.formattedElapsedTime(include_hsec: false) ?? "00:00:00")")
-                        .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.6))
+                        .font(.custom("RobotoMono-Regular", size: 16))
                     Text("\(child.activeFeedSession?.formattedElapsedTimeHsecs(includeRandomMsec: true) ?? ".00")")
-                        .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.5))
+                        .font(.custom("RobotoMono-Regular", size: 14))
                         .opacity(0.5)
                 }
                 .layoutPriority(100)
-                .opacity(child.hasActiveFeedSession ? 1 : 0.5)
 
                 Spacer()
                 
-                if self.showBreastSideLabel {
-                    HStack {
-                        Text(breastSideLabel)
-                            .onTapGesture {
-                                guard !self.cofeeding else {
-                                    return
-                                }
-
-                                self.child.activeFeedSession?.switchSide()
+                HStack {
+                    Text(breastSideLabel)
+                        .onTapGesture {
+                            guard !self.cofeeding else {
+                                return
                             }
-                            .font(.custom("RobotoMono-Regular", size: timerFontSize * 0.3))
-                            .opacity(self.cofeeding ? 0.25 : 1)
-                            .padding(.trailing, 2)
-                    }
+
+                            self.child.activeFeedSession?.switchSide()
+                        }
+                        .font(.custom("RobotoMono-Regular", size: 13))
+                        .padding(.trailing, 2)
                 }
-            } // timer footer
+            }
         }
-        .animation(nil)
-        .padding(self.layout == .minimised ? 5 : 10)
+        .padding(10)
         .frame(maxWidth: .infinity)
         .background(Color(self.child.theme.0))
         .foregroundColor(.white)
