@@ -90,23 +90,14 @@ struct ActiveFeedsTrayView: View {
                         .fixedSize()
                 }
 
-                if self.useVerticalLayout {
-                    VStack(spacing: 10) {
-                        feedTimersList()
-                    }
-                    .frame(maxWidth: .infinity)
-                }else {
-                    HStack(alignment: .top, spacing: 10) {
-                        feedTimersList()
-                    }
-                }
+                feedTimersList()
             }
             .padding(.bottom, 40)
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
         .frame(maxWidth: .infinity)
-        .frame(minHeight: 140)
+        .frame(height: self.layout == .expanded ? CGFloat(120 * self.profile.parent.breastfeedingChildrenArray.count) : 140)
         .frame(alignment: .bottom)
         .offset(y: 20)
         .gesture(

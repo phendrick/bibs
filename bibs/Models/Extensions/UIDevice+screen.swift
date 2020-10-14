@@ -25,7 +25,7 @@ extension UIDevice {
     }
     
     var hasLargeScreen: Bool {
-        UIScreen.main.bounds.size.height > 800
+        UIScreen.main.bounds.size.height > 811
     }
 }
 
