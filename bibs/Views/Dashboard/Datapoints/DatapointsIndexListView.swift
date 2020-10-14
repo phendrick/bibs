@@ -66,6 +66,7 @@ struct DatapointsIndexListView: View {
                                     Spacer()
                                     Image(systemName: "chevron.right").foregroundColor(Color.white.opacity(0.5))
                                 }
+                                .animation(nil)
                             }
                         }
                     }

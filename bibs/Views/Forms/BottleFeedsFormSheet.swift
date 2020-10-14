@@ -72,7 +72,7 @@ struct BottleFeedsFormSheet: View {
                 ) {
                     Stepper("\(self.feedAmount)ml", value: self.$feedAmount, in: 0...2000)
                         .padding()
-                        .font(.custom("RobotoMono-Regular", size: 20))
+                        .font(.system(.headline, design: .monospaced))
                 }
                 
                 

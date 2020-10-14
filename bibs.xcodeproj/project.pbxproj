@@ -53,7 +53,6 @@
 		DA8307B824A7417500454F14 /* Feed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8307AE24A7417500454F14 /* Feed+CoreDataProperties.swift */; };
 		DA842085252B12A500ED5105 /* ParentInsightGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA842084252B12A500ED5105 /* ParentInsightGenerator.swift */; };
 		DA84208B252B519800ED5105 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA84208D252B519800ED5105 /* Localizable.strings */; };
-		DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */; };
 		DA88ECAE250119D400DF01E2 /* DashboardToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */; };
 		DA8C169D25004F6900FA559F /* NappyChangeDailyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */; };
 		DA92439824DE0AAE00339810 /* DatapointsIndexListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */; };
@@ -195,7 +194,6 @@
 		DA842091252B51C100ED5105 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA8420B3252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		DA8420B4252B83E900ED5105 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
-		DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
 		DA88ECAD250119D400DF01E2 /* DashboardToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardToolView.swift; sourceTree = "<group>"; };
 		DA8C169C25004F6900FA559F /* NappyChangeDailyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeDailyChartView.swift; sourceTree = "<group>"; };
 		DA92439724DE0AAE00339810 /* DatapointsIndexListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatapointsIndexListView.swift; sourceTree = "<group>"; };
@@ -446,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				DA5DB18F24A5352C00DE2E01 /* Pacifico-Regular.ttf */,
-				DA86DEAA24AA7FA100107ED3 /* RobotoMono.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -819,7 +816,6 @@
 				DADD79042478609700791F61 /* Preview Assets.xcassets in Resources */,
 				DA60221325345911009361BF /* LaunchScreen.storyboard in Resources */,
 				DAD4A0412529339100E84EB0 /* Settings.bundle in Resources */,
-				DA86DEAB24AA7FA100107ED3 /* RobotoMono.ttf in Resources */,
 				DA5DB19024A5352C00DE2E01 /* Pacifico-Regular.ttf in Resources */,
 				DA84208B252B519800ED5105 /* Localizable.strings in Resources */,
 				DADD79012478609700791F61 /* Assets.xcassets in Resources */,
@@ -1146,7 +1142,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.04;
+				CURRENT_PROJECT_VERSION = 1.0.05;
 				DEVELOPMENT_ASSET_PATHS = "\"bibs/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B5655RNZN;
 				ENABLE_PREVIEWS = YES;
@@ -1155,7 +1151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.04;
+				MARKETING_VERSION = 1.0.05;
 				PRODUCT_BUNDLE_IDENTIFIER = hendrick.dev.bibs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1168,7 +1164,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.04;
+				CURRENT_PROJECT_VERSION = 1.0.05;
 				DEVELOPMENT_ASSET_PATHS = "\"bibs/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B5655RNZN;
 				ENABLE_PREVIEWS = YES;
@@ -1177,7 +1173,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.04;
+				MARKETING_VERSION = 1.0.05;
 				PRODUCT_BUNDLE_IDENTIFIER = hendrick.dev.bibs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
