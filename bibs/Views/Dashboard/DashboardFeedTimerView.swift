@@ -15,12 +15,15 @@ struct DashboardFeedTimerView: View {
     var siblingCount: Int
     
     var timerFontSize: CGFloat {
-        var baseSize: CGFloat = 30
+        var baseSize: CGFloat = 15
         
-        if self.layout == .expanded, siblingCount > 3 {
-            baseSize -= CGFloat(siblingCount)
-        }else {
-            baseSize = self.cofeeding ? 28 : 32
+//        if self.layout == .expanded, siblingCount > 3 {
+//            baseSize -= CGFloat(siblingCount)
+//        }else {
+//            baseSize = self.cofeeding ? 28 : 32
+//        }
+        if self.layout == .expanded {
+            baseSize += 3
         }
         
         return baseSize
@@ -51,7 +54,7 @@ struct DashboardFeedTimerView: View {
         VStack {
             HStack {
                 Text("\(self.child.wrappedName)")
-                    .font(.custom("RobotoMono-Regular", size: 17))
+                    .font(.custom("RobotoMono-Regular", size: timerFontSize))
                     .layoutPriority(10)
                     .animation(nil)
                     .minimumScaleFactor(0.95)
@@ -78,9 +81,9 @@ struct DashboardFeedTimerView: View {
             HStack(alignment: .lastTextBaseline) {
                 HStack(alignment: .lastTextBaseline, spacing: 0) {
                     Text("\(child.activeFeedSession?.formattedElapsedTime(include_hsec: false) ?? "00:00:00")")
-                        .font(.custom("RobotoMono-Regular", size: 16))
+                        .font(.custom("RobotoMono-Regular", size: 15))
                     Text("\(child.activeFeedSession?.formattedElapsedTimeHsecs(includeRandomMsec: true) ?? ".00")")
-                        .font(.custom("RobotoMono-Regular", size: 14))
+                        .font(.custom("RobotoMono-Regular", size: 13))
                         .opacity(0.5)
                 }
                 .layoutPriority(100)
@@ -96,7 +99,7 @@ struct DashboardFeedTimerView: View {
 
                             self.child.activeFeedSession?.switchSide()
                         }
-                        .font(.custom("RobotoMono-Regular", size: 13))
+                        .font(.custom("RobotoMono-Regular", size: 12))
                         .padding(.trailing, 2)
                 }
             }

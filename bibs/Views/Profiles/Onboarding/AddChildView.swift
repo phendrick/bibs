@@ -68,6 +68,7 @@ struct AddChildView: View {
     }
     
     func save(newChild: Bool = false) {
+        print("Saving")
         var child: Child
         
         if newChild || self.profile.parent.activeChild == nil {
@@ -97,7 +98,6 @@ struct AddChildView: View {
             if addingChild {
                 self.presentationMode.wrappedValue.dismiss()
             }else {
-                print("Setting initial view to .dashboard")
                 self.viewSettings.initialView = .dashboard
             }
         }catch {
