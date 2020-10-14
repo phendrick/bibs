@@ -12,13 +12,18 @@ struct DashboardFeedTimerView: View {
     @ObservedObject var child: Child
     @Binding var layout: ActiveFeedsTrayView.ExpandedState
     var cofeeding: Bool
+    var siblingCount: Int
     
     var timerFontSize: CGFloat {
-        if self.layout == .expanded {
-            return 38
+        var baseSize: CGFloat = 30
+        
+        if self.layout == .expanded, siblingCount > 3 {
+            baseSize -= CGFloat(siblingCount)
         }else {
-            return self.cofeeding ? 28 : 32
+            baseSize = self.cofeeding ? 28 : 32
         }
+        
+        return baseSize
     }
     
     var breastSideLabel: String {
@@ -105,7 +110,7 @@ struct DashboardFeedTimerView: View {
             } // timer footer
         }
         .animation(nil)
-        .padding(self.layout == .minimised ? 5 : 15)
+        .padding(self.layout == .minimised ? 5 : 10)
         .frame(maxWidth: .infinity)
         .background(Color(self.child.theme.0))
         .foregroundColor(.white)

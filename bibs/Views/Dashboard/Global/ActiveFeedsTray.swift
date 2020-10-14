@@ -50,7 +50,7 @@ struct ActiveFeedsTrayView: View {
     
     @ViewBuilder func feedTimersList() -> some View {
         if self.layout == .expanded {
-            VStack(spacing: 20) {
+            VStack(spacing: 10) {
                 FeedSessionsList(
                     children: self.profile.parent.breastfeedingChildrenArray,
                     layout: self.$layout,
@@ -105,7 +105,6 @@ struct ActiveFeedsTrayView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
-        .animation(nil)
         .frame(maxWidth: .infinity)
         .frame(minHeight: 140)
         .frame(alignment: .bottom)
@@ -184,11 +183,14 @@ struct FeedSessionsList: View {
     }
     
     var body: some View {
-        ForEach(self.children, id: \.self) {child in
+        let children = self.layout == .expanded ? Array(self.children.prefix(6)) : self.children
+        
+        return ForEach(children, id: \.self) {child in
             DashboardFeedTimerView(
                 child: child,
                 layout: self.$layout,
-                cofeeding: self.profile.activeFeedSessions.count>1
+                cofeeding: self.profile.activeFeedSessions.count>1,
+                siblingCount: self.profile.parent.breastfeedingChildrenArray.count
             )
             .frame(maxWidth: .infinity)
             .frame(width: cardWidth(child: child))

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -13,29 +13,39 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bibs-splash" translatesAutoresizingMaskIntoConstraints="NO" id="kfh-IJ-CdO">
-                                <rect key="frame" x="30" y="291" width="354" height="315"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bibs" translatesAutoresizingMaskIntoConstraints="NO" id="q8L-0o-wzP">
+                                <rect key="frame" x="54" y="314" width="267" height="267"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="bibs-splash" translatesAutoresizingMaskIntoConstraints="NO" id="r8J-cW-7UV">
+                                <rect key="frame" x="60" y="138" width="255" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="ciE-fl-i41"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kfh-IJ-CdO" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="247" id="6YY-JC-sQQ"/>
-                            <constraint firstItem="kfh-IJ-CdO" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="30" id="Dzp-os-ogv"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="kfh-IJ-CdO" secondAttribute="bottom" constant="256" id="G14-cf-q3r"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="kfh-IJ-CdO" secondAttribute="trailing" constant="30" id="VxW-G3-LYy"/>
+                            <constraint firstItem="r8J-cW-7UV" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="60" id="EiL-KM-ihK"/>
+                            <constraint firstItem="q8L-0o-wzP" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="54" id="Jgg-9G-tEI"/>
+                            <constraint firstItem="r8J-cW-7UV" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Qgr-ih-vXF"/>
+                            <constraint firstItem="r8J-cW-7UV" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="138" id="eY8-Op-a3r"/>
+                            <constraint firstItem="r8J-cW-7UV" firstAttribute="centerX" secondItem="q8L-0o-wzP" secondAttribute="centerX" id="o6H-CL-LPU"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="q8L-0o-wzP" secondAttribute="bottom" constant="86" id="ob7-r4-Nep"/>
+                            <constraint firstItem="q8L-0o-wzP" firstAttribute="top" secondItem="r8J-cW-7UV" secondAttribute="bottom" constant="46" id="p3c-0c-ZyS"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="bibs-splash" width="600" height="600"/>
+        <image name="bibs" width="600" height="600"/>
+        <image name="bibs-splash" width="525" height="291"/>
     </resources>
 </document>
