@@ -1142,7 +1142,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.05;
+				CURRENT_PROJECT_VERSION = 1.0.06;
 				DEVELOPMENT_ASSET_PATHS = "\"bibs/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B5655RNZN;
 				ENABLE_PREVIEWS = YES;
@@ -1151,7 +1151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.05;
+				MARKETING_VERSION = 1.0.06;
 				PRODUCT_BUNDLE_IDENTIFIER = hendrick.dev.bibs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1164,7 +1164,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.05;
+				CURRENT_PROJECT_VERSION = 1.0.06;
 				DEVELOPMENT_ASSET_PATHS = "\"bibs/Preview Content\"";
 				DEVELOPMENT_TEAM = 8B5655RNZN;
 				ENABLE_PREVIEWS = YES;
@@ -1173,7 +1173,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.05;
+				MARKETING_VERSION = 1.0.06;
 				PRODUCT_BUNDLE_IDENTIFIER = hendrick.dev.bibs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
