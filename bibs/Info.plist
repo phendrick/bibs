@@ -26,13 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>OpenSans.ttf</string>
-		<string>OpenSans-SemiBold.ttf</string>
-		<string>OpenSans-Bold.ttf</string>
-		<string>Merriweather-Regular.ttf</string>
-		<string>Merriweather-Bold.ttf</string>
 		<string>Pacifico-Regular.ttf</string>
-		<string>RobotoMono.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -77,6 +77,7 @@ struct DashboardFeedTimerView: View {
                     }
             }
             .frame(maxWidth: .infinity)
+            .padding(.bottom, self.layout == .expanded ? 10 : 5)
             
             HStack(alignment: .lastTextBaseline) {
                 HStack(alignment: .lastTextBaseline, spacing: 0) {
