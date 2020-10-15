@@ -14,21 +14,6 @@ struct DashboardFeedTimerView: View {
     var cofeeding: Bool
     var siblingCount: Int
     
-    var timerFontSize: CGFloat {
-        var baseSize: CGFloat = 15
-        
-//        if self.layout == .expanded, siblingCount > 3 {
-//            baseSize -= CGFloat(siblingCount)
-//        }else {
-//            baseSize = self.cofeeding ? 28 : 32
-//        }
-        if self.layout == .expanded {
-            baseSize += 3
-        }
-        
-        return baseSize
-    }
-    
     var breastSideLabel: String {
         guard let feedSession = self.child.activeFeedSession else {
             return ""

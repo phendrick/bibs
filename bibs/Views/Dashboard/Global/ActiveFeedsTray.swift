@@ -56,8 +56,8 @@ struct ActiveFeedsTrayView: View {
                     layout: self.$layout,
                     profile: self.profile
                 )
+                .padding(10)
                 .frame(maxWidth: .infinity)
-                .padding(.bottom, 20)
             }
             .frame(maxWidth: .infinity)
         }else {
@@ -73,10 +73,6 @@ struct ActiveFeedsTrayView: View {
         }
     }
     
-    var useVerticalLayout: Bool {
-        return self.layout == .expanded
-    }
-    
     var body: some View {
         VStack {
             VStack {
@@ -86,7 +82,7 @@ struct ActiveFeedsTrayView: View {
                         .foregroundColor(Color.gray.opacity(0.5))
                         .frame(width: 40, height: 6)
                         .padding(.top)
-                        .offset(y: self.layout == .minimised ? 0 : -4)
+                        //.offset(y: self.layout == .minimised ? 0 : -4)
                         .fixedSize()
                 }
 
@@ -97,7 +93,7 @@ struct ActiveFeedsTrayView: View {
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
         .frame(maxWidth: .infinity)
-        .frame(height: self.layout == .expanded ? CGFloat(120 * self.profile.parent.breastfeedingChildrenArray.count) : 140)
+        //.frame(height: self.layout == .expanded ? CGFloat(120 * self.profile.parent.breastfeedingChildrenArray.count) : 140)
         .frame(alignment: .bottom)
         .offset(y: 20)
         .gesture(
@@ -174,7 +170,7 @@ struct FeedSessionsList: View {
     }
     
     var body: some View {
-        let children = self.layout == .expanded ? Array(self.children.prefix(6)) : self.children
+        let children = self.layout == .expanded ? Array(self.children.prefix(5)) : self.children
         
         return ForEach(children, id: \.self) {child in
             DashboardFeedTimerView(
