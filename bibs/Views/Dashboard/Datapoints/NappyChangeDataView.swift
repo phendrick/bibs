@@ -69,23 +69,19 @@ struct NappyChangesDataView: View {
                 headerView: headerView
             ) {(result: NappyChange, count: Int) in
                 NavigationLink(destination: EditNappyChangeView(profile: self.profile, nappyChange: result)) {
-                    VStack {
-                        VStack(alignment: .leading, spacing: 5) {
-                            HStack(spacing: 0) {
-                                Text("\(result.status.description)")
-                                Text("\(result.detail.description)")
-                                    .font(.caption)
-                                    .padding(2)
-                                    .padding([.leading, .trailing], 6)
-                                    .overlay(
-                                        Capsule().stroke()
-                                    ).padding()
-                            }
-                            
-                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
-                                .foregroundColor(.gray)
-                        }.padding()
-                    }
+                    HStack(alignment: .firstTextBaseline, spacing: 0) {
+                        Text("\(result.status.description)")
+                            .font(.system(.headline))
+                        
+                        Text("\(result.detail.description)")
+                            .font(.system(.subheadline))
+                            .padding(2).padding([.leading, .trailing], 6)
+                            .overlay(Capsule().stroke()).padding()
+                        
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                    }.padding([.top, .bottom])
                 }
             }
         }

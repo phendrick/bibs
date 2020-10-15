@@ -49,7 +49,7 @@ struct DashboardFeedTimerView: View {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.white)
                     .frame(width: 40, alignment: .topTrailing)
-                    .opacity(self.child.activeFeedSession?.status == .paused ? 1 : 0.25)
+                    .opacity(self.child.activeFeedSession == nil ? 0 : 1)
                     .onTapGesture {
                         guard self.child.activeFeedSession?.status == .paused else {
                             self.child.activeFeedSession?.pause()
@@ -69,7 +69,7 @@ struct DashboardFeedTimerView: View {
                     Text("\(child.activeFeedSession?.formattedElapsedTime(include_hsec: false) ?? "00:00:00")")
                         .font(.system(.headline, design: .monospaced))
                     Text("\(child.activeFeedSession?.formattedElapsedTimeHsecs(includeRandomMsec: true) ?? ".00")")
-                        .font(.system(.subheadline, design: .monospaced))
+                        .font(.system(.caption, design: .monospaced))
                         .opacity(0.5)
                 }
                 .layoutPriority(100)
@@ -85,8 +85,8 @@ struct DashboardFeedTimerView: View {
 
                             self.child.activeFeedSession?.switchSide()
                         }
-                        .font(.system(.caption, design: .monospaced))
-                        .padding(.trailing, 2)
+                        //.font(.system(.caption, design: .monospaced))
+                        .font(.system(size: 10, weight: .bold, design: .monospaced))
                 }
             }
         }

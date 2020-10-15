@@ -74,13 +74,21 @@ struct WeaningDataView: View {
                 headerView: headerView
             ) {(result: Snack, count: Int) in
                 NavigationLink(destination: EditSnackView(profile: self.profile, snack: result)) {
-                    VStack(alignment: .leading, spacing: 15) {
-                        HStack {
-                            Text("\(result.snackType.description) ") +
-                            Text(result.note ?? "")
+                    VStack {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("\(result.snackType.description) ")
+                                .font(.system(.headline))
+                            
+                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                                .foregroundColor(.gray)
+                                .font(.caption)
                         }
                         
-                        Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+                        if result.note != "" {
+                            HStack {
+                                Text(result.note ?? "")
+                            }
+                        }
                     }.padding([.top, .bottom])
                 }
             }

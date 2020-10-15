@@ -73,18 +73,39 @@ struct ParentFoodDiaryListView: View {
                     ],
                     headerView: headerView
                 ) {(result: FoodDiaryEntry, count: Int) in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 15) {
-                            HStack {
-                                Text("\(result.foodType.emoji)")
-                                Text("\(result.foodType.description)").fontWeight(.bold)
+                    VStack {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("\(result.foodType.description) ")
+                                .font(.system(.headline))
+                            
+                            Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                                .foregroundColor(.gray)
+                                .font(.caption)
+                            
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            if result.note != "" {
+                                Text(result.note ?? "")
                             }
                             
-                            HStack {
-                                Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                            }
-                        }.padding([.top, .bottom])
-                    }
+                            Spacer()
+                        }
+                    }.padding([.top, .bottom])
+                    
+//                    HStack {
+//                        VStack(alignment: .leading, spacing: 15) {
+//                            HStack {
+//                                Text("\(result.foodType.emoji)")
+//                                Text("\(result.foodType.description)").fontWeight(.bold)
+//                            }
+//
+//                            HStack {
+//                                Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
+//                            }
+//                        }.padding([.top, .bottom])
+//                    }
                 }
             }
         }

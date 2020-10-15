@@ -78,7 +78,7 @@ struct BarChartBarView: View {
             labelForChartValue(label: self.valueLabel)
                 .offset(labelOffset)
                 .fixedSize()
-                .font(.system(.subheadline, design: .monospaced))
+                .font(.system(.caption, design: .monospaced))
                 .foregroundColor(valueLabelColor)
                 .frame(alignment: .bottom)
         )

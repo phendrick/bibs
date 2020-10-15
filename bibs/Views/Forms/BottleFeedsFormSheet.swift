@@ -51,7 +51,7 @@ struct BottleFeedsFormSheet: View {
                         self.selectedExpressedBottles = []
                     }catch {
                     }
-                }
+                }.disabled(self.profile.parent.activeChild == nil)
             }
             .font(.headline)
             .padding()
@@ -64,6 +64,7 @@ struct BottleFeedsFormSheet: View {
             if profile.parent.activeChildrenArray.count > 1 {
                 ChildrenFormList()
                     .padding()
+                    .animation(nil)
             }
             
             Form {

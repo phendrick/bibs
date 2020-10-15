@@ -30,10 +30,10 @@ struct DashboardView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 25) {
                             NavigationLink(destination: DatapointsIndexListView(profile: self.profile)) {
-                                DashboardHeaderOverviewView(profile: self.profile).padding()
+                                DashboardHeaderOverviewView(profile: self.profile).padding([.leading, .trailing])
                             }.foregroundColor(Color(UIColor.label))
                             
-                            DashboardToolsListView().padding([.top, .bottom])
+                            DashboardToolsListView().padding([.bottom])
                         }
                     }
                     .navigationBarTitle(Text(dashboardGreeting(for: self.profile.parent)), displayMode: .large)
