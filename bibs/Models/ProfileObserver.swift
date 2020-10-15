@@ -49,6 +49,8 @@ final class ProfileObserver: ObservableObject {
         
         if UIDevice.current.hasLargeScreen {
             baseHeight -= 5
+        }else if (667...810).contains(UIScreen.main.bounds.size.height) {
+            baseHeight += 0
         }else {
             baseHeight += 15
         }
