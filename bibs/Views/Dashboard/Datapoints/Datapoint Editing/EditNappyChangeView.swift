@@ -46,7 +46,7 @@ struct EditNappyChangeView: View {
                                 VStack {
                                     EmptyView()
                                 }
-                                .frame(width: 40, height: 40)
+                                .frame(width: 30, height: 30)
                                 .background(Color(poopColor.color))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .overlay(

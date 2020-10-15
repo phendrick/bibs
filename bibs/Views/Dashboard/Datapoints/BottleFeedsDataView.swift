@@ -68,7 +68,9 @@ struct BottleFeedsDataView: View {
                     Text("\(storage.description)").tag(storage.rawValue)
                 }
             }
+            .pickerStyle(SegmentedPickerStyle())
             .labelsHidden()
+            .padding()
             
             DashboardDataView(
                 profile: self.profile,
@@ -79,14 +81,14 @@ struct BottleFeedsDataView: View {
                 headerView: headerView
             ) {(result: BottleFeed, count: Int) in
                 NavigationLink(destination: EditBottleFeedView(profile: self.profile, bottleFeed: result)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 15) {
-                            HStack {
-                                Text("\(result.amount)ml").fontWeight(.bold)  +
-                                Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                            }
-                        }.padding([.top, .bottom])
-                    }
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("\(result.amount)ml")
+                            .font(.system(.headline, design: .monospaced))
+                        
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                    }.padding([.top, .bottom])
                 }
             }
         }

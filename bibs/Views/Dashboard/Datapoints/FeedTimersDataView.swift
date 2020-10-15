@@ -73,13 +73,14 @@ struct FeedTimersDataView: View {
                 headerView: headerView
             ) {(result: FeedSession, count: Int) in
                 NavigationLink(destination: EditFeedSessionView(profile: self.profile, feedSession: result)) {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("\(result.formattedElapsedTime(include_hsec: false))")
-                        }
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("\(result.formattedElapsedTime(include_hsec: false))")
+                            .font(.system(.headline, design: .monospaced))
                         
-                        Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                    }
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                    }.padding([.top, .bottom])
                 }
             }
         }

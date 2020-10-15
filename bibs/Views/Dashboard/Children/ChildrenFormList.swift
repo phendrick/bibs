@@ -18,9 +18,7 @@ struct ChildrenFormList: View {
                     VStack(alignment: .leading) {
                         Text("\(child.wrappedName)")
                             .font(.callout).fontWeight(self.profile.parent.activeChild == child ? .bold : .none)
-                            .padding(.bottom, 5)
                             .foregroundColor(.white)
-                            .animation(nil)
                     }
                     
                     Spacer()
@@ -30,14 +28,16 @@ struct ChildrenFormList: View {
                         .opacity(self.profile.parent.activeChild == child ? 1 : 0.2)
                 }
                 .animation(.easeInOut)
-                .padding(10)
+                .padding(8)
                 .background(Color(child.theme.0))
                 .onTapGesture {
                     self.profile.parent.activeChild = child
                     self.profile.objectWillChange.send()
                 }
             }
-        }.cornerRadius(15)
+        }
+        .cornerRadius(15)
+        .animation(nil)
     }
 }
 

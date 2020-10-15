@@ -84,7 +84,7 @@ struct NappyChangeFormSheet: View {
                                 VStack {
                                     EmptyView()
                                 }
-                                .frame(width: 40, height: 40)
+                                .frame(width: 30, height: 30)
                                 .background(Color(poopColor.color))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .overlay(
@@ -122,7 +122,7 @@ struct NappyChangeFormSheet: View {
                     .pickerStyle(SegmentedPickerStyle())
                     
                 }.animation(.spring())
-            }
+            }.layoutPriority(100)
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color(UIColor.systemGray6))

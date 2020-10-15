@@ -57,9 +57,11 @@ struct DashboardDataView<T: NSManagedObject, Header: View, Content: View>: View 
         VStack(alignment: .leading) {
             self.headerView(Array(results)).padding().font(.caption)
             
-            Text(String.localizedStringWithFormat(
-                    NSLocalizedString("\(String(describing: T.self))_count", comment: "pluralised count"), results.count
-            )).padding().padding(.leading, 3)
+            if results.count > 0 {
+                Text(String.localizedStringWithFormat(
+                        NSLocalizedString("\(String(describing: T.self))_count", comment: "pluralised count"), results.count
+                )).padding([.leading, .trailing]).padding(.leading, 3)
+            }
             
             List {
                 ForEach(results.indices, id: \.self) { index in

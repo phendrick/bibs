@@ -56,12 +56,14 @@ struct NaptimesDataView: View {
                 headerView: headerView
             ) {(result: Nap, count: Int) in
                 NavigationLink(destination: EditNapView(profile: self.profile, nap: result)) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 15) {
-                            Text("\(result.duration.formattedHoursAndMinutes)")
-                            Text("\(result.wrappedCreatedAt.getFormattedDate())").foregroundColor(.gray)
-                        }.padding([.top, .bottom])
-                    }
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("\(result.formattedElapsedTime(include_hsec: false))")
+                            .font(.system(.headline, design: .monospaced))
+                        
+                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                            .foregroundColor(.gray)
+                            .font(.caption)
+                    }.padding([.top, .bottom])
                 }
             }
         }
