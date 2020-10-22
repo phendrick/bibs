@@ -34,15 +34,18 @@ struct EditFeedSessionView: View {
                         HStack {
                             NavigationLink(destination: EditFeedTimeView(feed: feed, context: self.context)) {
                                 Text("\(feed.formattedElapsedTime())")
+                                    .font(.system(.headline, design: .monospaced))
                                 Spacer()
+                                
                                 Text("\(feed.breastSide.description.0)").foregroundColor(.gray)
+                                    .font(.caption)
                             }
                         }
                     }.onDelete(perform: removeRows)
                 }
             }
         }
-        .navigationBarTitle(self.feedSession.wrappedCreatedAt.getFormattedDate(format: "EEEE, MMMM d"))
+        .navigationBarTitle(self.feedSession.wrappedCreatedAt.getFormattedDate(format: "EE, MMMM d"))
         .navigationBarItems(trailing: EditButton())
     }
 }
