@@ -83,6 +83,7 @@
 		DAC0236B2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0236A2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift */; };
 		DAC52E5324FC76DE00CF613D /* ChildDataTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */; };
 		DAD3554024E09AC4006B96B5 /* EditExpressedMilkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */; };
+		DAD3C375254DB0C80055DAC1 /* ChildRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3C374254DB0C80055DAC1 /* ChildRoutineView.swift */; };
 		DAD4A0412529339100E84EB0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DAD4A0402529339100E84EB0 /* Settings.bundle */; };
 		DAD5CC5F24EA87F600E0EE77 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD5CC5E24EA87F600E0EE77 /* BarView.swift */; };
 		DAD7E7C724DDF18400BF5283 /* ParentTrackerFormSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7E7C624DDF18400BF5283 /* ParentTrackerFormSheet.swift */; };
@@ -224,6 +225,7 @@
 		DAC0236A2500DFFC00AC02D4 /* NappyChangeWeeklyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NappyChangeWeeklyChartView.swift; sourceTree = "<group>"; };
 		DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildDataTypeListView.swift; sourceTree = "<group>"; };
 		DAD3553F24E09AC4006B96B5 /* EditExpressedMilkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpressedMilkView.swift; sourceTree = "<group>"; };
+		DAD3C374254DB0C80055DAC1 /* ChildRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildRoutineView.swift; sourceTree = "<group>"; };
 		DAD4A0402529339100E84EB0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		DAD5CC5E24EA87F600E0EE77 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		DAD7E7C624DDF18400BF5283 /* ParentTrackerFormSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentTrackerFormSheet.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				DA4DEA2B24D4C4CF00ADC1EA /* ChildrenFormList.swift */,
+				DAD3C374254DB0C80055DAC1 /* ChildRoutineView.swift */,
 				DA18ECE324D6026200211144 /* ChildrenDashboardListView.swift */,
 				DAC52E5224FC76DE00CF613D /* ChildDataTypeListView.swift */,
 			);
@@ -917,6 +920,7 @@
 				DA4DEA2A24D4B0B600ADC1EA /* Int32+timers.swift in Sources */,
 				DA2D2A54249805A100E9D811 /* Child+TrackableItems.swift in Sources */,
 				DAFE32382479D7680009B737 /* AddChildView.swift in Sources */,
+				DAD3C375254DB0C80055DAC1 /* ChildRoutineView.swift in Sources */,
 				DAF7517724B7C92C00C83F33 /* ParentProfile+CoreDataProperties.swift in Sources */,
 				DAE1A7D224B92FFB00FFA96E /* BottleFeedsDataView.swift in Sources */,
 				DAF7517E24B7D2AA00C83F33 /* ExpressedBottle+CoreDataClass.swift in Sources */,

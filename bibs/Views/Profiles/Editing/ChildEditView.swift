@@ -27,6 +27,8 @@ struct ChildEditView: View {
     @State var colorScheme: Int = 0
     @State var childStatus: Child.ChildStatuses = .current
     
+    @State var routineSheetVisible: Bool = false
+    
     var getTheme: Theme {
         guard let theme = Child.Themes[self.colorScheme] else {
             return Child.Themes[0]!
@@ -83,6 +85,12 @@ struct ChildEditView: View {
                     }
                 }
             }
+            
+            Section {
+                Button("manage_routine".localized) {
+                    self.routineSheetVisible.toggle()
+                }
+            }
         }
         .navigationBarItems(trailing:
             HStack {
@@ -102,6 +110,8 @@ struct ChildEditView: View {
             self.isBorn = self.child.isBorn
             self.colorScheme = Int(self.child.colorScheme)
             self.dueDate = self.child.dueDate ?? Date()
+        }.sheet(isPresented: self.$routineSheetVisible) {
+            ChildRoutineView()
         }
     }
     
