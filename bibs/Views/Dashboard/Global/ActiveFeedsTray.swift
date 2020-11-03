@@ -82,7 +82,6 @@ struct ActiveFeedsTrayView: View {
                         .foregroundColor(Color.gray.opacity(0.5))
                         .frame(width: 40, height: 6)
                         .padding(.top)
-                        //.offset(y: self.layout == .minimised ? 0 : -4)
                         .fixedSize()
                 }
 
@@ -93,41 +92,25 @@ struct ActiveFeedsTrayView: View {
             .background(Color(UIColor.systemGray6).opacity(0.85))
         }
         .frame(maxWidth: .infinity)
-        //.frame(height: self.layout == .expanded ? CGFloat(120 * self.profile.parent.breastfeedingChildrenArray.count) : 140)
         .frame(alignment: .bottom)
         .offset(y: 20)
         .gesture(
             DragGesture(minimumDistance: 10, coordinateSpace: .global)
-            .onChanged {translation in
-                guard self.layout != .single else {
-                    return
+                .onChanged {translation in
+                    guard self.layout != .single else {
+                        return
+                    }
+                    
+                    let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
+                                       ? .up
+                                       : .down
+                    
+                    if dragDirection == .up, let layout = self.layout.next {
+                        self.layout = layout
+                    }else if dragDirection == .down, let layout = self.layout.previous {
+                        self.layout = layout
+                    }
                 }
-                
-                let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
-                                   ? .up
-                                   : .down
-                
-                if dragDirection == .up, let layout = self.layout.next {
-                    self.layout = layout
-                }else if dragDirection == .down, let layout = self.layout.previous {
-                    self.layout = layout
-                }
-            }
-            .onEnded { translation in
-                guard self.layout != .single else {
-                    return
-                }
-                
-                let dragDirection: DragDirection = (translation.location.y < translation.startLocation.y)
-                ? .up
-                : .down
-
-                if dragDirection == .up {
-                    self.layout = self.layout.next ?? self.layout
-                }else {
-                    self.layout = self.layout.previous ?? self.layout
-                }
-            }
         )
     }
 }

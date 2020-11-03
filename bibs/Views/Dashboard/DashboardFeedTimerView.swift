@@ -35,6 +35,14 @@ struct DashboardFeedTimerView: View {
         return true
     }
     
+    var iconName: String {
+        guard let session = self.child.activeFeedSession else {
+            return ""
+        }
+        
+        return session.status == .running ? "pause.circle.fill" : "xmark.circle.fill"
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -46,7 +54,7 @@ struct DashboardFeedTimerView: View {
                 
                 Spacer()
                 
-                Image(systemName: "xmark.circle.fill")
+                Image(systemName: iconName)
                     .foregroundColor(.white)
                     .frame(width: 40, alignment: .topTrailing)
                     .opacity(self.child.activeFeedSession == nil ? 0 : 1)
