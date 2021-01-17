@@ -332,10 +332,13 @@ extension ParentProfile {
             
             session.child?.activeFeedSession = session
             
+            // if we've lost our active feed session for whatever reason
+            // (save failed due to 0 battery etc), reassign it here.
             if self.profileObserver?.activeFeedSessions.firstIndex(of: session) == nil {
                 self.profileObserver?.activeFeedSessions.append(session)
             }
             
+            // ready to go - unsuspend this feed session
             session.unsuspend()
             
             try? self.managedObjectContext?.save()

@@ -86,10 +86,8 @@ struct ChildEditView: View {
                 }
             }
             
-            Section {
-                Button("manage_routine".localized) {
-                    self.routineSheetVisible.toggle()
-                }
+            NavigationLink(destination: ChildRoutineView(), isActive: self.$routineSheetVisible) {
+                Text("manage_routine".localized)
             }
         }
         .navigationBarItems(trailing:
@@ -110,8 +108,6 @@ struct ChildEditView: View {
             self.isBorn = self.child.isBorn
             self.colorScheme = Int(self.child.colorScheme)
             self.dueDate = self.child.dueDate ?? Date()
-        }.sheet(isPresented: self.$routineSheetVisible) {
-            ChildRoutineView()
         }
     }
     

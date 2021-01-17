@@ -15,6 +15,10 @@ struct ChildRoutineView: View {
     @State var sleepRoutineStart: Date = Calendar.current.date(bySettingHour: 19, minute: 0, second: 0, of: Date())!
     @State var sleepRoutineEnd: Date = Calendar.current.date(bySettingHour: 6, minute: 0, second: 0, of: Date())!
     
+    @State var showMorningNapForm: Bool = false
+    @State var showAfternoonNapForm: Bool = false
+    @State var showBedtimeForm: Bool = false
+    
     @State var morningNaptimeRoutineStart: Date = Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!
     @State var morningNaptimeRoutineEnd: Date = Calendar.current.date(bySettingHour: 11, minute: 0, second: 0, of: Date())!
     
@@ -25,59 +29,80 @@ struct ChildRoutineView: View {
         Form {
             Section(header: Text("sleep".localized)) {
                 HStack {
-                    Text("Bedtime").fixedSize().frame(width: 100, alignment: .leading)
+                    Text("morning_nap".localized).fixedSize().frame(width: 100, alignment: .leading)
                     Spacer()
                     
-                    DatePicker("", selection: self.$sleepRoutineStart, displayedComponents: .hourAndMinute)
-                    DatePicker("", selection: self.$sleepRoutineEnd, displayedComponents: .hourAndMinute)
+                    NavigationLink(
+                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                        isActive: self.$showMorningNapForm,
+                        label: {
+                            HStack {
+                                Spacer()
+                                Text("10am - 12pm") //.font(.system(.callout, design: .monospaced))
+                            }
+                        }
+                    )
                 }
                 
                 HStack {
-                    Text("Morning Nap").fixedSize().frame(width: 100, alignment: .leading)
+                    Text("afternoon_nap".localized).fixedSize().frame(width: 100, alignment: .leading)
                     Spacer()
                     
-                    DatePicker("", selection: self.$morningNaptimeRoutineStart, displayedComponents: .hourAndMinute)
-                    DatePicker("", selection: self.$morningNaptimeRoutineEnd, displayedComponents: .hourAndMinute)
+                    NavigationLink(
+                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                        isActive: self.$showAfternoonNapForm,
+                        label: {
+                            HStack {
+                                Spacer()
+                                Text("14am - 17pm")
+                            }.font(.callout)
+                        }
+                    )
                 }
                 
                 HStack {
-                    Text("Afternoon Nap").fixedSize().frame(width: 100, alignment: .leading)
+                    Text("bedtimes".localized).fixedSize().frame(width: 100, alignment: .leading)
                     Spacer()
                     
-                    DatePicker("", selection: self.$afternoonNaptimeRoutineStart, displayedComponents: .hourAndMinute)
-                    DatePicker("", selection: self.$afternoonNaptimeRoutineEnd, displayedComponents: .hourAndMinute)
-                }
-                
-                HStack {
-                    Text("monitor_wakups")
-                    Spacer()
-                    Text("✅")
+                    NavigationLink(
+                        destination: /*@START_MENU_TOKEN@*/Text("Destination")/*@END_MENU_TOKEN@*/,
+                        isActive: self.$showBedtimeForm,
+                        label: {
+                            HStack {
+                                Spacer()
+                                Text("10am - 12pm")
+                            }
+                        }
+                    )
                 }
             }
             
-            Section(header: Text("feeds".localized)) {
+            Section(header: Text("cluster_feeds".localized)) {
+                HStack {
+                    Text("monitor_cluster_feeds".localized)
+                    Spacer()
+                    
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(Color(UIColor.systemGreen) )
+                }
+                
                 Slider(value: self.$feedCountValue, in: 5...25, minimumValueLabel: Text("1"), maximumValueLabel: Text("25")) {
-                    
-                }
-                
-                HStack {
-                    Text("monitor_cluster_feeds")
-                    Spacer()
-                    Text("✅")
                 }
             }
             
             Section(header: Text("feeds".localized)) {
                 HStack {
-                    Text("monitor_feed_length")
+                    Text("monitor_feed_length".localized)
                     Spacer()
-                    Text("✅")
+                    
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(Color(UIColor.systemGreen) )
                 }
                 
-                Slider(value: self.$feedCountValue, in: 1...50, minimumValueLabel: Text("1"), maximumValueLabel: Text("50")) {
+                Slider(value: self.$feedCountValue, in: 1...60, minimumValueLabel: Text("1"), maximumValueLabel: Text("50")) {
                 }
             }
-        }
+        }.navigationBarTitle(Text("Routine"))
     }
 }
 

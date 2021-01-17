@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="BottleFeed" representedClassName=".BottleFeed" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -22,6 +22,7 @@
         <relationship name="nappyChanges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NappyChange" inverseName="child" inverseEntity="NappyChange"/>
         <relationship name="naps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Nap" inverseName="child" inverseEntity="Nap"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ParentProfile" inverseName="children" inverseEntity="ParentProfile"/>
+        <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Routine" inverseName="child" inverseEntity="Routine"/>
         <relationship name="snacks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Snack" inverseName="child" inverseEntity="Snack"/>
     </entity>
     <entity name="Emotion" representedClassName=".Emotion" syncable="YES">
@@ -85,6 +86,22 @@
         <relationship name="expressedBottles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpressedBottle" inverseName="parent" inverseEntity="ExpressedBottle"/>
         <relationship name="foodDiaryEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodDiaryEntry" inverseName="parent" inverseEntity="FoodDiaryEntry"/>
     </entity>
+    <entity name="Routine" representedClassName="Routine" syncable="YES" codeGenerationType="class">
+        <attribute name="afternoonNaptimeEnd" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="afternoonNaptimeStart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="bedtimeEnd" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="bedtimeStart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="clusterFeedThreshold" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="feedLengthThreshold" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="monitorAfternoonNap" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="monitorBedtime" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="monitorClusterFeeds" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="monitorFeedLength" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="monitorMorningNap" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="morningNaptimeEnd" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="morningNaptimeStart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="child" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Child" inverseName="routine" inverseEntity="Child"/>
+    </entity>
     <entity name="Snack" representedClassName=".Snack" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
@@ -93,15 +110,16 @@
     </entity>
     <elements>
         <element name="BottleFeed" positionX="115.80078125" positionY="373.6640625" width="128" height="118"/>
-        <element name="Child" positionX="-171.8203125" positionY="47.98828125" width="128" height="268"/>
-        <element name="Emotion" positionX="-288" positionY="54" width="128" height="103"/>
+        <element name="Child" positionX="-171.8203125" positionY="47.98828125" width="128" height="283"/>
+        <element name="Emotion" positionX="-562.7578125" positionY="294.2109375" width="128" height="103"/>
         <element name="ExpressedBottle" positionX="-277.50390625" positionY="374.3203125" width="128" height="133"/>
         <element name="Feed" positionX="188.2109375" positionY="-63.21875" width="128" height="118"/>
         <element name="FeedSession" positionX="1.078125" positionY="-93.109375" width="128" height="148"/>
-        <element name="FoodDiaryEntry" positionX="-297" positionY="45" width="128" height="28"/>
+        <element name="FoodDiaryEntry" positionX="-768.14453125" positionY="173.19140625" width="128" height="28"/>
         <element name="Nap" positionX="-388.9609375" positionY="-110.5703125" width="128" height="118"/>
         <element name="NappyChange" positionX="178.859375" positionY="87.29296875" width="128" height="133"/>
         <element name="ParentProfile" positionX="-505.92578125" positionY="202.74609375" width="128" height="28"/>
         <element name="Snack" positionX="-476.4921875" positionY="-1.359375" width="128" height="103"/>
+        <element name="Routine" positionX="-288" positionY="171" width="128" height="253"/>
     </elements>
 </model>
