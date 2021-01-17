@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct DashboardView: View {
     @ObservedObject var profile: ProfileObserver
@@ -64,7 +65,26 @@ struct DashboardView: View {
         .frame(maxHeight: .infinity, alignment: .bottom)
         .onAppear {
             self.selectedEmotionType = self.profile.parent.latestEmotionType
+            
+            if shouldPromptForReview() {
+                SKStoreReviewController.requestReview()
+                UserDefaults.standard.set(true, forKey: "promptedForReview")
+            }
         }
+    }
+    
+    func shouldPromptForReview() -> Bool {
+        let prompted = UserDefaults.standard.bool(forKey: "promptedForReview")
+        
+        if(prompted) {
+            return false
+        }
+        
+        let count = profile.parent.childrenArray.reduce(into: 0) { (count, child) in
+            count += child.feedSessionsArray.count
+        }
+        
+        return count > 2
     }
 }
 
