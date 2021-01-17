@@ -25,13 +25,15 @@ struct ExpressedMilkDataView: View {
     
     var body: some View {
         VStack {
-            Form {
-                Picker(selection: self.$expressedBottleStorageType, label: Text("type".localized)) {
-                    ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
-                        Text("\(storage.description)").tag(storage.rawValue)
+            VStack {
+                Form {
+                    Picker(selection: self.$expressedBottleStorageType, label: Text("type".localized)) {
+                        ForEach(ExpressedBottle.ExpressedBottleStorageStatus.allCases, id: \.self) {storage in
+                            Text("\(storage.description)").tag(storage.rawValue)
+                        }
                     }
-                }
-                .labelsHidden()
+                    .labelsHidden()
+                }.padding(.bottom, 0)
                 
                 DashboardDataView(
                     profile: self.profile,
@@ -47,7 +49,7 @@ struct ExpressedMilkDataView: View {
                             Text("\(result.wrappedCreatedAt.getFormattedDate())")
                         }
                     }
-                }
+                }.offset(y: -100)
             }
         }
         .navigationBarTitle(Text("stored_milk".localized), displayMode: .large)
