@@ -17,6 +17,8 @@ struct NappyChangeFormSheet: View {
     @State var nappyChangeAmountType: Int = 0
     @State var nappyChangePoopColor: NappyChange.NappyChangePoopColor = .brown
     
+    @State var changedAt:Date = Date()
+    
     var body: some View {
         VStack {
             HStack {
@@ -34,6 +36,7 @@ struct NappyChangeFormSheet: View {
                     nappyChange.state = Int16(self.nappyType)
                     nappyChange.amount = Int16(self.nappyChangeAmountType)
                     nappyChange.poopColor = self.nappyChangePoopColor
+                    nappyChange.changedAt = self.changedAt
                     nappyChange.createdAt = Date()
                     child.addToNappyChanges(nappyChange)
 
@@ -122,6 +125,13 @@ struct NappyChangeFormSheet: View {
                     .pickerStyle(SegmentedPickerStyle())
                     
                 }.animation(.spring())
+                
+                Section(
+                    header: Text("when".localized)
+                ) {
+                    DatePicker("time".localized, selection: self.$changedAt, in: ...Date(), displayedComponents: .hourAndMinute)
+                }
+                
             }.layoutPriority(100)
         }
         .edgesIgnoringSafeArea(.all)

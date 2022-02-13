@@ -23,5 +23,5 @@ extension NappyChange {
     @NSManaged public var color: Int16
     @NSManaged public var note: String?
     @NSManaged public var child: Child?
-
+    @NSManaged public var changedAt: Date?
 }

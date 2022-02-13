@@ -110,6 +110,10 @@ extension NappyChange: Identifiable, Trackable {
         createdAt ?? Date()
     }
     
+    public var wrappedChangedAt: Date {
+        changedAt ?? Date()
+    }
+    
     public var title: String {
         "Nappy Change"
     }
@@ -123,8 +127,8 @@ extension NappyChange: Identifiable, Trackable {
     }
     
     public static func trackableItemsWithinRange(range: Range<Date>, context: NSManagedObjectContext?) -> [NappyChange] {
-        let dateFromPredicate = NSPredicate(format: "createdAt >= %@", range.lowerBound as NSDate)
-        let dateToPredicate   = NSPredicate(format: "createdAt =< %@",  range.upperBound as NSDate)
+        let dateFromPredicate = NSPredicate(format: "changedAt >= %@", range.lowerBound as NSDate)
+        let dateToPredicate   = NSPredicate(format: "changedAt =< %@",  range.upperBound as NSDate)
 
         let datePredicate = NSCompoundPredicate(
             andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate]
@@ -132,7 +136,7 @@ extension NappyChange: Identifiable, Trackable {
         
         let request:NSFetchRequest<NappyChange> = NappyChange.fetchRequest()
         request.predicate = datePredicate
-        request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "changedAt", ascending: true)]
         
         do {
             return try context?.fetch(request) ?? []

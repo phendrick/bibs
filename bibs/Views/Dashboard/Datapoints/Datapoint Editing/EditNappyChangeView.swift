@@ -18,12 +18,13 @@ struct EditNappyChangeView: View {
     @State var nappyType: Int = 0
     @State var nappyChangeAmountType: Int = 0
     @State var nappyChangePoopColor: NappyChange.NappyChangePoopColor = .brown
+    @State var changedAt = Date()
     
     var body: some View {
         VStack {
             Form {
                 Section(
-                    header: Text(String(format: "childs_nappy_was", self.profile.parent.activeChild?.wrappedName ?? "Baby"))
+                    header: Text(String(format: "childs_nappy_was".localized, self.profile.parent.activeChild?.wrappedName ?? "Baby"))
                 ) {
                     Picker(selection: self.$nappyType, label: Text("Choose a nappy change type")) {
                         ForEach(NappyChange.NappyChangeType.allCases, id: \.self) {type in
@@ -84,17 +85,25 @@ struct EditNappyChangeView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     
                 }.animation(.spring())
+                
+                Section(
+                    header: Text("when".localized)
+                ) {
+                    DatePicker("time".localized, selection: self.$changedAt, in: ...Date(), displayedComponents: .hourAndMinute)
+                }
             }
         }
         .onAppear(perform: {
             self.nappyType = Int(self.nappyChange.state)
             self.nappyChangeAmountType = Int(self.nappyChange.amount)
             self.nappyChangePoopColor = self.nappyChange.poopColor
+            self.changedAt = self.nappyChange.wrappedChangedAt
         })
         .navigationBarItems(trailing: Button("save".localized) {
             self.nappyChange.state = Int16(self.nappyType)
             self.nappyChange.amount = Int16(self.nappyChangeAmountType)
             self.nappyChange.poopColor = self.nappyChangePoopColor
+            self.nappyChange.changedAt = self.changedAt
             
             do {
                 try self.context.save()

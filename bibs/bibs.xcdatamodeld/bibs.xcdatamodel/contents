@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="BottleFeed" representedClassName=".BottleFeed" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -69,6 +69,7 @@
     </entity>
     <entity name="NappyChange" representedClassName=".NappyChange" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="changedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="color" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
@@ -100,7 +101,7 @@
         <element name="FeedSession" positionX="1.078125" positionY="-93.109375" width="128" height="148"/>
         <element name="FoodDiaryEntry" positionX="-297" positionY="45" width="128" height="28"/>
         <element name="Nap" positionX="-388.9609375" positionY="-110.5703125" width="128" height="118"/>
-        <element name="NappyChange" positionX="178.859375" positionY="87.29296875" width="128" height="133"/>
+        <element name="NappyChange" positionX="178.859375" positionY="87.29296875" width="128" height="134"/>
         <element name="ParentProfile" positionX="-505.92578125" positionY="202.74609375" width="128" height="28"/>
         <element name="Snack" positionX="-476.4921875" positionY="-1.359375" width="128" height="103"/>
     </elements>

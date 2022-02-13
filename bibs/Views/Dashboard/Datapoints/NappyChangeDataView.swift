@@ -78,7 +78,7 @@ struct NappyChangesDataView: View {
                             .padding(2).padding([.leading, .trailing], 6)
                             .overlay(Capsule().stroke()).padding()
                         
-                        Text("\(result.wrappedCreatedAt.getFormattedDate())")
+                        Text("\(result.wrappedChangedAt.getFormattedDate())")
                             .foregroundColor(.gray)
                             .font(.caption)
                     }.padding([.top, .bottom])
